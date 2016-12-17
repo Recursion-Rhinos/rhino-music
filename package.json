@@ -1,0 +1,22 @@
+  {
+  "name": "rhino-music",
+  "version": "1.0.0",
+  "description": "Take charge of your music experience. ",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Recursion-Rhinos/rhino-music.git"
+  },
+  "keywords": [
+    "Music"
+  ],
+  "author": "Narmin Shahin, Jerry Shanahan, Svetlin Mladenov",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Recursion-Rhinos/rhino-music/issues"
+  },
+  "homepage": "https://github.com/Recursion-Rhinos/rhino-music#readme"
+}
