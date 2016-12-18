@@ -1,2 +1,2 @@
-var knex = require('../database/schema.knex.js');
+const knex = require('../database/schema.knex.js');
 module.exports = {};
