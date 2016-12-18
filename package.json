@@ -1,4 +1,4 @@
-  {
+{
   "name": "rhino-music",
   "version": "1.0.0",
   "description": "Take charge of your music experience. ",
@@ -18,5 +18,12 @@
   "bugs": {
     "url": "https://github.com/Recursion-Rhinos/rhino-music/issues"
   },
-  "homepage": "https://github.com/Recursion-Rhinos/rhino-music#readme"
+  "homepage": "https://github.com/Recursion-Rhinos/rhino-music#readme",
+  "dependencies": {
+    "body-parser": "^1.15.2",
+    "dotenv": "^2.0.0",
+    "express": "^4.14.0",
+    "knex": "^0.12.6",
+    "mysql": "^2.12.0"
+  }
 }
