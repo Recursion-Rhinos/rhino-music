@@ -15,8 +15,8 @@ app.post('/main', function (req, res) {
 
 })
 
-app.get('/main', function (req, res) {
-
+app.get('/', function (req, res) {
+  res.send(path.join(__dirname, '/../comingSoon.html'))
 });
 app.use(router);
 
