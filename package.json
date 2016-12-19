@@ -1,9 +1,10 @@
-  {
+{
   "name": "rhino-music",
   "version": "1.0.0",
   "description": "Take charge of your music experience. ",
   "main": "index.js",
   "scripts": {
+    "start": "nodemon server/server.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
@@ -18,5 +19,38 @@
   "bugs": {
     "url": "https://github.com/Recursion-Rhinos/rhino-music/issues"
   },
-  "homepage": "https://github.com/Recursion-Rhinos/rhino-music#readme"
+  "homepage": "https://github.com/Recursion-Rhinos/rhino-music#readme",
+  "devDependencies": {
+    "babel-core": "^6.2.1",
+    "babel-loader": "^6.2.0",
+    "babel-preset-es2015": "^6.1.18",
+    "babel-preset-react": "^6.1.18",
+    "chai": "^3.5.0",
+    "chai-jquery": "^2.0.0",
+    "eslint-config-airbnb": "^13.0.0",
+    "jquery": "^2.2.1",
+    "jsdom": "^8.1.0",
+    "mocha": "^2.4.5",
+    "react-addons-test-utils": "^0.14.7",
+    "webpack": "^1.12.9",
+    "webpack-dev-server": "^1.14.0"
+  },
+  "dependencies": {
+    "body-parser": "^1.15.2",
+    "dotenv": "^2.0.0",
+    "express": "^4.14.0",
+    "knex": "^0.12.6",
+    "morgan": "^1.7.0",
+    "mysql": "^2.12.0",
+    "nodemon": "^1.11.0",
+    "request": "^2.79.0",
+    "babel-preset-stage-1": "^6.1.18",
+    "lodash": "^3.10.1",
+    "react": "^0.14.3",
+    "react-dom": "^0.14.3",
+    "react-redux": "^4.0.0",
+    "react-router": "^2.0.1",
+    "redux": "^3.0.4",
+    "youtube-api-search": "0.0.5"
+  }
 }
