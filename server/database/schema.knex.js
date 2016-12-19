@@ -43,9 +43,10 @@ knex.schema.hasTable('Playlist').then(exist => {
   if (!exist) {
     knex.schema.createTable('Playlist', (table) => {
       table.increments('id').primary();
-      table.foreign('SongsId').references('Songs.song_id_in_songs'); //or references('id').inTable(Songs);
-      table.foreign('UserId').references('Users.user_id_in_users');
-
+      table.integer('SongsId').unsigned();
+      table.integer('UserId').unsigned();
+      table.foreign('SongsId').references('Songs.id'); //or references('id').inTable(Songs);
+      table.foreign('UserId').references('Users.id');
     }).then(table => {
       console.log('Created Table', table);
     });
@@ -58,7 +59,8 @@ knex.schema.hasTable('Messages').then(exist => {
       message.increments('id').primary();
       message.string('text');
       message.string('genre');
-      message.foreign('UserId').references('Users.user_id_in_users');
+      message.integer('UserId').unsigned();
+      message.foreign('UserId').references('Users.id');
 
     }).then(table => {
       console.log('Created Table', table);
