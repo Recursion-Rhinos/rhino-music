@@ -1,17 +1,16 @@
 import _ from 'lodash'
 import React, { Component } from 'react'; //find node mod named 'react' and put it into var React
 import ReactDOM from 'react-dom';
-import SearchBar from './components/search_bar'
+import SearchBar from './components/searchbar'
 import SearchResults from './components/search_results'
 
-class App extends Component { // this app will be a factory that makes components. Insantiates component before rendering to the DOM.
-    constructor(props) {
-        super(props);
-
-        this.state = { 
-        	 
-        }
-
+class App extends React.Component {
+	
+  render () {
+    return <div>
+    		 <SearchBar />
+    	   </div>
+  }
 }
 
 ReactDOM.render( < App / > , document.querySelector('.container'))
