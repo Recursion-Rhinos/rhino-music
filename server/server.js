@@ -2,20 +2,15 @@ var express = require('express');
 var bodyParser = require('body-parser');
 var path = require('path')
 var request = require('request')
+var morgan = require('morgan');
+var router = require('./routes.js')
 var app = express();
 module.exports = app;
 
 app.use( bodyParser.json() );
 app.use(express.static(path.join(__dirname, '/../client')));
+app.use(router);
 
-
-app.post('/main', function (req, res) {
-
-})
-
-app.get('/main', function (req, res) {
-
-});
 
 
 
