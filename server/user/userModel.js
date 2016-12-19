@@ -1,7 +1,7 @@
+
 const knex = require('../database/schema.knex.js');
-//1 Function for saving username, password, email and genres
-//1 Function for get all data back
-let store = (username, password, email, genres) => {
+
+var storeUser = (username, password, email, genre = 'Hip-Hop') => {
   return knex('Users').insert({ 
     username: username, 
     password: password,
@@ -10,12 +10,36 @@ let store = (username, password, email, genres) => {
   });
 };
 
-let getAll = () => {
-  
+let retrieveUser = (name, password) => {
+  return knex('Users').where({
+    username: name,
+    password: password  
+  })
+.first();//resolves with promise in the controller
+// .then(data => {
+//   console.log('DATA', data);
+//   return data;
+// });
+}; 
+
+let retrieveGraphId = (userId) => {
+ //not finished yet
+};
+
+let deleteUser = (name) => {
+  return knex('Users').where({
+    username: name
+  }).select('id').del(); //resolves with promise in the controller
+    // .then(deletedUser => {
+    //   console.log(deletedUser);
+    //   return deletedUser;
+    // }); 
 };
 
 
 module.exports = {
-  store: store,	
-  getAll: getAll
+  storeUser: storeUser, 
+  retrieveUser: retrieveUser,
+  deleteUser: deleteUser,
+  retrieveGraphId: retrieveGraphId
 };
