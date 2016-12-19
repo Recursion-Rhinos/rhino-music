@@ -63,13 +63,17 @@
 	
 	var _reactDom2 = _interopRequireDefault(_reactDom);
 	
-	var _searchbar = __webpack_require__(!(function webpackMissingModule() { var e = new Error("Cannot find module \"./components/searchbar\""); e.code = 'MODULE_NOT_FOUND'; throw e; }()));
+	var _searchbar = __webpack_require__(/*! ./components/searchbar */ 161);
 	
 	var _searchbar2 = _interopRequireDefault(_searchbar);
 	
 	var _search_results = __webpack_require__(/*! ./components/search_results */ 162);
 	
 	var _search_results2 = _interopRequireDefault(_search_results);
+	
+	var _rec_list = __webpack_require__(/*! ./components/rec_list */ 163);
+	
+	var _rec_list2 = _interopRequireDefault(_rec_list);
 	
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 	
@@ -32654,11 +32658,107 @@
 
 
 /***/ },
-/* 161 */,
+/* 161 */
+/*!****************************************!*\
+  !*** ./client/components/searchbar.js ***!
+  \****************************************/
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+	
+	Object.defineProperty(exports, "__esModule", {
+		value: true
+	});
+	
+	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+	
+	var _react = __webpack_require__(/*! react */ 3);
+	
+	var _react2 = _interopRequireDefault(_react);
+	
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+	
+	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+	
+	function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+	
+	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+	
+	var SearchBar = function (_Component) {
+		_inherits(SearchBar, _Component);
+	
+		function SearchBar(props) {
+			_classCallCheck(this, SearchBar);
+	
+			var _this = _possibleConstructorReturn(this, (SearchBar.__proto__ || Object.getPrototypeOf(SearchBar)).call(this, props));
+	
+			_this.state = { value: '' };
+	
+			_this.handleChange = _this.handleChange.bind(_this);
+			_this.handleSubmit = _this.handleSubmit.bind(_this);
+			return _this;
+		}
+	
+		_createClass(SearchBar, [{
+			key: 'handleChange',
+			value: function handleChange(event) {
+				this.setState({ value: event.target.value });
+			}
+		}, {
+			key: 'handleSubmit',
+			value: function handleSubmit(event) {
+				event.preventDefault();
+				console.log(this.state.value);
+			}
+		}, {
+			key: 'render',
+			value: function render() {
+	
+				return _react2.default.createElement(
+					'div',
+					null,
+					_react2.default.createElement(
+						'form',
+						{ onSubmit: this.handleSubmit },
+						_react2.default.createElement('input', {
+							value: this.state.value,
+							onChange: this.handleChange })
+					)
+				);
+			}
+		}]);
+	
+		return SearchBar;
+	}(_react.Component);
+	
+	exports.default = SearchBar;
+
+/***/ },
 /* 162 */
 /*!*********************************************!*\
   !*** ./client/components/search_results.js ***!
   \*********************************************/
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+	
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+	
+	var _react = __webpack_require__(/*! react */ 3);
+	
+	var _react2 = _interopRequireDefault(_react);
+	
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+	
+	exports.default = rec_list;
+
+/***/ },
+/* 163 */
+/*!***************************************!*\
+  !*** ./client/components/rec_list.js ***!
+  \***************************************/
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
