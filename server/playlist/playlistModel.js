@@ -16,7 +16,16 @@ let remove = (SongsId, UserId) => {
   .del(); //resolves with primise in the controller
 };
 
+let getAllByUserId = (UserId) => {
+  return knex('Users').where({
+    id: UserId
+  })
+  .first();//resolves with primise in the controller
+};
 
 
-
-module.exports = {};
+module.exports = {
+  addTo: addTo,
+  remove: remove,
+  getAllByUserId: getAllByUserId
+};
