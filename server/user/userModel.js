@@ -1,7 +1,5 @@
 var knex = require('../database/schema.knex.js');
-//1 Function for saving username, password, email and genres
-//1 Function for get all data back
-//Graph => getGraphId(userId) => return GraphId!!!
+
 var storeUser = (username, password, email, genre = 'Hip-Hop') => {
   return knex('Users').insert({ 
     username: username, 
