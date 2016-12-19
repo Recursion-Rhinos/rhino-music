@@ -17,6 +17,10 @@ router.get('/api/getMessages', (req,res) => {
   console.log('Getting All Messages Route');
 });/*controller.messages.get*/
 
+router.post('/api/search', (req,res) => {
+  console.log("Search Term", req.body)
+});
+
 router.post('api/postMessage', (req,res) => {
   console.log('Posting Message Route');
 });/*controller.messages.post*/
