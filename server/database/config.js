@@ -6,4 +6,4 @@ const config = {
   charset: 'utf8'
 };
 
-module.exports = config;//config file 
+module.exports = config;
