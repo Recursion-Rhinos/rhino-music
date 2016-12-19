@@ -27,5 +27,10 @@ build/
 # see https://npmjs.org/doc/faq.html#Should-I-check-my-node_modules-folder-into-git
 node_modules/
 emailConfig/
+
 # Store
 .env
+config.js
+
+### API keys ###
+server/database/config.js
