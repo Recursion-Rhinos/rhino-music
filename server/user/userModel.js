@@ -1,32 +1,49 @@
-const knex = require('../database/schema.knex.js');
+var knex = require('../database/schema.knex.js');
 //1 Function for saving username, password, email and genres
 //1 Function for get all data back
-let storeUser = (username, password, email, genre = 'HipHop') => {
-  // genre = genre || 'HipHop';
+//Graph => getGraphId(userId) => return GraphId!!!
+var storeUser = (username, password, email, genre = 'Hip-Hop') => {
   return knex('Users').insert({ 
     username: username, 
     password: password,
     email: email,
     genres: genre
-  });
+  })
+   .then(storedUser => {
+     console.log(storedUser);
+     return storedUser;
+   });
 };
 
-let retrieveUser = (name, password) => {
-  return knex('Users').where({
-    username: name,
-    password: password	
-  }).select('id');
+let retrieveUser = (name, password) => knex('Users').where({
+  username: name,
+  password: password  
+})
+.first()
+.then(data => {
+  console.log('DATA', data);
+  return data;
+});
+
+let retrieveGraphId = (userId) => {
+
 };
 
 let deleteUser = (name) => {
   return knex('Users').where({
     username: name
-  }).select('id').del(); 
+  }).select('id').del()
+    .then(deletedUser => {
+      console.log(deletedUser);
+      return deletedUser;
+    }); 
 };
 
 
+
 module.exports = {
-  storeUser: storeUser,	
+  storeUser: storeUser, 
   retrieveUser: retrieveUser,
-  deleteUser: deleteUser
+  deleteUser: deleteUser,
+  retrieveGraphId: retrieveGraphId
 };

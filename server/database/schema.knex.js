@@ -20,6 +20,8 @@ knex.schema.hasTable('Users').then(exist => {
       user.string('password'); //charset
       user.string('email');
       user.string('genres');
+      // user.string('graph_id');
+    
 
     }).then(table => {
       console.log('Created Table', table);
@@ -67,6 +69,7 @@ knex.schema.hasTable('Messages').then(exist => {
     });
   }
 });
+
 
 module.exports = knex;
 
