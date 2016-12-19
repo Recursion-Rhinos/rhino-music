@@ -8,37 +8,38 @@ var storeUser = (username, password, email, genre = 'Hip-Hop') => {
     password: password,
     email: email,
     genres: genre
-  })
-   .then(storedUser => {
-     console.log(storedUser);
-     return storedUser;
-   });
+  }); //resolve with promise in the controller
+   // .then(storedUser => {
+   //   console.log(storedUser);
+   //   return storedUser;
+   // });
 };
 
-let retrieveUser = (name, password) => knex('Users').where({
-  username: name,
-  password: password  
-})
-.first()
-.then(data => {
-  console.log('DATA', data);
-  return data;
-});
+let retrieveUser = (name, password) => {
+  return knex('Users').where({
+    username: name,
+    password: password  
+  })
+.first();//resolves with promise in the controller
+// .then(data => {
+//   console.log('DATA', data);
+//   return data;
+// });
+}; 
 
 let retrieveGraphId = (userId) => {
-
+ //not finished yet
 };
 
 let deleteUser = (name) => {
   return knex('Users').where({
     username: name
-  }).select('id').del()
-    .then(deletedUser => {
-      console.log(deletedUser);
-      return deletedUser;
-    }); 
+  }).select('id').del(); //resolves with promise in the controller
+    // .then(deletedUser => {
+    //   console.log(deletedUser);
+    //   return deletedUser;
+    // }); 
 };
-
 
 
 module.exports = {
