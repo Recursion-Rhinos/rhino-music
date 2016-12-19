@@ -1,11 +1,13 @@
+const config = require('./config');
 const knex = require('knex')({
+
   client: 'mysql',
   connection: { 
-    host: '127.0.0.1',
-    user: '<User Name>',
-    password: '<Your password>',
-    database: '<DB name>',
-    charset: 'utf8'
+    host: config.host,
+    user: config.user,
+    password: config.password,
+    database: config.database,
+    charset: config.charset
   },
   useNullasDefault: true
 });
@@ -41,7 +43,7 @@ knex.schema.hasTable('Playlist').then(exist => {
   if (!exist) {
     knex.schema.createTable('Playlist', (table) => {
       table.increments('id').primary();
-      table.foreign('SongsId').references('Songs.song_id_in_songs');
+      table.foreign('SongsId').references('Songs.song_id_in_songs'); //or references('id').inTable(Songs);
       table.foreign('UserId').references('Users.user_id_in_users');
 
     }).then(table => {
@@ -56,7 +58,7 @@ knex.schema.hasTable('Messages').then(exist => {
       message.increments('id').primary();
       message.string('text');
       message.string('genre');
-      table.foreign('UserId').references('Users.user_id_in_users');
+      message.foreign('UserId').references('Users.user_id_in_users');
 
     }).then(table => {
       console.log('Created Table', table);
