@@ -5,12 +5,30 @@ router.get('/api/main', function(req, res) {
 	res.sendFile(path.join(__dirname, '/../client/comingSoon.html'))
 });
 
-router.get('/api/signup', function(req, res) {
+router.get('/api/signup', function(req, res) {  //replace anon-fn with user.controller
 	// res.sendFile(path.join(__dirname, '/../client/auth/signup.html'));
 })
-router.get('/api/login', function(req, res) {
+router.get('/api/login', function(req, res) { // replace anon-fn with user.controller
 	//res.sendFile(path.join(__dirname,'/../client/auth/login.html'))
 });
+router.get('/api/getMessages', (req, res) => {
+  console.log('Getting All Messages Route');
+});/*controller.messages.get*/
+router.post('api/postMessage', (req, res) => {
+  console.log('Posting Message Route');
+});/*controller.messages.post*/
+router.get('/api/getNews', (req,res) => {
+  console.log('Getting News Route');
+});/*controller.news.get*/
+router.get('/api/getPlaylist', (req,res) => {
+  console.log('Getting Playlist Route');
+});/*controller.playlist.getAll*/
+router.post('/api/updatePlayist', (req,res) => {
+  console.log('Updating Playlist Route');
+});/*controller.playlist.update*/
+router.get('/api/deletePlaylist', (req,res) => {
+  console.log('Deleting Playlist Route');
+});/*controller.playlist.delete*/
 
 
 
