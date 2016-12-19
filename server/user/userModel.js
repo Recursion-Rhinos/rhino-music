@@ -10,9 +10,13 @@ let store = (username, password, email, genres) => {
   });
 };
 
-let getAll = () => {
-  
+let retrieve = (name, password) => {
+  return knex('Users').where({
+    name: name,
+    password: password	
+  }).select('id');
 };
+
 
 
 module.exports = {
