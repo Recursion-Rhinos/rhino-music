@@ -17,9 +17,8 @@ let remove = (SongsId, UserId) => {
 };
 
 let getAllByUserId = (UserId) => {
-  return knex('Users').where({
-    id: UserId
-  })
+  return knex('Users')
+  .where('UserId', UserId)
   .first();//resolves with primise in the controller
 };
 
