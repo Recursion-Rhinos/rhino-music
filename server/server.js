@@ -12,14 +12,16 @@ var app = express();
 var userModel = require('./user/userModel.js');
 module.exports = app;
 
+require('./config/passport')(passport);
 app.use(bodyParser.json() );
 app.use(express.static(path.join(__dirname, '/../client')));
 app.use(cookieParser());
 app.use(session({secret:"someSecret"}))
 app.use(passport.initialize());
 app.use(passport.session());
-app.use(router);
-
+require('./routes.js')(app, passport);
+//app.use(router);
+userModel.storeUser('annonymous', 'password', 'email@email.com', 'hip-hop');
 var port = process.env.PORT || 3005;
 app.listen(port,(err) => {
   console.log("Listening on port " + port);
