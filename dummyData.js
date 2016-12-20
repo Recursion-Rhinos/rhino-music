@@ -1,5 +1,4 @@
-module.exports = {
-  [{
+module.exports = [{
     "id": 13158665,
     "created_at": "2011/04/06 15:37:43 +0000",
     "user_id": 3699101,
@@ -148,5 +147,5 @@ module.exports = {
     "favoritings_count": 0,
     "comment_count": 0,
     "attachments_uri": "http://api.soundcloud.com/tracks/13158671/attachments"
-  }]  
-}
+  }
+]
