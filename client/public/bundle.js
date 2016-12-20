@@ -67,14 +67,6 @@
 	
 	var _searchbar2 = _interopRequireDefault(_searchbar);
 	
-	var _search_results = __webpack_require__(/*! ./components/search_results */ 162);
-	
-	var _search_results2 = _interopRequireDefault(_search_results);
-	
-	var _rec_list = __webpack_require__(/*! ./components/rec_list */ 163);
-	
-	var _rec_list2 = _interopRequireDefault(_rec_list);
-	
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 	
 	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -82,6 +74,10 @@
 	function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
 	
 	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; } //find node mod named 'react' and put it into var React
+	
+	
+	// import SearchResults from './components/search_results'
+	// import RecList from './components/rec_list'
 	
 	
 	var App = function (_React$Component) {
@@ -32732,42 +32728,6 @@
 	}(_react.Component);
 	
 	exports.default = SearchBar;
-
-/***/ },
-/* 162 */
-/*!*********************************************!*\
-  !*** ./client/components/search_results.js ***!
-  \*********************************************/
-/***/ function(module, exports, __webpack_require__) {
-
-	'use strict';
-	
-	Object.defineProperty(exports, "__esModule", {
-	  value: true
-	});
-	
-	var _react = __webpack_require__(/*! react */ 3);
-	
-	var _react2 = _interopRequireDefault(_react);
-	
-	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-	
-	exports.default = rec_list;
-
-/***/ },
-/* 163 */
-/*!***************************************!*\
-  !*** ./client/components/rec_list.js ***!
-  \***************************************/
-/***/ function(module, exports, __webpack_require__) {
-
-	'use strict';
-	
-	var _react = __webpack_require__(/*! react */ 3);
-	
-	var _react2 = _interopRequireDefault(_react);
-
-	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 /***/ }
 /******/ ]);
