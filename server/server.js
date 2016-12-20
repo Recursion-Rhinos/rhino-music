@@ -22,6 +22,7 @@ app.use(bodyParser.urlencoded({
 app.use(bodyParser.json());
 app.use(express.static(path.join(__dirname, '/../client')));
 app.use(cookieParser());
+app.set('view engine', 'ejs');
 app.use(session({
   secret:"someSecret",
   resave: true,
