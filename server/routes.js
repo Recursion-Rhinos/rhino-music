@@ -1,5 +1,7 @@
 var router = require('express').Router();
 var path = require('path')
+var dummyData = require ('../dummyData.js')
+var request = require('request');
 
 router.get('/api/main', (req,res) => {
 	res.sendFile(path.join(__dirname, '/../client/comingSoon.html'))
@@ -18,7 +20,26 @@ router.get('/api/getMessages', (req,res) => {
 });/*controller.messages.get*/
 
 router.post('/api/search', (req,res) => {
-  console.log("Search Term", req.body)
+  console.log("INPUT:", req.body)
+  let input = JSON.stringify(req.body.inputVal);
+
+   request({
+      url: 'https://api.spotify.com/v1/search',
+      qs: {
+        q: input,
+        type: 'track',
+        limit: 6
+      }
+    },
+      function(error, response, body) {
+        console.log(body);
+        if (!error && response.statusCode === 200) {
+          console.log(body);
+          res.send(body);
+        } else {
+          res.json(error);
+        }
+      });
 });
 
 router.post('api/postMessage', (req,res) => {
