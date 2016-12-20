@@ -1,4 +1,7 @@
 import React, { Component } from 'react';
+import 'whatwg-fetch'
+// import Router {router, browserHistory} from 'react-router';
+// import Routes from './routes';
 
 
 class SearchBar extends Component {
@@ -17,9 +20,26 @@ class SearchBar extends Component {
   }
 
   handleSubmit(event) {
-    event.preventDefault();
-    console.log(this.state.value)
+      event.preventDefault();
+      let inputVal = this.state.value;
+
+      fetch('/api/search', {
+          method: 'POST',
+          headers: {
+              'Content-Type': 'application/json'
+          },
+          body: JSON.stringify({
+              inputVal
+          })
+      }).then(function(resp) {
+        resp.json().then(function(data){
+         	return data
+         })
+
+      })
   }
+
+
 
 render() {
 
