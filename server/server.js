@@ -9,7 +9,6 @@ var session = require('express-session');
 var cookieParser = require('cookie-parser');
 //var localStrategy = require('passport-local').Strategy;
 var app = express();
-var userModel = require('./user/userModel.js');
 module.exports = app;
 
 require('./config/passport')(passport);
