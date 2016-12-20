@@ -1,4 +1,4 @@
-var knex = require('../database/schema.knex.js');
+const knex = require('../database/schema.knex.js');
 
 let getByUserId = (UserId) => {
   return knex('Messages')

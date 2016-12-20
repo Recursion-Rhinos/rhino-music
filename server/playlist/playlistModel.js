@@ -4,7 +4,7 @@ let addTo = (SongsId, UserId) => {
   return knex('Playlist').insert({
     SongsId: SongsId,
     UserId: UserId
-  }); //resolves with primise in the controller
+  }); //resolves with promise in the controller
 };
 
 let remove = (SongsId, UserId) => {
@@ -13,13 +13,13 @@ let remove = (SongsId, UserId) => {
     UserId: UserId	
   })
   .select('id')
-  .del(); //resolves with primise in the controller
+  .del(); //resolves with promise in the controller
 };
 
 let getAllByUserId = (UserId) => {
   return knex('Users')
   .where('UserId', UserId)
-  .first();//resolves with primise in the controller
+  .first();//resolves with promise in the controller
 };
 
 
