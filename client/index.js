@@ -24,6 +24,3 @@ class App extends Component {
   }
 }
 ReactDOM.render( < App / > , document.querySelector('.container'))
-
-// search bar will get search query and react router will send it to search 'api/search' in routes
-// results will return 
