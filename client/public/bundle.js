@@ -96,7 +96,8 @@
 	      return _react2.default.createElement(
 	        'div',
 	        null,
-	        _react2.default.createElement(_searchbar2.default, null)
+	        _react2.default.createElement(_searchbar2.default, null),
+	        _react2.default.createElement(_search_results2.default, null)
 	      );
 	    }
 	  }]);
@@ -32261,9 +32262,26 @@
 
 	var _react2 = _interopRequireDefault(_react);
 
+	var _searchbar = __webpack_require__(161);
+
+	var _searchbar2 = _interopRequireDefault(_searchbar);
+
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-	exports.default = rec_list;
+	var SearchResults = function SearchResults(props) {
+	  console.log("SearchResutls", props);
+	  return _react2.default.createElement(
+	    'div',
+	    null,
+	    _react2.default.createElement(
+	      'div',
+	      null,
+	      'Some Data'
+	    )
+	  );
+	};
+
+	exports.default = SearchResults;
 
 /***/ },
 /* 163 */

@@ -33,7 +33,7 @@ knex.schema.hasTable('Songs').then(exist => {
   if (!exist) {
     knex.schema.createTable('Songs', (song) => {
       song.increments('id').primary();    
-      song.string('song');
+      song.text('song');
 
     }).then(table => {
       console.log('Created Table', table);
