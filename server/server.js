@@ -10,18 +10,28 @@ var cookieParser = require('cookie-parser');
 var localStrategy = require('passport-local').Strategy;
 var app = express();
 var userModel = require('./user/userModel.js');
+var flash = require('connect-flash');
 module.exports = app;
 
 require('./config/passport')(passport);
-app.use(bodyParser.json() );
+
+app.use(morgan('dev'));
+app.use(bodyParser.urlencoded({
+  extended:true
+}));
+app.use(bodyParser.json());
 app.use(express.static(path.join(__dirname, '/../client')));
 app.use(cookieParser());
-app.use(session({secret:"someSecret"}))
+app.use(session({
+  secret:"someSecret",
+  resave: true,
+  saveUninitialized: true
+}));
 app.use(passport.initialize());
 app.use(passport.session());
+app.use(flash());
 require('./routes.js')(app, passport);
 //app.use(router);
-userModel.storeUser('annonymous', 'password', 'email@email.com', 'hip-hop');
 var port = process.env.PORT || 3005;
 app.listen(port,(err) => {
   console.log("Listening on port " + port);

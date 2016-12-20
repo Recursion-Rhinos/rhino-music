@@ -28,6 +28,12 @@ let getUserById = (id) => {
   }).first();
 };
 
+let getUserByName = (username) => {
+  return knex('Users').where({
+    username: username
+  }).first();
+};
+
 let retrieveGraphId = (userId) => {
  //not finished yet
 };
@@ -42,11 +48,11 @@ let deleteUser = (name) => {
     // }); 
 };
 
-
 module.exports = {
   storeUser: storeUser, 
   retrieveUser: retrieveUser,
   getUserById: getUserById,
+  getUserByName: getUserByName,
   deleteUser: deleteUser,
   retrieveGraphId: retrieveGraphId
 };
