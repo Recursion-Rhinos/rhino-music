@@ -1,7 +1,12 @@
 const knex = require('../database/schema.knex.js');
 
 let addSong = (song) => {
-  return knex('Songs').insert('song', song);  
+  return knex('Songs').insert(
+  {song: song})
+  .then((test) => {
+    console.log(test);
+    return test;
+  });
 };
 
 let removeSong = (song) => {
