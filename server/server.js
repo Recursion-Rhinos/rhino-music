@@ -28,10 +28,10 @@ app.use(session({
   resave: true,
   saveUninitialized: true
 }));
-// app.use(passport.initialize());
-// app.use(passport.session());
-// app.use(flash());
-// require('./routes.js')(app, passport);
+app.use(passport.initialize());
+app.use(passport.session());
+app.use(flash());
+require('./routes.js')(app, passport);
 app.use(router);
 var port = process.env.PORT || 3005;
 app.listen(port,(err) => {
