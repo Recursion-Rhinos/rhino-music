@@ -21,8 +21,8 @@ var request = require('request');
 
 router.post('/api/search', (req,res) => {
   console.log("INPUT:", req.body)
-  let input = JSON.stringify(req.body.inputVal);
-
+  let input = JSON.stringify(req.body);
+  console.log("Input:", input)
    request({
       url: 'https://api.spotify.com/v1/search',
       qs: {
@@ -32,9 +32,9 @@ router.post('/api/search', (req,res) => {
       }
     },
       function(error, response, body) {
-        console.log(body);
         if (!error && response.statusCode === 200) {
-          console.log(body);
+      console.log(body)
+          
           res.send(body);
         } else {
           res.json(error);
@@ -67,38 +67,38 @@ router.post('/api/search', (req,res) => {
 
  module.exports = router;
 
-module.exports = function(app, passport) {
-  app.get('/', (req, res) => {
-    res.render('index.ejs')
-  });
+// module.exports = function(app, passport) {
+//   // app.get('/', (req, res) => {
+//   //   res.render('index.ejs')
+//   // });
 
-  app.get('/login', (req, res) => {
-    res.render('login.ejs', { message: req.flash('loginMessage') });
-  });
+//   app.get('/login', (req, res) => {
+//     res.render('login.ejs', { message: req.flash('loginMessage') });
+//   });
 
-  //app.post('/login', do passport stuff)
+//   //app.post('/login', do passport stuff)
   
-  app.get('/signup', (req, res) => {
-    res.render('signup.ejs', { message: req.flash('signupMessage') })
-  });
+//   app.get('/signup', (req, res) => {
+//     res.render('signup.ejs', { message: req.flash('signupMessage') })
+//   });
 
-  //app.post('/signup', do all passport stuff)
+//   //app.post('/signup', do all passport stuff)
   
-  app.get('/profile', isLoggedIn, (req, res) => {
-    res.render('profile.ejs', {
-      user: req.user
-    });
-  });
+//   app.get('/profile', isLoggedIn, (req, res) => {
+//     res.render('profile.ejs', {
+//       user: req.user
+//     });
+//   });
 
-  app.get('/logout', (req, res) => {
-    req.logout();
-    res.redirect('/');
-  });
-};
+//   app.get('/logout', (req, res) => {
+//     req.logout();
+//     res.redirect('/');
+//   });
+// };
 
-function isLoggedIn(req, res, next) {
-  if(req.isAuthenticated()) {
-    return next();
-  }
-  res.redirect('/');
-}
+// function isLoggedIn(req, res, next) {
+//   if(req.isAuthenticated()) {
+//     return next();
+//   }
+//   res.redirect('/');
+// }
