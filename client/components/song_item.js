@@ -2,7 +2,7 @@ import React from 'react';
 // import SearchResult from './search_results';
 
 const SongItem = (props) => {
-  console.log(props);
+  console.log("SongItem",props);
   return (
     <li className="list-group-item">
       <div className="song-list-media">
