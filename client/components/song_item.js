@@ -3,15 +3,17 @@ import React from 'react';
 
 const SongItem = (props) => {
   console.log("SongItem",props);
+  const images = props.song.album.images[2].url;
   return (
     <li onClick = {() => props.onSongSelect(props.song.uri)} className="list-group-item">
       <div className="song-list-media">
-        <div className="song-left">     
-          <img className="song-object" />
+        <div className="media-left">     
+          <img className="media-object" src={images} />
         </div>
       
-        <div className="song-body">
-          <div className="song-heading">{props.song.name}</div>
+        <div className="media-body">
+          <h4 className="media-heading">{props.song.name}</h4>
+
         </div>
       </div>
     </li>
