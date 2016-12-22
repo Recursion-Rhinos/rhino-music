@@ -13,7 +13,6 @@ var userModel = require('./user/userModel.js');
 var flash = require('connect-flash');
 module.exports = app;
 
-// require('./config/passport')(passport);
 
 app.use(morgan('dev'));
 app.use(bodyParser.urlencoded({
@@ -31,10 +30,13 @@ app.use(session({
 app.use(passport.initialize());
 app.use(passport.session());
 app.use(flash());
+require('./config/passport')(passport);
 require('./routes.js')(app, passport);
-app.use(router);
+//app.use(router);
 var port = process.env.PORT || 3005;
 app.listen(port,(err) => {
   console.log("Listening on port " + port);
 });
-
+// process.on('uncaughtException', function (err) {
+//     console.log(err);
+// }); 
