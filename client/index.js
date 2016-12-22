@@ -6,6 +6,7 @@ import axios from 'axios'
 // import Routes from './routes';
 import SearchBar from './components/searchbar'
 import SearchResults from './components/search_results'
+import MusicPlayer from './components/spotify_player'
 // import RecList from './components/rec_list'
 // import SongItem from './components/song_item'
 
@@ -23,22 +24,23 @@ class App extends Component {
 
 songSearch = (term) => {
   var that = this;
-let test = axios.post('/api/search', { 
+axios.post('/api/search', { 
             body: term
     }).then(function(results){
+      console.log(results)
         console.log("THAT", that)
         that.setState({
-            songs: results.data.tracks.items
+            songs: results.data.tracks.items,
+            selectedSong: results.data.tracks.items[0].uri
         })
     })
 }
   
-
-
   render () {
     return <div>
     		 <SearchBar onSearchTermChange={term => this.songSearch(term)}/>
     		 <SearchResults songs={this.state.songs}/>
+         <MusicPlayer songUri={this.state.selectedSong}/>
     	   </div>
   }
 }
