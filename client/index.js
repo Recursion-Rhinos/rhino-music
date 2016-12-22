@@ -41,7 +41,7 @@ axios.post('/api/search', {
 render () {
    return <div>
             <SearchBar onSearchTermChange={term => this.songSearch(term)}/>
-            <SearchResults onSongSelect={selectedSong => {this.setState({ selectedSong:selectedSong})}}
+            <SearchResults onSongSelect={selectedSong => this.setState({ selectedSong:selectedSong})}
              songs={this.state.songs}/>
              <MusicPlayer songUri={this.state.selectedSong}/>
           </div>
