@@ -17,7 +17,7 @@ var localSignup = new LocalStrategy({
         var newUser = {
           username: username,
           password: bcrypt.hashSync(password, null, null),
-          email: 'test@test.com'
+          email: req.body.email
         };
         User.storeUser(newUser.username, newUser.password, newUser.email).then((data) => {
           console.log('DATA: ',data);
