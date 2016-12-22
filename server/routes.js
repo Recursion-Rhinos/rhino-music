@@ -102,7 +102,9 @@ app.post('/api/search', (req,res) => {
   
   app.get('/profile', isLoggedIn, (req, res) => {
     console.log('PROFILE!!!')
-    res.render('profile.ejs');
+    res.render('profile.ejs', {
+      user: req.user
+    });
   });
 
   app.get('/logout', (req, res) => {
