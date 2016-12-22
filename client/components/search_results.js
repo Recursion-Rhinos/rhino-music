@@ -12,9 +12,9 @@ const SearchResults = (props) => {
    );
   })
   return (
-    <div>
-      <div>{searchResult}</div>
-    </div>
+    <ul className="col-md-8 list-group">
+      {searchResult}
+    </ul>
   );	
 } 
 export default SearchResults;

@@ -7,12 +7,12 @@ const SongItem = (props) => {
   return (
     <li onClick = {() => props.onSongSelect(props.song.uri)} className="list-group-item">
       <div className="song-list-media">
-        <div className="song-left">     
-          <img className="song-object" src={images} />
+        <div className="media-left">     
+          <img className="media-object" src={images} />
         </div>
       
-        <div className="song-body">
-          <div className="song-heading">{props.song.name}</div>
+        <div className="media-body">
+          <div className="media-heading">{props.song.name}</div>
         </div>
       </div>
     </li>
