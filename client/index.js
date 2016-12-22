@@ -11,6 +11,7 @@ import SearchResults from './components/search_results'
 
 class App extends Component {
 
+
  constructor(props) {
     super(props);
 
