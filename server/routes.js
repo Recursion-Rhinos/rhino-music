@@ -83,7 +83,7 @@ app.post('/api/search', (req,res) => {
   });
 
   app.post('/login', passport.authenticate('local-login', {
-    successRedirect: '/',
+    successRedirect: '/search',
     failureRedirect: '/login',
     failureFlash: true
   })
@@ -95,7 +95,7 @@ app.post('/api/search', (req,res) => {
   });
 
   app.post('/signup', passport.authenticate('local-signup', {
-    successRedirect: '/profile',
+    successRedirect: '/search',
     failureRedirect: '/signup',
     failureFlash: true
   }));
