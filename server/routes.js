@@ -18,8 +18,8 @@ var request = require('request');
 // router.get('/api/getMessages', (req,res) => {
 //   console.log('Getting All Messages Route');
 // });/*controller.messages.get*/
-
-router.post('/api/search', (req,res) => {
+module.exports = function(app, passport) {
+app.post('/api/search', (req,res) => {
   console.log("INPUT:", req.body)
   let input = JSON.stringify(req.body);
   console.log("Input:", input)
@@ -65,9 +65,9 @@ router.post('/api/search', (req,res) => {
 //   console.log('Deleting Playlist Route');
 // });/*controller.playlist.delete*/
 
- module.exports = router;
+// module.exports = router;
 
-module.exports = function(app, passport) {
+
   // app.get('/', (req, res) => {
   //   res.render('index.ejs')
   // });
