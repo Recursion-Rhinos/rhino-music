@@ -19,6 +19,11 @@ var request = require('request');
 //   console.log('Getting All Messages Route');
 // });/*controller.messages.get*/
 module.exports = function(app, passport) {
+
+app.get('/search', isLoggedIn, (req,res) => {
+  res.sendFile(path.join(__dirname, '/../client/search.html'))
+})
+
 app.post('/api/search', (req,res) => {
   console.log("INPUT:", req.body)
   let input = JSON.stringify(req.body);
@@ -68,37 +73,49 @@ app.post('/api/search', (req,res) => {
 // module.exports = router;
 
 
-  // app.get('/', (req, res) => {
-  //   res.render('index.ejs')
-  // });
+  app.get('/', isLoggedIn, (req, res) => {
+    console.log('ROUTES.JS GET')
+    res.sendFile(path.join(__dirname, '/../client/public/bundle.js'))
+  });
 
   app.get('/login', (req, res) => {
     res.render('login.ejs', { message: req.flash('loginMessage') });
   });
 
-  //app.post('/login', do passport stuff)
+  app.post('/login', passport.authenticate('local-login', {
+    successRedirect: '/',
+    failureRedirect: '/login',
+    failureFlash: true
+  })
+  );
   
   app.get('/signup', (req, res) => {
+    console.log('rendering signup')
     res.render('signup.ejs', { message: req.flash('signupMessage') })
   });
 
-  //app.post('/signup', do all passport stuff)
+  app.post('/signup', passport.authenticate('local-signup', {
+    successRedirect: '/profile',
+    failureRedirect: '/signup',
+    failureFlash: true
+  }));
   
   app.get('/profile', isLoggedIn, (req, res) => {
-    res.render('profile.ejs', {
-      user: req.user
-    });
+    console.log('PROFILE!!!')
+    res.render('profile.ejs');
   });
 
-  app.get('/logout', (req, res) => {
+  app.get('/logout', isLoggedIn, (req, res) => {
     req.logout();
     res.redirect('/');
   });
 };
 
 function isLoggedIn(req, res, next) {
+  console.log('isLoggedInReq: ',req.isAuthenticated)
   if(req.isAuthenticated()) {
     return next();
   }
-  res.redirect('/');
+  res.redirect('/login');
+>>>>>>> auth
 }
