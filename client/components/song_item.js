@@ -1,10 +1,10 @@
 import React from 'react';
 // import SearchResult from './search_results';
 
-const SongItem = (props, onSongSelect) => {
+const SongItem = (props) => {
   console.log("SongItem",props);
   return (
-    <li onClick = {() => onSongSelect(props.song.uri)} className="list-group-item">
+    <li onClick = {() => props.onSongSelect(props.song.uri)} className="list-group-item">
       <div className="song-list-media">
         <div className="song-left">     
           <img className="song-object" />
