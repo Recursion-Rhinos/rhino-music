@@ -12,7 +12,8 @@ const SongItem = (props) => {
         </div>
       
         <div className="media-body">
-          <div className="media-heading">{props.song.name}</div>
+          <h4 className="media-heading">{props.song.name}</h4>
+
         </div>
       </div>
     </li>
