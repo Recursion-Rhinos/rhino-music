@@ -105,16 +105,15 @@ app.post('/api/search', (req,res) => {
     res.render('profile.ejs');
   });
 
-  app.get('/logout', isLoggedIn, (req, res) => {
+  app.get('/logout', (req, res) => {
     req.logout();
     res.redirect('/');
   });
 };
 
 function isLoggedIn(req, res, next) {
-  console.log('isLoggedInReq: ',req.isAuthenticated)
   if(req.isAuthenticated()) {
     return next();
   }
-  res.redirect('/login');
+  res.redirect('/');
 }
