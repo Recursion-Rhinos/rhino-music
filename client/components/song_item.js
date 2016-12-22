@@ -4,12 +4,12 @@ import React from 'react';
 const SongItem = (props) => {
   console.log("SongItem",props);
   return (
-    <li className="list-group-item">
+    <li onClick = {() => onSongSelect(props.songs.uri)} className="list-group-item">
       <div className="song-list-media">
         <div className="song-left">     
           <img className="song-object" />
         </div>
-
+      
         <div className="song-body">
           <div className="song-heading">Some props</div>
         </div>
