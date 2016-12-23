@@ -2,6 +2,9 @@ var router = require('express').Router();
 var path = require('path')
 var dummyData = require ('../dummyData.js')
 var request = require('request');
+var nytApi = require('./API/nytAPI.js')
+
+console.log("NYTAPI", nytApi)
 
 // router.get('/api/main', (req,res) => {
 // 	res.sendFile(path.join(__dirname, '/../client/comingSoon.html'))
@@ -119,3 +122,22 @@ function isLoggedIn(req, res, next) {
   }
   res.redirect('/');
 }
+
+// app.post('/api/nytimes', (req, res) => {
+//   nytApi.search(req.body.query, (data) => {
+//   console.log('Data', data)  
+//   
+// });
+
+request.get({
+  url: "https://api.nytimes.com/svc/search/v2/articlesearch.json",
+  qs: {
+    'api-key': "af60270881bb4977ad34da8640335d97",
+    'q': "chess",
+    'sort': "oldest",
+    'page': 3
+  },
+}, function(err, response, body) {
+  body = JSON.parse(body);
+  console.log(body);
+});
