@@ -14,7 +14,7 @@ const SongItem = (props) => {
         </div>
       
         <div className="media-body">
-          <h4 className="media-heading">{artistName}-{songName}</h4>
+          <h4 className="media-heading">{artistName}-{songName} </h4>
           views ratings likes comments share lyrics 
         </div>
       </div>
