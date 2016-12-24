@@ -16,14 +16,20 @@ search = (q, callback) => {
   });	
 };
 
- 
-result = (body) => {
+results = (body) => {
+  return body.response.docs.map((data) => {
 
+    return {
+      weburl: data.web_url,
+      multimedia: data.multimedia[0].url,
+      headline: data.headline.main,
+    };
+  });
 };
 
 
-
-// NYTIME URL https://api.nytimes.com/svc/search/v2/articlesearch.json?api-key=af60270881bb4977ad34da8640335d97&q=New York
+// NYTIME URL https://api.nytimes.com/svc/search/v2/articlesearch.json?api-key=APIKEY&q=New York
 module.exports = {
-  search: search
+  search: search,
+  results: results
 };
