@@ -4,10 +4,10 @@ var dummyData = require ('../dummyData.js')
 var request = require('request');
 const nytApi = require('./API/nytAPI.js');
 const apiKey = process.env.API_KEY_NYT;
+var express = require('express');
 
 
 console.log("NYTAPI", nytApi)
-
 // router.get('/api/main', (req,res) => {
 // 	res.sendFile(path.join(__dirname, '/../client/comingSoon.html'))
 // });
@@ -116,7 +116,7 @@ app.post('/api/search', (req,res) => {
     req.logout();
     res.redirect('/');
   });
-};
+
 
 function isLoggedIn(req, res, next) {
   if(req.isAuthenticated()) {
@@ -125,21 +125,20 @@ function isLoggedIn(req, res, next) {
   res.redirect('/');
 }
 
-// app.post('/api/nytimes', (req, res) => {
-//   nytApi.search(req.body.query, (data) => {
-//   console.log('Data', data)  
-//   
-// });
+  // router.get('/api/test', (req, res) => {
+  app.get('/news', (req, res) => { 
+    request.get({
+      url: "https://api.nytimes.com/svc/search/v2/articlesearch.json",
+      qs: {
+        'api-key': "af60270881bb4977ad34da8640335d97",
+        'q': 'Madonna'
+      },
+    }, (err, response, body) => {
+      body = JSON.parse(body);
+      console.log("MULTIMEDIA", body.response.docs[0].multimedia);
+      res.send(body);
+    });
+  });
+};
 
-request.get({
-  url: "https://api.nytimes.com/svc/search/v2/articlesearch.json",
-  qs: {
-    'api-key': "******API-KEY*******",
-    'q': "Madonna"
-  },
-}, function(err, response, body) {
-  body = JSON.parse(body);
-  // let mappedData = body.response.docs.map((data) => {
-  // })
-  console.log("MULTIMEDIA", body.response.docs[0].multimedia);
-});
+
