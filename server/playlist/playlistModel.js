@@ -16,6 +16,12 @@ let remove = (SongsId, UserId) => {
   .del(); //resolves with promise in the controller
 };
 
+// let getPlaylistById = (id) => {
+//   return knex('Playlist').where({
+//     id: id
+//   }).first();
+// };
+
 let getAllByUserId = (UserId) => {
   return knex('Users')
   .where('UserId', UserId)

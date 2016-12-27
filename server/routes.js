@@ -4,6 +4,7 @@ var dummyData = require ('../dummyData.js')
 var request = require('request');
 const nytApi = require('./API/nytAPI.js');
 const apiKey = process.env.API_KEY_NYT;
+// const ytApi = AIzaSyDuq91IyM4yVkDOCagx_Y_VvRnLyKHXfuE;
 
 
 console.log("NYTAPI", nytApi)
@@ -29,6 +30,35 @@ app.get('/search', isLoggedIn, (req,res) => {
   res.sendFile(path.join(__dirname, '/../client/search.html'))
 })
 
+
+app.get('/events',isLoggedIn, (req,res) => {
+  res.sendFile(path.join(__dirname,'/../client/events/BandsInTownWidget.html'))
+})
+
+app.get('/api/youtube', (req, res) => {
+    //req.body can be id for selected playlist?
+    request({
+
+        url: `https://www.googleapis.com/youtube/v3/search`,
+        qs: {
+            part: "snippet",
+            q: "redbone",
+            order: "relevance",
+            key: "AIzaSyDuq91IyM4yVkDOCagx_Y_VvRnLyKHXfuE"
+        }
+
+    },
+      function(error,response,body) {
+        console.log("THE BODY", body)
+        if(!error && response.statusCode === 200) {
+          res.send(body);
+        } else {
+          res.send(error);
+        }
+    })
+})
+
+
 app.post('/api/search', (req,res) => {
   console.log("INPUT:", req.body)
   let input = JSON.stringify(req.body);
@@ -43,8 +73,6 @@ app.post('/api/search', (req,res) => {
     },
       function(error, response, body) {
         if (!error && response.statusCode === 200) {
-      console.log(body)
-          
           res.send(body);
         } else {
           res.json(error);
@@ -134,7 +162,7 @@ function isLoggedIn(req, res, next) {
 request.get({
   url: "https://api.nytimes.com/svc/search/v2/articlesearch.json",
   qs: {
-    'api-key': "******API-KEY*******",
+    'api-key': "af60270881bb4977ad34da8640335d97",
     'q': "Madonna"
   },
 }, function(err, response, body) {
