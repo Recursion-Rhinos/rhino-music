@@ -17,13 +17,16 @@ class App extends Component {
 
     this.state = { 
     	songs: [],
-    	selectedSong: null 
+    	selectedSong: null,
+      image: null
+      
     }
      this.songSearch = this.songSearch.bind(this)
+     this.newsSearch = this.newsSearch.bind(this)
 }
 
-songSearch = (term) => {
-  var that = this;
+songSearch = (term) => {   
+    var that = this;
 axios.post('/api/search', { 
             body: term
     }).then(function(results){
@@ -34,8 +37,28 @@ axios.post('/api/search', {
             selectedSong: results.data.tracks.items[0].uri
         })
     })
+  }
+
+newsSearch = () => {
+  let that = this;
+  axios.get('/news')
+  .then((response) => 
+    console.log("responce123", response.data.response.docs[0].multimedia[0].url);
+    //Have to fix this part
+    that.setState({
+    songs: [],
+    selectedSong: null,
+    image: "nytimes.com/" + response.data.response.docs.[0].multimedia[0].url
+  })
+  .catch((error) => {
+    console.log("ERROR", error)
+  })
 }
 
+componentDidMount() {
+  console.log("TEST");
+  return this.newsSearch();
+  }
 
   
 render () {
@@ -44,6 +67,7 @@ render () {
             <SearchResults onSongSelect={selectedSong => this.setState({ selectedSong:selectedSong})}
              songs={this.state.songs}/>
              <MusicPlayer songUri={this.state.selectedSong}/>
+
           </div>
  }
 }
