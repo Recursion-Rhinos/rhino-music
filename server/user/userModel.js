@@ -34,6 +34,12 @@ let getUserByName = (username) => {
   }).first();
 };
 
+// let retrieveUserId = () => {
+//   return knex('Users').where({
+
+//   }).select('id')
+// }
+
 let retrieveGraphId = (userId) => {
  //not finished yet
 };
