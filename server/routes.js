@@ -4,7 +4,7 @@ var dummyData = require ('../dummyData.js')
 var request = require('request');
 const nytApi = require('./API/nytAPI.js');
 const apiKey = process.env.API_KEY_NYT;
-`
+
 // router.get('/api/main', (req,res) => {
 // 	res.sendFile(path.join(__dirname, '/../client/comingSoon.html'))
 // });
@@ -68,6 +68,7 @@ app.post('/api/search', (req,res) => {
       }
     },
       function(error, response, body) {
+        console.log("BODY", body)
         if (!error && response.statusCode === 200) {
           res.send(body);
         } else {
