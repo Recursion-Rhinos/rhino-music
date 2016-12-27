@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <link rel="stylesheet" href="./styles/styles.css">
+     <link rel="stylesheet" href="http://cdn.rawgit.com/twbs/bootstrap/v4-dev/dist/css/bootstrap.css">
+    	<script type='text/javascript' src='http://www.bandsintown.com/javascripts/bit_widget.js'></script>
+      <script src="https://code.jquery.com/jquery-2.2.0.js"></script>
+  </head>
+  <body>
+    <h1>Events</h1>
+    <div class="navigation">
+      <ul>
+        <li><a href="/search" class='index'>Search</a></li>
+        <li><a href="/profile" class='index'>Profile</a></li>
+        <li><a href="/logout" class='index'>Logout</a></li>
+      </ul>
+    </div>
+    <div class="widget">
+    <form class="artistSubmit">
+
+    <input type="text" name="artist" />
+
+    <button type="submit">Submit Artist</button>
+    </form>
+
+  <a href='http://www.bandsintown.com' id="widgetInput" class='bit-widget-initializer' data-artist=''>Bandsintown</a>
+ 	</div>
+
+<script type="text/javascript">
+$(document).ready(function() {
+    $('form.artistSubmit').on('submit', function(e) {
+        e.preventDefault();
+
+        const form = this;
+        let artistName = form.artist.value;
+        console.log("ARTIST NAME", artistName)
+        console.log($('#widgetInput').attr('data-artist'));
+
+        $('#widgetInput').attr('data-artist',artistName);
+
+    });
+
+});
+</script>
+
+  </body>
+</html>
+
+
