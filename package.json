@@ -63,6 +63,7 @@
     "path": "^0.12.7",
     "react": "^0.14.8",
     "react-dom": "^0.14.8",
+    "react-promise": "^1.1.2",
     "react-redux": "^4.0.0",
     "react-router": "^2.8.1",
     "redux": "^3.0.4",

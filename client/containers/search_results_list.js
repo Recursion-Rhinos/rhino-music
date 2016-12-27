@@ -1,37 +1,30 @@
-// import React, { Component } from 'react';
-// import { connect } from 'react-redux';
+import React, { Component } from 'react';
+import { connect } from 'react-redux';
 
-// export default class SearchList extends Component {
-// 	renderWeather(songData) {
-// 		return (
-// 		  <tr key={songData.id}>
-// 		   <td>{songData}</td>
-// 		  </tr>
-// 		)
-// 	}
+class SearchList extends Component {
+	render () {
+		return (
+			<table className="table table-hover">
+				<thead>
+					<tr>
+					<th> Title</th>
+					<th> Artist </th>
+					<th> Album </th>
+					<th> {this.props.song}</th>
+					</tr>
+				</thead>
+				<tbody>
+					
+				</tbody>
+			</table>
+		)
+	}
+}
 
-// 	render () {
-// 		return (
-// 			<table className="table table-hover">
-// 				<thead>
-// 					<tr>
-// 					<th> Title</th>
-// 					<th> Artist </th>
-// 					<th> Album </th>
-// 					<th> Duration </th>
-// 					</tr>
-// 				</thead>
-// 				<tbody>
-// 					{this.props.weather.map(this.renderWeather)}
-// 				</tbody>
-// 			</table>
-// 		)
-// 	}
-// }
+function mapStateToProps({ song }) {
+	console.log("SONG", {song});
 
-// function mapStateToProps({ song }) {
+	return { song };  //same as song: state.song
+}
 
-// 	return { song };  //same as song: state.song
-// }
-
-// export default connect (mapStateToProps)(SearchList);
+export default connect (mapStateToProps)(SearchList);
