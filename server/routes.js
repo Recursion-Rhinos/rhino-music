@@ -125,7 +125,6 @@ function isLoggedIn(req, res, next) {
   res.redirect('/');
 }
 
-  // router.get('/api/test', (req, res) => {
   app.get('/news', (req, res) => { 
     request.get({
       url: "https://api.nytimes.com/svc/search/v2/articlesearch.json",
