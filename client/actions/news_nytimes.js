@@ -1,7 +1,6 @@
 import axios from 'axios';
-const NEWS_URL = "http://localhost:3005/news"
-
-export const NYT_NEWS = 'NYT_NEWS'; 
+import { NYT_NEWS } from '../constants/ActionType';
+const NEWS_URL = "http://localhost:3005/news";
 
 export function fetchNews(news) {
   const news = NEWS_URL;
