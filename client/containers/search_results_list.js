@@ -2,7 +2,9 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 
 class SearchList extends Component {
+
 	render () {
+	  console.log("PROPSInIN", this.props)	
 		return (
 			<table className="table table-hover">
 				<thead>
@@ -10,7 +12,7 @@ class SearchList extends Component {
 					<th> Title</th>
 					<th> Artist </th>
 					<th> Album </th>
-					<th> {this.props.song}</th>
+					<th> {this.props.tracks}</th>
 					</tr>
 				</thead>
 				<tbody>
@@ -21,10 +23,10 @@ class SearchList extends Component {
 	}
 }
 
-function mapStateToProps({ song }) {
-	console.log("SONG", {song});
+function mapStateToProps({ tracks }) {
+	console.log("SONG", {tracks});
 
-	return { song };  //same as song: state.song
+	return { tracks };  //same as song: state.song
 }
 
-export default connect (mapStateToProps)(SearchList);
+export default connect(mapStateToProps)(SearchList);
