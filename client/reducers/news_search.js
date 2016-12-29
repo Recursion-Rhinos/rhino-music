@@ -1,4 +1,4 @@
-import { NYT_NEWS } from '../constants/ActionTypes';
+import { NYT_NEWS }  from '../constants/ActionTypes';
 
 export default function (state=[], action) {
   console.log('REDUCER-NEWS', action);
