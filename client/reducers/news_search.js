@@ -1,10 +1,10 @@
 import { NYT_NEWS } from '../constants/ActionTypes';
 
-export default function(state={}, action) {
+export default function (state=[], action) {
   console.log('REDUCER-NEWS', action);
-  switch(action.type) {
+  switch (action.type) {
     case NYT_NEWS:
     return state.concat([ action.payload.data ]);
-  }  
+  }
   return state;
 }
