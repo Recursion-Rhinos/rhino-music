@@ -2,8 +2,14 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 
 class SearchList extends Component {
+
+  handleClick(e) {
+    console.log("SOUND TESTS");
+  }
+  
   renderAlbums(albumId) {
-  	console.log('albumId', albumId);   
+  	console.log('albumId', albumId);
+   
     const name = albumId
      .map((title) => title.name)
      .map((names, idx) => (<p key={names.concat(idx + 1)}>{names}</p>));
@@ -15,14 +21,14 @@ class SearchList extends Component {
     const album = albumId
       .map(title => title.album.album_type)
       .map((album, idx) => (<p key={album.concat(idx + 1)}>{album}</p>));
-    
+
     return (
       <tr key={name + artist}>
         <td>{name}</td>
         <td>{artist}</td>
         <td>{album}</td>
       </tr>
-    );
+   );
   }
 
   render () {
@@ -30,7 +36,7 @@ class SearchList extends Component {
     return (
       <table className="table table-hover">
       <thead>
-        <tr>
+        <tr >
           <th> Title</th>
           <th> Artist </th>
           <th> Album </th>
