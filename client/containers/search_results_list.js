@@ -3,10 +3,25 @@ import { connect } from 'react-redux';
 
 class SearchList extends Component {
   renderAlbums(albumId) {
-  	console.log('albumId', albumId)
+  	console.log('albumId', albumId);
+    const name = albumId[0].name;
+    const artist = albumId[0].artists[0].name;
+    const album = albumId[0].album.album_type
+     // let name = albumId.map(album => album.name);
+     // console.log("NAME", name)
+     // let newName = name.map(function(i) {
+     //   return i.split("\n").map(function(singleName) {
+     //     return ( {singleName} <br/>)
+     //   })
+     // })
+      // album.name.split("\n").map(function(item) {
+      //   return ({item} <br/>)}
+      //   } 
     return (
-      <tr>
-        <td>{albumId}</td>
+      <tr key={name}>
+        <td>{name}</td>
+        <td>{artist}</td>
+        <td>{album}</td>
       </tr>
    );
   }
@@ -31,8 +46,8 @@ class SearchList extends Component {
   }
 }
 
-function mapStateToProps({ tracks }) {
-  return {tracks};  //same as tracks: state.tracks
+function mapStateToProps(state) {
+  return {tracks: state.tracks};  //same as tracks: state.tracks
 }
 
 export default connect(mapStateToProps)(SearchList);
