@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { playSong } from '../actions/songs';
 import { bindActionCreators } from 'redux'; //=> Take a look
-import MusicPlayer from '../components/spotify_player';
+import MusicPlayer from './spotify_player';
 
 class SearchList extends Component {
 
@@ -30,11 +30,10 @@ class SearchList extends Component {
    const name = albumId[0].name;
    const artist = albumId[0].artists[0].name;
    const album = albumId[0].album.album_type;
-   const uri =  albumId[0].uri;
    //==========================>    
   
     return (
-      <tr onClick={() => playSong(uri) } key={name + artist.concat(Math.random())}> 
+      <tr onClick={() => playSong(albumId[0].uri) } key={name + artist.concat(Math.random())}> 
         <td>{name}</td>
         <td>{artist}</td>
         <td>{album}</td>
@@ -71,7 +70,7 @@ function mapStateToProps(state) {
 }
 
 function mapDispatchToProps(dispatch) {
-  return bindActionCreators({playSong}, dispatch);
+  return bindActionCreators({playSong:playSong}, dispatch);
 }
 export default connect(mapStateToProps, mapDispatchToProps)(SearchList); //add mapDispatchToProps to mapStateToProps
 

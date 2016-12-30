@@ -5,10 +5,11 @@ import PlaySongs from './reducer_songs';
 
 const rootReducer = combineReducers({
   tracks: SearchReducer,
-  songs: PlaySongs
+  playSong: PlaySongs
   // news: NewsSearch
 });
 
 console.log("tracks", SearchReducer)
 console.log("songs", PlaySongs)
+
 export default rootReducer;
