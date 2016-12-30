@@ -3,8 +3,9 @@ import 	SearchReducer from './reducer_search';
 // import  NewsSearch from './news_search';
 
 const rootReducer = combineReducers({
-  tracks: SearchReducer,
+  tracks: SearchReducer
   // news: NewsSearch
 });
 
+console.log("tracks", SearchReducer)
 export default rootReducer;
