@@ -1,5 +1,7 @@
 import React, { Component } from 'react'
 // size may also be a plain string using the presets 'large' or 'compact' 
+
+
 const MusicPlayer = (props) => {
 console.log("MUSIC PLAYER PROPS", props)
 console.log("PROPS URI", props.songUri)
