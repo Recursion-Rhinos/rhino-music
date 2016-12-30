@@ -6,11 +6,10 @@ class SearchList extends Component {
   	console.log('albumId', albumId)
     return (
       <tr>
-        <td>{albumId.name}</td>
+        <td>{albumId}</td>
       </tr>
    );
   }
-
 
   render () {
   console.log("PROPSInIN", this.props)	
@@ -24,8 +23,8 @@ class SearchList extends Component {
         </tr>
       </thead>
       <tbody>
-         { console.log("this.props", this.props)}
-      {this.props.tracks.map(this.renderAlbums)}
+       { console.log("this.props", this.props)}
+       {this.props.tracks.map(this.renderAlbums)}
       </tbody>
     </table>
     );
