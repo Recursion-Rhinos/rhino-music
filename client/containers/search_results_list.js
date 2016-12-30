@@ -4,11 +4,15 @@ import { connect } from 'react-redux';
 class SearchList extends Component {
   renderAlbums(albumId) {
   	console.log('albumId', albumId);
-    const name = albumId[0].name;
+   
+    const name = albumId
+     .map(title => title.name)
+     .map(names => (<p key={names}>{names}</p>))
+      
     const artist = albumId[0].artists[0].name;
     const album = albumId[0].album.album_type
-     // let name = albumId.map(album => album.name);
-     // console.log("NAME", name)
+     //.map(name => name.split("\n"))
+     console.log("NAME", name)
      // let newName = name.map(function(i) {
      //   return i.split("\n").map(function(singleName) {
      //     return ( {singleName} <br/>)
