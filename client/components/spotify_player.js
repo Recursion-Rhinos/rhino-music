@@ -2,7 +2,6 @@ import React, { Component } from 'react'
 // size may also be a plain string using the presets 'large' or 'compact' 
 import SearchList from '../containers/search_results_list';
 
-
 const MusicPlayer = (props) => {
 console.log("SearchList", SearchList)
 console.log("MUSIC PLAYER PROPS", props)
