@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import MusicPlayer from '../components/spotify_player'
+import { bindActionCreators } from 'redux'; //=> Take a look
+// import MusicPlayer from '../components/spotify_player';
 
 class SearchList extends Component {
 
@@ -23,7 +24,7 @@ class SearchList extends Component {
     //   .map(title => title.album.album_type)
     //   .map((album, idx) => (<p key={album.concat(idx + 1)}>{album}</p>));
 
-   //For testing purposes only!
+   //For testing purposes only
   //==========================>
    const name = albumId[0].name;
    const artist = albumId[0].artists[0].name;
@@ -31,7 +32,7 @@ class SearchList extends Component {
       
    //==========================>    
     return (
-      <tr key={name + artist.concat(Math.random())}>
+      <tr key={name + artist.concat(Math.random())}> 
         <td>{name}</td>
         <td>{artist}</td>
         <td>{album}</td>
@@ -67,4 +68,8 @@ function mapStateToProps(state) {
   return {tracks: state.tracks};  //same as tracks: state.tracks
 }
 
-export default connect(mapStateToProps)(SearchList);
+function mapDispatchToProps(dispatch) {
+  return bindActionCreators({SearchList}, dispatch)
+}
+export default connect(mapStateToProps, mapDispatchToProps)(SearchList); //add mapDispatchToProps to mapStateToProps
+
