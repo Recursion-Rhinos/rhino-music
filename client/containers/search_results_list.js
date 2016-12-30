@@ -2,29 +2,37 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 
 class SearchList extends Component {
-	render () {
-		return (
-			<table className="table table-hover">
-				<thead>
-					<tr>
-					<th> Title</th>
-					<th> Artist </th>
-					<th> Album </th>
-					<th> {this.props.song}</th>
-					</tr>
-				</thead>
-				<tbody>
-					
-				</tbody>
-			</table>
-		)
-	}
+  renderAlbums(albumId) {
+  	console.log('albumId', albumId)
+    return (
+      <tr>
+        <td>{albumId}</td>
+      </tr>
+   );
+  }
+
+  render () {
+  console.log("PROPSInIN", this.props)	
+    return (
+      <table className="table table-hover">
+      <thead>
+        <tr>
+          <th> Title</th>
+          <th> Artist </th>
+          <th> Album </th>
+        </tr>
+      </thead>
+      <tbody>
+       { console.log("this.props", this.props)}
+       {this.props.tracks.map(this.renderAlbums)}
+      </tbody>
+    </table>
+    );
+  }
 }
 
-function mapStateToProps({ song }) {
-	console.log("SONG", {song});
-
-	return { song };  //same as song: state.song
+function mapStateToProps({ tracks }) {
+  return {tracks};  //same as tracks: state.tracks
 }
 
-export default connect (mapStateToProps)(SearchList);
+export default connect(mapStateToProps)(SearchList);

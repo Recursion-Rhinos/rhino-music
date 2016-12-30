@@ -123,7 +123,7 @@ function isLoggedIn(req, res, next) {
 }
 
 
-  app.get('/news', (req, res) => { 
+  app.get('/api/news', (req, res) => { 
     request.get({
       url: "https://api.nytimes.com/svc/search/v2/articlesearch.json",
       qs: {

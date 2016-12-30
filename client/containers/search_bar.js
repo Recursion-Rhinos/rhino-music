@@ -2,8 +2,10 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import { fetchSongs } from '../actions/index';
-import Redux from 'react-redux';
-console.log("REDUX", {connect});
+// import Redux from 'react-redux';
+// console.log("REDUX", {connect});
+
+
 class SearchBar extends Component {
   constructor(props) {
     super(props);
@@ -16,6 +18,7 @@ class SearchBar extends Component {
 
 
   onInputChange(event) {
+    console.log('Search_Bar Container onInputChange:', event.target.value);
     this.setState({term: event.target.value})
   }
 
@@ -23,7 +26,7 @@ class SearchBar extends Component {
     event.preventDefault();
 
     //we need to go fetch data
-
+    console.log('Search_Bar Container onFormSubmit:', this.state.term);
     this.props.fetchSongs(this.state.term);
     this.setState({ term: '' });
   }
