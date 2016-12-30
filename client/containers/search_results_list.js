@@ -3,8 +3,7 @@ import { connect } from 'react-redux';
 
 class SearchList extends Component {
   renderAlbums(albumId) {
-  	console.log('albumId', albumId);
-   
+  	console.log('albumId', albumId);   
     const name = albumId
      .map((title) => title.name)
      .map((names, idx) => (<p key={names.concat(idx + 1)}>{names}</p>));
@@ -13,25 +12,17 @@ class SearchList extends Component {
       .map(title => title.artists[0].name)
       .map((artistName, idx) => (<p key={artistName.concat(idx + 1)}>{artistName}</p>)); 
       
-    // const artist = albumId[0].artists[0].name;
-    const album = albumId[0].album.album_type
-     //.map(name => name.split("\n"))
-     // console.log("Artist", artist)
-     // let newName = name.map(function(i) {
-     //   return i.split("\n").map(function(singleName) {
-     //     return ( {singleName} <br/>)
-     //   })
-     // })
-      // album.name.split("\n").map(function(item) {
-      //   return ({item} <br/>)}
-      //   } 
+    const album = albumId
+      .map(title => title.album.album_type)
+      .map((album, idx) => (<p key={album.concat(idx + 1)}>{album}</p>));
+    
     return (
       <tr key={name + artist}>
         <td>{name}</td>
         <td>{artist}</td>
         <td>{album}</td>
       </tr>
-   );
+    );
   }
 
   render () {
