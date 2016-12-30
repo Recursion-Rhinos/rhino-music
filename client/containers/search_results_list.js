@@ -24,17 +24,16 @@ class SearchList extends Component {
         </tr>
       </thead>
       <tbody>
-       {this.props.tracks.map(this.renderAlbums)}  
-       { console.log("this.props", this.props)}
+         { console.log("this.props", this.props)}
+      {this.props.tracks.map(this.renderAlbums)}
       </tbody>
     </table>
     );
   }
 }
 
-function mapStateToProps(state) {
-	console.log('Search_results_List: Tracks', state)
-  return { tracks: state.tracks};  //same as tracks: state.tracks
+function mapStateToProps({ tracks }) {
+  return {tracks};  //same as tracks: state.tracks
 }
 
 export default connect(mapStateToProps)(SearchList);
