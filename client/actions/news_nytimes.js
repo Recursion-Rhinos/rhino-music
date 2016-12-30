@@ -18,12 +18,12 @@
 //       });
 //   }
 // }
-  // .then(data => {
-  //  console.log("NEWS DATA", data);
-  //  })
-  // .catch(error => {
-  //   console.log(error);
-  // })
+//   .then(data => {
+//    console.log("NEWS DATA", data);
+//    })
+//   .catch(error => {
+//     console.log(error);
+//   })
  
 //   console.log("NEWS", newsdata);
 
