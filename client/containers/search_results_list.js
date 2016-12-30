@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
+import MusicPlayer from '../components/spotify_player'
 
 class SearchList extends Component {
 
@@ -30,7 +31,7 @@ class SearchList extends Component {
       
    //==========================>    
     return (
-      <tr key={name + artist}>
+      <tr key={name + artist.concat(Math.random())}>
         <td>{name}</td>
         <td>{artist}</td>
         <td>{album}</td>
