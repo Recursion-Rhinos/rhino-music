@@ -3,10 +3,11 @@ import { connect } from 'react-redux';
 
 class SearchList extends Component {
   renderAlbums(albumId) {
-  	console.log('albumId', albumId)
+  	// console.log('albumId', albumId);
+    const name = albumId.name;
     return (
       <tr>
-        <td>{albumId}</td>
+        <td>{albumId[0].name}</td>
       </tr>
    );
   }
@@ -31,8 +32,8 @@ class SearchList extends Component {
   }
 }
 
-function mapStateToProps({ tracks }) {
-  return {tracks};  //same as tracks: state.tracks
+function mapStateToProps(state) {
+  return {tracks: state.tracks};  //same as tracks: state.tracks
 }
 
 export default connect(mapStateToProps)(SearchList);
