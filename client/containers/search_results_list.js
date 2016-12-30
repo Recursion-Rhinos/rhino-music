@@ -6,13 +6,17 @@ class SearchList extends Component {
   	console.log('albumId', albumId);
    
     const name = albumId
-     .map(title => title.name)
-     .map(names => (<p key={names}>{names}</p>))
+     .map((title) => title.name)
+     .map((names, idx) => (<p key={names.concat(idx + 1)}>{names}</p>));
+
+    const artist = albumId
+      .map(title => title.artists[0].name)
+      .map((artistName, idx) => (<p key={artistName.concat(idx + 1)}>{artistName}</p>)); 
       
-    const artist = albumId[0].artists[0].name;
+    // const artist = albumId[0].artists[0].name;
     const album = albumId[0].album.album_type
      //.map(name => name.split("\n"))
-     console.log("NAME", name)
+     // console.log("Artist", artist)
      // let newName = name.map(function(i) {
      //   return i.split("\n").map(function(singleName) {
      //     return ( {singleName} <br/>)
@@ -22,7 +26,7 @@ class SearchList extends Component {
       //   return ({item} <br/>)}
       //   } 
     return (
-      <tr key={name}>
+      <tr key={name + artist}>
         <td>{name}</td>
         <td>{artist}</td>
         <td>{album}</td>
