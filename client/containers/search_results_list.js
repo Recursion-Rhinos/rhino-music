@@ -31,6 +31,7 @@ class SearchList extends Component {
    const album = albumId[0].album.album_type;
       
    //==========================>    
+  
     return (
       <tr key={name + artist.concat(Math.random())}> 
         <td>{name}</td>
