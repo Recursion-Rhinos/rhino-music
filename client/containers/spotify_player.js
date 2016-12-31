@@ -7,7 +7,7 @@ import { playSong } from '../actions/songs';
 class MusicPlayer extends Component {
 
   render () {
-  	console.log("spotify_player", playSong)
+  	console.log("123spotify_player", this.props)
     // if(!this.props.tracks) {
     //   console.log("....loading");
     // } else if(this.props.track){
@@ -33,13 +33,13 @@ function mapStateToProps(state) {
 	console.log("state in  spotify_player",state);
 	console.log("spotify_player state.playSong", state.playSong);
 
-  return {playSong: state.playSong};
+  return {tracks: state.tracks};
 }
-// function mapDispatchToProps(dispatch) {
-//   return bindActionCreators({playSong:playSong}, dispatch);
-// }
+function mapDispatchToProps(dispatch) {
+  return bindActionCreators({playSong:playSong}, dispatch);
+}
 
-export default connect(mapStateToProps)(MusicPlayer)
+export default connect(mapStateToProps,mapDispatchToProps)(MusicPlayer)
 
 
 // "spotify:track:7vFv0yFGMJW3qVXbAd9BK9"
