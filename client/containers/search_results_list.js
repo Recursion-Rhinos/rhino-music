@@ -31,9 +31,9 @@ class SearchList extends Component {
    const artist = albumId[0].artists[0].name;
    const album = albumId[0].album.album_type;
    //==========================>    
-  
+
     return (
-      <tr onClick={() => playSong(albumId[0].uri) } key={name + artist.concat(Math.random())}> 
+      <tr onClick={() => playSong(albumId[0].uri)} key={name + artist.concat(Math.random())}> 
         <td>{name}</td>
         <td>{artist}</td>
         <td>{album}</td>

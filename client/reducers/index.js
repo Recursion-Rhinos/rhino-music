@@ -10,6 +10,6 @@ const rootReducer = combineReducers({
 });
 
 console.log("tracks", SearchReducer)
-console.log("songs", PlaySongs)
+console.log("playSongs", PlaySongs)
 
 export default rootReducer;
