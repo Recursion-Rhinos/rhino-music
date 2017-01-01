@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { playSong } from '../actions/songs';
 import { bindActionCreators } from 'redux'; //=> Take a look
-import MusicPlayer from './spotify_player';
+// import MusicPlayer from './spotify_player';
 
 class SearchList extends Component {
 
@@ -57,7 +57,7 @@ class SearchList extends Component {
         </tr>
       </thead>
       <tbody>
-       { console.log("this.props", this.props)}
+       { console.log("search_results_list => this.props", this.props)}
        {this.props.tracks.map(this.renderAlbums)}
       </tbody>
     </table>
@@ -70,6 +70,7 @@ function mapStateToProps(state) {
 }
 
 function mapDispatchToProps(dispatch) {
+  console.log("dispatch in search-results",dispatch)
   return bindActionCreators({playSong:playSong}, dispatch);
 }
 export default connect(mapStateToProps, mapDispatchToProps)(SearchList); //add mapDispatchToProps to mapStateToProps
