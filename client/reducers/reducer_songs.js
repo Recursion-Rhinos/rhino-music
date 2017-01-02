@@ -5,7 +5,7 @@ export default function(state=null, action) {
   switch(action.type) {
   case "PLAY_SONGS":
   console.log('action.payload for PLAY_SONGS REDUCER', action)
-    return action.payload;
+    return action.payload; //object
   }
   return state;
 }

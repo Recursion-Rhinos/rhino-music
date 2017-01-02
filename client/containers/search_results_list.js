@@ -5,14 +5,20 @@ import { bindActionCreators } from 'redux'; //=> Take a look
 // import MusicPlayer from './spotify_player';
 
 class SearchList extends Component {
+  constructor(props) {  //no need of it if there is a stateless component
+    super(props)
+    this.renderAlbums = this.renderAlbums.bind(this); //binding in  a constructor
+  }
 
   handleClick(e) {
-    console.log("SOUND TESTS");
+    console.log("SOUND TESTS", this.props);
   }
 
   renderAlbums(albumId) {
   	console.log('albumId', albumId);
-   
+    // console.log("PLAY SONG", playSong)
+      let that = this;
+      console.log("RENDER ALBUMS", this.props)
     // const name = albumId
     //  .map((title) => title.name)
     //  .map((names, idx) => (<p key={names.concat(idx + 1)}>{names}</p>));
@@ -44,7 +50,7 @@ class SearchList extends Component {
   }
 
   render () {
-  console.log("PROPSInIN", this.props)	
+  console.log("PROPS IN SEARCH_RESULTS_LIST", this.props)	
     return (
       <table className="table table-hover">
       <thead>
