@@ -13,8 +13,6 @@ class MusicPlayer extends Component {
   }
 
   render () {
-    // let testSong = this.props.playSong();
-    // console.log("testSOng", testSong)
     console.log("SPOTIFY PLAYER", this.props)
     // if(!this.props.tracks) {
     //   console.log("....loading");
@@ -40,10 +38,9 @@ class MusicPlayer extends Component {
 function mapStateToProps(state) {
 	console.log("state in  spotify_player",state);
 	console.log("spotify_player state.playSong", state.playSong);
-  // this.songId = state.playSong;
-
   return {playSong: state.playSong};
 }
+
 function mapDispatchToProps(dispatch) {
   console.log("dispatch in spotify_player", dispatch)
   return bindActionCreators({playSong:playSong}, dispatch);
