@@ -91,8 +91,13 @@ app.post('/api/events', (req, res) => {
     successRedirect: '/search',
     failureRedirect: '/login',
     failureFlash: true
-  })
-  );
+  }), (req, res) => {
+    if(req.body.remember) {
+      req.session.cookie.maxAge= 100 * 60 * 3;
+    } else {
+      req.session.cookie.expires = false;
+    }
+  });
   
   app.get('/signup', (req, res) => {
     console.log('rendering signup')
