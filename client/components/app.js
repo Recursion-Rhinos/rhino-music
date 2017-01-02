@@ -7,9 +7,10 @@ import MusicPlayer from '../containers/spotify_player';
 
 export default class App extends Component {
   render () {
+  	// <SearchBar handler={fetch}/>
     return ( 
       <div>
-       <SearchBar />
+       <SearchBar/>
        <MusicPlayer />
        <SearchResults />
      </div>
