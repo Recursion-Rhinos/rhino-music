@@ -7,12 +7,14 @@ import { bindActionCreators } from 'redux'; //=> Take a look
 class SearchList extends Component {
 
   handleClick(e) {
-    console.log("SOUND TESTS");
+    console.log("SOUND TESTS", this.props);
+
   }
 
   renderAlbums(albumId) {
   	console.log('albumId', albumId);
-   
+    // console.log("PLAY SONG", playSong)
+      let that = this;
     // const name = albumId
     //  .map((title) => title.name)
     //  .map((names, idx) => (<p key={names.concat(idx + 1)}>{names}</p>));
@@ -44,7 +46,7 @@ class SearchList extends Component {
   }
 
   render () {
-  console.log("PROPSInIN", this.props)	
+  console.log("PROPS IN SEARCH_RESULTS_LIST", this.props)	
     return (
       <table className="table table-hover">
       <thead>

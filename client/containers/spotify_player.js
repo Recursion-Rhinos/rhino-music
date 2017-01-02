@@ -8,7 +8,6 @@ import { bindActionCreators } from 'redux';
 class MusicPlayer extends Component {
 
   render () {
-  	console.log("MusicPlayer", this.props)
     // if(!this.props.tracks) {
     //   console.log("....loading");
     // } else if(this.props.track){
