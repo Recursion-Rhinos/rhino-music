@@ -39,7 +39,7 @@ class SearchList extends Component {
    //==========================>    
 
     return (
-      <tr onClick={() => playSong(albumId[0].uri)} key={name + artist.concat(Math.random())}> 
+      <tr onClick={() => this.props.playSong(albumId[0].uri)} key={name + artist.concat(Math.random())}> 
         <td>{name}</td>
         <td>{artist}</td>
         <td>{album}</td>
