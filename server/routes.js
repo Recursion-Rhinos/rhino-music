@@ -2,7 +2,7 @@ var router = require('express').Router();
 var path = require('path')
 var dummyData = require ('../dummyData.js')
 var request = require('request');
-const nytApi = require('./API/nytAPI.js');
+const nytApi = require('./API/nytApi.js');
 const apiKey = process.env.API_KEY_NYT;
 // router.get('/api/main', (req,res) => {
 // 	res.sendFile(path.join(__dirname, '/../client/comingSoon.html'))
@@ -93,9 +93,9 @@ app.post('/api/events', (req, res) => {
     failureFlash: true
   }), (req, res) => {
     if(req.body.remember) {
-      req.session.cookie.maxAge= 100 * 60 * 3;
+      req.session.cookie.maxAge= 1000 * 60 * 3;
     } else {
-      req.session.cookie.expires = false;
+       req.session.cookie.expires = false;
     }
   });
   
