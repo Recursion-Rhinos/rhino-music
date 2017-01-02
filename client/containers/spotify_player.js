@@ -9,7 +9,7 @@ class MusicPlayer extends Component {
   constructor(props) {
     super(props);
     console.log("MUSIC PLAYER",this.props)
-     this.playSong = this.playSong.bind(this)
+     // this.playSong = this.playSong.bind(this)
   }
 
   render () {
@@ -23,8 +23,9 @@ class MusicPlayer extends Component {
   	let testSong = this.songId;
 	return (
 	<div>
+    <p>SONGID: {this.props.playSong ?  this.props.playSong.currentSong : "no song"}</p>
 	  <iframe 
-		  src={"https://embed.spotify.com/?uri=spotify:track:7vFv0yFGMJW3qVXbAd9BK9"}
+		  src={"https://embed.spotify.com/?uri=" + (this.props.playSong ?  this.props.playSong.currentSong : "no song")}
 		  width="100%" 
 		  height="100" 
 		  frameBorder="0" 
@@ -38,15 +39,14 @@ class MusicPlayer extends Component {
 function mapStateToProps(state) {
 	console.log("state in  spotify_player",state);
 	console.log("spotify_player state.playSong", state.playSong);
-  return {playSong: state.playSong};
+  return {playSong: state.playSong}; 
 }
+// function mapDispatchToProps(dispatch) {
+//   console.log("dispatch in spotify_player", dispatch)
+//   return bindActionCreators({playSong:playSong}, dispatch);
+// }
 
-function mapDispatchToProps(dispatch) {
-  console.log("dispatch in spotify_player", dispatch)
-  return bindActionCreators({playSong:playSong}, dispatch);
-}
-
-export default connect(mapStateToProps,mapDispatchToProps)(MusicPlayer)
+export default connect(mapStateToProps,null)(MusicPlayer)
 
 
 // "spotify:track:7vFv0yFGMJW3qVXbAd9BK9"
