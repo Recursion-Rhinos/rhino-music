@@ -3,6 +3,7 @@ import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import { fetchSongs } from '../actions/index';
 import { fetchNews } from '../actions/news_nytimes';
+import { fetchEvents } from '../actions/events';
 // import Redux from 'react-redux';
 // console.log("REDUX", {connect});
 
@@ -20,13 +21,14 @@ class SearchBar extends Component {
 
   onInputChange(event) {
     console.log('Search_Bar Container onInputChange:', event.target.value);
-    this.setState({term: event.target.value})
+    this.setState({term: event.target.value});
   }
 
   onFormSubmit(event) {
     event.preventDefault();
 
-    this.props.fetchNews();
+    this.props.fetchNews(this.state.term);
+    this.props.fetchEvents(this.state.term);
 
     //we need to go fetch data
     console.log('Search_Bar Container onFormSubmit:', this.state.term);
@@ -51,7 +53,7 @@ class SearchBar extends Component {
 }
 
 function mapDispatchToProps(dispatch) {
-  return bindActionCreators({ fetchSongs, fetchNews }, dispatch);
+  return bindActionCreators({ fetchSongs, fetchNews, fetchEvents}, dispatch);
 }
 
 export default connect(null, mapDispatchToProps)(SearchBar);
