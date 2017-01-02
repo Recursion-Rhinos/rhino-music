@@ -13,8 +13,6 @@ class MusicPlayer extends Component {
   }
 
   render () {
-    // let testSong = this.props.playSong();
-    // console.log("testSOng", testSong)
     console.log("SPOTIFY PLAYER", this.props)
     // if(!this.props.tracks) {
     //   console.log("....loading");
