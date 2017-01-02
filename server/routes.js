@@ -133,11 +133,12 @@ function isLoggedIn(req, res, next) {
 
   app.post('/api/news', (req, res) => { 
     console.log("NEWSSSSS TERM", req.body.body)
+    let reqBody = req.body.body || "Music";
     request.get({
       url: "https://api.nytimes.com/svc/search/v2/articlesearch.json",
       qs: {
         'api-key': "af60270881bb4977ad34da8640335d97",
-        'q': req.body.body
+        'q': reqBody
       },
     }, (err, response, body) => {
       body = JSON.parse(body);

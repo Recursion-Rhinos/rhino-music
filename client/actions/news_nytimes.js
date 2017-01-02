@@ -11,6 +11,7 @@ export function fetchNews(term) {
   }
 }
 
+
 // export function sendNews() {
 //   const post_request = axios.post('api/news', {term : 'Obama'});
 
