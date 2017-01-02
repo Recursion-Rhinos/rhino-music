@@ -60,7 +60,7 @@ module.exports = function(passport) {
   });
   passport.deserializeUser((id, done) => {
     User.getUserById(id).then((data) => {
-      console.log('deserializeDATA: ', data);
+      // console.log('deserializeDATA: ', data);
       done(null, data);
     });
   });

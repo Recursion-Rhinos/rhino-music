@@ -26,21 +26,20 @@ app.get('/search', isLoggedIn, (req,res) => {
 })
 
 app.post('/api/search', (req,res) => {
-  console.log("INPUT:", req.body)
+  
   let input = JSON.stringify(req.body);
-  console.log("Input:", input)
+  
    request({
       url: 'https://api.spotify.com/v1/search',
       qs: {
         q: input,
         type: 'track',
-        limit: 6
+        limit: 25
       }
     },
       function(error, response, body) {
-        console.log("BODY", body)
+        
         if (!error && response.statusCode === 200) {
-      console.log(body)
           
           res.send(body);
         } else {
@@ -48,6 +47,10 @@ app.post('/api/search', (req,res) => {
         }
       });
 });
+
+app.post('/api/events', (req, res) => {
+  console.log("EVENTS INPUT", req.body.searchTerm);
+})
 // router.post('/api/search', (req,res) => {
 //   console.log("Search Term", req.body)
 // });
@@ -123,16 +126,17 @@ function isLoggedIn(req, res, next) {
 }
 
 
-  app.get('/api/news', (req, res) => { 
+  app.post('/api/news', (req, res) => { 
+    console.log("NEWSSSSS TERM", req.body.body)
     request.get({
       url: "https://api.nytimes.com/svc/search/v2/articlesearch.json",
       qs: {
         'api-key': "af60270881bb4977ad34da8640335d97",
-        'q': 'Madonna'
+        'q': req.body.body
       },
     }, (err, response, body) => {
       body = JSON.parse(body);
-      console.log("MULTIMEDIA", body.response.docs[0].multimedia);
+      // console.log("MULTIMEDIA", body.response.docs[0].multimedia);
       res.json(body);
     });
   });
