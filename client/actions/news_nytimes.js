@@ -1,5 +1,5 @@
 import axios from 'axios';
-import { NYT_NEWS } from '../constants/ActionTypes';
+import { NYT_NEWS, GET_NEWS } from '../constants/ActionTypes';
 // const NEWS_URL = "http://localhost:3005/news"
 
 export function fetchNews(term) {
@@ -11,6 +11,14 @@ export function fetchNews(term) {
   }
 }
 
+// export function sendNews() {
+//   const post_request = axios.post('api/news', {term : 'Obama'});
+
+//   return {
+//     type: "GET_NEWS",
+//     payload: post_request
+//   }
+// }
 // const newsData = (news) => {
 //   console.log("news", news)	
 //   return {

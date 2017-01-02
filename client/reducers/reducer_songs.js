@@ -1,4 +1,4 @@
-import { PLAY_SONGS } from '../constants/ActionTypes';
+import { PLAY_SONGS, GET_NEWS } from '../constants/ActionTypes';
 
 export default function(state=null, action) {
   console.log("Action in reducer_songs", action)
@@ -9,3 +9,5 @@ export default function(state=null, action) {
   }
   return state;
 }
+
+
