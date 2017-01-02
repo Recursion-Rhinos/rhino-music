@@ -10,4 +10,3 @@ export function fetchSongs(term) {
 		payload: request
 	};
 }
-

@@ -133,7 +133,7 @@ function isLoggedIn(req, res, next) {
     }, (err, response, body) => {
       body = JSON.parse(body);
       console.log("MULTIMEDIA", body.response.docs[0].multimedia);
-      res.send(body);
+      res.json(body);
     });
   });
 };

@@ -1,26 +1,35 @@
 import axios from 'axios';
-import { NYT_NEWS } from '../constants/ActionType';
+import { NYT_NEWS } from '../constants/ActionTypes';
 // const NEWS_URL = "http://localhost:3005/news"
 
-const newsData = (news) => {
-  console.log("news", news)	
+export function fetchNews() {
+  const request = axios.get('/api/news');
+  console.log("ACTION-NEWS", request)
   return {
     type: NYT_NEWS,
-    news: news
-  }
-};
-
-
-export function fetchNews() {
-  return (dispatch) => {
-    return axios.get('/api/news')
-      .then((response) => {
-      	console.log("RESPONSE", response)
-        dispatch(newsData(response));
-      })
-      .catch((error) => console.log(error));
+    payload: request
   }
 }
+
+// const newsData = (news) => {
+//   console.log("news", news)	
+//   return {
+//     type: NYT_NEWS,
+//     news: news
+//   }
+// };
+
+
+// export function fetchNews() {
+//   return (dispatch) => {
+//     return axios.get('/api/news')
+//       .then((response) => {
+//       	console.log("RESPONSE", response)
+//         dispatch(newsData(response));
+//       })
+//       .catch((error) => console.log(error));
+//   }
+// }
 // export function fetchNews() {
 //   console.log("inside fetchNews get request");
 //   return function (dispatch) {

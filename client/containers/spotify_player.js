@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux';
 import { playSong } from '../actions/songs';
-import { bindActionCreators } from 'redux'; 
+import { bindActionCreators } from 'redux';
 
 // size may also be a plain string using the presets 'large' or 'compact' 
 
