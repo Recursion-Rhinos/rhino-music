@@ -9,7 +9,8 @@ const rootReducer = combineReducers({
   news: NewsSearch
 });
 
-console.log("tracks", SearchReducer)
-console.log("playSongs", PlaySongs)
+console.log("tracks", SearchReducer);
+console.log("playSongs", PlaySongs);
+console.log('news', NewsSearch);
 
 export default rootReducer;
