@@ -13,11 +13,11 @@ class YoutubePlaylist extends Component {
 
    renderList(vids) {
 
-  	return this.props.vids.map((videos) => {
+  	return vids.map((videos) => {
   		return (
-  			 	<li>
-      {videoThumbnail}
-    </li>
+  			<li>
+          {videoThumbnail}
+        </li>
   		)
   	})
 
@@ -31,7 +31,7 @@ class YoutubePlaylist extends Component {
 render () {
   return (
 	    <ul className="list-group col-sm-4">
-	    	{this.renderList(this.props.videos}
+	    	{this.renderList(this.props.videos)}
 	    </ul>
 
 	  );
