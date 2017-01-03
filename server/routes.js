@@ -28,7 +28,7 @@ app.get('/search', isLoggedIn, (req,res) => {
 app.post('/api/search', (req,res) => {
   
   let input = JSON.stringify(req.body);
-  
+   
    request({
       url: 'https://api.spotify.com/v1/search',
       qs: {
