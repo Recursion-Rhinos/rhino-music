@@ -4,19 +4,27 @@ import { bindActionCreators} from 'redux';
 import { fetchNews } from '../actions/news_nytimes';
 
 
-const nyTimesData = () => {
-  console.log('nyTimesData => this.props', this.props)
+class nyTimesData extends Component {
+ constructor(props) {
+  super(props);
+  console.log("NYTIMESDATA", this.props)
+ }
 
+
+render () {
+ console.log('nyTimesData => this.props', this.props);
   return (
     <div>
      Hello 
-    <div>
+    </div>
   )
+ }
 }
 
+//JOHN, CAN YOU TAKE A LOOK PLEASE
 function mapStateToProps(state) {
   console.log('nyTimesData', state)
-  return bindActionCreators({news: state.news});
+  return {news: state.news};
 }
 
 export default connect(mapStateToProps)(nyTimesData)

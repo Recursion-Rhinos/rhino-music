@@ -16,7 +16,7 @@ export default class App extends Component {
        <SearchBar/>
        <MusicPlayer />
        <SearchResults />
-       < NYTimes />
+       <NYTimes/>
      </div>
     );
   }
