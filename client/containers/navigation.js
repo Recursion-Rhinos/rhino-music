@@ -1,15 +1,16 @@
 import React ,{ Component} from 'react';
 import { connect } from 'react-redux';
 import { fetchSongs } from '../actions/index';
+import { playSong } from '../actions/songs';
 import { fetchNews } from '../actions/news_nytimes';
 import { fetchEvents } from '../actions/events';
+import { bindActionCreators } from 'redux';
 
-
-export default class Navigation extends Component {
+class Navigation extends Component {
   constructor(props) {
     super(props);
+    console.log("NAVIGATION", this.props)
   }
-
 
  render() {
    return (
@@ -24,4 +25,13 @@ export default class Navigation extends Component {
  }
 }
 
+function mapStateToProps(state) {	
+  return {
+  	tracks: state.tracks,
+  	playSong: state.playSong,
+    news: state.news,
+    evetns: state.events
+  }; 
+}
 
+export default connect(mapStateToProps,null)(Navigation)
