@@ -34,3 +34,4 @@ config.js
 
 ### API keys ###
 server/database/config.js
+client/public/bundle.js

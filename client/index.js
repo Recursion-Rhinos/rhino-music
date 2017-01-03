@@ -1,17 +1,16 @@
-import _ from 'lodash'
-import React, { Component } from 'react'; //find node mod named 'react' and put it into var React
+import React from 'react';
 import ReactDOM from 'react-dom';
-import SearchBar from './components/search_bar'
-import SearchResults from './components/search_results'
+import { Provider } from 'react-redux';
+import { createStore, applyMiddleware } from 'redux';
+import ReduxPromise from 'redux-promise';
 
-class App extends Component { // this app will be a factory that makes components. Insantiates component before rendering to the DOM.
-    constructor(props) {
-        super(props);
+import App from './components/app';
+import reducers from './reducers';
 
-        this.state = { 
-        	 
-        }
+const createStoreWithMiddleware = applyMiddleware(ReduxPromise)(createStore);
 
-}
-
-ReactDOM.render( < App / > , document.querySelector('.container'))
+ReactDOM.render(
+  <Provider store={createStoreWithMiddleware(reducers)}>
+    <App />
+  </Provider>
+  , document.querySelector('.container'));
