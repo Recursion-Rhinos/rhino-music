@@ -20,6 +20,8 @@ knex.schema.hasTable('Users').then(exist => {
       user.string('password'); //charset
       user.string('email');
       user.string('genres');
+      // user.string('graph_id');
+    
 
     }).then(table => {
       console.log('Created Table', table);
@@ -31,7 +33,7 @@ knex.schema.hasTable('Songs').then(exist => {
   if (!exist) {
     knex.schema.createTable('Songs', (song) => {
       song.increments('id').primary();    
-      song.string('song');
+      song.text('song');
 
     }).then(table => {
       console.log('Created Table', table);
@@ -43,9 +45,10 @@ knex.schema.hasTable('Playlist').then(exist => {
   if (!exist) {
     knex.schema.createTable('Playlist', (table) => {
       table.increments('id').primary();
-      table.foreign('SongsId').references('Songs.song_id_in_songs'); //or references('id').inTable(Songs);
-      table.foreign('UserId').references('Users.user_id_in_users');
-
+      table.integer('SongsId').unsigned();
+      table.integer('UserId').unsigned();
+      table.foreign('SongsId').references('Songs.id'); //or references('id').inTable(Songs);
+      table.foreign('UserId').references('Users.id');
     }).then(table => {
       console.log('Created Table', table);
     });
@@ -58,13 +61,15 @@ knex.schema.hasTable('Messages').then(exist => {
       message.increments('id').primary();
       message.string('text');
       message.string('genre');
-      message.foreign('UserId').references('Users.user_id_in_users');
+      message.integer('UserId').unsigned();
+      message.foreign('UserId').references('Users.id');
 
     }).then(table => {
       console.log('Created Table', table);
     });
   }
 });
+
 
 module.exports = knex;
 

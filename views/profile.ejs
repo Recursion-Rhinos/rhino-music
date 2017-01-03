@@ -1,0 +1,37 @@
+<html>
+<head>
+  <title>Rhino Music</title>
+  <link rel='stylesheet' href='//netdna.bootstrapcdn.com/bootstrap/3.0.2/css/bootstrap.min.css'>
+  <link rel='stylesheet' href='//netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.min.css'>
+  <style>
+    body { padding-top: 80px; word-wrap: break-word; }
+  </style>
+</head>
+<body>
+  <div class="navigation">
+    <ul>
+     <!--  <li><a href="/login" class="index">Login</a></li>
+      <li><a href="/signup" class='index'>Signup</a></li> -->
+      <li><a href='/search' class='index'>Search</a></li>
+      <li><a href="/logout" class='index'>Logout</a></li>
+    </ul>
+  </div>
+  <div class='container'>
+    <div class='page-header text-center'>
+      <h1><span class='fa fa-user-circle'></span>Profile</h1>
+    </div>
+    <div class='row'>
+      <div class='col-sm-6'>
+        <div class='well'>
+          <h3><span class='fa fa-user'></span><%= user.username %></h3>
+          <p>
+            <strong>id</strong>: <%= user.id %><br>
+            <strong>email</strong>: <%= user.email %><br>
+            <strong>password</strong>: <%= user.password %>
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+</body>
+</html>
