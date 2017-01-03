@@ -12,12 +12,12 @@ class SearchNews extends Component {
   }	
 
   renderNews(news) {
-  console.log("NEWS", news);
-
+  // console.log("NEWS", news);
+  //  <ul key={ news._id }>
   return (
    <ul key={ news._id }>
      <li>
-      { news.headline.main }
+       <img src="http://library.uncc.edu/sites/default/files/nytimes_558x360.png" /> {news.headline.main } 
      </li>
    </ul>
   )
@@ -35,9 +35,9 @@ render () {
  
   return (
     <div>
-      <ul>
+      <ul className="col-md-4 list-group">
         {console.log('THIS.PROPS.NEWS', this.props, newsData)}
-        {newsData.length ? newsData.map(this.renderNews) : "Fetching some Data"}
+        {newsData.length ? newsData.map(this.renderNews) : "Loading..."}
       </ul>
     </div>
   );
