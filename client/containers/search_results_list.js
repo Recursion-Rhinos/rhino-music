@@ -19,23 +19,23 @@ class SearchList extends Component {
     // console.log("PLAY SONG", playSong)
       let that = this;
       console.log("RENDER ALBUMS", this.props)
-    // const name = albumId
-    //  .map((title) => title.name)
-    //  .map((names, idx) => (<p key={names.concat(idx + 1)}>{names}</p>));
+    const name = albumId
+     .map((title) => title.name)
+     .map((names, idx) => (<p key={names.concat(idx + 1)}>{names}</p>));
 
-    // const artist = albumId
-    //   .map(title => title.artists[0].name)
-    //   .map((artistName, idx) => (<p key={artistName.concat(idx + 1)}>{artistName}</p>)); 
+    const artist = albumId
+      .map(title => title.artists[0].name)
+      .map((artistName, idx) => (<p key={artistName.concat(idx + 1)}>{artistName}</p>)); 
       
-    // const album = albumId
-    //   .map(title => title.album.album_type)
-    //   .map((album, idx) => (<p key={album.concat(idx + 1)}>{album}</p>));
+    const album = albumId
+      .map(title => title.album.album_type)
+      .map((album, idx) => (<p key={album.concat(idx + 1)}>{album}</p>));
 
    //For testing purposes only
   //==========================>
-   const name = albumId[0].name;
-   const artist = albumId[0].artists[0].name;
-   const album = albumId[0].album.album_type;
+   // const name = albumId[0].name;
+   // const artist = albumId[0].artists[0].name;
+   // const album = albumId[0].album.album_type;
    //==========================>    
 
     return (
