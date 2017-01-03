@@ -18,10 +18,11 @@ class Navigation extends Component {
  render() {
  	console.log("NAVIGATION2", this.props)
   console.log("Container", nyTimesData)
+  // let profile = <a href="/profile"></a>
    return (
      <div>
-       <button type = "button" class = "btn btn-default">Events</button>	
-       <button type = "button" class = "btn btn-default">Videos</button>
+       <button onClick={() => console.log("EVENTS EVENTS EVENTS")} type = "button" class = "btn btn-default">Events</button>	
+       <button onClick={() => console.log("VIDEOS VIDEOS VIDEOS")} type = "button" class = "btn btn-default">Videos</button>
        <button onClick={() => console.log("NEWS NEWS NEWS")} type = "button" class = "btn btn-default">News</button>	
        <button type = "button" class = "btn btn-default">Profile</button>
        <button type = "button" class = "btn btn-default">Logout</button>
