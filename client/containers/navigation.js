@@ -22,7 +22,7 @@ class Navigation extends Component {
      <div>
        <button type = "button" class = "btn btn-default">Events</button>	
        <button type = "button" class = "btn btn-default">Videos</button>
-       <button onClick={() => )} type = "button" class = "btn btn-default">News</button>	
+       <button onClick={() => console.log("NEWS NEWS NEWS"))} type = "button" class = "btn btn-default">News</button>	
        <button type = "button" class = "btn btn-default">Profile</button>
        <button type = "button" class = "btn btn-default">Logout</button>
      </div>

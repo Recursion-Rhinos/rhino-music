@@ -8,10 +8,6 @@ export default function (state=[], action) {
     return state.concat(action.payload.data.response.docs); //return an array with all news!
     // case "GET_NEWS":
     // return state.concat([action.payload.data]);
-    return state.concat([ action.payload.data ]);
-    case "GET_NEWS":
-    console.log('REDUCER-NEWS', action.type);
-    return state.concat([action.payload.data]);
   }
   return state;
 }
