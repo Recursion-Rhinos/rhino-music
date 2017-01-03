@@ -12,7 +12,8 @@ class SearchNews extends Component {
   }	
 
   renderNews(news) {
-  console.log("NEWS", this.news)
+  console.log("NEWS", news);
+
   return (
    <ul key={ news._id }>
      <li>
