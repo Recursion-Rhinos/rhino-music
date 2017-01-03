@@ -4,6 +4,7 @@ import { bindActionCreators } from 'redux';
 import { fetchSongs } from '../actions/index';
 import { fetchNews } from '../actions/news_nytimes';
 import { fetchEvents } from '../actions/events';
+import { fetchVideos } from '../actions/youtube.js';
 // import Redux from 'react-redux';
 // console.log("REDUX", {connect});
 
@@ -26,15 +27,17 @@ class SearchBar extends Component {
 
   onFormSubmit(event) {
     event.preventDefault();
+    this.props.fetchVideos(this.state.term);
 
     this.props.fetchNews(this.state.term);
-    this.props.fetchEvents(this.state.term);
-
+    // this.props.fetchEvents(this.state.term);
     //we need to go fetch data
     console.log('Search_Bar Container onFormSubmit:', this.state.term);
     this.props.fetchSongs(this.state.term);
     this.setState({ term: '' });
   }
+
+  
 
   render() {
     return (
@@ -53,7 +56,7 @@ class SearchBar extends Component {
 }
 
 function mapDispatchToProps(dispatch) {
-  return bindActionCreators({ fetchSongs, fetchNews, fetchEvents}, dispatch);
+  return bindActionCreators({ fetchSongs, fetchNews, fetchEvents, fetchVideos}, dispatch);
 }
 
 export default connect(null, mapDispatchToProps)(SearchBar);
