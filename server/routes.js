@@ -49,8 +49,59 @@ app.post('/api/search', (req,res) => {
 });
 
 app.post('/api/events', (req, res) => {
-  console.log("EVENTS INPUT", req.body.searchTerm);
-})
+    // console.log("EVENTS INPUT", req.body);
+
+    let name = req.body.body;
+
+    request({
+            // url: "http://api.bandsintown.com/artists/" + name + "/events.json?",
+            url: `http://api.bandsintown.com/artists/${name}/events.json?api_version=2.0&app_id=rhino_music`,
+            method: 'GET',
+            // qs: {
+            //     api_version: 2.0,
+            //     app_id: "rhino_music",
+            //     // location: "San Diego,CA",
+            //     // radius: 100
+            // }
+        },
+        function(error, response, body) {
+            console.log("EVENTS BODY", body)
+            if (!error && response.statusCode === 200) {
+
+                res.send(body);
+            } else {
+                res.json(error);
+            }
+        });
+});
+
+app.post('/api/videos', (req, res) => {
+
+    let input = req.body.body
+
+    request({
+        url: "https://www.googleapis.com/youtube/v3/search",
+        qs: {
+            q: input,
+            type: "video",
+            videoEmbeddable: "true",
+            maxResults: 2,
+            part: "snippet",
+            key: "AIzaSyDuq91IyM4yVkDOCagx_Y_VvRnLyKHXfuE"
+          }
+        },
+        function(error, response, body) {
+            console.log("youtube", body)
+            if (!error && response.statusCode === 200) {
+
+                res.send(body);
+            } else {
+                res.json(error);
+          }
+    });
+});
+
+
 // router.post('/api/search', (req,res) => {
 //   console.log("Search Term", req.body)
 // });
