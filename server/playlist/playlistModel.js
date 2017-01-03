@@ -67,7 +67,12 @@ let getAllByUserId = (UserId) => {
 
 
 module.exports = {
-  addTo: addTo,
-  remove: remove,
+  addSongToPlaylist: addSongToPlaylist,
+  removeSongFromPlaylist: removeSongFromPlaylist,
+  getPlaylistIdByName: getPlaylistIdByName,
+  getPlaylistSongsByPlaylistId: getPlaylistSongsByPlaylistId,
+  getAllPlaylistsByUserId: getAllPlaylistsByUserId,
+  deletePlaylist: deletePlaylist,
+  createNewPlaylist: createNewPlaylist,
   getAllByUserId: getAllByUserId
 };
