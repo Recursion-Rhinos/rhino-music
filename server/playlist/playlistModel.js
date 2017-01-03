@@ -25,6 +25,20 @@ let removeFromPlaylist = (PlaylistId, SongsId, UserId) => {
   .del(); //resolves with promise in the controller
 };
 
+let deletePlaylist = (PlaylistId) => {
+  knex('PlaylistSongs').where({
+    PlaylistId: PlaylistId
+  })
+  .select('id')
+  .del().then((result) => {
+    return knex('Playlist').where({
+      PlaylistId: PlaylistId
+    })
+    .select('id')
+    .del();
+  });
+}
+
 let getPlaylistByName = (Name) => {
   return knex('Playlist').where({
     Name: Name
