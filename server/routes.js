@@ -4,6 +4,7 @@ var dummyData = require ('../dummyData.js')
 var request = require('request');
 const nytApi = require('./API/nytApi.js');
 const apiKey = process.env.API_KEY_NYT;
+const PlayLists = require('./playlist/playlistModel.js');
 // router.get('/api/main', (req,res) => {
 // 	res.sendFile(path.join(__dirname, '/../client/comingSoon.html'))
 // });
@@ -100,6 +101,10 @@ app.post('/api/videos', (req, res) => {
           }
     });
 });
+
+app.get('/api/myMusic', (req, res) => {
+  
+})
 
 
 // router.post('/api/search', (req,res) => {
