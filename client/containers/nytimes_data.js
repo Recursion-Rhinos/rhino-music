@@ -12,12 +12,12 @@ class nyTimesData extends Component {
 
 
 render () {
- console.log('nyTimesData => this.props', this.props);
+ console.log('NYimesData => this.props', this.props);
   return (
     <div>
-     Hello 
+      <h1>Hello</h1> 
     </div>
-  )
+  );
  }
 }
 

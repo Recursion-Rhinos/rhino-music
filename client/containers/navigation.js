@@ -5,15 +5,19 @@ import { playSong } from '../actions/songs';
 import { fetchNews } from '../actions/news_nytimes';
 import { fetchEvents } from '../actions/events';
 import { bindActionCreators } from 'redux';
+import nyTimesData  from '../containers/nytimes_data';
 
 class Navigation extends Component {
   constructor(props) {
     super(props);
+
+    // this.state = {term: ''};
     console.log("NAVIGATION", this.props)
   }
 
  render() {
  	console.log("NAVIGATION2", this.props)
+  console.log("Container", nyTimesData)
    return (
      <div>
        <button type = "button" class = "btn btn-default">Events</button>	
