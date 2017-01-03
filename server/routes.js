@@ -109,9 +109,35 @@ app.get('/api/myMusic', isLoggedIn, (req, res) => {
   .then((data) => {
     playlists = data;
     console.log(playlists);
+    res.send(playlists);
   });
-
 });
+app.get('/api/newPlaylist', isLoggedIn, (req, res) => {
+  Playlists.getPlaylistIdByName(/*replace with req.playlistName ->*/'MyPlaylist4',passport.user.id)
+  .then((playlist) => {
+    console.log('PLAYLIST!!!!!! line:118: ', playlist)
+    if(playlist.length < 1) {
+      Playlists.createNewPlaylist(/*replace with req.playlistName ->*/'MyPlaylist4', passport.user.id)
+      .then((data) => {
+        console.log('Playlist Created', data);
+        res.send(data);
+      });
+    } else {
+      res.send('Playlist already exists');
+    }
+  });
+});
+
+app.get('/api/deletePlaylist', isLoggedIn, (req,res) => {
+  Playlists.getPlaylistIdByName('MyPlaylist4', passport.user.id)
+  .then((result) => {
+    console.log('GET PLAYLIST ID: ', result)
+    let playlistId = result[0].id;
+    Playlists.deletePlaylist(playlistId).then((response) => {
+      console.log('Playlist Deleted', response);
+    })
+  })
+})
 
 
 // router.post('/api/search', (req,res) => {
