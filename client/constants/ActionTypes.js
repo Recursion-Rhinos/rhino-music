@@ -7,3 +7,4 @@ export const FETCH_VIDEOS = 'FETCH_VIDEOS';
 //Buttons
 export const PLAY_SONGS = 'PLAY_SONG';
 export const PLAY_VIDEO = 'PLAY_VIDEO';
+export const FETCH_PLAYLISTS = 'FETCH_PLAYLISTS';
