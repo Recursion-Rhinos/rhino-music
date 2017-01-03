@@ -61,6 +61,11 @@ module.exports = function(passport) {
   passport.deserializeUser((id, done) => {
     User.getUserById(id).then((data) => {
       // console.log('deserializeDATA: ', data);
+      let user = {
+        id: data.id,
+        username: data.username
+      }
+      passport.user = user;
       done(null, data);
     });
   });

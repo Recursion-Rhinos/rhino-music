@@ -4,7 +4,7 @@ var dummyData = require ('../dummyData.js')
 var request = require('request');
 const nytApi = require('./API/nytApi.js');
 const apiKey = process.env.API_KEY_NYT;
-const PlayLists = require('./playlist/playlistModel.js');
+const Playlists = require('./playlist/playlistModel.js');
 // router.get('/api/main', (req,res) => {
 // 	res.sendFile(path.join(__dirname, '/../client/comingSoon.html'))
 // });
@@ -102,9 +102,16 @@ app.post('/api/videos', (req, res) => {
     });
 });
 
-app.get('/api/myMusic', (req, res) => {
-  Playlist.
-})
+app.get('/api/myMusic', isLoggedIn, (req, res) => {
+  console.log('USERID: ', passport.user)
+  let playlists;
+  Playlists.getAllPlaylistsByUserId(passport.user.id)
+  .then((data) => {
+    playlists = data;
+    console.log(playlists);
+  });
+
+});
 
 
 // router.post('/api/search', (req,res) => {
