@@ -13,8 +13,8 @@ class UserPlaylists extends Component {
     return playlists.map((playlist) => {
       console.log("myMusic.js playlist: ", playlist);
       return (
-        <li >
-          {playlist.name}
+        <li key={playlist.id} onClick=>
+          {playlist.Name}
         </li>
       )
     }) 
