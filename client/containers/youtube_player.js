@@ -30,9 +30,7 @@ class VideoPlayer extends Component {
 }
 
 function mapStateToProps(state) {
-  console.log("state in  spotify_player",state);
-  console.log("spotify_player state.playSong", state.playSong);
-  return {playSong: state.playSong}; 
+  return {playVideo: state.playVideo}; 
 }
 // function mapDispatchToProps(dispatch) {
 //   console.log("dispatch in spotify_player", dispatch)

@@ -19,6 +19,7 @@ export default class App extends Component {
        <SearchResults />
        <NYTimes/>
        <VideoPlaylist />
+       <VideoPlayer />
      </div>
     );
   }
