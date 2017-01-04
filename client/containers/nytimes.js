@@ -27,8 +27,10 @@ class SearchNews extends Component {
       <div 
       key={el.source.concat(idx + Math.random())}
       className="col-md-3"
-      >    
-        <img className="img-thumbnail" src={`http://nytimes.com/${el.multimedia[0].url}`} width="190" height="130"/> 
+      > 
+        <a href={el.web_url}>
+        <img className="img-thumbna il" src={`http://nytimes.com/${el.multimedia[0].url}`} width="190" height="130"/> 
+        </a>
         {el.headline.main} 
       </div>
      )
