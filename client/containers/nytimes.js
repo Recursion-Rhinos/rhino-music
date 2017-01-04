@@ -10,7 +10,7 @@ class SearchNews extends Component {
     console.log("NYTimes props =>", this.props);
     this.renderNews = this.renderNews.bind(this);
   }
-  
+
   renderNews(news) {
   console.log("RENDERNEWS", this.props)
   console.log("NEWS", news);
@@ -19,13 +19,14 @@ class SearchNews extends Component {
     .map((img) => img.multimedia[0].url);
   console.log("renderedNews",renderedNews);
   //  <ul key={ news._id }>
+
+  let snippet = news.map((text) => text.headline.main); //Have to fix this one
   return (
-    renderedNews.map((el) => { 
+    renderedNews.map((el, idx) => { 
     return (
-      <ul key={ Math.random() }>
+      <ul key={el.concat(idx + Math.random()) }>
         <li>     
-        <img src={`http://nytimes.com/${el}`} />
-        </li>
+        <img src={`http://nytimes.com/${el}`}/> { snippet} </li>
       </ul>
      )
    })
