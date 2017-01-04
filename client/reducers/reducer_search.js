@@ -5,7 +5,7 @@ export default function(state = [], action) {
   switch (action.type) {
   case "FETCH_SONGS":
   console.log("ALBUMS:", action)
-  	state = [] 
+  	state = [];
     return [ action.payload.data.tracks.items, ...state ];
   }
   return state;

@@ -19,14 +19,6 @@ class YoutubePlaylist extends Component {
    		videosArray = this.props.videos[0];
    	}
 
-  	return vids.map((videos) => {
-  		return (
-  			<li>
-          {videoThumbnail}
-        </li>
-  		)
-  	})
-
    	console.log('THIS DA VIDEOZZZZZZZ: ', videosArray);
 
    return (
