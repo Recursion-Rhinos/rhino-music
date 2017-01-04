@@ -4,6 +4,7 @@ var dummyData = require ('../dummyData.js')
 var request = require('request');
 const nytApi = require('./API/nytApi.js');
 const apiKey = process.env.API_KEY_NYT;
+const Playlists = require('./playlist/playlistModel.js');
 // router.get('/api/main', (req,res) => {
 // 	res.sendFile(path.join(__dirname, '/../client/comingSoon.html'))
 // });
@@ -28,7 +29,7 @@ app.get('/search', isLoggedIn, (req,res) => {
 app.post('/api/search', (req,res) => {
   
   let input = JSON.stringify(req.body);
-  
+   
    request({
       url: 'https://api.spotify.com/v1/search',
       qs: {
@@ -100,6 +101,43 @@ app.post('/api/videos', (req, res) => {
           }
     });
 });
+
+app.get('/api/myMusic', isLoggedIn, (req, res) => {
+  console.log('USERID: ', passport.user)
+  let playlists;
+  Playlists.getAllPlaylistsByUserId(passport.user.id)
+  .then((data) => {
+    playlists = data;
+    console.log(playlists);
+    res.send(playlists);
+  });
+});
+app.get('/api/newPlaylist', isLoggedIn, (req, res) => {
+  Playlists.getPlaylistIdByName(/*replace with req.playlistName ->*/'MyPlaylist4',passport.user.id)
+  .then((playlist) => {
+    console.log('PLAYLIST!!!!!! line:118: ', playlist)
+    if(playlist.length < 1) {
+      Playlists.createNewPlaylist(/*replace with req.playlistName ->*/'MyPlaylist4', passport.user.id)
+      .then((data) => {
+        console.log('Playlist Created', data);
+        res.send(data);
+      });
+    } else {
+      res.send('Playlist already exists');
+    }
+  });
+});
+
+app.get('/api/deletePlaylist', isLoggedIn, (req,res) => {
+  Playlists.getPlaylistIdByName('MyPlaylist4', passport.user.id)
+  .then((result) => {
+    console.log('GET PLAYLIST ID: ', result)
+    let playlistId = result[0].id;
+    Playlists.deletePlaylist(playlistId).then((response) => {
+      console.log('Playlist Deleted', response);
+    })
+  })
+})
 
 
 // router.post('/api/search', (req,res) => {
@@ -194,7 +232,7 @@ function isLoggedIn(req, res, next) {
       },
     }, (err, response, body) => {
       body = JSON.parse(body);
-      console.log("MULTIMEDIA", body.response.docs[0].multimedia);
+
       res.json(body);
     });
   });

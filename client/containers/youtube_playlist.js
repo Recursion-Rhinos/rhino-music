@@ -11,27 +11,47 @@ class YoutubePlaylist extends Component {
 		this.renderList = this.renderList.bind(this);
 	}
 
-   renderList(vids) {
+   renderList() {
+   	
+   	console.log('THIS DA VID PROP. DUDE: ', this.props.videos);
+   	let videosArray = [];
+   	if(this.props.videos.length > 0) {
+   		videosArray = this.props.videos[0];
+   	}
 
-  	return this.props.vids.map((videos) => {
+  	return vids.map((videos) => {
   		return (
-  			 	<li>
-      {videoThumbnail}
-    </li>
+  			<li>
+          {videoThumbnail}
+        </li>
   		)
   	})
 
-   	const videoThumbnail = vids
-   	.map((image) => image.snippet.thumbnails.default.url)
-   	.map((thumbnail, idx) => (<img key={idx} src={thumbnail} />));
+   	console.log('THIS DA VIDEOZZZZZZZ: ', videosArray);
 
+   return (
+	videosArray.map((video) => {
+	return (
+   	<li className="list-group-item">
+      <div className="video-list media">
+        <div className="media-left">
+          <img className="media-object" src={video.snippet.thumbnails.default.url} />
+        </div>
+        <div className="media-body">
+          <div className="media-heading">{video.snippet.title}</div>
+        </div>
+      </div>
+    </li>
+		)
+	})
+    	)
   
   }
 
 render () {
   return (
 	    <ul className="list-group col-sm-4">
-
+	    	{this.renderList()}
 	    </ul>
 
 	  );
