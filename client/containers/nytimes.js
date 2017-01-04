@@ -9,20 +9,30 @@ class SearchNews extends Component {
     super(props);
     console.log("NYTimes props =>", this.props);
     this.renderNews = this.renderNews.bind(this);
-  }	
+  }
 
   renderNews(news) {
+  console.log("RENDERNEWS", this.props)
   console.log("NEWS", news);
+  let renderedNews = this.props.news  
+    .filter((news) => news.multimedia.length > 0) //sorting the news with multimedia
+    .map((img) => img.multimedia[0].url);
+  console.log("renderedNews",renderedNews);
+  //  <ul key={ news._id }>
 
+  let snippet = news.map((text) => text.headline.main); //Have to fix this one
   return (
-   <ul key={ news._id }>
-     <li>
-      { news.headline.main }
-     </li>
-   </ul>
+    renderedNews.map((el, idx) => { 
+    return (
+      <ul key={el.concat(idx + Math.random()) }>
+        <li>     
+        <img src={`http://nytimes.com/${el}`}/> { snippet} </li>
+      </ul>
+     )
+   })
   )
 }
-//this.props.news[0].response.docs
+
 render () {
   let newsData = [];
   if(this.props.news.length === 0) {
@@ -32,12 +42,11 @@ render () {
     console.log("newsData", newsData)
   }
   
- 
   return (
     <div>
-      <ul>
+      <ul className="col-md-4 list-group">
         {console.log('THIS.PROPS.NEWS', this.props, newsData)}
-        {newsData.length ? newsData.map(this.renderNews) : "Fetching some Data"}
+        {newsData.length ? this.renderNews(newsData) : "Loading..."}
       </ul>
     </div>
   );
