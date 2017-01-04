@@ -7,5 +7,5 @@ export default function(state = [], action) {
   	state = [];
     return [ action.payload.data.tracks.items, ...state ];
   }
-  return state;
+  return state; 
 }
