@@ -24,12 +24,15 @@ class SearchNews extends Component {
   return (
     renderedNews.map((el, idx) => { 
     return (
-      <ul class="row" key={el.source.concat(idx + Math.random()) }>
-        <li class="col-xs-6 col-md-2 col-md-offset-1">     
-        <img class="img-responsive" src={`http://nytimes.com/${el.multimedia[0].url}`}/> 
-        </li>
-        { el.headline.main} 
-      </ul>
+      <div 
+      key={el.source.concat(idx + Math.random())}
+      className="col-md-3"
+      > 
+        <a href={el.web_url}>
+        <img className="img-thumbna il" src={`http://nytimes.com/${el.multimedia[0].url}`} width="190" height="130"/> 
+        </a>
+        {el.headline.main} 
+      </div>
      )
    })
   )
@@ -45,11 +48,9 @@ render () {
   }
   
   return (
-    <div>
-      <ul className="col-md-4 list-group">
-        {console.log('THIS.PROPS.NEWS', this.props, newsData)}
-        {newsData.length ? this.renderNews(newsData) : "Loading..."}
-      </ul>
+    <div className="row">
+      {console.log('THIS.PROPS.NEWS', this.props, newsData)}
+      {newsData.length ? this.renderNews(newsData) : "Loading..."}
     </div>
   );
  }
