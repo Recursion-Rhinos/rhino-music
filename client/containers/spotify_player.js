@@ -12,12 +12,11 @@ class MusicPlayer extends Component {
   }
 
   render () {
-    console.log("CHANGE")
-    //" + (this.props.playSong ?  this.props.playSong.currentSong : "no song"
+      //" + (this.props.playSong ?  this.props.playSong.currentSong : "no song"
     return (
     <div>
     <iframe
-  		  src={"https://embed.spotify.com/?uri=${this.props.playSong}"}
+  		  src={`https://embed.spotify.com/?uri=${this.props.playSong}`}
   		  width="100%" 
   		  height="100" 
   		  frameBorder="0" 
