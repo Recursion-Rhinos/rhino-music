@@ -29,9 +29,6 @@ class YoutubePlaylist extends Component {
         <div className="media-left">
           <img className="media-object" src={video.snippet.thumbnails.default.url} />
         </div>
-        <div className="media-body">
-          <div className="media-heading">{video.snippet.title}</div>
-        </div>
       </div>
     </li>
 		)
@@ -42,7 +39,7 @@ class YoutubePlaylist extends Component {
 
 render () {
   return (
-	    <ul className="list-group col-sm-4">
+	    <ul className="list-group col-sm-2">
 	    	{this.renderList()}
 	    </ul>
 
