@@ -9,7 +9,7 @@ class MusicPlayer extends Component {
   constructor(props) {
     super(props);
     console.log("MUSIC PLAYER",this.props.playSong)
-     this.playSong = this.playSong.bind(this)
+    // this.playSong = this.playSong.bind(this)
   }
 
   render () {
@@ -21,7 +21,7 @@ class MusicPlayer extends Component {
     //   testSong = songUri;	
     // // }
     //  + (this.props.playSong ?  this.props.playSong.currentSong : "no song")
-  	let testSong = spotify:track:29PKceZYR9ynXLwToCvSOj
+  	let testSong = 'spotify:track:29PKceZYR9ynXLwToCvSOj'
 	return (
 	<div>
     <p>SONGID: {this.props.playSong ?  this.props.playSong.currentSong : "no song"}</p>
