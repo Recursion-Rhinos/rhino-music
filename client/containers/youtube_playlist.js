@@ -19,14 +19,6 @@ class YoutubePlaylist extends Component {
    		videosArray = this.props.videos[0];
    	}
 
-  	return vids.map((videos) => {
-  		return (
-  			<li>
-          {videoThumbnail}
-        </li>
-  		)
-  	})
-
    	console.log('THIS DA VIDEOZZZZZZZ: ', videosArray);
 
    return (
@@ -36,9 +28,6 @@ class YoutubePlaylist extends Component {
       <div className="video-list media">
         <div className="media-left">
           <img className="media-object" src={video.snippet.thumbnails.default.url} />
-        </div>
-        <div className="media-body">
-          <div className="media-heading">{video.snippet.title}</div>
         </div>
       </div>
     </li>
@@ -50,7 +39,7 @@ class YoutubePlaylist extends Component {
 
 render () {
   return (
-	    <ul className="list-group col-sm-4">
+	    <ul className="list-group col-sm-2">
 	    	{this.renderList()}
 	    </ul>
 

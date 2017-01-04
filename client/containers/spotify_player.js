@@ -8,30 +8,22 @@ import { bindActionCreators } from 'redux';
 class MusicPlayer extends Component {
   constructor(props) {
     super(props);
-    console.log("MUSIC PLAYER",this.props)
      // this.playSong = this.playSong.bind(this)
   }
 
   render () {
-    console.log("SPOTIFY PLAYER", this.props)
-    // if(!this.props.tracks) {
-    //   console.log("....loading");
-    // } else if(this.props.track){
-    //   let songUri = this.props.tracks[0].uri;
-    //   testSong = songUri;	
-    // }
-  	let testSong = this.songId;
-	return (
-	<div>
-    <p>SONGID: {this.props.playSong ?  this.props.playSong.currentSong : "no song"}</p>
-	  <iframe 
-		  src={"https://embed.spotify.com/?uri=" + (this.props.playSong ?  this.props.playSong.currentSong : "no song")}
-		  width="100%" 
-		  height="100" 
-		  frameBorder="0" 
-		  allowTransparency="true">
-	  </iframe>
-	</div>
+    console.log("CHANGE")
+    //" + (this.props.playSong ?  this.props.playSong.currentSong : "no song"
+    return (
+    <div>
+    <iframe
+  		  src={"https://embed.spotify.com/?uri=${this.props.playSong}"}
+  		  width="100%" 
+  		  height="100" 
+  		  frameBorder="0" 
+  		  allowTransparency="true">
+  	  </iframe>
+  	</div>
     );
   }
 }
@@ -41,10 +33,6 @@ function mapStateToProps(state) {
 	console.log("spotify_player state.playSong", state.playSong);
   return {playSong: state.playSong}; 
 }
-// function mapDispatchToProps(dispatch) {
-//   console.log("dispatch in spotify_player", dispatch)
-//   return bindActionCreators({playSong:playSong}, dispatch);
-// }
 
 export default connect(mapStateToProps,null)(MusicPlayer)
 
