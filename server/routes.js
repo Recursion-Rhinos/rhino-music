@@ -108,7 +108,7 @@ app.get('/api/myMusic', isLoggedIn, (req, res) => {
   Playlists.getAllPlaylistsByUserId(passport.user.id)
   .then((data) => {
     playlists = data;
-    console.log(playlists);
+    console.log('GET_PLAYLISTS: ',playlists);
     res.send(playlists);
   });
 });

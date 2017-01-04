@@ -12,6 +12,9 @@ let addSongToPlaylist = (PlaylistId, SongsId, UserId) => {
 let getAllPlaylistsByUserId = (UserId) => {
   return knex('Playlist').where({
     UserId: UserId
+  }).then((data) => {
+    console.log('getAllPlaylistsByUserId: ', data)
+    return data;
   });
 };
 
@@ -22,7 +25,9 @@ let removeSongFromPlaylist = (PlaylistId, SongsId, UserId) => {
     UserId: UserId	
   })
   .select('id')
-  .del(); //resolves with promise in the controller
+  .del().then((data) => {
+    return data;
+  }); //resolves with promise in the controller
 };
 
 let createNewPlaylist = (Name, UserId) => {
