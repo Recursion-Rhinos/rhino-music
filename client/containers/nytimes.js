@@ -9,32 +9,29 @@ class SearchNews extends Component {
     super(props);
     console.log("NYTimes props =>", this.props);
     this.renderNews = this.renderNews.bind(this);
-  }	
-//src={`https://embed.spotify.com/?uri=${props.songUri}`}
+  }
+  
   renderNews(news) {
   console.log("RENDERNEWS", this.props)
   console.log("NEWS", news);
-// let renderedNews
-    // if(this.props.news !== undefined) {
-    let renderedNews = this.props.news  
-    .filter((news) => news.multimedia.length > 1) //sorting the news with multimedia
-    .map((el) => el.multimedia[0].url)
-    // .map((url, idx) => url);
-  // }
-    // .filter((image) => image[0].url);
-
-  console.log("renderedNews",renderedNews)
-  //  <img src={`http://nytimes.com/${renderNews}`} />
+  let renderedNews = this.props.news  
+    .filter((news) => news.multimedia.length > 0) //sorting the news with multimedia
+    .map((img) => img.multimedia[0].url);
+  console.log("renderedNews",renderedNews);
   //  <ul key={ news._id }>
   return (
-   <ul key={ news._id }>
-     <li>     
-       <img src={`http://nytimes.com/${renderedNews[0]}`} />
-     </li>
-   </ul>
+    renderedNews.map((el) => { 
+    return (
+      <ul key={ Math.random() }>
+        <li>     
+        <img src={`http://nytimes.com/${el}`} />
+        </li>
+      </ul>
+     )
+   })
   )
 }
-//this.props.news[0].response.docs
+
 render () {
   let newsData = [];
   if(this.props.news.length === 0) {
@@ -44,12 +41,11 @@ render () {
     console.log("newsData", newsData)
   }
   
- 
   return (
     <div>
       <ul className="col-md-4 list-group">
         {console.log('THIS.PROPS.NEWS', this.props, newsData)}
-        {newsData.length ? newsData.map(this.renderNews) : "Loading..."}
+        {newsData.length ? this.renderNews(newsData) : "Loading..."}
       </ul>
     </div>
   );
