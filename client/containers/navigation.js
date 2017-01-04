@@ -6,6 +6,7 @@ import { fetchNews } from '../actions/news_nytimes';
 import { fetchEvents } from '../actions/events';
 import { bindActionCreators } from 'redux';
 import nyTimesData  from '../containers/nytimes_data';
+import getPlaylists from '../actions/playlists';
 
 class Navigation extends Component {
   constructor(props) {
@@ -23,7 +24,8 @@ class Navigation extends Component {
      <div>
        <button onClick={() => console.log("EVENTS EVENTS EVENTS")} type = "button" class = "btn btn-default">Events</button>	
        <button onClick={() => console.log("VIDEOS VIDEOS VIDEOS")} type = "button" class = "btn btn-default">Videos</button>
-       <button onClick={() => console.log("NEWS NEWS NEWS")} type = "button" class = "btn btn-default">News</button>	
+       <button onClick={() => console.log("NEWS NEWS NEWS")} type = "button" class = "btn btn-default">News</button>
+       <button onClick={() => {console.log("MY MUSIC PLAYLISTS"); this.props.getPlaylists()}} type = "button" class = "btn btn-default">My Playlists</button>  	
        <button type = "button" class = "btn btn-default">Profile</button>
        <button type = "button" class = "btn btn-default">Logout</button>
      </div>
@@ -40,4 +42,4 @@ function mapStateToProps(state) {
   }; 
 }
 
-export default connect(mapStateToProps,null)(Navigation);
+export default connect(mapStateToProps, { getPlaylists })(Navigation);

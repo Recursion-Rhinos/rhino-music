@@ -13,7 +13,7 @@ class UserPlaylists extends Component {
     return playlists.map((playlist) => {
       console.log("myMusic.js playlist: ", playlist);
       return (
-        <li>
+        <li >
           {playlist.name}
         </li>
       )
@@ -21,8 +21,9 @@ class UserPlaylists extends Component {
   }
 
   render() {
+    console.log('USER PLAYLIST PROPS: ', this.props)
     return (
-      <ul className="list-grou[ col-md-4">
+      <ul className="list-group col-md-4">
         {this.renderList(this.props.playlists)}
       </ul>
     )
@@ -30,7 +31,12 @@ class UserPlaylists extends Component {
 }
 
 function mapStateToProps(state) {
+  console.log('MSTP state: ', state)
   return {playlists: state.playlists};
 }
 
-export default connect(mapStateToProps, null)(UserPlaylists)
+function mapDispatchToProps(dispatch) {
+  return bindActionCreators({ fetchPlaylists }, dispatch);
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(UserPlaylists)
