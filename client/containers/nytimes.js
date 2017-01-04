@@ -14,19 +14,20 @@ class SearchNews extends Component {
   renderNews(news) {
   console.log("RENDERNEWS", this.props)
   console.log("NEWS", news);
+ 
   let renderedNews = this.props.news  
     .filter((news) => news.multimedia.length > 0) //sorting the news with multimedia
-    .map((img) => img.multimedia[0].url);
+    // .map((img) => img.multimedia[0].url);
   console.log("renderedNews",renderedNews);
   //  <ul key={ news._id }>
 
-  let snippet = news.map((text) => text.headline.main); //Have to fix this one
+  //news.map((text) => text.headline.main); //Have to fix this one
   return (
     renderedNews.map((el, idx) => { 
     return (
-      <ul key={el.concat(idx + Math.random()) }>
+      <ul key={el.source.concat(idx + Math.random()) }>
         <li>     
-        <img src={`http://nytimes.com/${el}`}/> { snippet} </li>
+        <img src={`http://nytimes.com/${el.multimedia[0].url}`}/> { el.headline.main} </li>
       </ul>
      )
    })
