@@ -24,9 +24,9 @@ class YoutubePlaylist extends Component {
    return (
 	videosArray.map((video) => {
 	return (
-   	<li className="list-group-item">
+   	<li className="list-group-item" >
       <div className="video-list media">
-        <div className="media-left">
+        <div className="media-left" onClick={() => this.props.playVideo(video.id.videoId)}>
           <img className="media-object" src={video.snippet.thumbnails.default.url} />
         </div>
       </div>
