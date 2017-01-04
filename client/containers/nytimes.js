@@ -10,14 +10,26 @@ class SearchNews extends Component {
     console.log("NYTimes props =>", this.props);
     this.renderNews = this.renderNews.bind(this);
   }	
-
+//src={`https://embed.spotify.com/?uri=${props.songUri}`}
   renderNews(news) {
-  // console.log("NEWS", news);
+  console.log("RENDERNEWS", this.props)
+  console.log("NEWS", news);
+// let renderedNews
+    // if(this.props.news !== undefined) {
+    let renderedNews = this.props.news  
+    .filter((news) => news.multimedia.length > 1) //sorting the news with multimedia
+    .map((el) => el.multimedia[0].url)
+    // .map((url, idx) => url);
+  // }
+    // .filter((image) => image[0].url);
+
+  console.log("renderedNews",renderedNews)
+  //  <img src={`http://nytimes.com/${renderNews}`} />
   //  <ul key={ news._id }>
   return (
    <ul key={ news._id }>
-     <li>
-       <img src="http://library.uncc.edu/sites/default/files/nytimes_558x360.png" /> {news.headline.main } 
+     <li>     
+       <img src={`http://nytimes.com/${renderedNews[0]}`} />
      </li>
    </ul>
   )
