@@ -14,7 +14,6 @@ class SearchNews extends Component {
   renderNews(news) {
   console.log("RENDERNEWS", this.props)
   console.log("NEWS", news);
- 
   let renderedNews = this.props.news  
     .filter((news) => news.multimedia.length > 0) //sorting the news with multimedia
     // .map((img) => img.multimedia[0].url);
@@ -25,9 +24,11 @@ class SearchNews extends Component {
   return (
     renderedNews.map((el, idx) => { 
     return (
-      <ul key={el.source.concat(idx + Math.random()) }>
-        <li>     
-        <img src={`http://nytimes.com/${el.multimedia[0].url}`}/> { el.headline.main} </li>
+      <ul class="row" key={el.source.concat(idx + Math.random()) }>
+        <li class="col-xs-6 col-md-2 col-md-offset-1">     
+        <img class="img-responsive" src={`http://nytimes.com/${el.multimedia[0].url}`}/> 
+        </li>
+        { el.headline.main} 
       </ul>
      )
    })
