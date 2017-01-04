@@ -1,42 +1,33 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux';
-// import { playVideo } from '../actions/songs';
+import { playVideo } from '../actions/videos';
 import { bindActionCreators } from 'redux';
 
 class VideoPlayer extends Component {
   constructor(props) {
     super(props);
-    
-
+  
   }
 
-  render () {
-
-
-}
-
+render () { 
+console.log("HEEEEEEEEEEY", this.props.playVideo)
   return (
-      <div className="video-detail col-md-8">
+      <div className="video-detail col-md-5">
         <div className="embed-responsive embed-responsive-16by9">
-          <iframe className="embed-responsive-item" src={url}></iframe>
+          <iframe className="embed-responsive-item" src={this.props.playVideo} ></iframe>
         </div>
         <div className="details">
-          <div>{}</div>
-          <div>{}</div>
+          <div></div>
+          <div></div>
         </div>
       </div>
-    );
+    )
   }
 }
 
 function mapStateToProps(state) {
-  console.log("state in  spotify_player",state);
-  console.log("spotify_player state.playSong", state.playSong);
-  return {playSong: state.playSong}; 
+  return {playVideo: state.playVideo}; 
 }
-// function mapDispatchToProps(dispatch) {
-//   console.log("dispatch in spotify_player", dispatch)
-//   return bindActionCreators({playSong:playSong}, dispatch);
-// }
+
 
 export default connect(mapStateToProps,null)(VideoPlayer)

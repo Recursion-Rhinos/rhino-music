@@ -8,6 +8,7 @@ import MusicPlayer from '../containers/spotify_player';
 import NYTimes from '../containers/nytimes';
 import VideoPlaylist from '../containers/youtube_playlist';
 import UserPlaylists from '../containers/myMusic.js';
+import VideoPlayer from '../containers/youtube_player';
 
 export default class App extends Component {
   render () {
@@ -18,9 +19,10 @@ export default class App extends Component {
        <SearchBar/>
        <MusicPlayer />
        <SearchResults />
-       <NYTimes />
+       <NYTimes/>
+       <VideoPlayer/>
        <VideoPlaylist />
-       <UserPlaylists />
+      <UserPlaylists />
      </div>
     );
   }

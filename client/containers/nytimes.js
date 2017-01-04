@@ -16,18 +16,23 @@ class SearchNews extends Component {
   console.log("NEWS", news);
   let renderedNews = this.props.news  
     .filter((news) => news.multimedia.length > 0) //sorting the news with multimedia
-    .map((img) => img.multimedia[0].url);
+    // .map((img) => img.multimedia[0].url);
   console.log("renderedNews",renderedNews);
   //  <ul key={ news._id }>
 
-  let snippet = news.map((text) => text.headline.main); //Have to fix this one
+  //news.map((text) => text.headline.main); //Have to fix this one
   return (
     renderedNews.map((el, idx) => { 
     return (
-      <ul key={el.concat(idx + Math.random()) }>
-        <li>     
-        <img src={`http://nytimes.com/${el}`}/> { snippet} </li>
-      </ul>
+      <div 
+      key={el.source.concat(idx + Math.random())}
+      className="col-md-3"
+      > 
+        <a href={el.web_url}>
+        <img className="img-thumbna il" src={`http://nytimes.com/${el.multimedia[0].url}`} width="190" height="130"/> 
+        </a>
+        {el.headline.main} 
+      </div>
      )
    })
   )
@@ -43,11 +48,9 @@ render () {
   }
   
   return (
-    <div>
-      <ul className="col-md-4 list-group">
-        {console.log('THIS.PROPS.NEWS', this.props, newsData)}
-        {newsData.length ? this.renderNews(newsData) : "Loading..."}
-      </ul>
+    <div className="row">
+      {console.log('THIS.PROPS.NEWS', this.props, newsData)}
+      {newsData.length ? this.renderNews(newsData) : "Loading..."}
     </div>
   );
  }

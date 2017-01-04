@@ -37,12 +37,12 @@ class SearchList extends Component {
    // const artist = albumId[0].artists[0].name;
    // const album = albumId[0].album.album_type;
    //==========================>    
-// onClick={() => playSong(albumId[0].uri)} }
+//  }
 
     return (
       albumsArray.map((track) => {
        return (
-      <tr onClick={() => playSong(track.uri)} key={Math.random() * 100}> 
+      <tr onClick={() => this.props.playSong(track.uri)} key={Math.random() * 100}> 
         <td>{track.name}</td>
         <td>{track.artists[0].name}</td>
         <td>{track.album.name}</td>
