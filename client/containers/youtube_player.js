@@ -10,11 +10,15 @@ class VideoPlayer extends Component {
   }
 
 render () { 
-console.log("HEEEEEEEEEEY", this.props.playVideo)
+let autoplay;
+if(this.props.playVideo) {
+  autoplay = this.props.playVideo+"?autoplay=1"
+}
+
   return (
       <div className="video-detail col-md-5">
         <div className="embed-responsive embed-responsive-16by9">
-          <iframe className="embed-responsive-item" src={this.props.playVideo} ></iframe>
+          <iframe className="embed-responsive-item" src={autoplay} ></iframe>
         </div>
         <div className="details">
           <div></div>
