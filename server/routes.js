@@ -245,7 +245,7 @@ function isLoggedIn(req, res, next) {
   });
 
 
-//Google routes
+//GOOGLE ROUTES
 //========================>
   app.get('/auth/google', passport.authenticate('google-login', { scope : ['profile', 'email'] }, {
     successRedirect: '/search',
@@ -253,9 +253,26 @@ function isLoggedIn(req, res, next) {
   }));
 
   app.get('/auth/google/callback',passport.authenticate('google-login', {
-    successRedirect: '/profile',
+    successRedirect: '/search',
     failureRedirect: '/login'
   }));
   
 //========================>
+
+//FACEBOOK ROUTES
+//========================>
+
+  app.get('/auth/facebook', passport.authenticate('facebook-login', { scope: 'email' }, {
+    successRedirect: '/search',
+    failureRedirect: '/login'
+  }));
+
+  app.get('/auth/facebook/callback', passport.authenticate('facebook-login', {
+    successRedirect: '/search',
+    failureRedirect: '/login'
+  }));
+
+
+//========================>
+
 };

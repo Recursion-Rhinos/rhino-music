@@ -1,9 +1,9 @@
 var LocalStrategy = require('passport-local').Strategy;
 var GoogleStrategy = require('passport-google-oauth').OAuth2Strategy;
+var FacebookStrategy = require('passport-facebook').Strategy;
 var User = require('../user/userModel.js');
 var bcrypt = require('bcrypt-node');
 var configAuth = require('./auth');
-console.log("CONFIGAUTH", configAuth);
 // console.log('USER: ', User.getUserById)
 var localSignup = new LocalStrategy({
   usernameField: 'username',
@@ -81,8 +81,7 @@ module.exports = function(passport) {
     clientSecret: configAuth.googleAuth.clientSecret,
     callbackURL: configAuth.googleAuth.callbackURL
   },
-   function(token, refrechToken, profile, done) {
-    console.log("PROFILE", profile)
+   function(token, refreshToken, profile, done) {
      User.getUserByName(profile.displayName)
      .then(function(user) { 
        if (user) {
@@ -93,13 +92,40 @@ module.exports = function(passport) {
          .then((data) => {
            console.log('Google DATA: ', data);
            return done(null, data);
-      })
-    }
-   });     
+         });
+       }
+     });     
+   });
+//========================>
+
+//FACEBOOK AUTHENTICATION
+//========================>
+  var facebookStrategy = new FacebookStrategy({
+    clientID: configAuth.facebookAuth.clientID,
+    clientSecret: configAuth.facebookAuth.clientSecret,
+    callbackURL: configAuth.facebookAuth.callbackURL
+  },
+  function(token, refreshToken, profile, done) {
+    console.log('PROFILE', profile);
+    User.getUserByName(profile.displayName)
+     .then(function(user) { 
+       if (user) {
+         return done(null, user);
+       } else {
+         User.storeUser(profile.displayName, 
+          null,profile.emails[0].value, null, JSON.stringify({token: token}))
+         .then((data) => {
+           console.log('Facebook DATA: ', data);
+           return done(null, data);
+         });
+       }
+     });     
   });
+
 //========================>
   passport.use('local-signup',localSignup);
+  passport.use('facebook-login', facebookStrategy);
   passport.use('google-login', googleStrategy);
   passport.use('local-login',localLogin);
 
-}
+};
