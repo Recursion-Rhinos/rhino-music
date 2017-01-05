@@ -253,7 +253,7 @@ function isLoggedIn(req, res, next) {
   }));
 
   app.get('/auth/google/callback',passport.authenticate('google-login', {
-    successRedirect: '/profile',
+    successRedirect: '/search',
     failureRedirect: '/login'
   }));
   
@@ -268,7 +268,7 @@ function isLoggedIn(req, res, next) {
   }));
 
   app.get('/auth/facebook/callback', passport.authenticate('facebook-login', {
-    successRedirect: '/profile',
+    successRedirect: '/search',
     failureRedirect: '/login'
   }));
 
