@@ -69,6 +69,11 @@ module.exports = function(passport) {
       done(null, data);
     });
   });
+ //GOOGLE AUTHENTICATION
+//=======================>
+
+
+//========================>
 
   passport.use('local-signup',localSignup);
 

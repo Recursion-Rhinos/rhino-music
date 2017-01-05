@@ -22,7 +22,7 @@ export default class App extends Component {
        <NYTimes/>
        <VideoPlayer/>
        <VideoPlaylist />
-      <UserPlaylists />
+       <UserPlaylists />
      </div>
     );
   }
