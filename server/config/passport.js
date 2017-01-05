@@ -82,7 +82,6 @@ module.exports = function(passport) {
     callbackURL: configAuth.googleAuth.callbackURL
   },
    function(token, refrechToken, profile, done) {
-    console.log("PROFILE", profile)
      User.getUserByName(profile.displayName)
      .then(function(user) { 
        if (user) {
@@ -93,13 +92,13 @@ module.exports = function(passport) {
          .then((data) => {
            console.log('Google DATA: ', data);
            return done(null, data);
-      })
-    }
-   });     
-  });
+         });
+       }
+     });     
+   });
 //========================>
   passport.use('local-signup',localSignup);
   passport.use('google-login', googleStrategy);
   passport.use('local-login',localLogin);
 
-}
+};
