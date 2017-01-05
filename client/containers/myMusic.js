@@ -1,9 +1,9 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
-import { fetchPlaylists } from '../actions/playlists.js';
-import { getPlaylistSongs } from '../actions/playlists.js';
+import { getPlaylistSongs } from '../actions/playlistSongs.js';
 
+console.log("GET PLAYLIST SONGS", getPlaylistSongs)
 class UserPlaylists extends Component {
   constructor(props) {
     super(props);
@@ -13,8 +13,9 @@ class UserPlaylists extends Component {
   renderList(playlists) {
     return playlists.map((playlist) => {
       console.log("myMusic.js playlist: ", playlist);
+      console.log("MOTHA FUCKING PROPS:", this.props)
       return (
-        <li key={playlist.id} onClick={getPlaylistSongs(playlist.Name)}>
+        <li key={playlist.id} onClick={() => this.props.getPlaylistSongs(playlist.Name)}>
           {playlist.Name}
         </li>
       )
@@ -33,11 +34,11 @@ class UserPlaylists extends Component {
 
 function mapStateToProps(state) {
   console.log('MSTP state: ', state)
-  return {playlists: state.playlists};
+  return {playlists: state.playlists, getPlaylistSongs: state.playlistSongs};
 }
 
 function mapDispatchToProps(dispatch) {
-  return bindActionCreators({ fetchPlaylists }, dispatch);
+  return bindActionCreators({ getPlaylistSongs }, dispatch);
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(UserPlaylists);

@@ -37,4 +37,4 @@ function mapDispatchToProps(dispatch) {
   return bindActionCreators({ getPlaylistSongs }, dispatch);
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(PlaylistSongs);
+export default connect(mapStateToProps, null)(PlaylistSongs);

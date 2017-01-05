@@ -141,7 +141,7 @@ app.get('/api/deletePlaylist', isLoggedIn, (req,res) => {
 
 app.post('/api/getPlaylistSongs', isLoggedIn, (req, res) => {
   console.log('THIS THE MOTHAFUCKING REQ.BODY: ', req.body)
-  Playlist.getPlaylistIdByName(req.body)
+  Playlists.getPlaylistIdByName(req.body.body)
 })
 
 
