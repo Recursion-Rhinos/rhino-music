@@ -21,27 +21,21 @@ class YoutubePlaylist extends Component {
 
    	console.log('THIS DA VIDEOZZZZZZZ: ', videosArray);
 
-   return (
-	videosArray.map((video) => {
-	return (
-   	<li className="list-group-item" >
-      <div className="video-list media">
+    return videosArray.map(video => (
+      <div className="video-list media col-md-1">
         <div className="media-left" onClick={() => this.props.playVideo(video.id.videoId)}>
           <img className="media-object" src={video.snippet.thumbnails.default.url} />
-        </div>
+        </div>        
       </div>
-    </li>
-		)
-	})
-    	)
+    ));
   
   }
 
 render () {
   return (
-	    <ul className="list-group col-sm-2">
+	    <div className="row">
 	    	{this.renderList()}
-	    </ul>
+	    </div>
 
 	  );
   }
