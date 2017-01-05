@@ -92,7 +92,7 @@ module.exports = function(passport) {
          .then((data) => {
            console.log('Google DATA: ', data);
            return done(null, data);
-      });
+      })
     }
    });     
   });
