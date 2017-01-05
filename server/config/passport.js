@@ -81,7 +81,7 @@ module.exports = function(passport) {
     clientSecret: configAuth.googleAuth.clientSecret,
     callbackURL: configAuth.googleAuth.callbackURL
   },
-   function(token, refrechToken, profile, done) {
+   function(token, refreshToken, profile, done) {
      User.getUserByName(profile.displayName)
      .then(function(user) { 
        if (user) {
@@ -105,7 +105,7 @@ module.exports = function(passport) {
     clientSecret: configAuth.facebookAuth.clientSecret,
     callbackURL: configAuth.facebookAuth.callbackURL
   },
-  function(token, refrechToken, profile, done) {
+  function(token, refreshToken, profile, done) {
     console.log('PROFILE', profile);
     User.getUserByName(profile.displayName)
      .then(function(user) { 

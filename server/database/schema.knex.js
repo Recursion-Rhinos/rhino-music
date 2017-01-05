@@ -21,6 +21,7 @@ knex.schema.hasTable('Users').then(exist => {
       user.string('email');
       user.string('genres');
       user.string('google');
+      user.string('facebook');
       // user.string('graph_id');
     
 
