@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import { fetchPlaylists } from '../actions/playlists.js';
+import { getPlaylistSongs } from '../actions/playlists.js';
 
 class UserPlaylists extends Component {
   constructor(props) {
@@ -13,7 +14,7 @@ class UserPlaylists extends Component {
     return playlists.map((playlist) => {
       console.log("myMusic.js playlist: ", playlist);
       return (
-        <li key={playlist.id} >
+        <li key={playlist.id} onClick={getPlaylistSongs(playlist.Name)}>
           {playlist.Name}
         </li>
       )
@@ -39,4 +40,4 @@ function mapDispatchToProps(dispatch) {
   return bindActionCreators({ fetchPlaylists }, dispatch);
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(UserPlaylists)
+export default connect(mapStateToProps, mapDispatchToProps)(UserPlaylists);
