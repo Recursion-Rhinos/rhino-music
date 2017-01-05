@@ -1,4 +1,5 @@
 var LocalStrategy = require('passport-local').Strategy;
+var GoogleStrategy = require('passport-google-oauth').OAuth2Strategy;
 var User = require('../user/userModel.js');
 var bcrypt = require('bcrypt-node');
 // console.log('USER: ', User.getUserById)
