@@ -20,6 +20,7 @@ knex.schema.hasTable('Users').then(exist => {
       user.string('password'); //charset
       user.string('email');
       user.string('genres');
+      user.string('google');
       // user.string('graph_id');
     
 
