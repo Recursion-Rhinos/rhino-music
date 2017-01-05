@@ -103,7 +103,6 @@ app.post('/api/videos', (req, res) => {
 });
 
 app.get('/api/myMusic', isLoggedIn, (req, res) => {
-  console.log('USERID: ', passport.user)
   let playlists;
   Playlists.getAllPlaylistsByUserId(passport.user.id)
   .then((data) => {
@@ -115,7 +114,6 @@ app.get('/api/myMusic', isLoggedIn, (req, res) => {
 app.get('/api/newPlaylist', isLoggedIn, (req, res) => {
   Playlists.getPlaylistIdByName(/*replace with req.playlistName ->*/'MyPlaylist4',passport.user.id)
   .then((playlist) => {
-    console.log('PLAYLIST!!!!!! line:118: ', playlist)
     if(playlist.length < 1) {
       Playlists.createNewPlaylist(/*replace with req.playlistName ->*/'MyPlaylist4', passport.user.id)
       .then((data) => {
@@ -140,8 +138,15 @@ app.get('/api/deletePlaylist', isLoggedIn, (req,res) => {
 });
 
 app.post('/api/getPlaylistSongs', isLoggedIn, (req, res) => {
-  console.log('THIS THE MOTHAFUCKING REQ.BODY: ', req.body)
-  Playlists.getPlaylistIdByName(req.body.body)
+  Playlists.getPlaylistIdByName(req.body.body, passport.user.id)
+  .then((result) => {
+    let playlistId = result[0].id;
+    Playlists.getPlaylistSongsByPlaylistId(playlistId, passport.user.id)
+    .then((songs) => {
+      console.log('PLAYLIST SONGS: ', songs);
+      res.send(songs);
+    })
+  })
 })
 
 
