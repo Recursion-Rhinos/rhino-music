@@ -2,15 +2,17 @@ var LocalStrategy = require('passport-local').Strategy;
 var GoogleStrategy = require('passport-google-oauth').OAuth2Strategy;
 var User = require('../user/userModel.js');
 var bcrypt = require('bcrypt-node');
+var configAuth = require('./auth');
+console.log("CONFIGAUTH", configAuth);
 // console.log('USER: ', User.getUserById)
 var localSignup = new LocalStrategy({
-    usernameField: 'username',
-    passwordField: 'password',
-    emailField: 'email',
-    passReqToCallback: true
-  },
+  usernameField: 'username',
+  passwordField: 'password',
+  emailField: 'email',
+  passReqToCallback: true
+},
   function(req, username, password, done) {
-    console.log('local-signup config session: ', req.session)
+    console.log('local-signup config session: ', req.session);
     User.getUserByName(username).then((user) => { 
       if(user) {
         return done(null, false, req.flash('signupMessage', 'That Username is already taken.'));
@@ -73,10 +75,35 @@ module.exports = function(passport) {
  //GOOGLE AUTHENTICATION
 //=======================>
 
+ let googleStategy = new GoogleStrategy({
+    clientID: configAuth.googleAuth.clientID,
+    clientSecret: configAuth.googleAuth.clientSecret,
+    callbackURL: configAuth.googleAuth.callbackURL
+  },
 
+   function(token, refrechToken, profile, done) {
+     User.getUserByName(profile.displayName)
+     .then(function(user){ 
+       if(user) {
+        return done(null, user);
+       } 
+       else {
+       User.storeUser(profile.displayName, null, profile.email[0].value, null, JSON.stringify({token: token}))
+       .then((data) => {
+        console.log('Google DATA: ', data);
+        return done(null, data);
+      });
+    }
+
+        // newUser.google.id = profile.id;
+        // newUser.google.token = token;
+        // newUser.google.name = profile.displayName;
+        // newUser.google.email= profile.emails[0].value;
+       
+      });
+  });
 //========================>
-
   passport.use('local-signup',localSignup);
-
-  passport.use('local-login',localLogin)
-}
+  passport.use('google-login', googleStategy);
+  passport.use('local-login',localLogin);
+};
