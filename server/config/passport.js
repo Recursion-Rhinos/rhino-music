@@ -27,37 +27,37 @@ var localSignup = new LocalStrategy({
           return done(null,data);
         });
       }
-    })
+    });
   });
 
 var localLogin = new LocalStrategy({
-    usernameField: 'username',
-    passwordField: 'password',
-    passReqToCallback: true
-  },
+  usernameField: 'username',
+  passwordField: 'password',
+  passReqToCallback: true
+},
   function(req, username, password, done) {
     User.getUserByName(username).then((user) => {
-      console.log('LOCAL LOGIN USER: ', user)
-      if(!user){
+      console.log('LOCAL LOGIN USER: ', user);
+      if (!user) {
         return done(null, false, req.flash('loginMessage', 'No user found.'));
       }     
-      if(!bcrypt.compareSync(password, user.password)) {
+      if (!bcrypt.compareSync(password, user.password)) {
         return done(null, false, req.flash('loginMessage', 'Wrong password!'));
       }
-      console.log('passwordsMatch: ', bcrypt.compareSync(password, user.password))
-      console.log('FOUND USER LOCAL-LOGIN')
+      console.log('passwordsMatch: ', bcrypt.compareSync(password, user.password));
+      console.log('FOUND USER LOCAL-LOGIN');
       return done(null, user);
-    })
+    });
   });
 
 module.exports = function(passport) {
   passport.serializeUser((user, done) => {
-    console.log('serializeUser: ', user)
-    if(Array.isArray(user)) {
-      var id = user[0]
+    console.log('serializeUser: ', user);
+    if (Array.isArray(user)) {
+      var id = user[0];
       user = {
-        id:id
-      }
+        id: id
+      };
     }
     done(null, user.id);
   });
@@ -67,43 +67,38 @@ module.exports = function(passport) {
       let user = {
         id: data.id,
         username: data.username
-      }
+      };
       passport.user = user;
       done(null, data);
     });
   });
+
  //GOOGLE AUTHENTICATION
 //=======================>
 
- let googleStategy = new GoogleStrategy({
+  var googleStrategy = new GoogleStrategy({
     clientID: configAuth.googleAuth.clientID,
     clientSecret: configAuth.googleAuth.clientSecret,
     callbackURL: configAuth.googleAuth.callbackURL
   },
-
    function(token, refrechToken, profile, done) {
      User.getUserByName(profile.displayName)
-     .then(function(user){ 
-       if(user) {
-        return done(null, user);
-       } 
-       else {
-       User.storeUser(profile.displayName, null, profile.email[0].value, null, JSON.stringify({token: token}))
-       .then((data) => {
-        console.log('Google DATA: ', data);
-        return done(null, data);
+     .then(function(user) { 
+       if (user) {
+         return done(null, user);
+       } else {
+         User.storeUser(profile.displayName, 
+          null, profile.email[0].value, null, JSON.stringify({token: token}))
+         .then((data) => {
+           console.log('Google DATA: ', data);
+           return done(null, data);
       });
     }
-
-        // newUser.google.id = profile.id;
-        // newUser.google.token = token;
-        // newUser.google.name = profile.displayName;
-        // newUser.google.email= profile.emails[0].value;
-       
-      });
+   });     
   });
 //========================>
   passport.use('local-signup',localSignup);
-  passport.use('google-login', googleStategy);
+  passport.use('google-login', googleStrategy);
   passport.use('local-login',localLogin);
-};
+
+}
