@@ -6,6 +6,7 @@ import EventsSearch from './events_search';
 import YoutubeSearch from './youtube_search';
 import PlaylistSearch from './playlists';
 import PlayVideos from './reducer_videos';
+import PlaylistSongs from './playlistSongs';
 
 const rootReducer = combineReducers({
   tracks: SearchReducer,
@@ -14,12 +15,14 @@ const rootReducer = combineReducers({
   events: EventsSearch,
   playVideo: PlayVideos,
   videos: YoutubeSearch,
-  playlists: PlaylistSearch
+  playlists: PlaylistSearch, 
+  playlistSongs: PlaylistSongs
 });
 
 console.log("tracks", SearchReducer);
 console.log("playSongs", PlaySongs);
 console.log('news', NewsSearch);
 console.log('playlists', PlaylistSearch);
+console.log('playlistSongs', PlaylistSongs)
 
 export default rootReducer;

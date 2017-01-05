@@ -8,3 +8,4 @@ export const FETCH_VIDEOS = 'FETCH_VIDEOS';
 export const PLAY_SONGS = 'PLAY_SONGS';
 export const PLAY_VIDEO = 'PLAY_VIDEO';
 export const FETCH_PLAYLISTS = 'FETCH_PLAYLISTS';
+export const FETCH_PLAYLIST_SONGS = 'FETCH_PLAYLIST_SONGS';
