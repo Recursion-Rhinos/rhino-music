@@ -82,17 +82,18 @@ module.exports = function(passport) {
     callbackURL: configAuth.googleAuth.callbackURL
   },
    function(token, refrechToken, profile, done) {
+    console.log("PROFILE", profile)
      User.getUserByName(profile.displayName)
      .then(function(user) { 
        if (user) {
          return done(null, user);
        } else {
          User.storeUser(profile.displayName, 
-          null, profile.email[0].value, null, JSON.stringify({token: token}))
+          null, profile.emails[0].value, null, JSON.stringify({token: token}))
          .then((data) => {
            console.log('Google DATA: ', data);
            return done(null, data);
-      });
+      })
     }
    });     
   });

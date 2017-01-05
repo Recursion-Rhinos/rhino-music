@@ -243,6 +243,19 @@ function isLoggedIn(req, res, next) {
       res.json(body);
     });
   });
+
+
+//Google routes
+//========================>
+  app.get('/auth/google', passport.authenticate('google-login', { scope : ['profile', 'email'] }, {
+    successRedirect: '/search',
+    failureRedirect: '/login'
+  }));
+
+  app.get('/auth/google/callback',passport.authenticate('google-login', {
+    successRedirect: '/profile',
+    failureRedirect: '/login'
+  }));
+  
+//========================>
 };
-
-
