@@ -9,6 +9,7 @@ import NYTimes from '../containers/nytimes';
 import VideoPlaylist from '../containers/youtube_playlist';
 import UserPlaylists from '../containers/myMusic.js';
 import VideoPlayer from '../containers/youtube_player';
+import EventsList from '../containers/events_list.js';
 
 export default class App extends Component {
   render () {
@@ -22,7 +23,8 @@ export default class App extends Component {
        <NYTimes/>
        <VideoPlayer/>
        <VideoPlaylist />
-       <UserPlaylists />
+      <UserPlaylists />
+      <EventsList />
      </div>
     );
   }

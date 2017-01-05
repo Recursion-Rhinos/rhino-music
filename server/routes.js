@@ -49,31 +49,46 @@ app.post('/api/search', (req,res) => {
       });
 });
 
-app.post('/api/events', (req, res) => {
-    // console.log("EVENTS INPUT", req.body);
+app.post('/api/getId', (req, res) => {
+     console.log("EVENTS INPUT", req.body);
 
-    let name = req.body.body;
+    let artistName = req.body.body;
 
-    request({
-            // url: "http://api.bandsintown.com/artists/" + name + "/events.json?",
-            url: `http://api.bandsintown.com/artists/${name}/events.json?api_version=2.0&app_id=rhino_music`,
-            method: 'GET',
-            // qs: {
-            //     api_version: 2.0,
-            //     app_id: "rhino_music",
-            //     // location: "San Diego,CA",
-            //     // radius: 100
-            // }
+  request.get({
+            url: `http://api.songkick.com/api/3.0/search/artists.json?apikey=ujMX1UFiCgZT5oaH&query=${artistName}`,
+            method: "GET"
         },
         function(error, response, body) {
-            console.log("EVENTS BODY", body)
-            if (!error && response.statusCode === 200) {
 
-                res.send(body);
+            if (!error && response.statusCode === 200) {
+              var bodyParsed = JSON.parse(body);
+
+              res.send(bodyParsed)
+
             } else {
                 res.json(error);
             }
         });
+});
+app.post('/api/events', (req, res) => {
+
+  console.log("EVENTS ID SHOULD BE HERE", req.body);
+
+    var artist_id = req.body.body
+
+    request.get({
+        url: `http://api.songkick.com/api/3.0/artists/${artist_id}/calendar.json?apikey=ujMX1UFiCgZT5oaH`
+
+    }, function(error, response, body) {
+        if (!error && response.statusCode === 200) {
+            var bodyParse = JSON.parse(body);
+            console.log("DO I HAVE EVENTS OR NAH!?", bodyParse)
+            res.send(bodyParse);
+
+        } else {
+            res.json(error);
+        }
+    });
 });
 
 app.post('/api/videos', (req, res) => {
@@ -92,7 +107,7 @@ app.post('/api/videos', (req, res) => {
           }
         },
         function(error, response, body) {
-            console.log("youtube", body)
+         
             if (!error && response.statusCode === 200) {
 
                 res.send(body);
