@@ -98,7 +98,7 @@ module.exports = function(passport) {
    });
 //========================>
 
-//FACEBOOK UTHENTICATION
+//FACEBOOK AUTHENTICATION
 //========================>
   var facebookStrategy = new FacebookStrategy({
     clientID: configAuth.facebookAuth.clientID,
@@ -113,7 +113,7 @@ module.exports = function(passport) {
          return done(null, user);
        } else {
          User.storeUser(profile.displayName, 
-          null,null, null, JSON.stringify({token: token}))
+          null,profile.emails[0].value, null, JSON.stringify({token: token}))
          .then((data) => {
            console.log('Facebook DATA: ', data);
            return done(null, data);
@@ -121,7 +121,6 @@ module.exports = function(passport) {
        }
      });     
   });
-
 
 //========================>
   passport.use('local-signup',localSignup);
