@@ -3,8 +3,8 @@ import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import { fetchSongs } from '../actions/index';
 import { fetchNews } from '../actions/news_nytimes';
-import { fetchEvents } from '../actions/events';
 import { fetchVideos } from '../actions/youtube.js';
+import { fetchEvents } from '../actions/events';
 // import Redux from 'react-redux';
 // console.log("REDUX", {connect});
 
@@ -28,7 +28,7 @@ class SearchBar extends Component {
   onFormSubmit(event) {
     event.preventDefault();
     this.props.fetchVideos(this.state.term);
-
+    this.props.fetchEvents(this.state.term);
     this.props.fetchNews(this.state.term);
     // this.props.fetchEvents(this.state.term);
     //we need to go fetch data
