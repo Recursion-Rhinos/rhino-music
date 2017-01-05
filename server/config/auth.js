@@ -5,10 +5,15 @@ module.exports = {
     scope: 'user-read-private user-read-email',
     callbackURL: 'http://localhost:3005/auth/spotify/callback'
   },
-
-  'googleAuth' : {
-    'clientID'      : "948319285413-if84g6741rt1u3nm7dpd9ip449jq4dh2.apps.googleusercontent.com",
-    'clientSecret'  : 'CYGv1MNksTqrGABE0AZbvWk6',
-    'callbackURL'   : 'http://localhost:3005/auth/google/callback'
+  googleAuth: {
+    clientID: '948319285413-if84g6741rt1u3nm7dpd9ip449jq4dh2.apps.googleusercontent.com',
+    clientSecret: 'CYGv1MNksTqrGABE0AZbvWk6',
+    callbackURL: 'http://localhost:3005/auth/google/callback'
+  },
+  facebookAuth: {
+    clientID: '1296092313746575',
+    clientSecret: 'a812d1bcd8d1c6de0afb0eb848573fcb', 
+    callbackURL: 'http://localhost:8080/auth/facebook/callback'
   }
 };
+
