@@ -1,15 +1,12 @@
-// import React from 'react';
-// import { Router, Route } from 'react-router';
+import React from 'react';
+import { Route, IndexRoute } from 'react-router';
 
-// import App from './components/index.js';
+import App from './components/app';
+import Home from './components/home';
 
+export default (
+    <Route path="/" component={App} >
+    <IndexRoute component={Home}/>
+    </Route>
 
-// const Routes = (props) => (
-//   <Router {...props}>
-//     <Route path="/api/search" component={App} />
-//     // <Route path="/about" component={About} />
-//     // <Route path="*" component={NotFound} />
-//   </Router>
-// );
-
-// export default Routes;
+);
