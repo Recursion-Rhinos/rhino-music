@@ -44,9 +44,9 @@ class SearchList extends Component {
       albumsArray.map((track) => {
        return (
       <tr key={Math.random() * 100}> 
-        <td>{track.name}</td>
+        <td></td>
         <td>{track.artists[0].name}</td>
-        <td>{track.album.name}</td>
+        <td>{track.name}</td>
         <td><button onClick={() => this.props.playSong(track.uri)} >Play</button></td>
         <td><button onClick={() =>renderDropdown(getPlaylistDropdown())}>Playlists</button></td>
         <td><button onClick={()=>getPlaylistDropdown()}>Favourites</button></td>
@@ -62,7 +62,7 @@ class SearchList extends Component {
       <table className="table table-hover">
       <thead>
         <tr >
-          <th> Title</th>
+          <th> Track </th>
           <th> Artist </th>
           <th> Album </th>
           <th> Play </th>
