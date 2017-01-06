@@ -8,7 +8,17 @@ import axios from 'axios';
 class SearchList extends Component {
   constructor(props) {  //no need of it if there is a stateless component
     super(props)
+    this.state = this.getPlaylistDropdown();
+    this.getPlaylistDropdown = this.getPlaylistDropdown.bind(this);
     this.renderAlbums = this.renderAlbums.bind(this); //binding in  a constructor
+  }
+
+  getPlaylistDropdown() {
+    let playlists;
+    return axios.get('/api/myMusic').then((data) => {
+      console.log('DATA: ', data.data)
+      this.state = data.data;
+    });
   }
 
   renderAlbums(albumId) {
@@ -48,8 +58,10 @@ class SearchList extends Component {
         <td>{track.artists[0].name}</td>
         <td>{track.name}</td>
         <td><button onClick={() => this.props.playSong(track.uri)} >Play</button></td>
-        <td><button onClick={() =>renderDropdown(getPlaylistDropdown())}>Playlists</button></td>
-        <td><button onClick={()=>getPlaylistDropdown()}>Favourites</button></td>
+        <td><select><option value='default'>Pick a Playlist</option>{this.state.map(function(playlist){
+          return(<option value={playlist.Name}>{playlist.Name}</option>)
+        })}></select></td>
+        <td><button onClick={() => console.log('THIS.STATE', this.state)}>Add to playlist</button></td>
       </tr>
         )
       })
@@ -79,16 +91,10 @@ class SearchList extends Component {
   }
 }
 
-function getPlaylistDropdown() {
-  let playlists;
-  return axios.get('/api/myMusic').then((data) => {
-    console.log('DATA: ', data)
-    return data;
-  });
-}
+
 
 function renderDropdown(arr) {
-  console.log('PLAYLIST ARRAY: ', Promise.resolve(arr));
+  console.log('RESOLVED DATA: ', arr)
 }
 
 function mapStateToProps(state) {
