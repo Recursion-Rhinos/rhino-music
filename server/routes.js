@@ -27,21 +27,16 @@ app.get('/search', isLoggedIn, (req,res) => {
 })
 
 app.post('/api/search', (req,res) => {
-  
-  let input = JSON.stringify(req.body);
+  console.log("SEARCH MUSIC REQQQQ", req.body)
+  let input = JSON.stringify(req.body.body);
    
-   request({
-      url: 'https://api.spotify.com/v1/search',
-      qs: {
-        q: input,
-        type: 'track',
-        limit: 25
-      }
+   request.get({
+      url: `https://api.spotify.com/v1/search?q=${input}&type=album`
     },
       function(error, response, body) {
         
         if (!error && response.statusCode === 200) {
-          
+          console.log(body)
           res.send(body);
         } else {
           res.json(error);
