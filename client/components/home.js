@@ -11,20 +11,19 @@ import EventsList from '../containers/events_list.js';
 
 
 export default class Home extends Component {
-
-  render ()	 {
+  render() {
     return (
       <div>
-      <SearchBar />
-      <Navigation />
-      <MusicPlayer />
-      <SearchBar />
-      <SearchResults/>
-      <NYTimes /> 
-      <VideoPlayer />
-      <VideoPlayList />
-      <UserPlayLists />
-      <EventsList /> 	 	 	 		 	 	 	 	
+        <SearchBar />
+        <Navigation />
+        <MusicPlayer />
+        <SearchBar />
+        <SearchResults/>
+        <NYTimes /> 
+        <VideoPlayer />
+        <VideoPlayList />
+        <UserPlayLists />
+        <EventsList /> 	 	 	 		 	 	 	 	
       </div>
     );
   }
