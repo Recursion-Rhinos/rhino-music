@@ -6,7 +6,7 @@ const nytApi = require('./API/nytApi.js');
 const apiKey = process.env.API_KEY_NYT;
 const Playlists = require('./playlist/playlistModel.js');
 const Songs = require('./songs/songModel.js');
-const Events = require('./events/eventsModel.js');
+const Events = require('./events/eventModel.js');
 // router.get('/api/main', (req,res) => {
 // 	res.sendFile(path.join(__dirname, '/../client/comingSoon.html'))
 // });
@@ -197,16 +197,11 @@ app.post('/api/saveSong', isLoggedIn, (req, res) => {
   })
 })
 
-// app.post('/api/saveEvent', isLoggedIn, (req,res) => {
+app.post('/api/saveEvent', isLoggedIn, (req,res) => {
 
-//   // let eventInfo = "DMX at The Emporium (January 28, 2017)"
-//   // let eventUri = "http://www.songkick.com/concerts/28874599-dmx-at-emporium?utm_source=43531&utm_medium=partner"
+console.log("EVENTS HERE INFO", req.body)
 
-//   Events.getAllEvents().then((events) => {
-//     events.map((event) => {
-
-//     })
-//   })
+});
 
 // })
 //var match = false
