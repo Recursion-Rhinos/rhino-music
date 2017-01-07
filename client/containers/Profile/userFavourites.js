@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
-
+import { getPlaylists } from '../../actions/playlist';
 
 export default  class Favourites extends Component {
   constructor(props) {
