@@ -1,4 +1,5 @@
 import React, {Component} from 'react';
+import {Link} from 'react-router';
 import Navigation from '../containers/navigation'
 import SearchBar from '../containers/search_bar';
 import SearchResults from '../containers/search_results_list';
@@ -14,6 +15,7 @@ export default class Home extends Component {
   render() {
     return (
       <div>
+       <Link to={'/profile'}>Profile</Link>  
         <SearchBar />
         <Navigation />
         <MusicPlayer />
@@ -23,8 +25,9 @@ export default class Home extends Component {
         <VideoPlayer />
         <VideoPlayList />
         <UserPlayLists />
-        <EventsList /> 	 	 	 		 	 	 	 	
+        <EventsList /> 	  		 	 	 	 	
       </div>
+
     );
   }
 }
