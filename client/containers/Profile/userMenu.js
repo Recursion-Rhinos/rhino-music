@@ -13,6 +13,7 @@ export default class Profile extends Component {
 render () { 
     return (
       <div>
+       <img src={"http://www.musicfilmweb.com/wp-content/uploads/2011/07/dktr-rhino.jpg"}/>
        <p>Basic Details</p>
        <p>Search</p>
        <p>Favourites</p>
