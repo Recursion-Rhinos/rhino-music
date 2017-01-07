@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import { getPlaylists } from '../../actions/playlists';
+import { getEvents } from '../../actions/profileEvents';
 
 class Favourites extends Component {
   constructor(props) {
@@ -21,8 +22,9 @@ class Favourites extends Component {
 function mapStateToProps(state) {
   console.log("STATE IN FAVOURITES", state);
   return {
-    events: state.events
-  };
+    events: state.events,
+    playlists: state.playlists
+  }
 }
 
 export default connect(mapStateToProps, null)(Favourites);
