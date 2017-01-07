@@ -16,7 +16,6 @@ export default class Home extends Component {
     return (
       <div>
        <Link to={'/profile'}>Profile</Link>  
-        <SearchBar />
         <Navigation />
         <MusicPlayer />
         <SearchBar />
