@@ -294,16 +294,16 @@ function isLoggedIn(req, res, next) {
   });
  
 
- //GET USER ID
+ //GET ALL EVENTS USER ID
  //========================>
-   app.get('/events/userid', isLoggedIn, (req, res) => {
-     Events.getEventsByUserId(passport.user.id)
-  .then((data) => {
-    events = data;
-    console.log('All EVENTS BY USER: ',events);
-    res.send(events);
+  app.get('/events/userid', isLoggedIn, (req, res) => {
+    Events.getEventsByUserId(passport.user.id)
+    .then((data) => {
+      events = data;
+      console.log('All EVENTS BY USER: ',events);
+      res.send(events);
+    });
   });
- });
   
  //========================>
 
