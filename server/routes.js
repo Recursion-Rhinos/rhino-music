@@ -6,7 +6,7 @@ const nytApi = require('./API/nytApi.js');
 const apiKey = process.env.API_KEY_NYT;
 const Playlists = require('./playlist/playlistModel.js');
 const Songs = require('./songs/songModel.js');
-const Events = require('./events/eventsModel.js');
+const Events = require('./events/eventModel.js');
 // router.get('/api/main', (req,res) => {
 // 	res.sendFile(path.join(__dirname, '/../client/comingSoon.html'))
 // });

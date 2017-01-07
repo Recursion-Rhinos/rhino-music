@@ -3,7 +3,7 @@ import { GET_EVENTS} from '../constants/ActionTypes';
 
 const getEvents = () => {
   let allEvents = axios.get('/events/userid');
-  return: {
+  return {
     type:GET_EVENTS,
     events: allEvents
   }	

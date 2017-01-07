@@ -1,9 +1,9 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
-import { getPlaylists } from '../../actions/playlist';
+import { getPlaylists } from '../../actions/playlists';
 
-export default  class Favourites extends Component {
+class Favourites extends Component {
   constructor(props) {
     super(props);
   }	
@@ -18,10 +18,13 @@ export default  class Favourites extends Component {
   }
 }
 
-// function mapStateToProps(state) {
-//   console.log("STATE IN FAVOURITES", state);
-//   return {
-//     state: state
-//   }
-// }
+function mapStateToProps(state) {
+  console.log("STATE IN FAVOURITES", state);
+  return {
+    events: state.events
+  };
+}
+
+export default connect(mapStateToProps, null)(Favourites);
+
 
