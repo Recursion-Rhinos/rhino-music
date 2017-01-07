@@ -35,7 +35,7 @@ app.post('/api/search', (req,res) => {
       url: `https://api.spotify.com/v1/search?q=${input}&type=album`
     },
       function(error, response, body) {
-        
+        console.log("spotify Body", body)
         if (!error && response.statusCode === 200) {
           console.log(body)
           res.send(body);
@@ -55,6 +55,7 @@ app.post('/api/getId', (req, res) => {
             method: "GET"
         },
         function(error, response, body) {
+            // console.log("SOngKinck API", body);
 
             if (!error && response.statusCode === 200) {
               var bodyParsed = JSON.parse(body);

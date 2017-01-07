@@ -26,7 +26,6 @@ export default class Home extends Component {
         <UserPlayLists />
         <EventsList /> 	  		 	 	 	 	
       </div>
-
     );
   }
 }

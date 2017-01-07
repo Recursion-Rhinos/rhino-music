@@ -14,9 +14,10 @@ render () {
     return (
       <div>
        <img src={"http://www.musicfilmweb.com/wp-content/uploads/2011/07/dktr-rhino.jpg"}/>
-       <p>Basic Details</p>
        <p>Search</p>
-       <p>Favourites</p>
+       <p>Videos</p>
+       <p>Events</p>
+       <p>News</p>
        <p>Logout</p>
       {console.log("PROPS", this.props)}
       </div>
