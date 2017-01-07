@@ -5,7 +5,8 @@ const request = require('request');
 const nytApi = require('./API/nytApi.js');
 const apiKey = process.env.API_KEY_NYT;
 const Playlists = require('./playlist/playlistModel.js');
-const Songs = require('./songs/songModel.js')
+const Songs = require('./songs/songModel.js');
+const Events = require('./events/eventsModel.js');
 // router.get('/api/main', (req,res) => {
 // 	res.sendFile(path.join(__dirname, '/../client/comingSoon.html'))
 // });
@@ -35,7 +36,7 @@ app.post('/api/search', (req,res) => {
       url: `https://api.spotify.com/v1/search?q=${input}&type=album`
     },
       function(error, response, body) {
-        
+        console.log("spotify Body", body)
         if (!error && response.statusCode === 200) {
           console.log(body)
           res.send(body);
@@ -55,6 +56,7 @@ app.post('/api/getId', (req, res) => {
             method: "GET"
         },
         function(error, response, body) {
+            // console.log("SOngKinck API", body);
 
             if (!error && response.statusCode === 200) {
               var bodyParsed = JSON.parse(body);
@@ -138,9 +140,10 @@ app.get('/api/newPlaylist', isLoggedIn, (req, res) => {
 });
 
 app.get('/api/deletePlaylist', isLoggedIn, (req,res) => {
+  console.log("passport.user.id", passport.user.id);
   Playlists.getPlaylistIdByName('MyPlaylist4', passport.user.id)
   .then((result) => {
-    console.log('GET PLAYLIST ID: ', result)
+    console.log('GET PLAYLIST ID: ', result);
     let playlistId = result[0].id;
     Playlists.deletePlaylist(playlistId).then((response) => {
       console.log('Playlist Deleted', response);
@@ -289,7 +292,20 @@ function isLoggedIn(req, res, next) {
       res.json(body);
     });
   });
+ 
 
+ //GET ALL EVENTS USER ID
+ //========================>
+  app.get('/events/userid', isLoggedIn, (req, res) => {
+    Events.getEventsByUserId(passport.user.id)
+    .then((data) => {
+      events = data;
+      console.log('All EVENTS BY USER: ',events);
+      res.send(events);
+    });
+  });
+  
+ //========================>
 
 //GOOGLE ROUTES
 //========================>

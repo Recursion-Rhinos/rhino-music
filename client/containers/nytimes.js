@@ -29,7 +29,7 @@ class SearchNews extends Component {
         className="col-md-3"
         > 
         <a href={el.web_url}>
-        <img src={`http://nytimes.com/${el.multimedia[0].url}`} width="233" height="299"/> 
+        <img src={`http://nytimes.com/${el.multimedia[0].url}`} width="190" height="130"/> 
         </a>
         {el.headline.main} 
       </div>
