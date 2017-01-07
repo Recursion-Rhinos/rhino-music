@@ -26,10 +26,10 @@ class SearchBar extends Component {
 
   onFormSubmit(event) {
     event.preventDefault();
-    // this.props.fetchVideos(this.state.term);
-    // this.props.fetchEvents(this.state.term);
-    // this.props.fetchNews(this.state.term);
-    // this.props.fetchEvents(this.state.term);
+    this.props.fetchVideos(this.state.term);
+    this.props.fetchEvents(this.state.term);
+    this.props.fetchNews(this.state.term);
+    this.props.fetchEvents(this.state.term);
     //we need to go fetch data
     console.log('Search_Bar Container onFormSubmit:', this.state.term);
     this.props.fetchSongs(this.state.term);
