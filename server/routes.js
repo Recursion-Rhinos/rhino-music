@@ -178,21 +178,46 @@ app.post('/api/saveSong', isLoggedIn, (req, res) => {
   console.log('MOTHA FUCKING INFO: ', info)
   Playlists.getPlaylistIdByName(info.playlistName, passport.user.id)
   .then((playlist) => {
-    var playlistId = playlist[0].id;
-    Songs.getAllSongs().then((allsongs) => {
-      let match = false;
-      allSongs.forEach((s) => {
+    let playlistId = playlist[0].id;
+    Songs.getAllSongs().then((allSongs) => {
+      let songMatch = false;
+      allSongs.forEach((s) => {      
         console.log('ALL_SONGS SONG: ', s)
-      })
-    })
-    Songs.addSong(JSON.stringify(info.songData))
-    .then((songs) => {
-      console.log('SONGS!!!!: ', songs);
-      let songId = songs[0];
-      Playlists.addSongToPlaylist(playlistId, songId)
-      .then((result) => {
-        console.log('RESULT: ', result)
-      })
+        let songURI = JSON.parse(s.song).uri;
+        console.log('COMPARING ' + info.songData.uri + ' to ' + songURI)
+        if(songURI === info.songData.uri) {
+          songMatch = s;
+          console.log('MATCH!!!!', match)
+        }
+      });
+      if(songMatch) {
+        Playlists.getPlaylistSongsByPlaylistId(playlistId)
+        .then((pListSongs) => {
+        let playListSongMatch = false;
+          pListSongs.forEach((pListSong) => {
+            console.log('pLISTSONG!!!',  pListSong)
+            if(pListSong.SongId === songMatch.id) {
+              playListSongMatch = true;
+            }        
+          });
+          if(!playListSongMatch) {
+            Playlists.addSongToPlaylist(playlistId, match.id)
+            .then((result) => {
+              console.log('MATCHING SONG~!!!!: ', result)
+            })
+          }
+        })  
+      } else {
+        console.log('NO MATCHING SONG~!!')
+        Songs.addSong(JSON.stringify(info.songData))
+        .then((songs) => {
+          let songId = songs[0];
+          Playlists.addSongToPlaylist(playlistId, songId)
+          .then((result) => {
+            console.log('RESULT: ', result)
+          })
+        })
+      }
     })
   })
 })
