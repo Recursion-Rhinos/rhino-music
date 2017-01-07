@@ -10,3 +10,7 @@ export const PLAY_VIDEO = 'PLAY_VIDEO';
 export const FETCH_PLAYLISTS = 'FETCH_PLAYLISTS';
 export const FETCH_PLAYLIST_SONGS = 'FETCH_PLAYLIST_SONGS';
 export const FETCH_TRACK = 'FETCH_TRACK';
+
+//Profile Page
+export const GET_EVENTS = 'GET_EVENTS';
+
