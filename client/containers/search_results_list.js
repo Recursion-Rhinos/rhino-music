@@ -9,6 +9,7 @@ import {Table, TableBody, TableFooter, TableHeader, TableHeaderColumn, TableRow,
 class SearchList extends Component {
   constructor(props) {  //no need of it if there is a stateless component
     super(props)
+    this.index = 0;
     this.state = this.getPlaylistDropdown();
     this.getPlaylistDropdown = this.getPlaylistDropdown.bind(this);
     this.renderAlbums = this.renderAlbums.bind(this); //binding in  a constructor
@@ -50,21 +51,20 @@ class SearchList extends Component {
    // const album = albumId[0].album.album_type;
    //==========================>    
 //  }
-
+    let index = 0;
     return (
-
-      albumsArray.map((track) => {
-        
-       return (
-      <TableRow key={Math.random() * 100} onClick={() => this.props.playSong(track.uri)}> 
-        <TableRowColumn>{track.artists[0].name}</TableRowColumn>
-        <TableRowColumn>{track.name}</TableRowColumn>
-        <TableRowColumn><button onClick={() => this.props.playSong(track.uri)} >Play</button></TableRowColumn>
-        <TableRowColumn><select><option value='default'>Pick a Playlist</option>{this.state.map(function(playlist){
-          return(<option value={playlist.Name}>{playlist.Name}</option>)
-        })}></select></TableRowColumn>
-        <TableRowColumn><button onClick={() => console.log('THIS.STATE', this.state)}>Add to playlist</button></TableRowColumn>
-      </TableRow>
+      albumsArray.map((track) => { 
+        return (
+          <tr key={Math.random() * 100}> 
+            <td></td>
+            <td>{track.artists[0].name}</td>
+            <td>{track.name}</td>
+            <td><button onClick={() => this.props.playSong(track.uri)} >Play</button></td>
+            <td><select id={'playlistDropdown'+track.uri}><option value='default'>Pick a Playlist</option>{this.state.map(function(playlist){
+              return(<option value={playlist.Name}>{playlist.Name}</option>)
+            })}></select></td>
+            <td><button onClick={() => {let p = 'playlistDropdown'+track.uri; saveToPlaylist(document.getElementById(p).value, {artist:track.artists[0].name, album:track.name, uri:track.uri})}}>Add to playlist</button></td>
+          </tr>
         )
       })
    )
@@ -91,10 +91,21 @@ class SearchList extends Component {
   }
 }
 
+function saveToPlaylist(playlistName, songData) {
+  if(playlistName !== 'default'){
+    let obj = {
+      playlistName: playlistName,
+      songData: songData
+    }
+    axios.post('/api/saveSong', {body: obj})
+    .then((result) => {
+      console.log('SAVING SONG')
+    });
+  }
+}
 
-
-function renderDropdown(arr) {
-  console.log('RESOLVED DATA: ', arr)
+function updateIndex() {
+  this.index++;
 }
 
 function mapStateToProps(state) {

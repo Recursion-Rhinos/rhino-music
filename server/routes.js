@@ -1,10 +1,11 @@
-var router = require('express').Router();
-var path = require('path')
-var dummyData = require ('../dummyData.js')
-var request = require('request');
+const router = require('express').Router();
+const path = require('path')
+//const dummyData = require ('../dummyData.js')
+const request = require('request');
 const nytApi = require('./API/nytApi.js');
 const apiKey = process.env.API_KEY_NYT;
 const Playlists = require('./playlist/playlistModel.js');
+const Songs = require('./songs/songModel.js')
 // router.get('/api/main', (req,res) => {
 // 	res.sendFile(path.join(__dirname, '/../client/comingSoon.html'))
 // });
@@ -154,11 +155,46 @@ app.post('/api/getPlaylistSongs', isLoggedIn, (req, res) => {
     Playlists.getPlaylistSongsByPlaylistId(playlistId, passport.user.id)
     .then((songs) => {
       console.log('PLAYLIST SONGS: ', songs);
-      res.send(songs);
+      let songsArr = [];
+      for(var i = 0; i < songs.length; i++) {
+        songsArr.push(Songs.getSongById(songs[i].id))
+      }
+      Promise.all(songsArr).then((arrSongs) => {
+          sendSongs(arrSongs);
+      })
+      function sendSongs(arr) {
+          console.log('songArr else: ', arr);
+          res.send(arr);
+      }      
     })
   })
 })
 
+app.post('/api/saveSong', isLoggedIn, (req, res) => {
+  let info = req.body.body;
+  console.log('MOTHA FUCKING INFO: ', info)
+  Playlists.getPlaylistIdByName(info.playlistName, passport.user.id)
+  .then((playlist) => {
+    var playlistId = playlist[0].id;
+    Songs.getAllSongs().then((allsongs) => {
+      let match = false;
+      allSongs.forEach((s) => {
+        console.log('ALL_SONGS SONG: ', s)
+      })
+    })
+    Songs.addSong(JSON.stringify(info.songData))
+    .then((songs) => {
+      console.log('SONGS!!!!: ', songs);
+      let songId = songs[0];
+      Playlists.addSongToPlaylist(playlistId, songId)
+      .then((result) => {
+        console.log('RESULT: ', result)
+      })
+    })
+
+
+  })
+})
 
 // router.post('/api/search', (req,res) => {
 //   console.log("Search Term", req.body)

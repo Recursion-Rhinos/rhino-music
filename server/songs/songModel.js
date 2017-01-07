@@ -12,10 +12,19 @@ let removeSong = (song) => {
   .del();  
 };
 
+let getSongById = (songId) => {
+  return knex('Songs').where('id', songId);
+}
+
+let getAllSongs = () => {
+  return knex('Songs');
+}
 
 module.exports = {
   addSong: addSong,
-  removeSong: removeSong
+  removeSong: removeSong,
+  getSongById: getSongById,
+  getAllSongs: getAllSongs
 };
 
 
