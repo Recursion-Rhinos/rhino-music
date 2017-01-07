@@ -3,7 +3,8 @@ import { connect } from 'react-redux';
 import { playSong } from '../actions/songs';
 import { bindActionCreators } from 'redux'; //=> Take a look
 import axios from 'axios';
-// import MusicPlayer from './spotify_player';
+import {Table, TableBody, TableFooter, TableHeader, TableHeaderColumn, TableRow, TableRowColumn}
+  from 'material-ui/Table';
 
 class SearchList extends Component {
   constructor(props) {  //no need of it if there is a stateless component
@@ -51,42 +52,41 @@ class SearchList extends Component {
 //  }
 
     return (
+
       albumsArray.map((track) => {
+        
        return (
-      <tr key={Math.random() * 100}> 
-        <td></td>
-        <td>{track.artists[0].name}</td>
-        <td>{track.name}</td>
-        <td><button onClick={() => this.props.playSong(track.uri)} >Play</button></td>
-        <td><select><option value='default'>Pick a Playlist</option>{this.state.map(function(playlist){
+      <TableRow key={Math.random() * 100} onClick={() => this.props.playSong(track.uri)}> 
+        <TableRowColumn>{track.artists[0].name}</TableRowColumn>
+        <TableRowColumn>{track.name}</TableRowColumn>
+        <TableRowColumn><button onClick={() => this.props.playSong(track.uri)} >Play</button></TableRowColumn>
+        <TableRowColumn><select><option value='default'>Pick a Playlist</option>{this.state.map(function(playlist){
           return(<option value={playlist.Name}>{playlist.Name}</option>)
-        })}></select></td>
-        <td><button onClick={() => console.log('THIS.STATE', this.state)}>Add to playlist</button></td>
-      </tr>
+        })}></select></TableRowColumn>
+        <TableRowColumn><button onClick={() => console.log('THIS.STATE', this.state)}>Add to playlist</button></TableRowColumn>
+      </TableRow>
         )
       })
    )
 }
 
   render () {
-  console.log("PROPS IN SEARCH_RESULTS_LIST", this.props)	
+  console.log("PROPS IN SEARCH_RESULTS_LIST", this.props) 
     return (
-      <table className="table table-hover">
-      <thead>
-        <tr >
-          <th> Track </th>
-          <th> Artist </th>
-          <th> Album </th>
-          <th> Play </th>
-          <th> Playlist Dropdown</th>
-          <th> Favourites</th>
-        </tr>
-      </thead>
-      <tbody>
+       <Table>
+     
+      <TableBody>
        { console.log("search_results_list => this.props", this.props)}
+    <TableRow>
+          <TableHeaderColumn> Artist </TableHeaderColumn>
+          <TableHeaderColumn> Album </TableHeaderColumn>
+          <TableHeaderColumn> Play </TableHeaderColumn>
+          <TableHeaderColumn>Playlist Dropdown</TableHeaderColumn>
+          <TableHeaderColumn>Favourites</TableHeaderColumn>
+      </TableRow>
           {this.renderAlbums()}
-      </tbody>
-    </table>
+      </TableBody>
+      </Table>
     );
   }
 }

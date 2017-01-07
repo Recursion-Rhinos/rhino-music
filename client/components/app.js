@@ -11,6 +11,7 @@ import { Component } from 'react';
 // import VideoPlayer from '../containers/youtube_player';
 // import EventsList from '../containers/events_list.js';
 
+
 export default class App extends Component {
   render () {
     // return ( 
@@ -26,7 +27,7 @@ export default class App extends Component {
     //   <EventsList />
     //  </div>
     // );
-    return (
+    return ( 
       <div>
         {this.props.children || 'NO Components'}
       </div>
