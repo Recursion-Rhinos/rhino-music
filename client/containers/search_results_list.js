@@ -54,20 +54,33 @@ class SearchList extends Component {
     let index = 0;
     return (
       albumsArray.map((track) => { 
+        // return (
+        //   <tr key={Math.random() * 100}> 
+        //     <td></td>
+        //     <td>{track.artists[0].name}</td>
+        //     <td>{track.name}</td>
+        //     <td><button onClick={() => this.props.playSong(track.uri)} >Play</button></td>
+        //     <td><select id={'playlistDropdown'+track.uri}><option value='default'>Pick a Playlist</option>{this.state.map(function(playlist){
+        //       return(<option value={playlist.Name}>{playlist.Name}</option>)
+        //     })}></select></td>
+        //     <td><button onClick={() => {let p = 'playlistDropdown'+track.uri; saveToPlaylist(document.getElementById(p).value, {artist:track.artists[0].name, album:track.name, uri:track.uri})}}>Add to playlist</button></td>
+        //   </tr>
+        // )
         return (
-          <tr key={Math.random() * 100}> 
-            <td></td>
-            <td>{track.artists[0].name}</td>
-            <td>{track.name}</td>
-            <td><button onClick={() => this.props.playSong(track.uri)} >Play</button></td>
-            <td><select id={'playlistDropdown'+track.uri}><option value='default'>Pick a Playlist</option>{this.state.map(function(playlist){
+          <TableRow key={Math.random() * 100} onClick={() => this.props.playSong(track.uri)}>
+            <TableRowColumn>{track.artists[0].name}</TableRowColumn>
+            <TableRowColumn>{track.name}</TableRowColumn>
+            <TableRowColumn><button onClick={() => this.props.playSong(track.uri)} >Play</button></TableRowColumn>
+            <TableRowColumn><select id={'playlistDropdown'+track.uri}><option value='default'>Pick a Playlist</option>{this.state.map(function(playlist){
               return(<option value={playlist.Name}>{playlist.Name}</option>)
-            })}></select></td>
-            <td><button onClick={() => {let p = 'playlistDropdown'+track.uri; saveToPlaylist(document.getElementById(p).value, {artist:track.artists[0].name, album:track.name, uri:track.uri})}}>Add to playlist</button></td>
-          </tr>
-        )
-      })
+            })}></select></TableRowColumn>
+            <TableRowColumn><button onClick={() => {let p = 'playlistDropdown'+track.uri; saveToPlaylist(document.getElementById(p).value, {artist:track.artists[0].name, album:track.name, uri:track.uri})}}>Add to playlist</button></TableRowColumn>
+          </TableRow>
+       )
+    })
    )
+
+    
 }
 
   render () {
