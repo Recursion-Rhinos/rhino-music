@@ -103,7 +103,9 @@ module.exports = function(passport) {
   var facebookStrategy = new FacebookStrategy({
     clientID: configAuth.facebookAuth.clientID,
     clientSecret: configAuth.facebookAuth.clientSecret,
-    callbackURL: configAuth.facebookAuth.callbackURL
+    callbackURL: configAuth.facebookAuth.callbackURL,
+    redirect_uri: '/auth/facebook/callback',
+    profileFields: ['id', 'displayName', 'name', 'gender', 'picture.type(large)']
   },
   function(token, refreshToken, profile, done) {
     console.log('PROFILE', profile);
