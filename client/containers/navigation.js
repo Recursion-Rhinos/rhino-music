@@ -7,32 +7,71 @@ import { fetchEvents } from '../actions/events';
 import { bindActionCreators } from 'redux';
 import nyTimesData  from '../containers/nytimes_data';
 import getPlaylists from '../actions/playlists';
+import AppBar from 'material-ui/AppBar';
+import SwipeableViews from 'react-swipeable-views';
+import {Tabs, Tab} from 'material-ui/Tabs';
+
+export const teal900 = '#004D40';
+
+const styles = {
+  bar: {
+    "background-color": teal900,
+    backgroundColor: teal900
+  }
+};
 
 class Navigation extends Component {
   constructor(props) {
     super(props);
 
-    // this.state = {term: ''};
-    console.log("NAVIGATION", this.props)
+    this.state = {
+      slideIndex: 0,
+    };
   }
+
+  handleChange = (value) => {
+    this.setState({
+      slideIndex: value,
+    });
+  };
 
  render() {
  	console.log("NAVIGATION2", this.props)
   console.log("Container", nyTimesData)
   // let profile = <a href="/profile"></a>
    return (
-     <div>
-       <button onClick={() => console.log("EVENTS EVENTS EVENTS")} type = "button" class = "btn btn-default">Events</button>	
-       <button onClick={() => console.log("VIDEOS VIDEOS VIDEOS")} type = "button" class = "btn btn-default">Videos</button>
-       <button onClick={() => console.log("NEWS NEWS NEWS")} type = "button" class = "btn btn-default">News</button>
-       <button onClick={() => {console.log("MY MUSIC PLAYLISTS"); this.props.getPlaylists()}} type = "button" class = "btn btn-default">My Playlists</button>  	
-       <button type = "button" class = "btn btn-default">Profile</button>
-       <button type = "button" class = "btn btn-default">Logout</button>
-     </div>
-  );
+    <AppBar
+     style={styles.bar}
+      title="Rhino Music"
+      iconElementRight = {
+       <div>
+       <Tabs style={styles.bar}>
+          <Tab style={styles.bar} label="My Playlists" value={0}/>
+          <Tab style={styles.bar} label="Events" value={1}/>
+          <Tab style={styles.bar} label="Videos" />
+          <Tab style={styles.bar} label="News" />
+        </Tabs>
+         <SwipeableViews
+          style={styles.bar}
+          index={this.state.slideIndex}
+          onChangeIndex={this.handleChange}
+        >
+        <div></div>
+       // <button onClick={() => console.log("EVENTS EVENTS EVENTS")}>Events</button>  
+       // <button onClick={() => console.log("VIDEOS VIDEOS VIDEOS")}>Videos</button>
+       // <button onClick={() => console.log("NEWS NEWS NEWS")}>News</button>
+       // <button onClick={() => {console.log("MY MUSIC PLAYLISTS"); this.props.getPlaylists()}}>My Playlists</button>   
+       // <button>Profile</button>
+       // <button>Logout</button>
+       </SwipeableViews>
+       </div>
+     }
+    />
+
+  )
  }
 }
-//JOHN, CAN YOU TAKE A LOOK PLEASE
+
 function mapStateToProps(state) {	
   return {
   	news: state.news,
