@@ -46,10 +46,10 @@ class Navigation extends Component {
       iconElementRight = {
        <div>
        <Tabs style={styles.bar}>
-          <Tab style={styles.bar} label="My Playlists" value={0}/>
-          <Tab style={styles.bar} label="Events" value={1}/>
-          <Tab style={styles.bar} label="Videos" />
-          <Tab style={styles.bar} label="News" />
+          <Tab style={styles.bar} label="My Playlists" value={0} onClick={() => {console.log("MY MUSIC PLAYLISTS"); this.props.getPlaylists()}}/>
+          <Tab style={styles.bar} label="Events" value={1} onClick={() => console.log("EVENTS EVENTS EVENTS")}/>
+          <Tab style={styles.bar} label="Videos" onClick={() => console.log("VIDEOS VIDEOS VIDEOS")}/>
+          <Tab style={styles.bar} label="News" onClick={() => console.log("NEWS NEWS NEWS")}/>
         </Tabs>
          <SwipeableViews
           style={styles.bar}
@@ -77,8 +77,10 @@ function mapStateToProps(state) {
   	news: state.news,
   	tracks: state.tracks,
   	playSong: state.playSong,
-    events: state.events
+    events: state.events,
+    getPlaylists: state.playlists
   }; 
+
 }
 
 export default connect(mapStateToProps, { getPlaylists })(Navigation);
