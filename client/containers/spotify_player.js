@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 import { connect } from 'react-redux';
 import { playSong } from '../actions/songs';
 import { bindActionCreators } from 'redux';
+import {BottomNavigation, BottomNavigationItem} from 'material-ui/BottomNavigation';
 
 // size may also be a plain string using the presets 'large' or 'compact' 
 
@@ -14,7 +15,7 @@ class MusicPlayer extends Component {
   render () {
       //" + (this.props.playSong ?  this.props.playSong.currentSong : "no song"
     return (
-    <div>
+    <div className="bottom-align">
     <iframe
   		  src={`https://embed.spotify.com/?uri=${this.props.playSong}`}
   		  width="100%" 
@@ -22,7 +23,7 @@ class MusicPlayer extends Component {
   		  frameBorder="0" 
   		  allowTransparency="true">
   	  </iframe>
-  	</div>
+    </div>
     );
   }
 }

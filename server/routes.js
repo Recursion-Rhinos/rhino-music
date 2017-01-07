@@ -96,7 +96,7 @@ app.post('/api/videos', (req, res) => {
             q: input,
             type: "video",
             videoEmbeddable: "true",
-            maxResults: 2,
+            maxResults: 11,
             part: "snippet",
             key: "AIzaSyDuq91IyM4yVkDOCagx_Y_VvRnLyKHXfuE"
           }
