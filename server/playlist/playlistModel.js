@@ -1,11 +1,9 @@
 var knex = require('../database/schema.knex.js');
 
-let addSongToPlaylist = (PlaylistId, SongsId, UserId) => {
+let addSongToPlaylist = (PlaylistId, SongId) => {
   return knex('PlaylistSongs').insert({
-    SongsId: SongsId,
-    UserId: UserId
-  }).where({
-    PlaylistId: PlaylistId
+    PlaylistId: PlaylistId,
+    SongId: SongId
   }); //resolves with promise in the controller
 };
 
@@ -18,10 +16,10 @@ let getAllPlaylistsByUserId = (UserId) => {
   });
 };
 
-let removeSongFromPlaylist = (PlaylistId, SongsId, UserId) => {
+let removeSongFromPlaylist = (PlaylistId, SongId, UserId) => {
   return knex('Playlist').where ({
     PlaylistId: PlaylistId,
-    SongsId: SongsId,
+    SongId: SongId,
     UserId: UserId	
   })
   .select('id')

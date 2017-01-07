@@ -13,7 +13,6 @@ class UserPlaylists extends Component {
   renderList(playlists) {
     return playlists.map((playlist) => {
       console.log("myMusic.js playlist: ", playlist);
-      console.log("MOTHA FUCKING PROPS:", this.props)
       return (
         <li key={playlist.id} onClick={() => this.props.getPlaylistSongs(playlist.Name)}>
           {playlist.Name}
