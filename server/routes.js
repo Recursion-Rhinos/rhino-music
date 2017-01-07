@@ -99,7 +99,7 @@ app.post('/api/videos', (req, res) => {
             q: input,
             type: "video",
             videoEmbeddable: "true",
-            maxResults: 11,
+            maxResults: 12,
             part: "snippet",
             key: "AIzaSyDuq91IyM4yVkDOCagx_Y_VvRnLyKHXfuE"
           }
@@ -194,10 +194,24 @@ app.post('/api/saveSong', isLoggedIn, (req, res) => {
         console.log('RESULT: ', result)
       })
     })
-
-
   })
 })
+
+// app.post('/api/saveEvent', isLoggedIn, (req,res) => {
+
+//   // let eventInfo = "DMX at The Emporium (January 28, 2017)"
+//   // let eventUri = "http://www.songkick.com/concerts/28874599-dmx-at-emporium?utm_source=43531&utm_medium=partner"
+
+//   Events.getAllEvents().then((events) => {
+//     events.map((event) => {
+
+//     })
+//   })
+
+// })
+//var match = false
+//if name passed in matches event looped on then you set match to that event object
+// if match 
 
 // router.post('/api/search', (req,res) => {
 //   console.log("Search Term", req.body)

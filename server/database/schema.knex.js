@@ -65,9 +65,37 @@ knex.schema.hasTable('PlaylistSongs').then(exists => {
       table.foreign('SongId').references('Songs.id');
     }).then(table => {
       console.log('Created Table', table);
-    })
+    });
   }
-})
+});
+
+knex.schema.hasTable('Events').then(exist => {
+  if (!exist) {
+    knex.schema.createTable('Events', (table) => {
+      table.increments('id').primary();
+      table.string('name');
+      table.string('link');
+      table.integer('UserId').unsigned();
+      table.foreign('UserId').references('Users.id');
+    }).then(table => {
+      console.log('Created Table:', table);
+    });
+  }
+});
+
+knex.schema.hasTable('EventsUsers').then(exists => {
+  if(!exists) {
+    knex.schema.createTable('EventsUsers', (table) => {
+      table.increments('id').primary();
+      table.integer('EventsId').unsigned();
+      table.integer('UserId').unsigned();
+      table.foreign('EventsId').references('Events.Id');
+      table.foreign('UserId').references('Users.id');
+    }).then(table => {
+      console.log('Created Table', table);
+    });
+  }
+});
 
 knex.schema.hasTable('Messages').then(exist => {
   if (!exist) {
@@ -83,6 +111,7 @@ knex.schema.hasTable('Messages').then(exist => {
     });
   }
 });
+
 
 
 module.exports = knex;
