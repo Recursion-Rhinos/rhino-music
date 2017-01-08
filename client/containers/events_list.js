@@ -29,7 +29,7 @@ return (
         <td>{event.displayName}</td>
         <td>{event.location.city}</td>
       <td><a href={event.uri}><button onClick={() => 'location.href=`${event.uri}`'}> Reserve Now </button></a></td>
-      <td><button onClick={() => {saveEvent( {eventName:event.displayName, link: event.uri, location: {lat: event.location.lat, lon: event.location.lng} } ) }}> Reserve Later </button></td>
+      <td><button onClick={() => {saveEvent( {name:event.displayName, link: event.uri, location: [event.location.city, {lat: event.location.lat, lon: event.location.lng}] } ) }}> Reserve Later </button></td>
       </tr>		
 		)
 	})
@@ -64,6 +64,9 @@ function saveEvent(eventData) {
   }
 
 function mapStateToProps(state) {
+  if(!state.events) {
+    return "No events found for this artist"
+  }
   return {events: state.events};  
 }
 
