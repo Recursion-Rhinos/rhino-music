@@ -9,12 +9,14 @@ let getEventsById = (id) => {
 };
 
 let saveEvent = (event) => {
+	console.log("SAVING EVENT?", event)
   return knex('Events').insert({
     event: event
   }); 
 };
 
 let addEventToEventsUsers = (EventsId, UserId) => {
+	console.log("EVENTS ID", EventsId, "AND THE USER ID", UserId)
   return knex('EventsUsers').insert({
     EventsId: EventsId,
     UserId: UserId
@@ -29,12 +31,10 @@ return knex('EventsUsers').where({
   });
 };
 
-let getEventsByName = (name, UserId) => {
-	return knex('Events').select('id')
-	.where({
-		name: name,
-		UserId: UserId
-	});
+let getEventsUsersByEventsId = (EventsId) => {
+  return knex('EventsUsers').where({
+    EventsId: EventsId
+  });
 };
 
 module.exports = {
@@ -43,5 +43,5 @@ module.exports = {
 	saveEvent: saveEvent,
 	addEventToEventsUsers: addEventToEventsUsers,
 	getEventsByUserId: getEventsByUserId,
-	getEventsByName: getEventsByName
+	getEventsUsersByEventsId: getEventsUsersByEventsId
 };
