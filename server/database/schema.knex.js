@@ -73,10 +73,7 @@ knex.schema.hasTable('Events').then(exist => {
   if (!exist) {
     knex.schema.createTable('Events', (table) => {
       table.increments('id').primary();
-      table.string('name');
-      table.string('link');
-      table.integer('UserId').unsigned();
-      table.foreign('UserId').references('Users.id');
+      table.string('event',1000);
     }).then(table => {
       console.log('Created Table:', table);
     });
@@ -89,7 +86,7 @@ knex.schema.hasTable('EventsUsers').then(exists => {
       table.increments('id').primary();
       table.integer('EventsId').unsigned();
       table.integer('UserId').unsigned();
-      table.foreign('EventsId').references('Events.Id');
+      table.foreign('EventsId').references('Events.id');
       table.foreign('UserId').references('Users.id');
     }).then(table => {
       console.log('Created Table', table);

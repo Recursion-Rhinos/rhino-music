@@ -29,14 +29,14 @@ app.get('/search', isLoggedIn, (req,res) => {
 })
 
 app.post('/api/search', (req,res) => {
-  console.log("SEARCH MUSIC REQQQQ", req.body)
+
   let input = JSON.stringify(req.body.body);
    
    request.get({
       url: `https://api.spotify.com/v1/search?q=${input}&type=album`
     },
       function(error, response, body) {
-        console.log("spotify Body", body)
+    
         if (!error && response.statusCode === 200) {
           console.log(body)
           res.send(body);
@@ -69,8 +69,6 @@ app.post('/api/getId', (req, res) => {
         });
 });
 app.post('/api/events', (req, res) => {
-
-  console.log("EVENTS ID SHOULD BE HERE", req.body);
 
     var artist_id = req.body.body
 
@@ -157,7 +155,7 @@ app.post('/api/getPlaylistSongs', isLoggedIn, (req, res) => {
     let playlistId = result[0].id;
     Playlists.getPlaylistSongsByPlaylistId(playlistId, passport.user.id)
     .then((songs) => {
-      console.log('PLAYLIST SONGS: ', songs);
+     
       let songsArr = [];
       for(var i = 0; i < songs.length; i++) {
         songsArr.push(Songs.getSongById(songs[i].id))
@@ -182,7 +180,7 @@ app.post('/api/saveSong', isLoggedIn, (req, res) => {
     Songs.getAllSongs().then((allSongs) => {
       let songMatch = false;
       allSongs.forEach((s) => {      
-        console.log('ALL_SONGS SONG: ', s)
+   
         let songURI = JSON.parse(s.song).uri;
         console.log('COMPARING ' + info.songData.uri + ' to ' + songURI)
         if(songURI === info.songData.uri) {
@@ -222,16 +220,34 @@ app.post('/api/saveSong', isLoggedIn, (req, res) => {
   })
 })
 
-// app.post('/api/saveEvent', isLoggedIn, (req,res) => {
+app.post('/api/saveEvent', isLoggedIn, (req,res) => {
 
-//   // let eventInfo = "DMX at The Emporium (January 28, 2017)"
-//   // let eventUri = "http://www.songkick.com/concerts/28874599-dmx-at-emporium?utm_source=43531&utm_medium=partner"
+console.log("EVENTS HERE INFO", req.body)
+  const savedEvent = req.body.body
 
-//   Events.getAllEvents().then((events) => {
-//     events.map((event) => {
+  Events.saveEvent(JSON.stringify(savedEvent))
+  .then((id) => {
+    console.log("ID ID", id[0])
+    Events.addEventToEventsUsers(id[0], passport.user.id)
+  }).then((wut) => {
+    console.log("EVENTS USERS ADDED", wut)
+  })
+  // Events.getAllEvents().then((events) => {
+  // let match = false;
+  //     events.forEach((event) => {
+  //       let eventObj = JSON.parse(event.event)
+  //      console.log("COMPARISON", eventObj.name === savedEvent.name)
+  //       if(eventObj.name === savedEvent.name){
 
-//     })
-//   })
+  //         match = eventObj;
+  //       }
+  //     })
+  //   if(match){
+  //     Events.getEventsByUserId(passport.user.id)
+  //   }
+  // })
+
+});
 
 // })
 //var match = false

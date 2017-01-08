@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import { fetchEvents } from '../actions/events';
+import axios from 'axios';
 
 class EventsList extends Component {
 	constructor(props) {
@@ -27,13 +28,13 @@ return (
 	<tr key={Math.random() * 100}> 
         <td>{event.displayName}</td>
         <td>{event.location.city}</td>
-      <td><a href={event.uri}><button onClick={() => 'location.href=`${event.uri}`'}> Reserve </button></a></td>
+      <td><a href={event.uri}><button onClick={() => 'location.href=`${event.uri}`'}> Reserve Now </button></a></td>
+      <td><button onClick={() => {saveEvent( {name:event.displayName, link: event.uri, location: [event.location.city, {lat: event.location.lat, lon: event.location.lng}] } ) }}> Reserve Later </button></td>
       </tr>		
 		)
 	})
   )
 }
-
 
 render () {
 console.log("PROPS IN EVENTS LIST", this.props.events)	
@@ -50,13 +51,22 @@ return (
       {this.renderEvents()}
   </tbody>
 </table>
-);
-
+    );
   }
 }
 
+function saveEvent(eventData) {
+  console.log("saving event")
+    axios.post('/api/saveEvent', {body: eventData})
+    .then((result) => {
+      console.log('EVENT SAVED')
+    });
+  }
 
 function mapStateToProps(state) {
+  if(!state.events) {
+    return "No events found for this artist"
+  }
   return {events: state.events};  
 }
 
