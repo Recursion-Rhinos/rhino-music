@@ -67,10 +67,10 @@ class SearchList extends Component {
         //   </tr>
         // )
         return (
-          <TableRow key={Math.random() * 100} onClick={() => this.props.playSong(track.uri)}>
+          <TableRow key={Math.random() * 100}>
             <TableRowColumn>{track.artists[0].name}</TableRowColumn>
             <TableRowColumn>{track.name}</TableRowColumn>
-            <TableRowColumn><button onClick={() => this.props.playSong(track.uri)} >Play</button></TableRowColumn>
+            <TableRowColumn><button onClick={() => this.props.playSong(track.uri)}>Play</button></TableRowColumn>
             <TableRowColumn><select id={'playlistDropdown'+track.uri}><option value='default'>Pick a Playlist</option>{this.state.map(function(playlist){
               return(<option value={playlist.Name}>{playlist.Name}</option>)
             })}></select></TableRowColumn>
