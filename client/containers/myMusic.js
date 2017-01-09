@@ -7,7 +7,13 @@ import {Table, TableBody, TableFooter, TableHeader, TableHeaderColumn, TableRow,
 import axios from 'axios';
 import getPlaylists from '../actions/playlists';
 import { playSong } from '../actions/songs';
+import {Link} from 'react-router';
 
+const styles = {
+  selectBox: { width: '50%' },
+  playlist: { width: '100%'}
+
+}
 console.log("GET PLAYLIST SONGS", getPlaylistSongs)
 class UserPlaylists extends Component {
   constructor(props) {
@@ -17,18 +23,25 @@ class UserPlaylists extends Component {
     this.deletePlaylists = this.deletePlaylist.bind(this);
     this.renderSongs = this.renderSongs.bind(this);
     this.renderList = this.renderList.bind(this);
+    this.componentWillMount = this.componentWillMount.bind(this);
+  }
+
+  componentWillMount() {
+    this.props.getPlaylists();
   }
 
   deletePlaylist(playlistName) {
     console.log('DELETING PLAYLIST')
     axios.post('/api/deletePlaylist', {playlist: playlistName}).then((data) => {
-      console.log('GETTING PLAYLISTS after delete')
+      console.log('GETTING PLAYLISTS AFTER DELETE')
       this.props.getPlaylists();
     });
   }
 
   newPlaylist(playlistName){
   console.log('MAKING NEW PLAYLIST')
+  //playListName = result of remove spaces before and after name of playlist
+  //
   if(playlistName !== '') {
     axios.post('/api/newPlaylist', {body: playlistName}).then((data) => {
       console.log('GETTING NEW PLAYLISTS')
@@ -39,42 +52,32 @@ class UserPlaylists extends Component {
 
   renderSongs(songs) {
     console.log('SONGS!!!!!!!!!', songs)
-  if(songs !== null) {
-    return songs.map((songData) => {
-      songData.song = JSON.parse(songData.song);
-      console.log('SONG TO RENDER: ', songData)
-      return (
-        <tr key={songData.song.id}>
-          <td>{songData.song.artist}</td>
-          <td>
-            <button onClick={() => this.props.playSong(songData.song.uri)}>Play</button>
-          </td>
-        </tr>
-      )
-    })
-  }
-
-    // if(songs === null) {
-    //   return <tr><td></td></tr>;
-    // } else {
-    //   return songs.map((song) => {
-    //     console.log('RENDER THIS BITCH: ', song)
-    //     return
-    //   })
-    // }
+    if(songs !== null) {
+      return songs.map((songData) => {
+        songData.song = JSON.parse(songData.song);
+        console.log('SONG TO RENDER: ', songData)
+        return (
+          <tr key={songData.id}>
+            <td>{songData.song.artist}</td>
+            <td>
+              <button onClick={() => this.props.playSong(songData.song.uri)}>Play</button>
+            </td>
+          </tr>
+        )
+      })
+    }
   }
 
   renderList(playlists) {
     console.log('PLATLISTS!!!!!!!!!!!!!: ', playlists)
     return playlists.map((playlist) => {
-      //console.log("myMusic.js playlist: ", playlist);
       return (
-        <tr key={playlist.id}>
-          <td>
+        <TableRow key={playlist.id}>
+          <TableRowColumn>
             <button onClick={()=> { this.deletePlaylist(playlist.Name) }}>Delete</button>
             <button onClick={() => this.renderSongs(this.props.getPlaylistSongs(playlist.Name))}>{playlist.Name}</button>  
-          </td>
-        </tr>
+          </TableRowColumn>
+        </TableRow>
         // <TableRow key={playlist.id} onClick={() => this.props.getPlaylistSongs(playlist.Name)}>
           // <TableRowColumn>{playlist.Name}</TableRowColumn>
           // <TableRowColumn>SONG INFO</TableRowColumn>
@@ -86,25 +89,26 @@ class UserPlaylists extends Component {
   render() {
     console.log('USER PLAYLIST PROPS: ', this.props)
     return (
-    <div>
-      <div>
-        <table>
-          <th>Playlists</th>
-          <th>
-            <input id='newPlaylist' type='text' placeholder='Create New Playlist' /><button onClick={() => {this.newPlaylist(document.getElementById('newPlaylist').value); document.getElementById('newPlaylist').value = '';}}>New Playlist</button>
-          </th>
+    <div /*style={{display: 'inline-block'}}*/>
+
+        <Table>
+        <TableBody>
+          <TableHeaderColumn></TableHeaderColumn>
+          <TableHeaderColumn>Playlists</TableHeaderColumn>
+          <TableHeaderColumn>
+            <input id='newPlaylist' type='text' placeholder='Create New Playlist' maxLength='15'/>
+            <button onClick={() => {this.newPlaylist(document.getElementById('newPlaylist').value); document.getElementById('newPlaylist').value = '';}}>+</button>
+          </TableHeaderColumn>
           {this.renderList(this.props.playlists)}
-        </table>
-      </div>
-      <div>
+        </TableBody>
+        </Table>
         <table>
         <tr>
-          <td>Songs</td>
-          <td>Play</td>
+          <th>Songs</th>
+          <th>Play</th>
         </tr>
           {this.renderSongs(this.props.playlistSongs)}
         </table>
-      </div>
     </div>
         // <table>
         // {this.renderSongs(this.state)}

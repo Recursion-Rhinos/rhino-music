@@ -188,7 +188,7 @@ app.post('/api/saveSong', isLoggedIn, (req, res) => {
         console.log('COMPARING ' + info.songData.uri + ' to ' + songURI)
         if(songURI === info.songData.uri) {
           songMatch = s;
-          console.log('MATCH!!!!', match)
+          console.log('MATCH!!!!', songMatch)
         }
       });
       if(songMatch) {
@@ -202,7 +202,7 @@ app.post('/api/saveSong', isLoggedIn, (req, res) => {
             }        
           });
           if(!playListSongMatch) {
-            Playlists.addSongToPlaylist(playlistId, match.id)
+            Playlists.addSongToPlaylist(playlistId, songMatch.id)
             .then((result) => {
               console.log('MATCHING SONG~!!!!: ', result)
             })
