@@ -24,13 +24,34 @@ class Favourites extends Component {
   //   });
   }
 
+
+  renderPlaylists(playlists) {
+    console.log("PLAYLISTS INSINDE RENDERPLAYLISTS", playlists);
+    return playlists.map((el, idx) => {
+      return (
+        <tr key={Math.random()}>
+          <td>
+          {el.Name}    
+          </td>
+       </tr>
+      )
+    }) 
+  }
+
+  renderEvents(events) {
+  
+  }
+
+
   render () {
     console.log("SVETDaVeT Playlist", this.props.playlists);
     
     return (
       <div>
-        <h1>Playlists</h1> 
-        <p></p>
+       <table>
+        <th>Playlists</th> 
+        <tr>{this.renderPlaylists(this.props.playlists)}</tr>
+       </table> 
         <h1>Events</h1>	
       </div>    
     );
