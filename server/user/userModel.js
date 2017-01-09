@@ -22,9 +22,9 @@ let retrieveUser = (name, password) => {
 // });
 }; 
 
-let getUserById = (id) => {
+let getUserById = (Id) => {
   return knex('Users').where({
-    id: id
+    id: Id
   }).first();
 };
 
@@ -32,6 +32,14 @@ let getUserByName = (username) => {
   return knex('Users').where({
     username: username
   }).first();
+};
+
+let updatePassword = (password, userId) => {
+  return knex('Users').where({
+    id: userId
+  }).update({
+    password: password
+  });
 };
 
 // let retrieveUserId = () => {
@@ -60,5 +68,6 @@ module.exports = {
   getUserById: getUserById,
   getUserByName: getUserByName,
   deleteUser: deleteUser,
-  retrieveGraphId: retrieveGraphId
+  retrieveGraphId: retrieveGraphId,
+  updatePassword: updatePassword
 };
