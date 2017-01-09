@@ -19,21 +19,12 @@ class Favourites extends Component {
     this.props.getEvents();
     console.log("getEvents return a promise: => ", this.props.allEvents)
 }
-  // componentDidMount() {
-  //  this.props.getEvents();
-  //  console.log("componentDidMount", this.props) 
-  // }
-  // getUserEvents() {
-  //   this.props.getEvents().then((data) => {
-  //     this.test = data;
-  //   })
-  // }
-
+ 
   renderPlaylists(playlists) {
     console.log("PLAYLISTS INSINDE RENDERPLAYLISTS", playlists);
     return playlists.map((el, idx) => {
       return (
-        <tr key={el + idx}>
+        <tr key={el.Name}>
           <td>
           {el.Name}    
           </td>
@@ -43,11 +34,29 @@ class Favourites extends Component {
   }
 
   renderEvents(events) {
-    return JSON.stringify(events);
-  // console.log("EVENTSSSSSSSS", events)
+    // console.log("EVEEENTSSSS", JSON.parse(events));
+    const data = [];
+    events.forEach((arr) => {
+      arr.forEach((obj) => {
+        data.push(obj);
+      });
+    });
+    data.forEach((ele) => {
+      ele.event = JSON.parse(ele.event);
+    })
+     console.log("DATAAAAAAAAAAA", data)
+    return data.map((el, idx) =>{
+      return (
+        <tr key={el + (idx + Math.random())}>
+          <td>{el.event.name}</td> 
+          <td>{el.event.location[0]}</td>    
+        </tr>
+      )  
+    });
   }
+   //NEED STYLING!!!
   render () {
-    console.log("SVETDaVeT Playlist", this.props);
+    console.log("SVETDaVeT Playlist", this.props)
    return (
     <div>
       <div>
