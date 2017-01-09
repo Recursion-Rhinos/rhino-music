@@ -7,13 +7,15 @@ import getEvents  from '../../actions/profileEvents';
 class Favourites extends Component {
   constructor(props) {
     super(props)
+    this.test = this.props.getEvents();
     this.componentWillMount = this.componentWillMount.bind(this);
   }
 
   componentWillMount() {
     this.props.getAllPlaylists();
     console.log("JERRY IS THE MASTER ", this.props)
-    this.props.getEvents();
+    //this.props.getEvents();
+        console.log("Svetlin IS THE MASTER ", this.test)
   //   // console.log("This would be a good time to call action creator to fetch and render playlists");
   //   console.log("componentWillMount this.props =>", Promise.resolve(this.playlists))
   //   this.props.getAllPlaylists()
@@ -41,21 +43,28 @@ class Favourites extends Component {
   }
 
   renderEvents(events) {
-  
+  // console.log("EVENTSSSSSSSS", events)
   }
 
 
   render () {
-    console.log("SVETDaVeT Playlist", this.props.playlists);
+    // console.log("SVETDaVeT Playlist", this.props.playlists);
     
     return (
+    <div>
       <div>
        <table>
         <th>Playlists</th> 
         <tr>{this.renderPlaylists(this.props.playlists)}</tr>
        </table> 
-        <h1>Events</h1>	
-      </div>    
+      </div>
+      <div> 
+       <table>
+       <th>Events</th>
+       <tr>{this.renderEvents(this.props.events)}</tr>
+       </table>
+      </div>  
+      </div>  
     );
   }
 }
@@ -63,7 +72,7 @@ class Favourites extends Component {
 function mapStateToProps(state) {
   console.log("STATE IN FAVOURITES", state);
   return {
-    events: state.events,
+    allEvents: state.allEvents,
     playlists: state.getAllPlaylists
   }
 }
