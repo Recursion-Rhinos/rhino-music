@@ -67,7 +67,7 @@ class UserPlaylists extends Component {
     return playlists.map((playlist) => {
       return (
         <TableRow key={playlist.id}>
-          <TableRowColumn style={styles.playlist}>
+          <TableRowColumn>
             <button onClick={()=> { this.deletePlaylist(playlist.Name) }}>Delete</button>
             <button onClick={() => this.renderSongs(this.props.getPlaylistSongs(playlist.Name))}>{playlist.Name}</button>  
           </TableRowColumn>
@@ -86,9 +86,9 @@ class UserPlaylists extends Component {
     <div /*style={{display: 'inline-block'}}*/>
 
         <Table>
-        <TableBody style = {styles.selectBox}>
+        <TableBody>
           <TableHeaderColumn></TableHeaderColumn>
-          <TableHeaderColumn style = {styles.playlist}>Playlists</TableHeaderColumn>
+          <TableHeaderColumn>Playlists</TableHeaderColumn>
           <TableHeaderColumn>
             <input id='newPlaylist' type='text' placeholder='Create New Playlist' maxLength='15'/>
             <button onClick={() => {this.newPlaylist(document.getElementById('newPlaylist').value); document.getElementById('newPlaylist').value = '';}}>+</button>
