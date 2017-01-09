@@ -13,4 +13,5 @@ export const FETCH_TRACK = 'FETCH_TRACK';
 
 //Profile Page
 export const GET_EVENTS = 'GET_EVENTS';
+export const GET_ALL_PLAYLISTS = 'GET_ALL_PLAYLISTS';
 

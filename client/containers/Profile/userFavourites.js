@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
-import { getPlaylists } from '../../actions/playlists';
+import { getAllPlaylists } from '../../actions/getPlaylists';
 import { getEvents } from '../../actions/profileEvents';
 
 class Favourites extends Component {
@@ -14,20 +14,19 @@ class Favourites extends Component {
 
   componentWillMount() {
     // console.log("This would be a good time to call action creator to fetch and render playlists");
-    console.log("componentWillMount this.props =>", this.props.getPlaylists())
-    this.props.getPlaylists().
-    then((data) => {
+    console.log("componentWillMount this.props =>", this.props.getAllPlaylists())
+    this.props.getAllPlaylists()
+    .then((data) => {
       console.log("DATA IN PROPMISEEEEEEE DUDE", data)
       if(data) {
-        this.playists = data.payload.data; 
-        console.log("PLAYLISTS IN PROMISE", this.playists)
+        this.playlists = data.payload.data; 
+        console.log("PLAYLISTS IN PROMISE", this.playlists)
       }
     });
   }
 
-   renderPlaylist(playlists) {
-    
-   }
+   // renderPlaylist(playlists) {
+   // }
 
 
   render () {
@@ -63,7 +62,7 @@ class Favourites extends Component {
 // }
 
 function mapDispatchToProps(dispatch) {
-  return bindActionCreators({ getPlaylists, getEvents }, dispatch);
+  return bindActionCreators({ getAllPlaylists, getEvents }, dispatch);
 }
 
 export default connect(null, mapDispatchToProps)(Favourites);
