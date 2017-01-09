@@ -7,6 +7,7 @@ import {Table, TableBody, TableFooter, TableHeader, TableHeaderColumn, TableRow,
 import axios from 'axios';
 import getPlaylists from '../actions/playlists';
 import { playSong } from '../actions/songs';
+import {Link} from 'react-router';
 
 const styles = {
   selectBox: { width: '50%' },
@@ -22,6 +23,11 @@ class UserPlaylists extends Component {
     this.deletePlaylists = this.deletePlaylist.bind(this);
     this.renderSongs = this.renderSongs.bind(this);
     this.renderList = this.renderList.bind(this);
+    this.componentWillMount = this.componentWillMount.bind(this);
+  }
+
+  componentWillMount() {
+    this.props.getPlaylists();
   }
 
   deletePlaylist(playlistName) {
@@ -51,7 +57,7 @@ class UserPlaylists extends Component {
         songData.song = JSON.parse(songData.song);
         console.log('SONG TO RENDER: ', songData)
         return (
-          <tr key={songData.song.id}>
+          <tr key={songData.id}>
             <td>{songData.song.artist}</td>
             <td>
               <button onClick={() => this.props.playSong(songData.song.uri)}>Play</button>

@@ -65,7 +65,7 @@ function saveEvent(eventData) {
 
 function mapStateToProps(state) {
   if(!state.events) {
-    return "No events found for this artist"
+    return {noEvent: "No events found for this artist"}
   }
   return {events: state.events};  
 }
