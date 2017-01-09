@@ -4,6 +4,7 @@ export const FETCH_SONGS = 'FETCH_SONGS';
 export const GET_NEWS = 'GET_NEWS';
 export const FETCH_EVENTS = 'FETCH_EVENTS'
 export const FETCH_VIDEOS = 'FETCH_VIDEOS';
+export const VIDEO_PLAYLIST = 'VIDEO_PLAYLIST';
 //Buttons
 export const PLAY_SONGS = 'PLAY_SONGS';
 export const PLAY_VIDEO = 'PLAY_VIDEO';

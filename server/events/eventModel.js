@@ -24,6 +24,8 @@ let addEventToEventsUsers = (EventsId, UserId) => {
   }); 
 };
 
+
+
 let getEventsByUserId = (UserId) => {
 return knex('EventsUsers').where({
     UserId: UserId
