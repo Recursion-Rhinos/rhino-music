@@ -97,7 +97,35 @@ app.post('/api/videos', (req, res) => {
             q: input,
             type: "video",
             videoEmbeddable: "true",
+            videoSyndicated: "true",
             maxResults: 12,
+            part: "snippet",
+            key: "AIzaSyDuq91IyM4yVkDOCagx_Y_VvRnLyKHXfuE"
+          }
+        },
+        function(error, response, body) {
+         
+            if (!error && response.statusCode === 200) {
+
+                res.send(body);
+            } else {
+                res.json(error);
+          }
+    });
+});
+
+app.post('/api/videofy', (req, res) => {
+
+    let input = req.body.body
+
+    request({
+        url: "https://www.googleapis.com/youtube/v3/search",
+        qs: {
+            q: input,
+            type: "video",
+            videoEmbeddable: "true",
+            videoSyndicated: "true",
+            maxResults: 1,
             part: "snippet",
             key: "AIzaSyDuq91IyM4yVkDOCagx_Y_VvRnLyKHXfuE"
           }
