@@ -1,1 +1,26 @@
-CSS
+.navigation {
+  display: flex;
+  justify-content: space-around;
+  width: 100%;
+  backgroud-color: #eee;
+}
+
+.navigation ul {
+  margin: 5px;
+  padding: 10px;
+  list-style: none;
+}
+
+.navigation li {
+  float: left;
+}
+
+.navigation li a {
+  width: 100px;
+  height: 20px;
+  line-height: 20px;
+  padding: 10px;
+  display: block;
+  text-align: center;
+}
+
