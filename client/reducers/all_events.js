@@ -5,7 +5,7 @@ export default function(state = [], action) {
   switch(action.type) {
     case "GET_EVENTS":
     console.log("REDUCER GET_EVENTS II", action);
-    return action.events
+    return action.payload.data
   }
   return state;	
 }

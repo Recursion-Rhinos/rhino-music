@@ -6,7 +6,7 @@ const getEvents = () => {
   console.log("GET-EVENTS ACTION CREATOR", allEvents)
   return {
     type:"GET_EVENTS",
-    events: allEvents
+    payload: allEvents
   }	
 }
 
