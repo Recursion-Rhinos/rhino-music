@@ -38,7 +38,7 @@ app.post('/api/search', (req,res) => {
       function(error, response, body) {
     
         if (!error && response.statusCode === 200) {
-          console.log(body)
+          
           res.send(body);
         } else {
           res.json(error);
@@ -176,7 +176,7 @@ app.post('/api/getPlaylistSongs', isLoggedIn, (req, res) => {
 
 app.post('/api/saveSong', isLoggedIn, (req, res) => {
   let info = req.body.body;
-  console.log('MOTHA FUCKING INFO: ', info)
+  
   Playlists.getPlaylistIdByName(info.playlistName, passport.user.id)
   .then((playlist) => {
     let playlistId = playlist[0].id;
@@ -226,30 +226,47 @@ app.post('/api/saveSong', isLoggedIn, (req, res) => {
 app.post('/api/saveEvent', isLoggedIn, (req,res) => {
 
 console.log("EVENTS HERE INFO", req.body)
+
   const savedEvent = req.body.body
 
-  Events.saveEvent(JSON.stringify(savedEvent))
-  .then((id) => {
-    console.log("ID ID", id[0])
-    Events.addEventToEventsUsers(id[0], passport.user.id)
-  }).then((wut) => {
-    console.log("EVENTS USERS ADDED", wut)
+    Events.getAllEvents().then((events) => {
+      let match = false;
+          events.forEach((event) => {
+            let eventObj = JSON.parse(event.event)
+           console.log("COMPARISON", eventObj.name === savedEvent.name)
+            if(eventObj.name === savedEvent.name){
+              match = event;
+            }
+          })
+          console.log("MATCH RESULT", match)
+        if(match.id === Number) {
+          let userEventMatch = false
+          Events.getEventsByUserId(passport.user.id)
+          .then((events) => {
+            if(events.id === match.id) {
+              console.log("MATCH FOUND FOR USER")
+              userEventMatch = true;
+            } else if(!userEventMatch) {
+              Events.addEventToEventsUsers(newEventId, passport.user.id)
+          .then((id) => {
+            console.log("DONE", id)
+        })
+            }
+          })
+
+        } else {
+
+         Events.saveEvent(JSON.stringify(savedEvent))
+          .then((id) => {
+            let newEventId = id[0]
+            console.log(newEventId)
+          Events.addEventToEventsUsers(newEventId, passport.user.id)
+          .then((newId) => {
+            console.log("DONE", newId)
+        })
+      })
+    }
   })
-  // Events.getAllEvents().then((events) => {
-  // let match = false;
-  //     events.forEach((event) => {
-  //       let eventObj = JSON.parse(event.event)
-  //      console.log("COMPARISON", eventObj.name === savedEvent.name)
-  //       if(eventObj.name === savedEvent.name){
-
-  //         match = eventObj;
-  //       }
-  //     })
-  //   if(match){
-  //     Events.getEventsByUserId(passport.user.id)
-  //   }
-  // })
-
 });
 
 // })
