@@ -2,34 +2,29 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import getAllPlaylists  from '../../actions/getPlaylists';
-import { getEvents } from '../../actions/profileEvents';
+import getEvents  from '../../actions/profileEvents';
 
 class Favourites extends Component {
   constructor(props) {
     super(props)
+    // this.test = this.props.getEvents()
+    // this.getUserEvents = this.getUserEvents.bind(this);
     this.componentWillMount = this.componentWillMount.bind(this);
-  }
+    // this.componentDidMount = this.componentDidMount.bind(this);
+ }
 
   componentWillMount() {
     this.props.getAllPlaylists();
-  //   // console.log("This would be a good time to call action creator to fetch and render playlists");
-  //   console.log("componentWillMount this.props =>", Promise.resolve(this.playlists))
-  //   this.props.getAllPlaylists()
-  //   .then((data) => {
-  //     console.log("DATA IN PROPMISEEEEEEE DUDE", data)
-  //     if(data) {
-  //       this.playlists = data.payload.data; 
-  //       console.log("PLAYLISTS IN PROMISE", this.playlists)
-  //     }
-  //   });
-  }
-
-
+    // this.getUserEvents();
+    this.props.getEvents();
+    console.log("getEvents return a promise: => ", this.props.allEvents)
+}
+ 
   renderPlaylists(playlists) {
     console.log("PLAYLISTS INSINDE RENDERPLAYLISTS", playlists);
     return playlists.map((el, idx) => {
       return (
-        <tr key={Math.random()}>
+        <tr key={el.Name}>
           <td>
           {el.Name}    
           </td>
@@ -39,22 +34,48 @@ class Favourites extends Component {
   }
 
   renderEvents(events) {
-  
+    // console.log("EVEEENTSSSS", JSON.parse(events));
+    const data = [];
+    events.forEach((arr) => {
+      arr.forEach((obj) => {
+        data.push(obj);
+      });
+    });
+    data.forEach((ele) => {
+      ele.event = JSON.parse(ele.event);
+    })
+     console.log("DATAAAAAAAAAAA", data)
+    return data.map((el, idx) =>{
+      return (
+        <tr key={el + (idx + Math.random())}>
+          <td>{el.event.name}</td> 
+          <td>{el.event.location[0]}</td>    
+        </tr>
+      )  
+    });
   }
-
-
+   //NEED STYLING!!!
   render () {
-    console.log("SVETDaVeT Playlist", this.props.playlists);
-    
-    
-    return (
+    console.log("SVETDaVeT Playlist", this.props)
+   return (
+    <div>
       <div>
        <table>
+       <tr>
         <th>Playlists</th> 
-        <tr>{this.renderPlaylists(this.props.playlists)}</tr>
+          <tr>{this.renderPlaylists(this.props.playlists)}</tr>
+       </tr>
        </table> 
-        <h1>Events</h1>	
-      </div>    
+      </div>
+      <div> 
+       <table>
+         <tr>
+         <th>Events</th>
+           <tr>{this.renderEvents(this.props.allEvents)}</tr>
+         </tr>
+       </table>
+      </div>  
+      </div>  
     );
   }
 }
@@ -62,15 +83,16 @@ class Favourites extends Component {
 function mapStateToProps(state) {
   console.log("STATE IN FAVOURITES", state);
   return {
-    events: state.events,
+    allEvents: state.allEvents,
     playlists: state.getAllPlaylists
   }
 }
 
-function mapDispatchToProps(dispatch) {
-  return bindActionCreators({ getAllPlaylists, getEvents }, dispatch);
-}
+// function mapDispatchToProps(dispatch) {
+//   return bindActionCreators({ getAllPlaylists, getEvents }, dispatch);
+// }
 
-export default connect(mapStateToProps, mapDispatchToProps)(Favourites);
+// export default connect(mapStateToProps, mapDispatchToProps)(Favourites);
+export default connect(mapStateToProps, { getAllPlaylists, getEvents })(Favourites);
 
 
