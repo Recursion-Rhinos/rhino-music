@@ -26,6 +26,7 @@ class Favourites extends Component {
     })
     console.log("ALL PLAYLIST IN PROFILE", playlists)
     
+    
     return (
       <div>
         <h1>Playlists</h1> 
