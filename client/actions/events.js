@@ -13,7 +13,7 @@ export function fetchEvents(term) {
 
 	console.log("HEY THIS IS THE ARTIST in FETCH EVENTS", events);
 	return {
-		type: FETCH_EVENTS,
+		type: "FETCH_EVENTS",
 		payload: events
 	};
 }
