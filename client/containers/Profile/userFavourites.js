@@ -47,16 +47,9 @@ class Favourites extends Component {
   // console.log("EVENTSSSSSSSS", events)
   }
   render () {
-<<<<<<< HEAD
-    console.log("SVETDaVeT Playlist", this.props.playlists);
-    
-    
-    return (
-=======
     console.log("SVETDaVeT Playlist", this.props);
    return (
     <div>
->>>>>>> Monday
       <div>
        <table>
        <tr>
