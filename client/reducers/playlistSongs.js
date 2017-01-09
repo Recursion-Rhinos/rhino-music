@@ -5,8 +5,13 @@ export default function(state=null, action) {
   switch(action.type) {
     case 'FETCH_PLAYLIST_SONGS':
     console.log("PLAYLIST STATE:", state)
-      console.log('FETCH_PLAYLIST_SONGS ACTION: ', action);
-      return action.payload;
+      console.log('FETCH_PLAYLIST_SONGS ACTION: ', action.payload.data);
+      let songs = [];
+      action.payload.data.forEach((arr) => {
+        songs.push(arr[0]);
+      })
+      console.log('SONGS!!!!!!: ', songs)
+      return songs;
   }
   return state;
 }
