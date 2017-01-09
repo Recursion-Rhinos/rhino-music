@@ -1,12 +1,13 @@
 const router = require('express').Router();
 const path = require('path')
-//const dummyData = require ('../dummyData.js')
+const bcrypt= require('bcrypt-node');
 const request = require('request');
 const nytApi = require('./API/nytApi.js');
 const apiKey = process.env.API_KEY_NYT;
 const Playlists = require('./playlist/playlistModel.js');
 const Songs = require('./songs/songModel.js');
 const Events = require('./events/eventModel.js');
+const Users = require('./user/userModel.js');
 // router.get('/api/main', (req,res) => {
 // 	res.sendFile(path.join(__dirname, '/../client/comingSoon.html'))
 // });
@@ -330,15 +331,45 @@ console.log("EVENTS HERE INFO", req.body)
   });
 
 
-function isLoggedIn(req, res, next) {
-  if(req.isAuthenticated()) {
-    return next();
+  function isLoggedIn(req, res, next) {
+    if(req.isAuthenticated()) {
+      return next();
+    }
+    res.redirect('/');
   }
-  res.redirect('/');
-}
 
+  //Get User Info 
+  //==================>
+  app.get('/api/getUserInfo', isLoggedIn ,(req,res) => {
+    res.send(passport.user);
+  })
+  //==================>
 
-  app.post('/api/news', (req, res) => { 
+  //Change Password
+  //==================>
+  app.get('/api/changePassword', isLoggedIn, (req, res) => {
+    let currentPassword = req.body.currentPassword;
+    let newPassword = req.body.newPassword;
+    Users.getUserById(passport.user.id).then((userInfo) => {
+      console.log('USER INFO : ', userInfo)
+      if(userInfo.password) {
+        bcrypt.compare(currentPassword, userInfo.password, (err, response) => {
+          if(response) {
+            newPassword = bcrypt.hashSync(newPassword, null, null);
+            Users.updatePassword(newPassword, passport.user.id).then((updated) => {
+              console.log('UPDATED PASSWORD', updated)
+
+              res.sendStatus(updated);
+            })
+          } 
+        })
+      }
+    })
+
+  })
+  //==================>
+
+  app.post('/api/news', isLoggedIn, (req, res) => { 
     let reqBody = req.body.body;
     request.get({
       url: "https://api.nytimes.com/svc/search/v2/articlesearch.json",
@@ -353,8 +384,8 @@ function isLoggedIn(req, res, next) {
   });
  
 
- //GET ALL EVENTS USER ID
- //========================>
+  //GET ALL EVENTS USER ID
+  //========================>
   app.get('/events/userid', isLoggedIn, (req, res) => {
     Events.getEventsByUserId(passport.user.id)
     .then((data) => {
@@ -363,8 +394,14 @@ function isLoggedIn(req, res, next) {
       res.send(events);
     });
   });
-  
- //========================>
+  //========================>
+
+  //DELETE USER EVENT
+  //========================>
+    app.get('api/deleteEvent', isLoggedIn, (req, res) => {
+      
+    })
+  //========================>
 
 //GOOGLE ROUTES
 //========================>
