@@ -37,16 +37,16 @@ let createNewPlaylist = (Name, UserId) => {
 
 let deletePlaylist = (PlaylistId) => {
   console.log('PLAYLIST ID: ', PlaylistId)
-  knex('PlaylistSongs').where({
+  return knex('PlaylistSongs').where({
     PlaylistId: PlaylistId
   })
   .del().then((result) => {
     console.log('DELETED Songs for PLAYLIST : ', result)
-  });
-  return knex('Playlist').where({
+    return knex('Playlist').where({
       id: PlaylistId
     })
     .del()
+  });
 };
 
 let getPlaylistIdByName = (Name, UserId) => {

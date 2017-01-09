@@ -122,11 +122,13 @@ app.get('/api/myMusic', isLoggedIn, (req, res) => {
     res.send(playlists);
   });
 });
-app.get('/api/newPlaylist', isLoggedIn, (req, res) => {
-  Playlists.getPlaylistIdByName(/*replace with req.playlistName ->*/'MyPlaylist4',passport.user.id)
+
+app.post('/api/newPlaylist', isLoggedIn, (req, res) => {
+  console.log('NEW PLAYLIST REQ.BODY: ', req.body)
+  Playlists.getPlaylistIdByName(req.body.body,passport.user.id)
   .then((playlist) => {
     if(playlist.length < 1) {
-      Playlists.createNewPlaylist(/*replace with req.playlistName ->*/'MyPlaylist4', passport.user.id)
+      Playlists.createNewPlaylist(req.body.body, passport.user.id)
       .then((data) => {
         console.log('Playlist Created', data);
         res.send(data);
@@ -137,14 +139,15 @@ app.get('/api/newPlaylist', isLoggedIn, (req, res) => {
   });
 });
 
-app.get('/api/deletePlaylist', isLoggedIn, (req,res) => {
+app.post('/api/deletePlaylist', isLoggedIn, (req,res) => {
   console.log("passport.user.id", passport.user.id);
-  Playlists.getPlaylistIdByName('MyPlaylist4', passport.user.id)
+  Playlists.getPlaylistIdByName(req.body.playlist, passport.user.id)
   .then((result) => {
     console.log('GET PLAYLIST ID: ', result);
     let playlistId = result[0].id;
     Playlists.deletePlaylist(playlistId).then((response) => {
       console.log('Playlist Deleted', response);
+      res.send('PLAYLIST DELETED')
     })
   })
 });

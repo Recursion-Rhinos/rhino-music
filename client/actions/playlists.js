@@ -11,7 +11,7 @@ export function getPlaylists() {
   }
 }
 
-// export default getPlaylists;
+export default getPlaylists;
 // export function fetchPlaylists() {  
 //   return dispatch => {
 //     return axios.post('/api/myMusic').then((res) => {
