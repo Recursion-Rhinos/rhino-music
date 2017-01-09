@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import getAllPlaylists  from '../../actions/getPlaylists';
-import { getEvents } from '../../actions/profileEvents';
+import getEvents  from '../../actions/profileEvents';
 
 class Favourites extends Component {
   constructor(props) {
@@ -12,6 +12,8 @@ class Favourites extends Component {
 
   componentWillMount() {
     this.props.getAllPlaylists();
+    console.log("JERRY IS THE MASTER ", this.props)
+    this.props.getEvents();
   //   // console.log("This would be a good time to call action creator to fetch and render playlists");
   //   console.log("componentWillMount this.props =>", Promise.resolve(this.playlists))
   //   this.props.getAllPlaylists()

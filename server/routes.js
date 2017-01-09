@@ -357,9 +357,21 @@ function isLoggedIn(req, res, next) {
   app.get('/events/userid', isLoggedIn, (req, res) => {
     Events.getEventsByUserId(passport.user.id)
     .then((data) => {
-      events = data;
-      console.log('All EVENTS BY USER: ',events);
-      res.send(events);
+     let events = data;
+      console.log('All EVENTS BY USER: ',data);
+    let eventsArray =[];
+    events.forEach((event) => {
+      eventsArray.push(Events.getEventsById(event.EventsId));
+      })
+      Promise.all(eventsArray).then((array) => {
+        sendEvents(array);
+      })
+
+      function sendEvents(arr) {
+        console.log("EVENTSARRAY", arr);
+        res.send(arr);
+      }
+
     });
   });
   
