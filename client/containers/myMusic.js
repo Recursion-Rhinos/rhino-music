@@ -52,9 +52,12 @@ class UserPlaylists extends Component {
 
   renderSongs(songs) {
     console.log('SONGS!!!!!!!!!', songs)
-    if(songs !== null) {
+    if(Array.isArray(songs)) {
       return songs.map((songData) => {
-        songData.song = JSON.parse(songData.song);
+        console.log('SONG-DATA: ', songData)
+        if(typeof songData.song === 'string'){
+          songData.song = JSON.parse(songData.song);
+        }
         console.log('SONG TO RENDER: ', songData)
         return (
           <tr key={songData.id}>
@@ -90,18 +93,17 @@ class UserPlaylists extends Component {
     console.log('USER PLAYLIST PROPS: ', this.props)
     return (
     <div /*style={{display: 'inline-block'}}*/>
-
+      <span>
         <Table>
         <TableBody>
-          <TableHeaderColumn></TableHeaderColumn>
+          <TableHeaderColumn><input id='newPlaylist' type='text' placeholder='Create New Playlist' maxLength='15'/>
+            <button onClick={() => {this.newPlaylist(document.getElementById('newPlaylist').value); document.getElementById('newPlaylist').value = '';}}>+</button></TableHeaderColumn>
           <TableHeaderColumn>Playlists</TableHeaderColumn>
-          <TableHeaderColumn>
-            <input id='newPlaylist' type='text' placeholder='Create New Playlist' maxLength='15'/>
-            <button onClick={() => {this.newPlaylist(document.getElementById('newPlaylist').value); document.getElementById('newPlaylist').value = '';}}>+</button>
-          </TableHeaderColumn>
           {this.renderList(this.props.playlists)}
         </TableBody>
         </Table>
+      </span>
+      <span>
         <table>
         <tr>
           <th>Songs</th>
@@ -109,6 +111,7 @@ class UserPlaylists extends Component {
         </tr>
           {this.renderSongs(this.props.playlistSongs)}
         </table>
+      </span>
     </div>
         // <table>
         // {this.renderSongs(this.state)}
