@@ -7,24 +7,41 @@ import { getEvents } from '../../actions/profileEvents';
 class Favourites extends Component {
   constructor(props) {
     super(props)
+    this.playlists =[];
+    console.log("PLAYLISSSTTTTTT ARRAY", this.playlists)
+    this.componentWillMount = this.componentWillMount.bind(this);
   }
 
   componentWillMount() {
-    console.log("This would be a good time to call action creator to fetch and render playlists");
+    // console.log("This would be a good time to call action creator to fetch and render playlists");
     console.log("componentWillMount this.props =>", this.props.getPlaylists())
+    this.props.getPlaylists().
+    then((data) => {
+      console.log("DATA IN PROPMISEEEEEEE DUDE", data)
+      if(data) {
+        this.playists = data.payload.data; 
+        console.log("PLAYLISTS IN PROMISE", this.playists)
+      }
+    });
   }
 
+   renderPlaylist(playlists) {
+    
+   }
+
+
   render () {
-    let returnedData;
-    let playlists = this.props.getPlaylists()
-    .then((data) => {
-      console.log("PROMISE WITH RETURNED DATA", data);
-      returnedData = data;
-    })
-    .catch((error) => {
-      console.log("ERROR", error);
-    })
-    console.log("ALL PLAYLIST IN PROFILE", playlists)
+    console.log("SVETDaVeT Playlist", this.playlists)
+    // let returnedData;
+    // let playlists = this.props.getPlaylists()
+    // .then((data) => {
+    //   console.log("PROMISE WITH RETURNED DATA", data);
+    //   returnedData = data;
+    // })
+    // .catch((error) => {
+    //   console.log("ERROR", error);
+    // })
+    // console.log("ALL PLAYLIST IN PROFILE", playlists)
     
     
     return (
