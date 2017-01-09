@@ -2,14 +2,27 @@ import React, { Component } from 'react'
 import { connect } from 'react-redux';
 import { playVideo } from '../actions/videos';
 import { bindActionCreators } from 'redux';
+import axios from 'axios';
+import { videoPlaylist } from '../actions/videoPlaylist';
+import  getDropDown  from '../actions/playlistDropdown';
+
 
 class VideoPlayer extends Component {
   constructor(props) {
     super(props);
-  
+    this.playlist= [];
+     // this.getDropdown = this.getDropdown.bind(this);
+    this.componentWillMount = this.componentWillMount.bind(this);
   }
 
+componentWillMount() {
+    this.props.getDropDown();
+  }
+   
+
 render () { 
+
+  console.log("THIS IS THE DROP DOWN THE PLAYLISTS", this.props.dropdown)
 let vidList = [];
 let firstVid;
 let videoIds;
@@ -33,7 +46,7 @@ if(this.props.videos.length > 0) {
   console.log("THIS IS THE VIDEO LIST OF IDs", videoIds);
   
 }
-
+        
   return (
       <div className="video-detail col-md-5">
         <div className="embed-responsive embed-responsive-16by9">
@@ -41,7 +54,7 @@ if(this.props.videos.length > 0) {
         </div>
         <div className="details">
           <div></div>
-          <div></div>
+          
         </div>
       </div>
     )
@@ -49,8 +62,11 @@ if(this.props.videos.length > 0) {
 }
 
 function mapStateToProps(state) {
-  return {playVideo: state.playVideo, videos: state.videos}; 
+  return {playVideo: state.playVideo, videos: state.videos, dropdown: state.dropdown}; 
 }
 
+function mapDispatchToProps(dispatch) {
+  return bindActionCreators({ getDropDown }, dispatch);
+}
 
-export default connect(mapStateToProps,null)(VideoPlayer)
+export default connect(mapStateToProps,mapDispatchToProps)(VideoPlayer)

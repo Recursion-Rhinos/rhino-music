@@ -3,10 +3,8 @@ import { VIDEO_PLAYLIST } from '../constants/ActionTypes';
 
 export function videoPlaylist(term) {
 
-	var videoPlaylist = axios.get('/api/myMusic')
-	.then((stuff) => {console.log("STUFF", stuff)})
-
-	// var videos = axios.post('/api/videos', {body: term});
+	// var videoPlaylist = axios.get('/api/getPlaylistSongs')
+	// .then((stuff) => {console.log("STUFF", stuff)})
 
 	return {
 		type: "VIDEO_PLAYLIST",
