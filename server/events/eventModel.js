@@ -18,10 +18,13 @@ let saveEvent = (event) => {
 let addEventToEventsUsers = (EventsId, UserId) => {
 	console.log("EVENTS ID", EventsId, "AND THE USER ID", UserId)
   return knex('EventsUsers').insert({
+  	
     EventsId: EventsId,
     UserId: UserId
   }); 
 };
+
+
 
 let getEventsByUserId = (UserId) => {
 return knex('EventsUsers').where({
