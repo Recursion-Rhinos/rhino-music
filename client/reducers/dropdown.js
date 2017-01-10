@@ -4,7 +4,8 @@ export default function(state = [], action) {
 
   switch (action.type) {
   case "PLAYLIST_DROPDOWN":
- 	return [action.payload.data,...state];
+  console.log(" THIS IS THE ACTION PAYLOAD DATA", action.payload.data)
+ 	return action.payload.data
   }
   return state;
 }

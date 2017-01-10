@@ -7,6 +7,7 @@ const apiKey = process.env.API_KEY_NYT;
 const Playlists = require('./playlist/playlistModel.js');
 const Songs = require('./songs/songModel.js');
 const Events = require('./events/eventModel.js');
+const async = require('async')
 // router.get('/api/main', (req,res) => {
 // 	res.sendFile(path.join(__dirname, '/../client/comingSoon.html'))
 // });
@@ -116,12 +117,13 @@ app.post('/api/videos', (req, res) => {
 
 app.post('/api/videofy', (req, res) => {
 
-    let input = req.body.body
+  let query = req.body.name.artist + " " + req.body.name.album;
+    console.log("QUERY QUERY QUERY FROM VIDEO PLAYLIST", query);
 
     request({
         url: "https://www.googleapis.com/youtube/v3/search",
         qs: {
-            q: input,
+            q: query,
             type: "video",
             videoEmbeddable: "true",
             videoSyndicated: "true",
@@ -133,8 +135,8 @@ app.post('/api/videofy', (req, res) => {
         function(error, response, body) {
          
             if (!error && response.statusCode === 200) {
-
-                res.send(body);
+              console.log("BODY", body)
+                res.json(body);
             } else {
                 res.json(error);
           }
@@ -181,6 +183,9 @@ app.post('/api/deletePlaylist', isLoggedIn, (req,res) => {
 });
 
 app.post('/api/getPlaylistSongs', isLoggedIn, (req, res) => {
+
+  console.log(" NAME FOR PLAYLIST", req.body.body)
+
   Playlists.getPlaylistIdByName(req.body.body, passport.user.id)
   .then((result) => {
     let playlistId = result[0].id;
@@ -196,6 +201,7 @@ app.post('/api/getPlaylistSongs', isLoggedIn, (req, res) => {
       })
       function sendSongs(arr) {
           console.log('songArr else: ', arr);
+
           res.send(arr);
       }      
     })

@@ -11,14 +11,17 @@ class VideoPlayer extends Component {
   constructor(props) {
     super(props);
     this.playlist= [];
-     // this.getDropdown = this.getDropdown.bind(this);
+     let vidList = [];
     this.componentWillMount = this.componentWillMount.bind(this);
   }
 
 componentWillMount() {
     this.props.getDropDown();
   }
-   
+  
+componentDidReceiveProps(nextProps) {
+  this.forceUpdate();
+}
 
 render () { 
 
@@ -31,7 +34,7 @@ if(this.props.playVideo) {
   autoplay = this.props.playVideo+"?autoplay=1";
 }
 
-console.log("PLAYAAAAAA", this.props.videos[0]);
+console.log("PLAYAAAAAA", this.props.videofyVideos);
 
 if(this.props.videos.length > 0) {
   vidList = this.props.videos[0];
@@ -46,6 +49,15 @@ if(this.props.videos.length > 0) {
   console.log("THIS IS THE VIDEO LIST OF IDs", videoIds);
   
 }
+
+if(this.props.videofyVideos) {
+  videoIds = this.props.videofyVideos;
+  console.log("VIDEO LIST", vidList)
+  firstVid = videoIds.shift()
+  console.log("THIS IS THE FIRST VID", firstVid)
+  };
+
+  console.log("THIS IS THE VIDEO LIST OF IDs", videoIds);
         
   return (
       <div className="video-detail col-md-5">
@@ -54,7 +66,10 @@ if(this.props.videos.length > 0) {
         </div>
         <div className="details">
           <div></div>
-          
+        <div><select id={'playlistDropdown'}><option value='default'>Pick a Playlist</option>{this.props.dropdown.map(function(playlist){
+              return(<option value={playlist.Name}>{playlist.Name}</option>)
+            })}></select></div>
+        <div><button onClick={() => {let p = 'playlistDropdown'; this.props.videoPlaylist(document.getElementById(p).value)}}>Videofy</button></div>  
         </div>
       </div>
     )
@@ -62,11 +77,11 @@ if(this.props.videos.length > 0) {
 }
 
 function mapStateToProps(state) {
-  return {playVideo: state.playVideo, videos: state.videos, dropdown: state.dropdown}; 
+  return {playVideo: state.playVideo, videos: state.videos, dropdown: state.dropdown, videofyVideos: state.videoPlaylist}; 
 }
 
 function mapDispatchToProps(dispatch) {
-  return bindActionCreators({ getDropDown }, dispatch);
+  return bindActionCreators({ getDropDown, videoPlaylist }, dispatch);
 }
 
 export default connect(mapStateToProps,mapDispatchToProps)(VideoPlayer)
