@@ -42,6 +42,22 @@ let updatePassword = (password, userId) => {
   });
 };
 
+let updateUsername = (username, userId) => {
+  return knex('Users').where({
+    id: userId
+  }).update({
+    username: username
+  });
+}
+
+let updateEmail = (email, userId) => {
+  return knex('Users').where({
+    id: userId
+  }).update({
+    email: email
+  });
+}
+
 // let retrieveUserId = () => {
 //   return knex('Users').where({
 
@@ -69,5 +85,7 @@ module.exports = {
   getUserByName: getUserByName,
   deleteUser: deleteUser,
   retrieveGraphId: retrieveGraphId,
-  updatePassword: updatePassword
+  updatePassword: updatePassword,
+  updateUsername: updateUsername,
+  updateEmail: updateEmail
 };
