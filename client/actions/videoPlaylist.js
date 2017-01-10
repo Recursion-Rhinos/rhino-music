@@ -13,7 +13,6 @@ console.log("PLAYLIST NAME", playlistName)
         songs.push(arr[0]);
       })
 
-    	// let songArray = 
     	console.log("SONGS", songs)
     	return Promise.all(songs.map((song) => {
     		console.log("SONG", song)
@@ -32,9 +31,3 @@ console.log("PLAYLIST NAME", playlistName)
 		payload: videos
 	};
 }
-
-// let songs = [];
-// 		console.log("SONGS ARRS", songArrs)
-// 		songArrs.forEach((arr) => {
-//         songs.push(arr[0]);
-//       })
