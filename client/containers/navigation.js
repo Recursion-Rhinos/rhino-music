@@ -14,6 +14,7 @@ import { Link } from 'react-router';
 import { hashHistory } from 'react-router';
 import IconButton from 'material-ui/IconButton';
 import ActionHome from 'material-ui/svg-icons/action/home';
+import Dashboard from 'material-ui/svg-icons/action/dashboard';
 
 export const teal900 = '#004D40';
 
@@ -21,6 +22,10 @@ const styles = {
   bar: {
     "background-color": teal900,
     backgroundColor: teal900
+  },
+  largeIcon: {
+    width: 60,
+    height: 60,
   }
 };
 
@@ -48,8 +53,8 @@ class Navigation extends Component {
     <AppBar
      style={styles.bar}
       title="Rhino Music"
-      iconElementLeft={ <IconButton iconStyle={styles.largeIcon} style={styles.large}><ActionHome /></IconButton>}
-      onLeftIconButtonTouchTap = {()=> {hashHistory.push("/")}}
+      iconElementLeft={<IconButton style> <Dashboard /> </IconButton>}
+      onTitleTouchTap = {()=> {hashHistory.push("/")}}
       iconElementRight = {
        <div>
        <Tabs style={styles.bar}>
@@ -57,6 +62,7 @@ class Navigation extends Component {
           <Tab style={styles.bar} label="Events" value={1} containerElement={<Link to="/Events"/>}/>
           <Tab style={styles.bar} label="Videos" containerElement={<Link to="/Youtube"/>}/>
           <Tab style={styles.bar} label="News" containerElement={<Link to="/News"/>}/>
+          <Tab style={styles.bar} label="Profile" containerElement={<Link to="/profile"/>}/>
         </Tabs>
          <SwipeableViews
           style={styles.bar}
