@@ -21,6 +21,7 @@ onUserFormSubmit(event) {
 }
 
 render() {
+  console.log("PROPS in USERSETTING", this.props)
   return (
   	<div>
   	<form>
