@@ -9,6 +9,7 @@ import PlayVideos from './reducer_videos';
 import PlaylistSongs from './playlistSongs';
 import AllEvents from './all_events';
 import GetAllPlaylists from './getallplaylists';
+import UserSettings from './userSettings';
 
 const rootReducer = combineReducers({
   tracks: SearchReducer,
@@ -20,7 +21,8 @@ const rootReducer = combineReducers({
   playlists: PlaylistSearch, 
   playlistSongs: PlaylistSongs,
   allEvents: AllEvents,
-  getAllPlaylists: GetAllPlaylists
+  getAllPlaylists: GetAllPlaylists,
+  userSettings: UserSettings
 });
 
 console.log("tracks", SearchReducer);
