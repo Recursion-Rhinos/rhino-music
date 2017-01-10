@@ -10,7 +10,6 @@ export function changeUser(username) {
   };
 }
 
-
 export function changePassword(password) {
   let newPassword = axios.post('/api/changePassword', {body:password);
   return {
