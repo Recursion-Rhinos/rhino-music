@@ -12,18 +12,26 @@ class UserSettings extends Component {
   constructor(props) {
     super(props);
 
-    this.state = {username: ''};
+    this.state = {
+      username: '',
+      password: '',
+      email: ''
+    };
 
-  this.onInputChange = this.onInputChange.bind(this);
-  this.onUserFormSubmit = this.onUserFormSubmit.bind(this);     
+  this.onUserInputChange = this.onUserInputChange.bind(this);
+  this.onUserFormSubmit = this.onUserFormSubmit.bind(this); 
+  this.onPasswordSubmit = this.onPasswordSubmit.bind(this);    
   }
 
 
 
-onInputChange(event) {
+onUserInputChange(event) {
 console.log('UserSettings Container onInputChange:', event.target.value);
-  this.setState({username: event.target.value});  
-
+  
+  this.setState({
+    username: event.target.value
+    
+   });  
 }
 
 onUserFormSubmit(event) {
@@ -32,6 +40,12 @@ onUserFormSubmit(event) {
   this.props.changeUser(this.state.username);
   console.log("HURAAAAAA USEEERRRRR")
   this.setState({ username: '' });
+}
+
+onPasswordSubmit(event) {
+  event.preventDefault();
+  this.props.changePassword(this.state.password);
+  this.setState({ password: ''}); 
 }
 
 render() {
@@ -45,14 +59,19 @@ render() {
        type="text" className="username" 
        placeholder="Username" 
        value={this.state.username}
-       onChange={this.onInputChange} /><br/>
+       onChange={this.onUserInputChange} /><br/>
        <input type="submit" value="Submit" />
      </div>
      </form>
      <div>
-     <form>
+     <form onSubmit={this.onPasswordSubmit}>
       New Password:<br/>
-       <input type="text" className="password" placeholder="Password"/><br/>
+       <input 
+       type="text" className="password" 
+       placeholder="Password"
+       value={this.state.password}
+       // onChange={this.onInputChange}
+       /><br/>
        <input type="submit" value="Submit" />
      </form>
      </div>
