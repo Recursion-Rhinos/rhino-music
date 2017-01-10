@@ -20,8 +20,10 @@ class UserSettings extends Component {
 
   this.onUserInputChange = this.onUserInputChange.bind(this);
   this.onPasswordInputChange = this.onPasswordInputChange.bind(this);
+  this.onEmailInputChange = this.onEmailInputChange.bind(this);
   this.onUserFormSubmit = this.onUserFormSubmit.bind(this); 
   this.onPasswordSubmit = this.onPasswordSubmit.bind(this);    
+  this.onEmailFormSubmit = this.onEmailFormSubmit.bind(this);
   }
 
 
@@ -40,6 +42,13 @@ console.log('UserSettings Container onPasswordChange:', event.target.value);
    });  
 }
 
+onEmailInputChange(event) {
+console.log('UserSettings Container onEmailChange:', event.target.value);
+  this.setState({
+  email: event.target.value
+   }); 
+}
+
 onUserFormSubmit(event) {
   console.log("+++++++++++++", event.target.value)
   event.preventDefault();
@@ -56,6 +65,15 @@ onPasswordSubmit(event) {
   this.setState({ password: ''}); 
 }
 
+onEmailFormSubmit(event) {
+  console.log("+++++++++++++", event.target.value)
+  event.preventDefault();
+  this.props.changeEmail(this.state.email);
+  console.log("HURAAAAAA NEW EMAIL DUDE")
+  this.setState({ email: '' });
+}
+
+
 render() {
   console.log("PROPS in USERSETTING", this.props)
   return (
@@ -71,8 +89,8 @@ render() {
        <input type="submit" value="Submit" />
      </div>
      </form>
-     <div>
      <form onSubmit={this.onPasswordSubmit}>
+     <div>
       New Password:<br/>
        <input 
        type="text" className="password" 
@@ -81,12 +99,16 @@ render() {
        onChange={this.onPasswordInputChange}
        /><br/>
        <input type="submit" value="Submit" />
+     </div> 
      </form>
-     </div>
      <div>
-     <form>
+     <form onSubmit={this.onEmailFormSubmit}>
       New Email:<br/>
-       <input type="text" className="email" placeholder="Email"/><br/>
+       <input type="text" className="email" 
+       placeholder="Email"
+       value={this.state.email}
+       onChange={this.onEmailInputChange}
+       /><br/>
        <input type="submit" value="Submit"/>
     </form>
      </div>

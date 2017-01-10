@@ -21,7 +21,7 @@ export function changePassword(password) {
 }
 
 export function changeEmail(email) {
-  let newEmail = axios.post('/events/changeEmail', {email:email});
+  let newEmail = axios.post('/api/changeEmail', {email:email});
   return {
     type: "USER_EMAIL",
     payload: newEmail	
