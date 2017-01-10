@@ -406,17 +406,21 @@ console.log("EVENTS HERE INFO", req.body)
   
   //Change Username
   //==================>
-  app.post('api/changeUsername', isLoggedIn, (req,res) => {
+  app.post('/api/changeUsername', isLoggedIn, (req,res) => {
+    console.log('2134324324', req)
     let newUsername = req.body.username;
     let userId = passport.user.id;
     Users.getUserByName(newUsername).then((user) => {
       if(!user) {
         Users.updateUsername(newUsername, userId).then((updated) => {
-          res.sendStatus(updated);
+          if(updated) {
+            res.send('updated');
+          }
         });
+      } else {
+        res.send('Username Taken');
       }
     })
-    res.send('Username Taken');
     });
 
   //==================>
