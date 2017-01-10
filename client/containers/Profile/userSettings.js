@@ -79,13 +79,12 @@ event.preventDefault();
   let username =this.props.changeUser(this.state.username);
   let password = this.props.changePassword(this.state.password);
   let email = this.props.changeEmail(this.state.email)
-if (!username || !password || !email ) {
-  return;
-}
-// TODO: send request to the server
-this.setState({username: '', password: '', email:''});
+  if (!username || !password || !email ) {
+    return;
+  }
+  this.setState({username: '', password: '', email:''});
+  }
 
-}
 render() {
   console.log("PROPS in USERSETTING", this.props)
   return (
