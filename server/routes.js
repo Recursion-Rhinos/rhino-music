@@ -351,22 +351,17 @@ console.log("EVENTS HERE INFO", req.body)
     let currentPassword = req.body.currentPassword;
     let newPassword = req.body.newPassword;
     Users.getUserById(passport.user.id).then((userInfo) => {
-      console.log('USER INFO : ', userInfo)
-      if(userInfo.password) {
-        bcrypt.compare(currentPassword, userInfo.password, (err, response) => {
-          if(response) {
-            newPassword = bcrypt.hashSync(newPassword, null, null);
-            Users.updatePassword(newPassword, passport.user.id).then((updated) => {
-              console.log('UPDATED PASSWORD', updated)
-
-              res.sendStatus(updated);
-            })
-          } 
-        })
+      console.log('USER INFO : ', userInfo);
+      if (userInfo.password) {
+        newPassword = bcrypt.hashSync(newPassword, null, null);
+        Users.updatePassword(newPassword, passport.user.id).then((updated) => {
+          console.log('UPDATED PASSWORD', updated);
+          res.sendStatus(updated);
+        });
       }
-    })
+    });
 
-  })
+  });
   //==================>
 
   app.post('/api/news', isLoggedIn, (req, res) => { 
