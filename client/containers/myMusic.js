@@ -113,20 +113,6 @@ class UserPlaylists extends Component {
         </table>
       </span>
     </div>
-        // <table>
-        // {this.renderSongs(this.state)}
-        // </table>
-      
-       // <Table>
-      // <TableBody>
-       // { console.log("myMusic.js => this.props", this.props)}
-      // <TableRow>
-        // <TableHeaderColumn> Playlists </TableHeaderColumn>
-        // <TableHeaderColumn> Songs </TableHeaderColumn>
-      // </TableRow>
-          // {this.renderList(this.props.playlists)}
-      // </TableBody>
-      // </Table>
     )
   }
 }

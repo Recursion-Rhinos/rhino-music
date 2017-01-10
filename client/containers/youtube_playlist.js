@@ -11,6 +11,7 @@ class YoutubePlaylist extends Component {
 		this.renderList = this.renderList.bind(this);
 	}
 
+
    renderList() {
    	
    	console.log('THIS DA VID PROP. DUDE: ', this.props.videos);
@@ -18,6 +19,7 @@ class YoutubePlaylist extends Component {
    	if(this.props.videos.length > 0) {
    		videosArray = this.props.videos[0];
    	}
+
 
    	console.log('THIS DA VIDEOZZZZZZZ: ', videosArray);
 
@@ -42,7 +44,7 @@ render () {
 }
 
 function mapStateToProps(state) {
-  return {videos: state.videos};  //same as tracks: state.tracks
+  return {videos: state.videos, videofyVideos: state.videoPlaylist};  //same as tracks: state.tracks
 }
 
 function mapDispatchToProps(dispatch) {

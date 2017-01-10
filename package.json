@@ -30,6 +30,7 @@
     "webpack-dev-server": "^1.14.0"
   },
   "dependencies": {
+    "async": "^2.1.4",
     "axios": "^0.15.3",
     "babel-core": "^6.2.1",
     "babel-loader": "^6.2.10",
