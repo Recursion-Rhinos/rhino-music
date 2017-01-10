@@ -3,6 +3,7 @@ import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import getAllPlaylists  from '../../actions/getPlaylists';
 import getEvents  from '../../actions/profileEvents';
+import removeEvent from '../../actions/removeEvent';
 
 class Favourites extends Component {
   constructor(props) {
@@ -18,6 +19,10 @@ class Favourites extends Component {
     // this.getUserEvents();
     this.props.getEvents();
     console.log("getEvents return a promise: => ", this.props.allEvents)
+}
+
+componentDidReceiveProps(nextProps) {
+  this.forceUpdate();
 }
  
   renderPlaylists(playlists) {
@@ -49,7 +54,8 @@ class Favourites extends Component {
       return (
         <tr key={el + (idx + Math.random())}>
           <td>{el.event.name}</td> 
-          <td>{el.event.location[0]}</td>    
+          <td>{el.event.location[0]}</td>
+          <td><button onClick={() => {this.props.removeEvent(el.id); this.props.getEvents()}}>Remove</button></td>   
         </tr>
       )  
     });
@@ -93,6 +99,6 @@ function mapStateToProps(state) {
 // }
 
 // export default connect(mapStateToProps, mapDispatchToProps)(Favourites);
-export default connect(mapStateToProps, { getAllPlaylists, getEvents })(Favourites);
+export default connect(mapStateToProps, { getAllPlaylists, getEvents, removeEvent })(Favourites);
 
 
