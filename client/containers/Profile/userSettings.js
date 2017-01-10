@@ -19,6 +19,7 @@ class UserSettings extends Component {
     };
 
   this.onUserInputChange = this.onUserInputChange.bind(this);
+  this.onPasswordInputChange = this.onPasswordInputChange.bind(this);
   this.onUserFormSubmit = this.onUserFormSubmit.bind(this); 
   this.onPasswordSubmit = this.onPasswordSubmit.bind(this);    
   }
@@ -27,10 +28,15 @@ class UserSettings extends Component {
 
 onUserInputChange(event) {
 console.log('UserSettings Container onInputChange:', event.target.value);
-  
   this.setState({
     username: event.target.value
-    
+   });  
+}
+
+onPasswordInputChange(event) {
+console.log('UserSettings Container onPasswordChange:', event.target.value);
+  this.setState({
+    password: event.target.value
    });  
 }
 
@@ -44,7 +50,9 @@ onUserFormSubmit(event) {
 
 onPasswordSubmit(event) {
   event.preventDefault();
+  console.log("+++++++++++++", event.target.value)
   this.props.changePassword(this.state.password);
+    console.log("HURAAAAAA PASSSWOOOORDDDDDDD")
   this.setState({ password: ''}); 
 }
 
@@ -70,7 +78,7 @@ render() {
        type="text" className="password" 
        placeholder="Password"
        value={this.state.password}
-       // onChange={this.onInputChange}
+       onChange={this.onPasswordInputChange}
        /><br/>
        <input type="submit" value="Submit" />
      </form>
