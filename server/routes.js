@@ -399,8 +399,8 @@ console.log("EVENTS HERE INFO", req.body)
   app.post('/api/changeEmail', isLoggedIn, (req, res) => {
     let newEmail = req.body.email;
     Users.updateEmail(newEmail, passport.user.id).then((updated) => {
-      res.sendStatus(updated);
-    })
+      res.send("updated");
+    });
   });
   //==================>
   
