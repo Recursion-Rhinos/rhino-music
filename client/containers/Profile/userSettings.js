@@ -5,7 +5,7 @@ import { changeUser  } from '../../actions/userSettings';
 import { changePassword } from '../../actions/userSettings';
 import { changeEmail } from '../../actions/userSettings';
 import TextField from 'material-ui/TextField';
-
+import FlatButton from 'material-ui/FlatButton';
 
 
 class UserSettings extends Component {
@@ -94,22 +94,22 @@ render() {
         floatingLabelText="Username" 
         value={this.state.username}
         onChange={this.onUserInputChange} 
-       /> 
-
+       /> <br />
+       <br />
       <TextField 
        hintText="Hint Text" 
        floatingLabelText="Password" 
        value={this.state.password}
        onChange={this.onPasswordInputChange}
-       />
-
+       /> <br />
+       <br /> 
       <TextField 
        hintText="Hint Text" 
        floatingLabelText="Email" 
        value={this.state.email}
        onChange={this.onEmailInputChange}
        />
-       <input type="submit" value="Submit"/>
+      <FlatButton label="Submit" primary={true} />
     </form>
    )
  }
