@@ -18,7 +18,8 @@ export default class Home extends Component {
         <Navigation />
         <MusicPlayer />
         <SearchBar />
-        <SearchResults/>	 	 	 	 	
+        <SearchResults/>
+        <NYTimes/>	 	 	 	 	
       </div>
     );
   }

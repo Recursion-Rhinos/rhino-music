@@ -45,7 +45,7 @@ class Navigation extends Component {
 
  render() {
  	console.log("NAVIGATION2", this.props)
-  console.log("Container", nyTimesData)
+  console.log("Container")
   // let profile = <a href="/profile"></a>
    return (
 
