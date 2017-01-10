@@ -303,6 +303,15 @@ console.log("EVENTS HERE INFO", req.body)
   })
 });
 
+app.post('/api/removeUserEvent', isLoggedIn, (req,res) => {
+  let eventId = req.body.eventId;
+  let userId = passport.user.id;
+  Events.removeUserEvent(eventId, userId).then((removed) => {
+    console.log('REMOVED EVENTS: ', removed);
+    res.send('removed');
+  })
+})
+
 // })
 //var match = false
 //if name passed in matches event looped on then you set match to that event object

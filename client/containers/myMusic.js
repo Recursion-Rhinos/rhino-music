@@ -94,8 +94,8 @@ class UserPlaylists extends Component {
     <div style={{display: 'inline-block'}}>
       <span>
         <Table>
-        <TableBody>
-          <TableHeaderColumn><input id='newPlaylist' type='text' placeholder='Create New Playlist' maxLength='15'/>
+        <TableBody displayRowCheckbox={false}>
+          <TableHeaderColumn adjustForCheckbox={false}><input id='newPlaylist' type='text' placeholder='Create New Playlist' maxLength='15'/>
             <button onClick={() => {this.newPlaylist(document.getElementById('newPlaylist').value); document.getElementById('newPlaylist').value = '';}}>+</button></TableHeaderColumn>
           <TableHeaderColumn>Playlists</TableHeaderColumn>
           {this.renderList(this.props.playlists)}
