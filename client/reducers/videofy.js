@@ -10,7 +10,7 @@ export default function(state = [], action) {
 	action.payload.forEach((objects) => {
 
 		objects.items.forEach((object) => {
-			songIds.push(object);
+			songIds.push(object.id.videoId);
 		})
 	})
 
