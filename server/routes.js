@@ -514,12 +514,12 @@ app.post('/api/removeUserEvent', isLoggedIn, (req,res) => {
 //========================>
 
   app.get('/auth/facebook', passport.authenticate('facebook-login', { scope: 'email' }, {
-    successRedirect: '/search/#_=_',
+    successRedirect: '/search/',
     failureRedirect: '/login'
   }));
 
   app.get('/auth/facebook/callback', passport.authenticate('facebook-login', {
-    successRedirect: '/search',
+    successRedirect: '/#/home',
     failureRedirect: '/login'
   }));
 

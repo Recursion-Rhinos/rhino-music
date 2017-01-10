@@ -78,7 +78,7 @@ render() {
   console.log("PROPS in USERSETTING", this.props)
   return (
   	<div>
-  	<form onSubmit={this.onUserFormSubmit}>
+  	<form className = 'userSetting' onSubmit={this.onUserFormSubmit}>
     <div>
       New Username:<br/>
        <input 
