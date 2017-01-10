@@ -12,35 +12,57 @@ class UserSettings extends Component {
   constructor(props) {
     super(props);
 
-  // this.onUserFormSubmit = this.onUserFormSubmit.bind(this);     
+    this.state = {username: ''};
+
+  this.onInputChange = this.onInputChange.bind(this);
+  this.onUserFormSubmit = this.onUserFormSubmit.bind(this);     
   }
 
+
+
+onInputChange(event) {
+console.log('UserSettings Container onInputChange:', event.target.value);
+  this.setState({username: event.target.value});  
+
+}
+
 onUserFormSubmit(event) {
+  console.log("+++++++++++++", event.target.value)
   event.preventDefault();
-  
+  this.props.changeUser(this.state.username);
+  console.log("HURAAAAAA USEEERRRRR")
+  this.setState({ username: '' });
 }
 
 render() {
   console.log("PROPS in USERSETTING", this.props)
   return (
   	<div>
-  	<form>
+  	<form onSubmit={this.onUserFormSubmit}>
     <div>
       New Username:<br/>
-       <input type="text" className="username" placeholder="Username"/><br/>
+       <input 
+       type="text" className="username" 
+       placeholder="Username" 
+       value={this.state.username}
+       onChange={this.onInputChange} /><br/>
        <input type="submit" value="Submit" />
      </div>
+     </form>
      <div>
+     <form>
       New Password:<br/>
        <input type="text" className="password" placeholder="Password"/><br/>
        <input type="submit" value="Submit" />
+     </form>
      </div>
      <div>
+     <form>
       New Email:<br/>
        <input type="text" className="email" placeholder="Email"/><br/>
        <input type="submit" value="Submit"/>
+    </form>
      </div>
-     </form>
      </div>
    )
  }
