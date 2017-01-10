@@ -320,22 +320,31 @@ module.exports = function(app, passport) {
   //Change Email
   //==================>
   app.post('/api/changeEmail', isLoggedIn, (req, res) => {
+    if(req.body.email === '') {
+      res.send("Nothing is updated");
+    } 
+    else {
     let newEmail = req.body.email;
     Users.updateEmail(newEmail, passport.user.id).then((updated) => {
       res.send("updated");
     });
+   }
   });
   //==================>
   
   //Change Username
   //==================>
   app.post('/api/changeUsername', isLoggedIn, (req,res) => {
-    console.log('2134324324', req)
+    console.log('2134324324', req);
+    if (req.body.username === '') {
+      res.send("Nothing is updated");
+    }
+    else { 
     let newUsername = req.body.username;
     let userId = passport.user.id;
     Users.getUserByName(newUsername).then((user) => {
       if(!user) {
-        Users.updateUsername(newUsername, userId).then((updated) => {
+        Users.updateUsername(newUsername, userId).then((updated) => { 
           if(updated) {
             res.send('updated');
           }
@@ -344,12 +353,18 @@ module.exports = function(app, passport) {
         res.send('Username Taken');
       }
     })
-  });
+  }
+});
+
   //==================>
 
   //Change Password
   //==================>
     app.post('/api/changePassword', isLoggedIn, (req, res) => {
+      if(req.body.newPassword === '') {
+        res.send("Nothing is updated");
+    }
+    else {
     let newPassword = req.body.newPassword;
     Users.getUserById(passport.user.id).then((userInfo) => {
       console.log('USER INFO : ', userInfo)
@@ -361,6 +376,7 @@ module.exports = function(app, passport) {
         });
       }
     });
+  }
   });
   //==================>
 
@@ -425,12 +441,12 @@ module.exports = function(app, passport) {
   //========================>
 
   app.get('/auth/facebook', passport.authenticate('facebook-login', { scope: 'email' }, {
-    successRedirect: '/search/#_=_',
+    successRedirect: '/search/',
     failureRedirect: '/login'
   }));
 
   app.get('/auth/facebook/callback', passport.authenticate('facebook-login', {
-    successRedirect: '/search',
+    successRedirect: '/#/home',
     failureRedirect: '/login'
   }));
   //========================>

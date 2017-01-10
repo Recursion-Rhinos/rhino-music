@@ -21,9 +21,10 @@ class UserSettings extends Component {
   this.onUserInputChange = this.onUserInputChange.bind(this);
   this.onPasswordInputChange = this.onPasswordInputChange.bind(this);
   this.onEmailInputChange = this.onEmailInputChange.bind(this);
-  this.onUserFormSubmit = this.onUserFormSubmit.bind(this); 
-  this.onPasswordSubmit = this.onPasswordSubmit.bind(this);    
-  this.onEmailFormSubmit = this.onEmailFormSubmit.bind(this);
+  // this.onUserFormSubmit = this.onUserFormSubmit.bind(this); 
+  // this.onPasswordSubmit = this.onPasswordSubmit.bind(this);    
+  // this.onEmailFormSubmit = this.onEmailFormSubmit.bind(this);
+  this.handleSubmit = this.handleSubmit.bind(this);
   }
 
 
@@ -49,70 +50,67 @@ console.log('UserSettings Container onEmailChange:', event.target.value);
    }); 
 }
 
-onUserFormSubmit(event) {
-  console.log("+++++++++++++", event.target.value)
-  event.preventDefault();
-  this.props.changeUser(this.state.username);
-  console.log("HURAAAAAA USEEERRRRR LETS HAVE SOME FUN")
-  this.setState({ username: '' });
-}
+// onUserFormSubmit(event) {
+//   console.log("+++++++++++++", event.target.value)
+//   event.preventDefault();
+//   this.props.changeUser(this.state.username);
+//   console.log("HURAAAAAA USEEERRRRR LETS HAVE SOME FUN")
+//   this.setState({ username: '' });
+// }
 
-onPasswordSubmit(event) {
-  event.preventDefault();
-  console.log("+++++++++++++", event.target.value)
-  this.props.changePassword(this.state.password);
-    console.log("HURAAAAAA NEW PASSSWOOOORDDDDDDD")
-  this.setState({ password: ''}); 
-}
+// onPasswordSubmit(event) {
+//   event.preventDefault();
+//   console.log("+++++++++++++", event.target.value)
+//   this.props.changePassword(this.state.password);
+//     console.log("HURAAAAAA NEW PASSSWOOOORDDDDDDD")
+//   this.setState({ password: ''}); 
+// }
 
-onEmailFormSubmit(event) {
-  console.log("+++++++++++++", event.target.value)
-  event.preventDefault();
-  this.props.changeEmail(this.state.email);
-  console.log("HURAAAAAA NEW EMAIL DUDE")
-  this.setState({ email: '' });
-}
+// onEmailFormSubmit(event) {
+//   console.log("+++++++++++++", event.target.value)
+//   event.preventDefault();
+//   this.props.changeEmail(this.state.email);
+//   console.log("HURAAAAAA NEW EMAIL DUDE")
+//   this.setState({ email: '' });
+// }
 
+handleSubmit(event) {
+event.preventDefault();
+  let username =this.props.changeUser(this.state.username);
+  let password = this.props.changePassword(this.state.password);
+  let email = this.props.changeEmail(this.state.email)
+  if (!username || !password || !email ) {
+    return;
+  }
+  this.setState({username: '', password: '', email:''});
+  }
 
 render() {
   console.log("PROPS in USERSETTING", this.props)
   return (
-  	<div>
-  	<form onSubmit={this.onUserFormSubmit}>
-    <div>
-      New Username:<br/>
+  	<form onSubmit={this.handleSubmit}>
        <input 
        type="text" className="username" 
        placeholder="Username" 
        value={this.state.username}
-       onChange={this.onUserInputChange} /><br/>
-       <input type="submit" value="Submit" />
-     </div>
-     </form>
-     <form onSubmit={this.onPasswordSubmit}>
-     <div>
-      New Password:<br/>
+       onChange={this.onUserInputChange} 
+       /> 
+
        <input 
        type="text" className="password" 
        placeholder="Password"
        value={this.state.password}
        onChange={this.onPasswordInputChange}
-       /><br/>
-       <input type="submit" value="Submit" />
-     </div> 
-     </form>
-     <div>
-     <form onSubmit={this.onEmailFormSubmit}>
-      New Email:<br/>
-       <input type="text" className="email" 
+       />
+
+       <input 
+       type="text" className="email" 
        placeholder="Email"
        value={this.state.email}
        onChange={this.onEmailInputChange}
-       /><br/>
+       />
        <input type="submit" value="Submit"/>
     </form>
-     </div>
-     </div>
    )
  }
 }
