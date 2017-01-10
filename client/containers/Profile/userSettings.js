@@ -4,7 +4,7 @@ import { bindActionCreators } from 'redux';
 import { changeUser  } from '../../actions/userSettings';
 import { changePassword } from '../../actions/userSettings';
 import { changeEmail } from '../../actions/userSettings';
-
+import TextField from 'material-ui/TextField';
 
 
 
@@ -89,23 +89,23 @@ render() {
   console.log("PROPS in USERSETTING", this.props)
   return (
   	<form onSubmit={this.handleSubmit}>
-       <input 
-       type="text" className="username" 
-       placeholder="Username" 
-       value={this.state.username}
-       onChange={this.onUserInputChange} 
+       <TextField 
+        hintText="Hint Text" 
+        floatingLabelText="Username" 
+        value={this.state.username}
+        onChange={this.onUserInputChange} 
        /> 
 
-       <input 
-       type="text" className="password" 
-       placeholder="Password"
+      <TextField 
+       hintText="Hint Text" 
+       floatingLabelText="Password" 
        value={this.state.password}
        onChange={this.onPasswordInputChange}
        />
 
-       <input 
-       type="text" className="email" 
-       placeholder="Email"
+      <TextField 
+       hintText="Hint Text" 
+       floatingLabelText="Email" 
        value={this.state.email}
        onChange={this.onEmailInputChange}
        />
