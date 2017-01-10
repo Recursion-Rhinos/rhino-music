@@ -11,7 +11,8 @@ import {Link} from 'react-router';
 
 const styles = {
   selectBox: { width: '50%' },
-  playlist: { width: '100%'}
+  playlist: { width: '100%'},
+  display: {display: 'block'}
 
 }
 console.log("GET PLAYLIST SONGS", getPlaylistSongs)
@@ -73,26 +74,24 @@ class UserPlaylists extends Component {
 
   renderList(playlists) {
     console.log('PLATLISTS!!!!!!!!!!!!!: ', playlists)
-    return playlists.map((playlist) => {
-      return (
-        <TableRow key={playlist.id}>
-          <TableRowColumn>
-            <button onClick={()=> { this.deletePlaylist(playlist.Name) }}>Delete</button>
-            <button onClick={() => this.renderSongs(this.props.getPlaylistSongs(playlist.Name))}>{playlist.Name}</button>  
-          </TableRowColumn>
-        </TableRow>
-        // <TableRow key={playlist.id} onClick={() => this.props.getPlaylistSongs(playlist.Name)}>
-          // <TableRowColumn>{playlist.Name}</TableRowColumn>
-          // <TableRowColumn>SONG INFO</TableRowColumn>
-        // </TableRow>
-      )
-    }) 
+    if(Array.isArray(playlists)){
+      return playlists.map((playlist) => {
+        return (
+          <TableRow key={playlist.id}>
+            <TableRowColumn>
+              <button onClick={()=> { this.deletePlaylist(playlist.Name) }}>Delete</button>
+              <button onClick={() => this.renderSongs(this.props.getPlaylistSongs(playlist.Name))}>{playlist.Name}</button>  
+            </TableRowColumn>
+          </TableRow>
+        )
+      }) 
+    }
   }
 
   render() {
     console.log('USER PLAYLIST PROPS: ', this.props)
     return (
-    <div /*style={{display: 'inline-block'}}*/>
+    <div style={{display: 'inline-block'}}>
       <span>
         <Table>
         <TableBody>
