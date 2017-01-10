@@ -53,7 +53,7 @@ onUserFormSubmit(event) {
   console.log("+++++++++++++", event.target.value)
   event.preventDefault();
   this.props.changeUser(this.state.username);
-  console.log("HURAAAAAA USEEERRRRR")
+  console.log("HURAAAAAA USEEERRRRR LETS HAVE SOME FUN")
   this.setState({ username: '' });
 }
 
@@ -61,7 +61,7 @@ onPasswordSubmit(event) {
   event.preventDefault();
   console.log("+++++++++++++", event.target.value)
   this.props.changePassword(this.state.password);
-    console.log("HURAAAAAA PASSSWOOOORDDDDDDD")
+    console.log("HURAAAAAA NEW PASSSWOOOORDDDDDDD")
   this.setState({ password: ''}); 
 }
 
