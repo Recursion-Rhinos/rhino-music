@@ -391,25 +391,52 @@ console.log("EVENTS HERE INFO", req.body)
   //==================>
   app.get('/api/getUserInfo', isLoggedIn ,(req,res) => {
     res.send(passport.user);
-  })
+  });
+  //==================>
+
+  //Change Email
+  //==================>
+  app.post('/api/changeEmail', isLoggedIn, (req, res) => {
+    let newEmail = req.body.email;
+    Users.updateEmail(newEmail, passport.user.id).then((updated) => {
+      res.sendStatus(updated);
+    })
+  });
+  //==================>
+  
+  //Change Username
+  //==================>
+  app.post('api/changeUsername', isLoggedIn, (req,res) => {
+    let newUsername = req.body.username;
+    let userId = passport.user.id;
+    Users.getUserByName(newUsername).then((user) => {
+      if(!user) {
+        Users.updateUsername(newUsername, userId).then((updated) => {
+          res.sendStatus(updated);
+        });
+      }
+    }
+    res.send('Username Taken');
+    })
+  });
   //==================>
 
   //Change Password
   //==================>
-  app.get('/api/changePassword', isLoggedIn, (req, res) => {
-    let currentPassword = req.body.currentPassword;
+    app.get('/api/changePassword', isLoggedIn, (req, res) => {
     let newPassword = req.body.newPassword;
     Users.getUserById(passport.user.id).then((userInfo) => {
-      console.log('USER INFO : ', userInfo);
-      if (userInfo.password) {
-        newPassword = bcrypt.hashSync(newPassword, null, null);
-        Users.updatePassword(newPassword, passport.user.id).then((updated) => {
-          console.log('UPDATED PASSWORD', updated);
-          res.sendStatus(updated);
-        });
+      console.log('USER INFO : ', userInfo)
+      if(userInfo.password) {
+        if(response) {
+          newPassword = bcrypt.hashSync(newPassword, null, null);
+          Users.updatePassword(newPassword, passport.user.id).then((updated) => {
+            console.log('UPDATED PASSWORD', updated)
+            res.sendStatus(updated);
+          });
+        } 
       }
     });
-
   });
   //==================>
 
@@ -446,7 +473,7 @@ console.log("EVENTS HERE INFO", req.body)
       sendEvents = (arr) => {
         console.log("EVENTSARRAY", arr);
         res.send(arr);
-      };
+      }
     });
   });
   //========================>
