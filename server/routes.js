@@ -415,10 +415,10 @@ console.log("EVENTS HERE INFO", req.body)
           res.sendStatus(updated);
         });
       }
-    }
-    res.send('Username Taken');
     })
-  });
+    res.send('Username Taken');
+    });
+
   //==================>
 
   //Change Password
@@ -448,10 +448,10 @@ console.log("EVENTS HERE INFO", req.body)
         'api-key': "af60270881bb4977ad34da8640335d97",
         'q': reqBody
       }
-    }, (err, response, body) => {
+    }), (err, response, body) => {
       body = JSON.parse(body);
       res.json(body);
-    });
+    };
   });
  
 
