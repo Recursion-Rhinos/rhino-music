@@ -53,7 +53,7 @@ class Navigation extends Component {
     <AppBar
      style={styles.bar}
       title="Rhino Music"
-      iconElementLeft={<IconButton style> <Dashboard /> </IconButton>}
+      iconElementLeft={<IconButton> <Dashboard /> </IconButton>}
       onTitleTouchTap = {()=> {hashHistory.push("/")}}
       iconElementRight = {
        <div>
@@ -64,19 +64,7 @@ class Navigation extends Component {
           <Tab style={styles.bar} label="News" containerElement={<Link to="/News"/>}/>
           <Tab style={styles.bar} label="Profile" containerElement={<Link to="/profile"/>}/>
         </Tabs>
-         <SwipeableViews
-          style={styles.bar}
-          index={this.state.slideIndex}
-          onChangeIndex={this.handleChange}
-        >
-        <div></div>
-       // <button onClick={() => console.log("EVENTS EVENTS EVENTS")}>Events</button>  
-       // <button onClick={() => console.log("VIDEOS VIDEOS VIDEOS")}>Videos</button>
-       // <button onClick={() => console.log("NEWS NEWS NEWS")}>News</button>
-
-       // <button>Profile</button>
-       // <button>Logout</button>
-       </SwipeableViews>
+        
        </div>
      }
     />
