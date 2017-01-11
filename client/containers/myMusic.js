@@ -8,6 +8,8 @@ import axios from 'axios';
 import getPlaylists from '../actions/playlists';
 import { playSong } from '../actions/songs';
 import {Link} from 'react-router';
+import Flexbox from 'flexbox-react';
+
 
 const styles = {
   selectBox: { width: '50%' },
@@ -32,54 +34,46 @@ class UserPlaylists extends Component {
   }
 
   deletePlaylist(playlistName) {
-    console.log('DELETING PLAYLIST')
     axios.post('/api/deletePlaylist', {playlist: playlistName}).then((data) => {
-      // console.log('GETTING PLAYLISTS AFTER DELETE')
       this.props.getPlaylists();
     });
   }
 
   newPlaylist(playlistName){
-  console.log('MAKING NEW PLAYLIST')
-  //playListName = result of remove spaces before and after name of playlist
-  //
-  if(playlistName !== '') {
-    axios.post('/api/newPlaylist', {body: playlistName}).then((data) => {
-      // console.log('GETTING NEW PLAYLISTS')
-      this.props.getPlaylists();
-    });
+    if(playlistName !== '') {
+      axios.post('/api/newPlaylist', {body: playlistName}).then((data) => {
+        this.props.getPlaylists();
+      });
+    }
   }
- }
 
   renderSongs(songs) {
-    // console.log('SONGS!!!!!!!!!', songs)
     if(Array.isArray(songs)) {
       return songs.map((songData) => {
-        // console.log('SONG-DATA: ', songData)
         if(typeof songData.song === 'string'){
           songData.song = JSON.parse(songData.song);
         }
-        // console.log('SONG TO RENDER: ', songData)
         return (
-          <tr key={songData.id}>
-            <td>{songData.song.artist}</td>
-            <td>
+          <TableRow key={songData.id}>
+            <TableRowColumn>{songData.song.artist}</TableRowColumn>
+            <TableRowColumn>
               <button onClick={() => this.props.playSong(songData.song.uri)}>Play</button>
-            </td>
-          </tr>
+            </TableRowColumn>
+          </TableRow>
         )
       })
     }
   }
 
   renderList(playlists) {
-    // console.log('PLATLISTS!!!!!!!!!!!!!: ', playlists)
     if(Array.isArray(playlists)){
       return playlists.map((playlist) => {
         return (
           <TableRow key={playlist.id}>
             <TableRowColumn>
               <button onClick={()=> { this.deletePlaylist(playlist.Name) }}>Delete</button>
+            </TableRowColumn>
+            <TableRowColumn>
               <button onClick={() => this.renderSongs(this.props.getPlaylistSongs(playlist.Name))}>{playlist.Name}</button>  
             </TableRowColumn>
           </TableRow>
@@ -89,10 +83,8 @@ class UserPlaylists extends Component {
   }
 
   render() {
-    // console.log('USER PLAYLIST PROPS: ', this.props)
     return (
-    <div style={{display: 'inline-block'}}>
-      <span>
+    <Flexbox>
         <Table>
         <TableBody displayRowCheckbox={false}>
           <TableHeaderColumn adjustForCheckbox={false}><input id='newPlaylist' type='text' placeholder='Create New Playlist' maxLength='15'/>
@@ -101,8 +93,6 @@ class UserPlaylists extends Component {
           {this.renderList(this.props.playlists)}
         </TableBody>
         </Table>
-      </span>
-      <span>
         <Table>
           <TableBody displayRowCheckbox={false}>
             <TableHeaderColumn adjustForCheckbox={false}>Songs</TableHeaderColumn>
@@ -110,14 +100,12 @@ class UserPlaylists extends Component {
             {this.renderSongs(this.props.playlistSongs)}
           </TableBody>
         </Table>
-      </span>
-    </div>
+    </Flexbox>
     )
   }
 }
 
 function mapStateToProps(state) {
-  console.log('MSTP state: ', state)
   return {
     playlists: state.playlists, 
     getPlaylistSongs: state.playlistSongs, 
