@@ -5,27 +5,31 @@ import { bindActionCreators } from 'redux'; //=> Take a look
 import axios from 'axios';
 import {Table, TableBody, TableFooter, TableHeader, TableHeaderColumn, TableRow, TableRowColumn}
   from 'material-ui/Table';
+import getPlaylistDropdown from '../actions/getPlaylistDropdown';
+import PlaylistAdd from 'material-ui/svg-icons/av/playlist-add';
+import PlayCircleFilled from 'material-ui/svg-icons/av/play-circle-filled';
+import DropDownMenu from 'material-ui/DropDownMenu';
+import MenuItem from 'material-ui/MenuItem';
+import Paper from 'material-ui/Paper';
 
+const style = {
+  height: "auto",
+  margin: 20,
+  textAlign: 'center',
+  display: 'inline-block',
+};
 class SearchList extends Component {
   constructor(props) {  //no need of it if there is a stateless component
     super(props)
     this.index = 0;
-    this.state = this.getPlaylistDropdown();
-    this.getPlaylistDropdown = this.getPlaylistDropdown.bind(this);
+    this.props.getPlaylistDropdown();
     this.renderAlbums = this.renderAlbums.bind(this); //binding in  a constructor
   }
 
-  getPlaylistDropdown() {
-    let playlists;
-    return axios.get('/api/myMusic').then((data) => {
-      console.log('DATA: ', data.data)
-      this.state = data.data;
-    });
-  }
 
   renderAlbums(albumId) {
   	let albumsArray = [];
-    console.log("PROPS TRACKS", this.props.tracks)
+    // console.log("PROPS TRACKS", this.props.tracks)
     if(this.props.tracks.length > 0) {
         albumsArray = this.props.tracks[0];
     }
@@ -67,14 +71,15 @@ class SearchList extends Component {
         //   </tr>
         // )
         return (
+      
           <TableRow key={Math.random() * 100}>
-            <TableRowColumn>{track.artists[0].name}</TableRowColumn>
-            <TableRowColumn>{track.name}</TableRowColumn>
-            <TableRowColumn><button onClick={() => this.props.playSong(track.uri)}>Play</button></TableRowColumn>
-            <TableRowColumn><select id={'playlistDropdown'+track.uri}><option value='default'>Pick a Playlist</option>{this.state.map(function(playlist){
+            <TableRowColumn style={{backgroundColor:'#B0BEC5', color: 'black',}}>{track.artists[0].name}</TableRowColumn>
+            <TableRowColumn style={{backgroundColor:'#B0BEC5', color: 'black',}}>{track.name}</TableRowColumn>
+            <TableRowColumn style={{backgroundColor:'#B0BEC5', color: 'white',}}><PlayCircleFilled onClick={() => this.props.playSong(track.uri)}>Play</PlayCircleFilled></TableRowColumn>
+            <TableRowColumn style={{backgroundColor:'#B0BEC5', color: 'white',}}><select id={'playlistDropdown'+track.uri}><option value='default'>Pick a Playlist</option>{this.props.playlistDropdown.map(function(playlist){
               return(<option value={playlist.Name}>{playlist.Name}</option>)
             })}></select></TableRowColumn>
-            <TableRowColumn><button onClick={() => {let p = 'playlistDropdown'+track.uri; saveToPlaylist(document.getElementById(p).value, {artist:track.artists[0].name, album:track.name, uri:track.uri})}}>Add to playlist</button></TableRowColumn>
+            <TableRowColumn style={{backgroundColor:'#B0BEC5', color: 'white',}}><PlaylistAdd onClick={() => {let p = 'playlistDropdown'+track.uri; saveToPlaylist(document.getElementById(p).value, {artist:track.artists[0].name, album:track.name, uri:track.uri})}}>Add to playlist</PlaylistAdd></TableRowColumn>
           </TableRow>
        )
     })
@@ -84,22 +89,24 @@ class SearchList extends Component {
 }
 
   render () {
-  console.log("PROPS IN SEARCH_RESULTS_LIST", this.props) 
+  // console.log("PROPS IN SEARCH_RESULTS_LIST", this.props) 
     return (
+       <Paper style={style} zDepth={3}>
        <Table>
      
-      <TableBody>
+      <TableBody displayRowCheckbox={false}>
        { console.log("search_results_list => this.props", this.props)}
     <TableRow>
-          <TableHeaderColumn> Artist </TableHeaderColumn>
-          <TableHeaderColumn> Album </TableHeaderColumn>
-          <TableHeaderColumn> Play </TableHeaderColumn>
-          <TableHeaderColumn>Playlist Dropdown</TableHeaderColumn>
-          <TableHeaderColumn>Favourites</TableHeaderColumn>
+          <TableHeaderColumn style={{backgroundColor:'#009688', color: 'white',}}> Artist </TableHeaderColumn>
+          <TableHeaderColumn style={{backgroundColor:'#009688', color: 'white',}}> Album </TableHeaderColumn>
+          <TableHeaderColumn style={{backgroundColor:'#009688', color: 'white',}}> Play </TableHeaderColumn>
+          <TableHeaderColumn style={{backgroundColor:'#009688', color: 'white',}}>Playlist Dropdown</TableHeaderColumn>
+          <TableHeaderColumn style={{backgroundColor:'#009688', color: 'white',}}>Add to Playlist</TableHeaderColumn>
       </TableRow>
           {this.renderAlbums()}
       </TableBody>
       </Table>
+       </Paper>
     );
   }
 }
@@ -122,12 +129,12 @@ function updateIndex() {
 }
 
 function mapStateToProps(state) {
-  return {tracks: state.tracks};  //same as tracks: state.tracks
+  return {tracks: state.tracks, playlistDropdown: state.PlaylistDropdown};  //same as tracks: state.tracks
 }
 
 function mapDispatchToProps(dispatch) {
-  console.log("dispatch in search-results",dispatch)
-  return bindActionCreators({playSong:playSong}, dispatch);
+  // console.log("dispatch in search-results",dispatch)
+  return bindActionCreators({playSong, getPlaylistDropdown}, dispatch);
 }
 export default connect(mapStateToProps, mapDispatchToProps)(SearchList); //add mapDispatchToProps to mapStateToProps
 

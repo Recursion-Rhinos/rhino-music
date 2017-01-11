@@ -30,7 +30,6 @@ export default class App extends Component {
     return ( 
       <div>
         {this.props.children || 'NO Components'}
-        {console.log("THIS.PROPS.CHILDREN", this.props.children)}
       </div>
     );
   }

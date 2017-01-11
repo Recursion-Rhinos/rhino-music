@@ -5,65 +5,71 @@ import { playSong } from '../actions/songs';
 import { fetchNews } from '../actions/news_nytimes';
 import { fetchEvents } from '../actions/events';
 import { bindActionCreators } from 'redux';
-import nyTimesData  from '../containers/nytimes_data';
 import getPlaylists from '../actions/playlists';
 import AppBar from 'material-ui/AppBar';
 import SwipeableViews from 'react-swipeable-views';
 import {Tabs, Tab} from 'material-ui/Tabs';
+import { Link } from 'react-router';
+import { hashHistory } from 'react-router';
+import IconButton from 'material-ui/IconButton';
+import Dashboard from 'material-ui/svg-icons/av/queue-music';
+import Drawer from 'material-ui/Drawer';
+import MenuItem from 'material-ui/MenuItem';
+import Logout from '../actions/logout.js';
 
 export const teal900 = '#004D40';
 
 const styles = {
   bar: {
-    "background-color": teal900,
-    backgroundColor: teal900
+    "background-color": "#00695C"
+  },
+  largeIcon: {
+    width: 60,
+    height: 60,
+    color: "white"
   }
 };
+
+
 
 class Navigation extends Component {
   constructor(props) {
     super(props);
-
-    this.state = {
-      slideIndex: 0,
-    };
+ 
+    this.state = {open: false};
   }
 
-  handleChange = (value) => {
-    this.setState({
-      slideIndex: value,
-    });
-  };
+handleToggle = () => this.setState({open: !this.state.open});
+
+  handleClose = () => this.setState({open: false});
 
  render() {
- 	console.log("NAVIGATION2", this.props)
-  console.log("Container", nyTimesData)
+ 	// console.log("NAVIGATION2", this.props)
+  // console.log("Container")
   // let profile = <a href="/profile"></a>
    return (
+
     <AppBar
      style={styles.bar}
       title="Rhino Music"
+      titleStyle={styles.largeIcon}
+      iconElementLeft={<div> <Dashboard style={styles.largeIcon} onTouchTap={this.handleToggle}/> <Drawer
+          docked={false}
+          width={200}
+          open={this.state.open}
+          onRequestChange={(open) => this.setState({open})}> 
+          <MenuItem onTouchTap={this.handleClose}>Home</MenuItem>
+          <MenuItem onTouchTap={this.handleClose} containerElement={<Link to="/MyMusic"/>} >My Music</MenuItem>
+          <MenuItem onTouchTap={this.handleClose} containerElement={<Link to="/profile"/>} >Profile</MenuItem>
+          <MenuItem onTouchTap={this.handleClose} containerElement={<Link to="/Events"/>} >Events</MenuItem>
+          <MenuItem onTouchTap={this.handleClose} containerElement={<Link to="/Youtube"/>} >Videos</MenuItem>
+          <MenuItem onTouchTap={this.handleClose} containerElement={<Link to="/News"/>} >News</MenuItem>
+          <MenuItem><a href='/logout'>Logout</a></MenuItem>
+        </Drawer></div>}
+      onTitleTouchTap = {()=> {hashHistory.push("/")}}
       iconElementRight = {
        <div>
-       <Tabs style={styles.bar}>
-          <Tab style={styles.bar} label="My Playlists" value={0} onClick={() => {console.log("MY MUSIC PLAYLISTS"); this.props.getPlaylists()}}/>
-          <Tab style={styles.bar} label="Events" value={1} onClick={() => console.log("EVENTS EVENTS EVENTS")}/>
-          <Tab style={styles.bar} label="Videos" onClick={() => console.log("VIDEOS VIDEOS VIDEOS")}/>
-          <Tab style={styles.bar} label="News" onClick={() => console.log("NEWS NEWS NEWS")}/>
-        </Tabs>
-         <SwipeableViews
-          style={styles.bar}
-          index={this.state.slideIndex}
-          onChangeIndex={this.handleChange}
-        >
-        <div></div>
-       // <button onClick={() => console.log("EVENTS EVENTS EVENTS")}>Events</button>  
-       // <button onClick={() => console.log("VIDEOS VIDEOS VIDEOS")}>Videos</button>
-       // <button onClick={() => console.log("NEWS NEWS NEWS")}>News</button>
-       // <button onClick={() => {console.log("MY MUSIC PLAYLISTS"); this.props.getPlaylists()}}>My Playlists</button>   
-       // <button>Profile</button>
-       // <button>Logout</button>
-       </SwipeableViews>
+       
        </div>
      }
     />
@@ -83,4 +89,4 @@ function mapStateToProps(state) {
 
 }
 
-export default connect(mapStateToProps, { getPlaylists })(Navigation);
+export default connect(mapStateToProps, { getPlaylists, Logout })(Navigation);

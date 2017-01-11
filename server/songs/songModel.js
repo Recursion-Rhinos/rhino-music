@@ -13,12 +13,15 @@ let removeSong = (song) => {
 };
 
 let getSongById = (songId) => {
-  return knex('Songs').where('id', songId);
-}
+  console.log('SONG MODEL ID: ', songId);
+  return knex('Songs').where({
+    id: songId
+  });
+};
 
 let getAllSongs = () => {
   return knex('Songs');
-}
+};
 
 module.exports = {
   addSong: addSong,
