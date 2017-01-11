@@ -19,3 +19,4 @@ export const GET_ALL_PLAYLISTS = 'GET_ALL_PLAYLISTS';
 export const USERNAME_CHANGE ='USERNAME_CHANGE';
 export const USER_PASSWORD = 'USER_PASSWORD';
 export const USER_EMAIL = 'USER_EMAIL';
+export const TOGGLE_USER = 'TOGGLE_USER';

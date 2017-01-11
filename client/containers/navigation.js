@@ -43,8 +43,8 @@ handleToggle = () => this.setState({open: !this.state.open});
   handleClose = () => this.setState({open: false});
 
  render() {
- 	console.log("NAVIGATION2", this.props)
-  console.log("Container")
+ 	// console.log("NAVIGATION2", this.props)
+  // console.log("Container")
   // let profile = <a href="/profile"></a>
    return (
 

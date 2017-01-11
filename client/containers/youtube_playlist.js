@@ -34,14 +34,14 @@ class YoutubePlaylist extends Component {
 
    renderList() {
    	
-   	console.log('THIS DA VID PROP. DUDE: ', this.props.videos);
+   	// console.log('THIS DA VID PROP. DUDE: ', this.props.videos);
    	let videosArray = [];
    	if(this.props.videos.length > 0) {
    		videosArray = this.props.videos[0];
    	}
 
 
-   	console.log('THIS DA VIDEOZZZZZZZ: ', videosArray);
+   	// console.log('THIS DA VIDEOZZZZZZZ: ', videosArray);
 
     return videosArray.map(video => (
     <GridTile

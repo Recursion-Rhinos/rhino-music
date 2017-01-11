@@ -4,6 +4,7 @@ import { bindActionCreators } from 'redux';
 import { changeUser  } from '../../actions/userSettings';
 import { changePassword } from '../../actions/userSettings';
 import { changeEmail } from '../../actions/userSettings';
+import { toggleUser} from '../../actions/toggleUser';
 import TextField from 'material-ui/TextField';
 import FlatButton from 'material-ui/FlatButton';
 
@@ -15,9 +16,13 @@ class UserSettings extends Component {
     this.state = {
       username: '',
       password: '',
-      email: ''
+      email: '',
+      active: 'none'
     };
-
+  // this.clickFunc() => {
+  //   this.setState({active: true});
+  // }
+  // this.props.toggleUser()
   this.onUserInputChange = this.onUserInputChange.bind(this);
   this.onPasswordInputChange = this.onPasswordInputChange.bind(this);
   this.onEmailInputChange = this.onEmailInputChange.bind(this);
@@ -25,6 +30,8 @@ class UserSettings extends Component {
   // this.onPasswordSubmit = this.onPasswordSubmit.bind(this);    
   // this.onEmailFormSubmit = this.onEmailFormSubmit.bind(this);
   this.handleSubmit = this.handleSubmit.bind(this);
+  console.log("TOG", this.props)
+  this.hideForm = this.props.toggleSettings;
   }
 
 
@@ -48,6 +55,10 @@ console.log('UserSettings Container onEmailChange:', event.target.value);
   this.setState({
   email: event.target.value
    }); 
+}
+
+componentDidReceiveProps(nextProp) {
+  console.log('NEXT PROPS !@#!@#!@#: ', nextProp);
 }
 
 // onUserFormSubmit(event) {
@@ -86,9 +97,13 @@ event.preventDefault();
   }
 
 render() {
+  if(typeof hideForm === 'function') {
+    hideForm();
+  }
+  console.log("BITCHEEEESSSSSSSSSSSSS", this.hideForm)
   console.log("PROPS in USERSETTING", this.props)
   return (
-  	<form onSubmit={this.handleSubmit}>
+  	<form style={{display: this.state.active}} onSubmit={this.handleSubmit}>
        <TextField 
         hintText="Hint Text" 
         floatingLabelText="Username" 
@@ -113,6 +128,10 @@ render() {
     </form>
    )
  }
+}
+
+function mapStateToProps(state) {
+  return (toggleSettings: state.toggleSettings)
 }
 
 function mapDispatchToProps(dispatch) {

@@ -13,6 +13,7 @@ import UserSettings from './userSettings';
 import Dropdown from './dropdown';
 import VideoPlaylist from './videofy';
 import PlaylistDropdown from './getPlaylistDropdown';
+import ToggleUser from './toggleUser';
 
 const rootReducer = combineReducers({
   tracks: SearchReducer,
@@ -28,7 +29,8 @@ const rootReducer = combineReducers({
   userSettings: UserSettings,
   dropdown: Dropdown,
   videoPlaylist: VideoPlaylist,
-  PlaylistDropdown: PlaylistDropdown
+  PlaylistDropdown: PlaylistDropdown,
+  toggleSettings: ToggleUser
 });
 
 console.log("tracks", SearchReducer);
