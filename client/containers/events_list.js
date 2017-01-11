@@ -24,6 +24,7 @@ console.log("WHAT IS HERE", this.props.events)
 return (
 	
 	eventsList.map((event) => {
+    console.log("EVENTS++++++++++++++>>>>>>>", event)
 		return (
 	<tr key={Math.random() * 100}> 
         <td>{event.displayName}</td>
