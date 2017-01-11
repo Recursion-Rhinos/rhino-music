@@ -6,6 +6,7 @@ export default function(state = [], action) {
 
   switch (action.type) {
   case "VIDEO_PLAYLIST":
+  state = [];
   let songIds = [];
 	action.payload.forEach((objects) => {
 
