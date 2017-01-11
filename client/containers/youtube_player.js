@@ -27,14 +27,14 @@ componentDidReceiveProps(nextProps) {
 render () { 
 
 let vidList = [];
-let firstVid;
 let videoIds;
 let vidIds;
-let searchFirst;
+let autoplay;
 let playlist =[];
-// if(this.props.playVideo) {
-//   autoplay = this.props.playVideo+"?autoplay=1";
-// }
+
+if(this.props.playVideo) {
+  autoplay = this.props.playVideo+"?autoplay=1";
+}
 
 console.log("PLAYAAAAAA", this.props.videos[0]);
 
@@ -62,7 +62,7 @@ else if(this.props.videofyVideos && this.flag) {
   return (
       <div className="video-detail col-md-5">
         <div className="embed-responsive embed-responsive-16by9">
-          <iframe className="embed-responsive-item" src={`https://www.youtube.com/v/${playlist.shift()}?&playlist=${playlist}&autoplay=1`}></iframe>
+          <iframe className="embed-responsive-item" src={this.props.playVideo ? autoplay : `https://www.youtube.com/v/${playlist.shift()}?&playlist=${playlist}&autoplay=1`}></iframe>
         </div>
         <div className="details">
           <div></div>
