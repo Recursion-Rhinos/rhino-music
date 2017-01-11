@@ -27,15 +27,17 @@ componentDidReceiveProps(nextProps) {
  
   renderPlaylists(playlists) {
     console.log("PLAYLISTS INSINDE RENDERPLAYLISTS", playlists);
-    return playlists.map((el, idx) => {
-      return (
-        <tr key={el.Name}>
-          <td>
-          {el.Name}    
-          </td>
-       </tr>
-      )
-    }) 
+    if(Array.isArray(playlists)) {
+      return playlists.map((el, idx) => {
+        return (
+          <tr key={el.Name}>
+            <td>
+            {el.Name}    
+            </td>
+         </tr>
+        )
+      }) 
+    }
   }
 
   renderEvents(events) {

@@ -103,13 +103,14 @@ class UserPlaylists extends Component {
         </Table>
       </span>
       <span>
-        <table>
-        <tr>
-          <th>Songs</th>
-          <th>Play</th>
-        </tr>
-          {this.renderSongs(this.props.playlistSongs)}
-        </table>
+        <Table>
+          <TableBody displayRowCheckbox={false}>
+            <TableHeaderColumn adjustForCheckbox={false}>Songs</TableHeaderColumn>
+            <TableHeaderColumn adjustForCheckbox={false}>Play</TableHeaderColumn>
+        
+            {this.renderSongs(this.props.playlistSongs)}
+          </TableBody>
+        </Table>
       </span>
     </div>
     )

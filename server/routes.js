@@ -338,24 +338,22 @@ module.exports = function(app, passport) {
     console.log('2134324324', req);
     if (req.body.username === '') {
       res.send("Nothing is updated");
+    } else { 
+      let newUsername = req.body.username;
+      let userId = passport.user.id;
+      Users.getUserByName(newUsername).then((user) => {
+        if(!user) {
+          Users.updateUsername(newUsername, userId).then((updated) => { 
+            if(updated) {
+              res.send('updated');
+            }
+          });
+        } else {
+          res.send('Username Taken');
+        }
+      })
     }
-    else { 
-    let newUsername = req.body.username;
-    let userId = passport.user.id;
-    Users.getUserByName(newUsername).then((user) => {
-      if(!user) {
-        Users.updateUsername(newUsername, userId).then((updated) => { 
-          if(updated) {
-            res.send('updated');
-          }
-        });
-      } else {
-        res.send('Username Taken');
-      }
-    })
-  }
-});
-
+  });
   //==================>
 
   //Change Password
@@ -381,7 +379,7 @@ module.exports = function(app, passport) {
   //==================>
 
   app.post('/api/news', isLoggedIn, (req, res) => { 
-    console.log('GETTING NEWS: ',req)
+    console.log('GETTING NEWS: ',req.body.body)
     let reqBody = req.body.body;
     request.get({
       url: "https://api.nytimes.com/svc/search/v2/articlesearch.json",
@@ -389,16 +387,11 @@ module.exports = function(app, passport) {
         'api-key': "ab537ed22a1840dc8ee6407cb2562df8",
         'q': reqBody
       }
-    }), (err, response, body) => {
-      console.log("NEWS RESPONSE BODY: ", body)
+    }, (err, response, body) => {
       body = JSON.parse(body);
-      res.json(body);
-    };
+      res.send(body);
+    });
   });
-//API KEYS:
-//A: ab537ed22a1840dc8ee6407cb2562df8
-//B: af60270881bb4977ad34da8640335d97
-
 
   //GET ALL EVENTS USER ID
   //========================>

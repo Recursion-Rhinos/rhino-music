@@ -10,8 +10,8 @@ export default class News extends Component {
       <div>
         <Navigation />
         <MusicPlayer />
-        <NYTimes /> 
         <SearchBar />   
+        <NYTimes /> 
       </div>
     )
   }
