@@ -5,7 +5,7 @@ export default function getDropDown() {
 
   const playlists = axios.get('/api/myMusic');
 
-  console.log(" THIS IS THE PLAYLIST HAPPENING DUDE", playlists)
+  // console.log(" THIS IS THE PLAYLIST HAPPENING DUDE", playlists)
 
 	return {
 		type: "PLAYLIST_DROPDOWN",

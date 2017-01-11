@@ -14,7 +14,7 @@ renderEvents() {
 	// console.log("EVENTS LIST IS HERE", eventsList)
 	// console.log('yoooo',this.props.events[0])
 let eventsList = [];
-console.log("WHAT IS HERE", this.props.events)
+// console.log("WHAT IS HERE", this.props.events)
 	if(!this.props.events) {
       return "search for events"
   } else {
@@ -24,7 +24,7 @@ console.log("WHAT IS HERE", this.props.events)
 return (
 	
 	eventsList.map((event) => {
-    console.log("EVENTS++++++++++++++>>>>>>>", event)
+    // console.log("EVENTS++++++++++++++>>>>>>>", event)
 		return (
 	<tr key={Math.random() * 100}> 
         <td>{event.displayName}</td>
@@ -38,7 +38,7 @@ return (
 }
 
 render () {
-console.log("PROPS IN EVENTS LIST", this.props.events)	
+// console.log("PROPS IN EVENTS LIST", this.props.events)	
 return (
   <table className="table table-hover">
   <thead>
@@ -57,10 +57,10 @@ return (
 }
 
 function saveEvent(eventData) {
-  console.log("saving event")
+  // console.log("saving event")
     axios.post('/api/saveEvent', {body: eventData})
     .then((result) => {
-      console.log('EVENT SAVED')
+      // console.log('EVENT SAVED')
     });
   }
 
