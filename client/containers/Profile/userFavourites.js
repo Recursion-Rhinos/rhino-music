@@ -68,15 +68,15 @@ handleChange (event) {
     console.log("PLAYLISTS INSINDE RENDERPLAYLISTS", playlists);
     if(Array.isArray(playlists)) {
       return playlists.map((el, idx) => {
-        console.log("PLAYLISTS", el);
+      console.log("PLAYLISTS", el);
         return (
-         <TableRow key={el.Name}>
-           <TableRowColumn>{idx}</TableRowColumn>
-           <TableRowColumn>{el.Name}</TableRowColumn>
-           <TableRowColumn>{Math.floor(Math.random() * 100)}</TableRowColumn>
-         </TableRow>
-        )
-      }) 
+        <TableRow key={el.Name}>
+          <TableRowColumn>{idx}</TableRowColumn>
+          <TableRowColumn>{el.Name}</TableRowColumn>
+          <TableRowColumn>{Math.floor(Math.random() * 100)}</TableRowColumn>
+        </TableRow>
+        );
+      }); 
     }
   }
 
@@ -112,16 +112,8 @@ handleChange (event) {
   render () {
     console.log("SVETDaVeT Playlist", this.props)
    return (
-    // <div>
-    //   <div>
-    //    <table>
-    //    <tr>
-    //     <th>Playlists</th> 
-    //       <tr>{this.renderPlaylists(this.props.playlists)}</tr>
-    //    </tr>
-    //    </table> 
-    //   </div>
-      <div>
+    <div>
+      <div className="playlists">
        <Table
       height={this.state.height}
       fixedHeader={this.state.fixedHeader}
@@ -154,7 +146,8 @@ handleChange (event) {
       {this.renderPlaylists(this.props.playlists)}
     </TableBody> 
     </Table>       
-  
+    </div>
+    <div className="events">
     <Table
       height={this.state.height}
       fixedHeader={this.state.fixedHeader}
@@ -188,7 +181,8 @@ handleChange (event) {
     >
       {this.renderEvents(this.props.allEvents)}
     </TableBody> 
-    </Table>   
+    </Table>  
+    </div> 
     </div>  
     );
   }
