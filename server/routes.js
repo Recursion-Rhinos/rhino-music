@@ -121,6 +121,37 @@ module.exports = function(app, passport) {
     });
   });
 
+  app.get('/api/profilePlaylists', isLoggedIn, (req, res) => {
+    let playlists;
+    Playlists.getAllPlaylistsByUserId(passport.user.id)
+    .then((userPlaylists) => {
+      console.log('USERPLAYLISTS: ', userPlaylists);
+      playlists = userPlaylists;
+      let playlistIds = [];
+      userPlaylists.forEach((playlist) => {
+        playlistIds.push(Playlists.getPlaylistIdByName(playlist.Name, passport.user.id));
+      });
+      Promise.all(playlistIds).then((idArr) => {
+        let idArray = [];
+        idArr.forEach((id) => {
+          idArray.push(id[0].id)
+        });
+        console.log('IDARRAY: ', idArray)
+        let songIds = [];
+        idArray.forEach((id) => {
+          songIds.push(Playlists.getPlaylistSongsByPlaylistId(id))
+        });
+        Promise.all(songIds).then((data) => {
+          console.log('DATA!@@#!@#!@#: ', data)
+          for(let i=0; i<playlists.length; i++) {
+            playlists[i].songCount = data[i].length;
+          }
+          res.send(playlists);
+        })
+      });
+    });
+  });
+
   app.post('/api/newPlaylist', isLoggedIn, (req, res) => {
     Playlists.getPlaylistIdByName(req.body.body,passport.user.id)
     .then((playlist) => {
