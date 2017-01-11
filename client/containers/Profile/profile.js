@@ -7,17 +7,26 @@ import {Link} from 'react-router';
 import Navigation from '../navigation';
 import UserFavourites from './userFavourites';
 import UserMenu from './userMenu';
-import UserSettigns from './userSettings';
+import UserSettings from './userSettings';
 
-export default class Profile extends Component {	
+const components = {
+  settings: <UserSettings />,
+  playlists: <UserFavourites />,
+  events: <UserFavourites />
+};
+
+class Profile extends Component {	
   render() {
     return (
       <div>
         <Navigation />
         <UserMenu />
-        <UserSettigns />
-        <UserFavourites />           
+        {components[this.props.selected] || 'NONE'}           
       </div>
     );
   }
 }
+
+export default connect((state) => ({
+  selected: state.selected
+}))(Profile);
