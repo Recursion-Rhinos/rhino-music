@@ -5,7 +5,7 @@ const BUILD_DIR = path.resolve(__dirname, './client/public');
 const APP_DIR = path.resolve(__dirname, './client');
 
 const config = {
-
+  devtool: '#eval-source-map',
   entry: APP_DIR + '/index.js',
   output: {
     path: BUILD_DIR,

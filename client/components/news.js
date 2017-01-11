@@ -9,9 +9,9 @@ export default class News extends Component {
     return (
       <div>
         <Navigation />
-        <SearchBar />
         <MusicPlayer />
         <NYTimes /> 
+        <SearchBar />   
       </div>
     )
   }

@@ -5,7 +5,6 @@ import { playSong } from '../actions/songs';
 import { fetchNews } from '../actions/news_nytimes';
 import { fetchEvents } from '../actions/events';
 import { bindActionCreators } from 'redux';
-import nyTimesData  from '../containers/nytimes_data';
 import getPlaylists from '../actions/playlists';
 import AppBar from 'material-ui/AppBar';
 import SwipeableViews from 'react-swipeable-views';
@@ -46,7 +45,7 @@ class Navigation extends Component {
 
  render() {
  	console.log("NAVIGATION2", this.props)
-  console.log("Container", nyTimesData)
+  console.log("Container")
   // let profile = <a href="/profile"></a>
    return (
 

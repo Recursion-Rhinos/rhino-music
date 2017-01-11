@@ -4,8 +4,8 @@ import { bindActionCreators } from 'redux';
 import { changeUser  } from '../../actions/userSettings';
 import { changePassword } from '../../actions/userSettings';
 import { changeEmail } from '../../actions/userSettings';
-
-
+import TextField from 'material-ui/TextField';
+import FlatButton from 'material-ui/FlatButton';
 
 
 class UserSettings extends Component {
@@ -89,27 +89,27 @@ render() {
   console.log("PROPS in USERSETTING", this.props)
   return (
   	<form onSubmit={this.handleSubmit}>
-       <input 
-       type="text" className="username" 
-       placeholder="Username" 
-       value={this.state.username}
-       onChange={this.onUserInputChange} 
-       /> 
-
-       <input 
-       type="text" className="password" 
-       placeholder="Password"
+       <TextField 
+        hintText="Hint Text" 
+        floatingLabelText="Username" 
+        value={this.state.username}
+        onChange={this.onUserInputChange} 
+       /> <br />
+       <br />
+      <TextField 
+       hintText="Hint Text" 
+       floatingLabelText="Password" 
        value={this.state.password}
        onChange={this.onPasswordInputChange}
-       />
-
-       <input 
-       type="text" className="email" 
-       placeholder="Email"
+       /> <br />
+       <br /> 
+      <TextField 
+       hintText="Hint Text" 
+       floatingLabelText="Email" 
        value={this.state.email}
        onChange={this.onEmailInputChange}
        />
-       <input type="submit" value="Submit"/>
+      <FlatButton label="Submit" primary={true} />
     </form>
    )
  }

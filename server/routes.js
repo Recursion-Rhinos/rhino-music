@@ -381,18 +381,24 @@ module.exports = function(app, passport) {
   //==================>
 
   app.post('/api/news', isLoggedIn, (req, res) => { 
+    console.log('GETTING NEWS: ',req)
     let reqBody = req.body.body;
     request.get({
       url: "https://api.nytimes.com/svc/search/v2/articlesearch.json",
       qs: {
-        'api-key': "af60270881bb4977ad34da8640335d97",
+        'api-key': "ab537ed22a1840dc8ee6407cb2562df8",
         'q': reqBody
       }
     }), (err, response, body) => {
+      console.log("NEWS RESPONSE BODY: ", body)
       body = JSON.parse(body);
       res.json(body);
     };
   });
+//API KEYS:
+//A: ab537ed22a1840dc8ee6407cb2562df8
+//B: af60270881bb4977ad34da8640335d97
+
 
   //GET ALL EVENTS USER ID
   //========================>
