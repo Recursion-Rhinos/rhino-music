@@ -14,8 +14,8 @@ const style = {
   textAlign: 'center',
   display: 'inline-block',
   button: {
-    color: "#00BCD4",
-    textColor: "white"
+    labelColor: "#00BCD4",
+    fontColor: "white"
   }
 };
 
