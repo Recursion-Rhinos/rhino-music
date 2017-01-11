@@ -330,6 +330,7 @@ module.exports = function(app, passport) {
   });
 
   app.get('/logout', (req, res) => {
+    console.log("LOGGING OUT ROUTES")
     req.logout();
     res.redirect('/');
   });
