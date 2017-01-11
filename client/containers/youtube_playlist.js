@@ -2,7 +2,27 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import { playVideo } from '../actions/videos';
+import {GridList, GridTile} from 'material-ui/GridList';
+import IconButton from 'material-ui/IconButton';
+import Subheader from 'material-ui/Subheader';
+import PlayVid from 'material-ui/svg-icons/av/play-circle-outline';
 
+const styles = {
+  root: {
+    display: 'flex',
+    flexWrap: 'wrap',
+    justifyContent: 'space-around',
+  },
+  gridList: {
+    width: 500,
+    height: 450,
+    overflowY: 'auto',
+  },
+  image: {
+    width: 480,
+    height: 360
+  }
+};
 
 class YoutubePlaylist extends Component {
 	constructor(props) {
@@ -24,20 +44,29 @@ class YoutubePlaylist extends Component {
    	console.log('THIS DA VIDEOZZZZZZZ: ', videosArray);
 
     return videosArray.map(video => (
-      <div className="video-list media col-md-1">
-        <div className="media-left" onClick={() => this.props.playVideo(video.id.videoId)}>
-          <img className="media-object" src={video.snippet.thumbnails.default.url} />
-        </div>        
-      </div>
+    <GridTile
+          key={video.id.videoId}
+          title={video.snippet.title}
+          actionIcon={<IconButton><PlayVid onClick={() => this.props.playVideo(video.id.videoId)} color="white" /> </IconButton>}
+        >
+  
+          <img style={styles.image} src={video.snippet.thumbnails.high.url} />
+
+    </GridTile>
     ));
   
   }
 
 render () {
   return (
+  <GridList
+      cellHeight={180}
+      style={styles.gridList}
+    >
 	    <div className="row">
 	    	{this.renderList()}
 	    </div>
+    </GridList>
 
 	  );
   }
