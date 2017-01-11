@@ -7,6 +7,15 @@ import { fetchVideos } from '../actions/youtube.js';
 import { fetchEvents } from '../actions/events';
 // import Redux from 'react-redux';
 // console.log("REDUX", {connect});
+import Paper from 'material-ui/Paper';
+
+const style = {
+  height: "auto",
+  width: "auto",
+  margin: 20,
+  textAlign: 'center',
+  display: 'inline-block',
+};
 
 class SearchBar extends Component {
   constructor(props) {
@@ -40,6 +49,7 @@ class SearchBar extends Component {
 
   render() {
     return (
+    <Paper style={style} >
       <form onSubmit={this.onFormSubmit} className="input-group">
           <input 
             placeholder="search for artist or album"
@@ -50,6 +60,7 @@ class SearchBar extends Component {
             <button type="submit" className="btn btn-secondary">Search</button>
           </span>
       </form>
+    </Paper>
     )
   }
 }

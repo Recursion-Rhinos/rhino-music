@@ -28,7 +28,7 @@ export default class App extends Component {
     //  </div>
     // );
     return ( 
-      <div>
+      <div style={{backgroundColor: "#D1C4E9"}}>
         {this.props.children || 'NO Components'}
       </div>
     );
