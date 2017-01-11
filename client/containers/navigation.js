@@ -52,7 +52,7 @@ class Navigation extends Component {
     <AppBar
      style={styles.bar}
       title="Rhino Music"
-      iconElementLeft={<IconButton style> <Dashboard /> </IconButton>}
+      iconElementLeft={<IconButton> <Dashboard /> </IconButton>}
       onTitleTouchTap = {()=> {hashHistory.push("/")}}
       iconElementRight = {
        <div>
