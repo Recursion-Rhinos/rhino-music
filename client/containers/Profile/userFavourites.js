@@ -61,7 +61,9 @@ componentDidReceiveProps(nextProps) {
     });
     data.forEach((ele) => {
       console.log("JSON PARSEEEEEEEEE", ele);
+      if (typeof ele.event === "string") {
       ele.event = JSON.parse(ele.event);
+      }
     })
      console.log("DATAAAAAAAAAAA", data)
     return data.map((el, idx) =>{
@@ -69,7 +71,7 @@ componentDidReceiveProps(nextProps) {
       return (
         <tr key={el + (idx + Math.random())}>
           <td>{el.event.name}</td> 
-          <td>{el.event.location? el.event.location[0] : "USA"}</td>
+          <td>{el.event.location[0]}</td>
           <td><button onClick={() => {this.props.removeEvent(el.id); this.props.getEvents()}}>Remove</button></td>   
         </tr>
       )  
