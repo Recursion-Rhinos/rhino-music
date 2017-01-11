@@ -177,6 +177,14 @@ module.exports = function(app, passport) {
     })
   });
 
+  app.post('/api/removePlaylistSong', isLoggedIn, (req, res) => {
+    let playlistId = req.body.playlistId;
+    let songId = req.body.songId;
+    Playlists.removeSongFromPlaylist(playlistId, songId, passport.user.id).then((data) => {
+      res.send('Song Deleted')
+    })
+  });
+
   app.post('/api/getPlaylistSongs', isLoggedIn, (req, res) => {
     Playlists.getPlaylistIdByName(req.body.body, passport.user.id)
     .then((result) => {
