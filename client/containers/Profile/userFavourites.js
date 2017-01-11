@@ -48,9 +48,10 @@ componentDidReceiveProps(nextProps) {
         data.push(obj);
       });
     });
-    data.forEach((ele) => {
-      ele.event = JSON.parse(ele.event);
-    })
+    // data.forEach((ele) => {
+    //   console.log("JSON PARSEEEEEEEEE", ele);
+    //   ele.event = JSON.parse(ele.event);
+    // })
      console.log("DATAAAAAAAAAAA", data)
     return data.map((el, idx) =>{
       return (
