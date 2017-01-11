@@ -11,7 +11,7 @@ class SearchList extends Component {
   constructor(props) {  //no need of it if there is a stateless component
     super(props)
     this.index = 0;
-    this.props.getPlaylistDropdown;
+    this.props.getPlaylistDropdown();
     this.renderAlbums = this.renderAlbums.bind(this); //binding in  a constructor
   }
 
