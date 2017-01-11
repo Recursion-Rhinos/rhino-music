@@ -68,12 +68,13 @@ handleChange (event) {
     console.log("PLAYLISTS INSINDE RENDERPLAYLISTS", playlists);
     if(Array.isArray(playlists)) {
       return playlists.map((el, idx) => {
+        console.log("PLAYLISTS", el);
         return (
-          <tr key={el.Name}>
-            <td>
-            {el.Name}    
-            </td>
-         </tr>
+         <TableRow key={el.Name}>
+           <TableRowColumn>{idx}</TableRowColumn>
+           <TableRowColumn>{el.Name}</TableRowColumn>
+           <TableRowColumn>{Math.floor(Math.random() * 100)}</TableRowColumn>
+         </TableRow>
         )
       }) 
     }
@@ -101,6 +102,7 @@ handleChange (event) {
         <TableRowColumn >{ idx }</TableRowColumn>
         <TableRowColumn>{el.event.name}</TableRowColumn>
         <TableRowColumn>{el.event.location[0]}</TableRowColumn>
+        <TableRowColumn><a href={el.event.link}><button onClick={() => 'location.href=`${el.event.link}`'}>Reserve</button></a></TableRowColumn>
         <TableRowColumn><button onClick={() => {this.props.removeEvent(el.id); this.props.getEvents()}}>Remove</button></TableRowColumn> 
       </TableRow>
       )  
@@ -119,7 +121,40 @@ handleChange (event) {
     //    </tr>
     //    </table> 
     //   </div>
-    <div>
+      <div>
+       <Table
+      height={this.state.height}
+      fixedHeader={this.state.fixedHeader}
+      fixedFooter={this.state.fixedFooter}
+      selectable={this.state.selectable}
+      multiSelectable={this.state.multiSelectable}
+    >
+    <TableHeader
+      displaySelectAll={this.state.showCheckboxes}
+      adjustForCheckbox={this.state.showCheckboxes}
+      enableSelectAll={this.state.enableSelectAll}
+    >
+    <TableRow>
+    <TableHeaderColumn colSpan="3" tooltip="PLAYLISTS" style={{textAlign: 'center'}}>
+      PLAYLISTS
+    </TableHeaderColumn>
+    </TableRow>
+    <TableRow>
+      <TableHeaderColumn tooltip="The ID">ID</TableHeaderColumn>
+      <TableHeaderColumn tooltip="The Name">Name</TableHeaderColumn>
+      <TableHeaderColumn tooltip="The Location">Songs</TableHeaderColumn>
+    </TableRow>
+    </TableHeader>
+    <TableBody
+      showRowHover={this.state.showRowHover}
+      displayRowCheckbox={this.state.showCheckboxes}
+      deselectOnClickaway={this.state.deselectOnClickaway}
+      stripedRows={this.state.stripedRows}
+    >
+      {this.renderPlaylists(this.props.playlists)}
+    </TableBody> 
+    </Table>       
+  
     <Table
       height={this.state.height}
       fixedHeader={this.state.fixedHeader}
@@ -133,7 +168,7 @@ handleChange (event) {
       enableSelectAll={this.state.enableSelectAll}
     >
     <TableRow>
-    <TableHeaderColumn colSpan="3" tooltip="EVENTS" style={{textAlign: 'center'}}>
+    <TableHeaderColumn colSpan="5" tooltip="EVENTS" style={{textAlign: 'center'}}>
       EVENTS
     </TableHeaderColumn>
     </TableRow>
@@ -141,6 +176,8 @@ handleChange (event) {
       <TableHeaderColumn tooltip="The ID">ID</TableHeaderColumn>
       <TableHeaderColumn tooltip="The Name">Name</TableHeaderColumn>
       <TableHeaderColumn tooltip="The Location">Location</TableHeaderColumn>
+      <TableHeaderColumn tooltip="The Reservation">Reserve</TableHeaderColumn>
+      <TableHeaderColumn tooltip="Delete">Delete</TableHeaderColumn>
     </TableRow>
     </TableHeader>
     <TableBody
