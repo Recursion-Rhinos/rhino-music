@@ -16,6 +16,7 @@ import ActionHome from 'material-ui/svg-icons/action/home';
 import Dashboard from 'material-ui/svg-icons/action/dashboard';
 import Drawer from 'material-ui/Drawer';
 import MenuItem from 'material-ui/MenuItem';
+import Logout from '../actions/logout.js';
 
 export const teal900 = '#004D40';
 
@@ -58,14 +59,13 @@ handleToggle = () => this.setState({open: !this.state.open});
           open={this.state.open}
           onRequestChange={(open) => this.setState({open})}> 
           <MenuItem onTouchTap={this.handleClose}>Home</MenuItem>
-          <MenuItem onTouchTap={this.handleClose} containerElement={<Link to="/MyMusic"/>}>My Music</MenuItem>
+          <MenuItem onTouchTap={this.handleClose} containerElement={<Link to="/MyMusic"/>} >My Music</MenuItem>
           <MenuItem onTouchTap={this.handleClose} containerElement={<Link to="/profile"/>} >Profile</MenuItem>
           <MenuItem onTouchTap={this.handleClose} containerElement={<Link to="/Events"/>} >Events</MenuItem>
           <MenuItem onTouchTap={this.handleClose} containerElement={<Link to="/Youtube"/>} >Videos</MenuItem>
           <MenuItem onTouchTap={this.handleClose} containerElement={<Link to="/News"/>} >News</MenuItem>
-          <MenuItem onTouchTap={this.handleClose}>Login</MenuItem>
-          <MenuItem onTouchTap={this.handleClose}>Logout</MenuItem>
-        </Drawer> </div>}
+          <MenuItem><a href='/logout'>Logout</a></MenuItem>
+        </Drawer></div>}
       onTitleTouchTap = {()=> {hashHistory.push("/")}}
       iconElementRight = {
        <div>
@@ -89,4 +89,4 @@ function mapStateToProps(state) {
 
 }
 
-export default connect(mapStateToProps, { getPlaylists })(Navigation);
+export default connect(mapStateToProps, { getPlaylists, Logout })(Navigation);
