@@ -8,22 +8,33 @@ import removeEvent from '../../actions/removeEvent';
 class Favourites extends Component {
   constructor(props) {
     super(props)
+
+    this.componentWillMount = this.componentWillMount.bind(this);
     // this.test = this.props.getEvents()
     // this.getUserEvents = this.getUserEvents.bind(this);
-    this.componentWillMount = this.componentWillMount.bind(this);
     // this.componentDidMount = this.componentDidMount.bind(this);
  }
 
-  componentWillMount() {
+componentWillMount() {
     this.props.getAllPlaylists();
     // this.getUserEvents();
     this.props.getEvents();
     console.log("getEvents return a promise: => ", this.props.allEvents)
 }
 
+handleToggle(event, toggled) {
+  this.setState({
+  [event.target.name]: toggled,
+  });
+};
+
+handleChange (event) {
+  this.setState({height: event.target.value});
+};
+
 componentDidReceiveProps(nextProps) {
   this.forceUpdate();
-}
+};
  
   renderPlaylists(playlists) {
     console.log("PLAYLISTS INSINDE RENDERPLAYLISTS", playlists);
@@ -48,16 +59,17 @@ componentDidReceiveProps(nextProps) {
         data.push(obj);
       });
     });
-    // data.forEach((ele) => {
-    //   console.log("JSON PARSEEEEEEEEE", ele);
-    //   ele.event = JSON.parse(ele.event);
-    // })
+    data.forEach((ele) => {
+      console.log("JSON PARSEEEEEEEEE", ele);
+      ele.event = JSON.parse(ele.event);
+    })
      console.log("DATAAAAAAAAAAA", data)
     return data.map((el, idx) =>{
+      console.log("+++++++++++++++++++++++++++", el)
       return (
         <tr key={el + (idx + Math.random())}>
           <td>{el.event.name}</td> 
-          <td>{el.event.location[0]}</td>
+          <td>{el.event.location? el.event.location[0] : "USA"}</td>
           <td><button onClick={() => {this.props.removeEvent(el.id); this.props.getEvents()}}>Remove</button></td>   
         </tr>
       )  
