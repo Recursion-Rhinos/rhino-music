@@ -17,16 +17,14 @@ let getAllPlaylistsByUserId = (UserId) => {
 };
 
 let removeSongFromPlaylist = (PlaylistId, SongId, UserId) => {
-  return knex('Playlist').where ({
+  return knex('PlaylistSongs').where ({
     PlaylistId: PlaylistId,
-    SongId: SongId,
-    UserId: UserId	
+    SongId: SongId
   })
   .select('id')
-  .del().then((data) => {
-    return data;
-  }); //resolves with promise in the controller
-};
+  .del()
+}; //resolves with promise in the controller
+
 
 let createNewPlaylist = (Name, UserId) => {
   return knex('Playlist').insert({
