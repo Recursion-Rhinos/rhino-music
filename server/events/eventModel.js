@@ -18,10 +18,20 @@ let saveEvent = (event) => {
 let addEventToEventsUsers = (EventsId, UserId) => {
 	console.log("EVENTS ID", EventsId, "AND THE USER ID", UserId)
   return knex('EventsUsers').insert({
+  	
     EventsId: EventsId,
     UserId: UserId
   }); 
 };
+
+let deleteUserEvent = (eventId, userId) => {
+  return knex('EventsUsers').where({
+    EventsId: eventId,
+    UserId: userId
+  })
+  .del();
+}
+
 
 let getEventsByUserId = (UserId) => {
 return knex('EventsUsers').where({
@@ -43,5 +53,6 @@ module.exports = {
 	saveEvent: saveEvent,
 	addEventToEventsUsers: addEventToEventsUsers,
 	getEventsByUserId: getEventsByUserId,
-	getEventsUsersByEventsId: getEventsUsersByEventsId
+	getEventsUsersByEventsId: getEventsUsersByEventsId,
+  removeUserEvent: deleteUserEvent
 };

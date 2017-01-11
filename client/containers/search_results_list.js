@@ -5,23 +5,23 @@ import { bindActionCreators } from 'redux'; //=> Take a look
 import axios from 'axios';
 import {Table, TableBody, TableFooter, TableHeader, TableHeaderColumn, TableRow, TableRowColumn}
   from 'material-ui/Table';
+import getPlaylistDropdown from '../actions/getPlaylistDropdown';
 
 class SearchList extends Component {
   constructor(props) {  //no need of it if there is a stateless component
     super(props)
     this.index = 0;
-    this.state = this.getPlaylistDropdown();
-    this.getPlaylistDropdown = this.getPlaylistDropdown.bind(this);
+    this.props.getPlaylistDropdown;
     this.renderAlbums = this.renderAlbums.bind(this); //binding in  a constructor
   }
 
-  getPlaylistDropdown() {
-    let playlists;
-    return axios.get('/api/myMusic').then((data) => {
-      console.log('DATA: ', data.data)
-      this.state = data.data;
-    });
-  }
+  // getPlaylistDropdown() {
+  //   let playlists;
+  //   return axios.get('/api/myMusic').then((data) => {
+  //     console.log('DATA: ', data.data)
+  //     this.state = data.data;
+  //   });
+  // }
 
   renderAlbums(albumId) {
   	let albumsArray = [];
@@ -71,7 +71,7 @@ class SearchList extends Component {
             <TableRowColumn>{track.artists[0].name}</TableRowColumn>
             <TableRowColumn>{track.name}</TableRowColumn>
             <TableRowColumn><button onClick={() => this.props.playSong(track.uri)}>Play</button></TableRowColumn>
-            <TableRowColumn><select id={'playlistDropdown'+track.uri}><option value='default'>Pick a Playlist</option>{this.state.map(function(playlist){
+            <TableRowColumn><select id={'playlistDropdown'+track.uri}><option value='default'>Pick a Playlist</option>{this.props.playlistDropdown.map(function(playlist){
               return(<option value={playlist.Name}>{playlist.Name}</option>)
             })}></select></TableRowColumn>
             <TableRowColumn><button onClick={() => {let p = 'playlistDropdown'+track.uri; saveToPlaylist(document.getElementById(p).value, {artist:track.artists[0].name, album:track.name, uri:track.uri})}}>Add to playlist</button></TableRowColumn>
@@ -88,7 +88,7 @@ class SearchList extends Component {
     return (
        <Table>
      
-      <TableBody>
+      <TableBody displayRowCheckbox={false}>
        { console.log("search_results_list => this.props", this.props)}
     <TableRow>
           <TableHeaderColumn> Artist </TableHeaderColumn>
@@ -122,12 +122,12 @@ function updateIndex() {
 }
 
 function mapStateToProps(state) {
-  return {tracks: state.tracks};  //same as tracks: state.tracks
+  return {tracks: state.tracks, playlistDropdown: state.PlaylistDropdown};  //same as tracks: state.tracks
 }
 
 function mapDispatchToProps(dispatch) {
   console.log("dispatch in search-results",dispatch)
-  return bindActionCreators({playSong:playSong}, dispatch);
+  return bindActionCreators({playSong, getPlaylistDropdown}, dispatch);
 }
 export default connect(mapStateToProps, mapDispatchToProps)(SearchList); //add mapDispatchToProps to mapStateToProps
 

@@ -5,11 +5,15 @@ import { playSong } from '../actions/songs';
 import { fetchNews } from '../actions/news_nytimes';
 import { fetchEvents } from '../actions/events';
 import { bindActionCreators } from 'redux';
-import nyTimesData  from '../containers/nytimes_data';
 import getPlaylists from '../actions/playlists';
 import AppBar from 'material-ui/AppBar';
 import SwipeableViews from 'react-swipeable-views';
 import {Tabs, Tab} from 'material-ui/Tabs';
+import { Link } from 'react-router';
+import { hashHistory } from 'react-router';
+import IconButton from 'material-ui/IconButton';
+import ActionHome from 'material-ui/svg-icons/action/home';
+import Dashboard from 'material-ui/svg-icons/action/dashboard';
 
 export const teal900 = '#004D40';
 
@@ -17,13 +21,17 @@ const styles = {
   bar: {
     "background-color": teal900,
     backgroundColor: teal900
+  },
+  largeIcon: {
+    width: 60,
+    height: 60,
   }
 };
 
 class Navigation extends Component {
   constructor(props) {
     super(props);
-
+ 
     this.state = {
       slideIndex: 0,
     };
@@ -37,19 +45,23 @@ class Navigation extends Component {
 
  render() {
  	console.log("NAVIGATION2", this.props)
-  console.log("Container", nyTimesData)
+  console.log("Container")
   // let profile = <a href="/profile"></a>
    return (
+
     <AppBar
      style={styles.bar}
       title="Rhino Music"
+      iconElementLeft={<IconButton style> <Dashboard /> </IconButton>}
+      onTitleTouchTap = {()=> {hashHistory.push("/")}}
       iconElementRight = {
        <div>
        <Tabs style={styles.bar}>
-          <Tab style={styles.bar} label="My Playlists" value={0} onClick={() => {console.log("MY MUSIC PLAYLISTS"); this.props.getPlaylists()}}/>
-          <Tab style={styles.bar} label="Events" value={1} onClick={() => console.log("EVENTS EVENTS EVENTS")}/>
-          <Tab style={styles.bar} label="Videos" onClick={() => console.log("VIDEOS VIDEOS VIDEOS")}/>
-          <Tab style={styles.bar} label="News" onClick={() => console.log("NEWS NEWS NEWS")}/>
+          <Tab style={styles.bar} label="Playlists" value={0} containerElement={<Link to="/MyMusic"/>} />
+          <Tab style={styles.bar} label="Events" value={1} containerElement={<Link to="/Events"/>}/>
+          <Tab style={styles.bar} label="Videos" containerElement={<Link to="/Youtube"/>}/>
+          <Tab style={styles.bar} label="News" containerElement={<Link to="/News"/>}/>
+          <Tab style={styles.bar} label="Profile" containerElement={<Link to="/profile"/>}/>
         </Tabs>
          <SwipeableViews
           style={styles.bar}
@@ -60,7 +72,7 @@ class Navigation extends Component {
        // <button onClick={() => console.log("EVENTS EVENTS EVENTS")}>Events</button>  
        // <button onClick={() => console.log("VIDEOS VIDEOS VIDEOS")}>Videos</button>
        // <button onClick={() => console.log("NEWS NEWS NEWS")}>News</button>
-       // <button onClick={() => {console.log("MY MUSIC PLAYLISTS"); this.props.getPlaylists()}}>My Playlists</button>   
+
        // <button>Profile</button>
        // <button>Logout</button>
        </SwipeableViews>

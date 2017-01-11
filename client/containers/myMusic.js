@@ -11,7 +11,8 @@ import {Link} from 'react-router';
 
 const styles = {
   selectBox: { width: '50%' },
-  playlist: { width: '100%'}
+  playlist: { width: '100%'},
+  display: {display: 'block'}
 
 }
 console.log("GET PLAYLIST SONGS", getPlaylistSongs)
@@ -73,30 +74,28 @@ class UserPlaylists extends Component {
 
   renderList(playlists) {
     console.log('PLATLISTS!!!!!!!!!!!!!: ', playlists)
-    return playlists.map((playlist) => {
-      return (
-        <TableRow key={playlist.id}>
-          <TableRowColumn>
-            <button onClick={()=> { this.deletePlaylist(playlist.Name) }}>Delete</button>
-            <button onClick={() => this.renderSongs(this.props.getPlaylistSongs(playlist.Name))}>{playlist.Name}</button>  
-          </TableRowColumn>
-        </TableRow>
-        // <TableRow key={playlist.id} onClick={() => this.props.getPlaylistSongs(playlist.Name)}>
-          // <TableRowColumn>{playlist.Name}</TableRowColumn>
-          // <TableRowColumn>SONG INFO</TableRowColumn>
-        // </TableRow>
-      )
-    }) 
+    if(Array.isArray(playlists)){
+      return playlists.map((playlist) => {
+        return (
+          <TableRow key={playlist.id}>
+            <TableRowColumn>
+              <button onClick={()=> { this.deletePlaylist(playlist.Name) }}>Delete</button>
+              <button onClick={() => this.renderSongs(this.props.getPlaylistSongs(playlist.Name))}>{playlist.Name}</button>  
+            </TableRowColumn>
+          </TableRow>
+        )
+      }) 
+    }
   }
 
   render() {
     console.log('USER PLAYLIST PROPS: ', this.props)
     return (
-    <div /*style={{display: 'inline-block'}}*/>
+    <div style={{display: 'inline-block'}}>
       <span>
         <Table>
-        <TableBody>
-          <TableHeaderColumn><input id='newPlaylist' type='text' placeholder='Create New Playlist' maxLength='15'/>
+        <TableBody displayRowCheckbox={false}>
+          <TableHeaderColumn adjustForCheckbox={false}><input id='newPlaylist' type='text' placeholder='Create New Playlist' maxLength='15'/>
             <button onClick={() => {this.newPlaylist(document.getElementById('newPlaylist').value); document.getElementById('newPlaylist').value = '';}}>+</button></TableHeaderColumn>
           <TableHeaderColumn>Playlists</TableHeaderColumn>
           {this.renderList(this.props.playlists)}
@@ -113,20 +112,6 @@ class UserPlaylists extends Component {
         </table>
       </span>
     </div>
-        // <table>
-        // {this.renderSongs(this.state)}
-        // </table>
-      
-       // <Table>
-      // <TableBody>
-       // { console.log("myMusic.js => this.props", this.props)}
-      // <TableRow>
-        // <TableHeaderColumn> Playlists </TableHeaderColumn>
-        // <TableHeaderColumn> Songs </TableHeaderColumn>
-      // </TableRow>
-          // {this.renderList(this.props.playlists)}
-      // </TableBody>
-      // </Table>
     )
   }
 }

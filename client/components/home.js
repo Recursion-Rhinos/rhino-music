@@ -15,16 +15,11 @@ export default class Home extends Component {
   render() {
     return (
       <div>
-       <Link to={'/profile'}>Profile</Link>
-       <Link to={'/myMusic'}>MyMusic</Link>
         <Navigation />
         <MusicPlayer />
         <SearchBar />
         <SearchResults/>
-        <NYTimes /> 
-        <VideoPlayer />
-        <VideoPlayList />
-        <EventsList /> 	  		 	 	 	 	
+        <NYTimes/>	 	 	 	 	
       </div>
     );
   }

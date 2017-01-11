@@ -8,283 +8,256 @@ const Playlists = require('./playlist/playlistModel.js');
 const Songs = require('./songs/songModel.js');
 const Events = require('./events/eventModel.js');
 const Users = require('./user/userModel.js');
-// router.get('/api/main', (req,res) => {
-// 	res.sendFile(path.join(__dirname, '/../client/comingSoon.html'))
-// });
 
-// router.get('/api/signup', (req,res) => {  //replace anon-fn with user.controller
-// 	// res.sendFile(path.join(__dirname, '/../client/auth/signup.html'));
-// })
-
-// router.get('/api/login', (req,res) => { // replace anon-fn with user.controller
-// 	//res.sendFile(path.join(__dirname,'/../client/auth/login.html'))
-// });
-
-// router.get('/api/getMessages', (req,res) => {
-//   console.log('Getting All Messages Route');
-// });/*controller.messages.get*/
 module.exports = function(app, passport) {
 
-app.get('/search', isLoggedIn, (req,res) => {
-  res.sendFile(path.join(__dirname, '/../client/search.html'))
-})
+  app.get('/search', isLoggedIn, (req,res) => {
+    res.sendFile(path.join(__dirname, '/../client/search.html'))
+  });
 
-app.post('/api/search', (req,res) => {
-
-  let input = JSON.stringify(req.body.body);
-   
-   request.get({
+  app.post('/api/search', (req,res) => {
+    let input = JSON.stringify(req.body.body); 
+    request.get({
       url: `https://api.spotify.com/v1/search?q=${input}&type=album`
     },
-      function(error, response, body) {
-    
-        if (!error && response.statusCode === 200) {
-          console.log(body)
-          res.send(body);
-        } else {
-          res.json(error);
-        }
-      });
-});
-
-app.post('/api/getId', (req, res) => {
-     console.log("EVENTS INPUT", req.body);
-
-    let artistName = req.body.body;
-
-  request.get({
-            url: `http://api.songkick.com/api/3.0/search/artists.json?apikey=ujMX1UFiCgZT5oaH&query=${artistName}`,
-            method: "GET"
-        },
-        function(error, response, body) {
-            // console.log("SOngKinck API", body);
-
-            if (!error && response.statusCode === 200) {
-              var bodyParsed = JSON.parse(body);
-
-              res.send(bodyParsed)
-
-            } else {
-                res.json(error);
-            }
-        });
-});
-app.post('/api/events', (req, res) => {
-
-    var artist_id = req.body.body
-
-    request.get({
-        url: `http://api.songkick.com/api/3.0/artists/${artist_id}/calendar.json?apikey=ujMX1UFiCgZT5oaH`
-
-    }, function(error, response, body) {
-        if (!error && response.statusCode === 200) {
-            var bodyParse = JSON.parse(body);
-            console.log("DO I HAVE EVENTS OR NAH!?", bodyParse)
-            res.send(bodyParse);
-
-        } else {
-            res.json(error);
-        }
-    });
-});
-
-app.post('/api/videos', (req, res) => {
-
-    let input = req.body.body
-
-    request({
-        url: "https://www.googleapis.com/youtube/v3/search",
-        qs: {
-            q: input,
-            type: "video",
-            videoEmbeddable: "true",
-            maxResults: 12,
-            part: "snippet",
-            key: "AIzaSyDuq91IyM4yVkDOCagx_Y_VvRnLyKHXfuE"
-          }
-        },
-        function(error, response, body) {
-         
-            if (!error && response.statusCode === 200) {
-
-                res.send(body);
-            } else {
-                res.json(error);
-          }
-    });
-});
-
-app.get('/api/myMusic', isLoggedIn, (req, res) => {
-  let playlists;
-  Playlists.getAllPlaylistsByUserId(passport.user.id)
-  .then((data) => {
-    playlists = data;
-    console.log('GET_PLAYLISTS: ',playlists);
-    res.send(playlists);
-  });
-});
-
-app.post('/api/newPlaylist', isLoggedIn, (req, res) => {
-  console.log('NEW PLAYLIST REQ.BODY: ', req.body)
-  Playlists.getPlaylistIdByName(req.body.body,passport.user.id)
-  .then((playlist) => {
-    if(playlist.length < 1) {
-      Playlists.createNewPlaylist(req.body.body, passport.user.id)
-      .then((data) => {
-        console.log('Playlist Created', data);
-        res.send(data);
-      });
-    } else {
-      res.send('Playlist already exists');
-    }
-  });
-});
-
-app.post('/api/deletePlaylist', isLoggedIn, (req,res) => {
-  console.log("passport.user.id", passport.user.id);
-  Playlists.getPlaylistIdByName(req.body.playlist, passport.user.id)
-  .then((result) => {
-    console.log('GET PLAYLIST ID: ', result);
-    let playlistId = result[0].id;
-    Playlists.deletePlaylist(playlistId).then((response) => {
-      console.log('Playlist Deleted', response);
-      res.send('PLAYLIST DELETED')
-    })
-  })
-});
-
-app.post('/api/getPlaylistSongs', isLoggedIn, (req, res) => {
-  Playlists.getPlaylistIdByName(req.body.body, passport.user.id)
-  .then((result) => {
-    let playlistId = result[0].id;
-    Playlists.getPlaylistSongsByPlaylistId(playlistId, passport.user.id)
-    .then((songs) => {
-     
-      let songsArr = [];
-      for(var i = 0; i < songs.length; i++) {
-        songsArr.push(Songs.getSongById(songs[i].id))
+    function(error, response, body) {
+      if (!error && response.statusCode === 200) {            
+        res.send(body);
+      } else {
+        res.json(error);
       }
-      Promise.all(songsArr).then((arrSongs) => {
-          sendSongs(arrSongs);
+    });
+  });
+
+  app.post('/api/getId', (req, res) => {
+    console.log("EVENTS INPUT", req.body);
+    let artistName = req.body.body;
+    request.get({
+      url: `http://api.songkick.com/api/3.0/search/artists.json?apikey=ujMX1UFiCgZT5oaH&query=${artistName}`,
+      method: "GET"
+    },
+    function(error, response, body) {
+      // console.log("SOngKinck API", body);
+      if(!error && response.statusCode === 200) {
+        var bodyParsed = JSON.parse(body);
+        res.send(bodyParsed)
+      } else {
+        res.json(error);
+      }
+    });
+  });
+
+  app.post('/api/events', (req, res) => {
+    var artist_id = req.body.body
+    request.get({
+      url: `http://api.songkick.com/api/3.0/artists/${artist_id}/calendar.json?apikey=ujMX1UFiCgZT5oaH`
+    }, 
+    function(error, response, body) {
+      if (!error && response.statusCode === 200) {
+        var bodyParse = JSON.parse(body);
+        console.log("DO I HAVE EVENTS OR NAH!?", bodyParse)
+        res.send(bodyParse);
+      } else {
+        res.json(error);
+      }
+    });
+  });
+
+  app.post('/api/videos', (req, res) => {
+    let input = req.body.body
+    request({
+      url: "https://www.googleapis.com/youtube/v3/search",
+      qs: {
+        q: input,
+        type: "video",
+        videoEmbeddable: "true",
+        videoSyndicated: "true",
+        maxResults: 12,
+        part: "snippet",
+        key: "AIzaSyDuq91IyM4yVkDOCagx_Y_VvRnLyKHXfuE"
+      }
+    },
+    function(error, response, body) {       
+      if (!error && response.statusCode === 200) {
+        res.send(body);
+      } else {
+        res.json(error);
+      }
+    });
+  });
+
+  app.post('/api/videofy', (req, res) => {
+
+    let query = req.body.name.artist + " " + req.body.name.album;
+    console.log("QUERY QUERY QUERY FROM VIDEO PLAYLIST", query);
+    request({
+      url: "https://www.googleapis.com/youtube/v3/search",
+      qs: {
+        q: query,
+        type: "video",
+        videoEmbeddable: "true",
+        videoSyndicated: "true",
+        maxResults: 1,
+        part: "snippet",
+        key: "AIzaSyDuq91IyM4yVkDOCagx_Y_VvRnLyKHXfuE"
+      }
+    },
+    function(error, response, body) {
+      if(!error && response.statusCode === 200) {
+        console.log("BODY", body)
+        res.json(body);
+      } else {
+        res.json(error);
+      }
+    });
+  });
+
+  app.get('/api/myMusic', isLoggedIn, (req, res) => {
+    let playlists;
+    Playlists.getAllPlaylistsByUserId(passport.user.id)
+    .then((data) => {
+      playlists = data;
+      res.send(playlists);
+    });
+  });
+
+  app.post('/api/newPlaylist', isLoggedIn, (req, res) => {
+    Playlists.getPlaylistIdByName(req.body.body,passport.user.id)
+    .then((playlist) => {
+      if(playlist.length < 1) {
+        Playlists.createNewPlaylist(req.body.body, passport.user.id)
+        .then((data) => {
+          res.send(data);
+        });
+      } else {
+        res.send('Playlist already exists');
+      }
+    });
+  });
+
+  app.post('/api/deletePlaylist', isLoggedIn, (req,res) => {
+    console.log("passport.user.id", passport.user.id);
+    Playlists.getPlaylistIdByName(req.body.playlist, passport.user.id)
+    .then((result) => {
+      let playlistId = result[0].id;
+      Playlists.deletePlaylist(playlistId).then((response) => {
+        res.send('PLAYLIST DELETED')
       })
-      function sendSongs(arr) {
-          console.log('songArr else: ', arr);
-          res.send(arr);
-      }      
+    })
+  });
+
+  app.post('/api/getPlaylistSongs', isLoggedIn, (req, res) => {
+    Playlists.getPlaylistIdByName(req.body.body, passport.user.id)
+    .then((result) => {
+      let playlistId = result[0].id;
+      Playlists.getPlaylistSongsByPlaylistId(playlistId, passport.user.id)
+      .then((songs) => {
+        let songsArr = [];
+        for(let i = 0; i < songs.length; i++) {
+          songsArr.push(Songs.getSongById(songs[i].SongId));
+        }
+        Promise.all(songsArr).then((arrSongs) => {
+            sendSongs(arrSongs);
+        })
+        function sendSongs(arr) {
+            res.send(arr);
+        }      
+      })
     })
   })
-})
 
-app.post('/api/saveSong', isLoggedIn, (req, res) => {
-  let info = req.body.body;
-  console.log('MOTHA FUCKING INFO: ', info)
-  Playlists.getPlaylistIdByName(info.playlistName, passport.user.id)
-  .then((playlist) => {
-    let playlistId = playlist[0].id;
-    Songs.getAllSongs().then((allSongs) => {
-      let songMatch = false;
-      allSongs.forEach((s) => {      
-   
-        let songURI = JSON.parse(s.song).uri;
-        console.log('COMPARING ' + info.songData.uri + ' to ' + songURI)
-        if(songURI === info.songData.uri) {
-          songMatch = s;
-          console.log('MATCH!!!!', songMatch)
-        }
-      });
-      if(songMatch) {
-        Playlists.getPlaylistSongsByPlaylistId(playlistId)
-        .then((pListSongs) => {
-        let playListSongMatch = false;
-          pListSongs.forEach((pListSong) => {
-            console.log('pLISTSONG!!!',  pListSong)
-            if(pListSong.SongId === songMatch.id) {
-              playListSongMatch = true;
-            }        
-          });
-          if(!playListSongMatch) {
-            Playlists.addSongToPlaylist(playlistId, songMatch.id)
+  app.post('/api/saveSong', isLoggedIn, (req, res) => {
+    let info = req.body.body;  
+    Playlists.getPlaylistIdByName(info.playlistName, passport.user.id)
+    .then((playlist) => {
+      let playlistId = playlist[0].id;
+      Songs.getAllSongs().then((allSongs) => {
+        let songMatch = false;
+        allSongs.forEach((s) => {       
+          let songURI = JSON.parse(s.song).uri;
+          if(songURI === info.songData.uri) {
+            songMatch = s;
+          }
+        });
+        if(songMatch) {
+          Playlists.getPlaylistSongsByPlaylistId(playlistId)
+          .then((pListSongs) => {
+          let playListSongMatch = false;
+            pListSongs.forEach((pListSong) => {
+              if(pListSong.SongId === songMatch.id) {
+                playListSongMatch = true;
+              }        
+            });
+            if(!playListSongMatch) {
+              Playlists.addSongToPlaylist(playlistId, songMatch.id)
+              .then((result) => {
+              })
+            }
+          })  
+        } else {
+          Songs.addSong(JSON.stringify(info.songData))
+          .then((songs) => {
+            let songId = songs[0];
+            Playlists.addSongToPlaylist(playlistId, songId)
             .then((result) => {
-              console.log('MATCHING SONG~!!!!: ', result)
+              console.log('RESULT: ', result)
+            })
+          })
+        }
+      })
+    })
+  })
+
+  app.post('/api/saveEvent', isLoggedIn, (req,res) => {
+    console.log("EVENTS HERE INFO", req.body)
+    const savedEvent = req.body.body
+
+    Events.getAllEvents().then((events) => {
+      let match = false;
+      events.forEach((event) => {
+        let eventObj = JSON.parse(event.event)
+        console.log("COMPARISON", eventObj.name === savedEvent.name)
+        if(eventObj.name === savedEvent.name){
+          match = event;
+        }
+      })
+      console.log("MATCH RESULT", match)
+      if(match.id === Number) {
+        let userEventMatch = false
+        Events.getEventsByUserId(passport.user.id)
+        .then((events) => {
+          if(events.id === match.id) {
+            console.log("MATCH FOUND FOR USER")
+            userEventMatch = true;
+          } else if(!userEventMatch) {
+            Events.addEventToEventsUsers(newEventId, passport.user.id)
+            .then((id) => {
+              console.log("DONE", id)
             })
           }
-        })  
+        })
       } else {
-        console.log('NO MATCHING SONG~!!')
-        Songs.addSong(JSON.stringify(info.songData))
-        .then((songs) => {
-          let songId = songs[0];
-          Playlists.addSongToPlaylist(playlistId, songId)
-          .then((result) => {
-            console.log('RESULT: ', result)
+        Events.saveEvent(JSON.stringify(savedEvent))
+        .then((id) => {
+          let newEventId = id[0]
+          console.log(newEventId)
+          Events.addEventToEventsUsers(newEventId, passport.user.id)
+          .then((newId) => {
+            console.log("DONE", newId)
           })
         })
       }
     })
-  })
-})
+  });
 
-app.post('/api/saveEvent', isLoggedIn, (req,res) => {
-
-console.log("EVENTS HERE INFO", req.body)
-  const savedEvent = req.body.body
-
-  Events.saveEvent(JSON.stringify(savedEvent))
-  .then((id) => {
-    console.log("ID ID", id[0])
-    Events.addEventToEventsUsers(id[0], passport.user.id)
-    .then((wut) => {
-      console.log("EVENTS USERS ADDED", wut)
+  app.post('/api/removeUserEvent', isLoggedIn, (req,res) => {
+    let eventId = req.body.eventId;
+    let userId = passport.user.id;
+    Events.removeUserEvent(eventId, userId).then((removed) => {
+      console.log('REMOVED EVENTS: ', removed);
+      res.send('removed');
     })
-  })
-  // Events.getAllEvents().then((events) => {
-  // let match = false;
-  //     events.forEach((event) => {
-  //       let eventObj = JSON.parse(event.event)
-  //      console.log("COMPARISON", eventObj.name === savedEvent.name)
-  //       if(eventObj.name === savedEvent.name){
-
-  //         match = eventObj;
-  //       }
-  //     })
-  //   if(match){
-  //     Events.getEventsByUserId(passport.user.id)
-  //   }
-  // })
-
-});
-
-// })
-//var match = false
-//if name passed in matches event looped on then you set match to that event object
-// if match 
-
-// router.post('/api/search', (req,res) => {
-//   console.log("Search Term", req.body)
-// });
-
-// router.post('api/postMessage', (req,res) => {
-//   console.log('Posting Message Route');
-// });/*controller.messages.post*/
-
-// router.get('/api/getNews', (req,res) => {
-//   console.log('Getting News Route');
-// });/*controller.news.get*/
-
-// router.get('/api/getPlaylist', (req,res) => {
-//   console.log('Getting Playlist Route');
-// });/*controller.playlist.getAll*/
-
-// router.post('/api/updatePlayist', (req,res) => {
-//   console.log('Updating Playlist Route');
-// });/*controller.playlist.update*/
-
-// router.get('/api/deletePlaylist', (req,res) => {
-//   console.log('Deleting Playlist Route');
-// });/*controller.playlist.delete*/
-
-// module.exports = router;
-
+  });
 
   app.get('/', isLoggedIn, (req, res) => {
     console.log('ROUTES.JS GET')
@@ -330,7 +303,6 @@ console.log("EVENTS HERE INFO", req.body)
     res.redirect('/');
   });
 
-
   function isLoggedIn(req, res, next) {
     if(req.isAuthenticated()) {
       return next();
@@ -342,47 +314,91 @@ console.log("EVENTS HERE INFO", req.body)
   //==================>
   app.get('/api/getUserInfo', isLoggedIn ,(req,res) => {
     res.send(passport.user);
-  })
+  });
+  //==================>
+
+  //Change Email
+  //==================>
+  app.post('/api/changeEmail', isLoggedIn, (req, res) => {
+    if(req.body.email === '') {
+      res.send("Nothing is updated");
+    } 
+    else {
+    let newEmail = req.body.email;
+    Users.updateEmail(newEmail, passport.user.id).then((updated) => {
+      res.send("updated");
+    });
+   }
+  });
+  //==================>
+  
+  //Change Username
+  //==================>
+  app.post('/api/changeUsername', isLoggedIn, (req,res) => {
+    console.log('2134324324', req);
+    if (req.body.username === '') {
+      res.send("Nothing is updated");
+    }
+    else { 
+    let newUsername = req.body.username;
+    let userId = passport.user.id;
+    Users.getUserByName(newUsername).then((user) => {
+      if(!user) {
+        Users.updateUsername(newUsername, userId).then((updated) => { 
+          if(updated) {
+            res.send('updated');
+          }
+        });
+      } else {
+        res.send('Username Taken');
+      }
+    })
+  }
+});
+
   //==================>
 
   //Change Password
   //==================>
-  app.get('/api/changePassword', isLoggedIn, (req, res) => {
-    let currentPassword = req.body.currentPassword;
+    app.post('/api/changePassword', isLoggedIn, (req, res) => {
+      if(req.body.newPassword === '') {
+        res.send("Nothing is updated");
+    }
+    else {
     let newPassword = req.body.newPassword;
     Users.getUserById(passport.user.id).then((userInfo) => {
       console.log('USER INFO : ', userInfo)
       if(userInfo.password) {
-        bcrypt.compare(currentPassword, userInfo.password, (err, response) => {
-          if(response) {
-            newPassword = bcrypt.hashSync(newPassword, null, null);
-            Users.updatePassword(newPassword, passport.user.id).then((updated) => {
-              console.log('UPDATED PASSWORD', updated)
-
-              res.sendStatus(updated);
-            })
-          } 
-        })
+        newPassword = bcrypt.hashSync(newPassword, null, null);
+        Users.updatePassword(newPassword, passport.user.id).then((updated) => {
+          console.log('UPDATED PASSWORD', updated)
+          res.send("updated");
+        });
       }
-    })
-
-  })
+    });
+  }
+  });
   //==================>
 
   app.post('/api/news', isLoggedIn, (req, res) => { 
+    console.log('GETTING NEWS: ',req)
     let reqBody = req.body.body;
     request.get({
       url: "https://api.nytimes.com/svc/search/v2/articlesearch.json",
       qs: {
-        'api-key': "af60270881bb4977ad34da8640335d97",
+        'api-key': "ab537ed22a1840dc8ee6407cb2562df8",
         'q': reqBody
       }
-    }, (err, response, body) => {
+    }), (err, response, body) => {
+      console.log("NEWS RESPONSE BODY: ", body)
       body = JSON.parse(body);
       res.json(body);
-    });
+    };
   });
- 
+//API KEYS:
+//A: ab537ed22a1840dc8ee6407cb2562df8
+//B: af60270881bb4977ad34da8640335d97
+
 
   //GET ALL EVENTS USER ID
   //========================>
@@ -402,7 +418,7 @@ console.log("EVENTS HERE INFO", req.body)
       sendEvents = (arr) => {
         console.log("EVENTSARRAY", arr);
         res.send(arr);
-      };
+      }
     });
   });
   //========================>
@@ -414,8 +430,8 @@ console.log("EVENTS HERE INFO", req.body)
     })
   //========================>
 
-//GOOGLE ROUTES
-//========================>
+  //GOOGLE ROUTES
+  //========================>
   app.get('/auth/google', passport.authenticate('google-login', { scope : ['profile', 'email'] }, {
     successRedirect: '/search',
     failureRedirect: '/login'
@@ -425,23 +441,19 @@ console.log("EVENTS HERE INFO", req.body)
     successRedirect: '/search',
     failureRedirect: '/login'
   }));
-  
-//========================>
+  // ========================>
 
-//FACEBOOK ROUTES
-//========================>
+  //FACEBOOK ROUTES
+  //========================>
 
   app.get('/auth/facebook', passport.authenticate('facebook-login', { scope: 'email' }, {
-    successRedirect: '/search/#_=_',
+    successRedirect: '/search/',
     failureRedirect: '/login'
   }));
 
   app.get('/auth/facebook/callback', passport.authenticate('facebook-login', {
-    successRedirect: '/search',
+    successRedirect: '/#/home',
     failureRedirect: '/login'
   }));
-
-
-//========================>
-
+  //========================>
 };
