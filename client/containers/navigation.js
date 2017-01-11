@@ -14,6 +14,8 @@ import { hashHistory } from 'react-router';
 import IconButton from 'material-ui/IconButton';
 import ActionHome from 'material-ui/svg-icons/action/home';
 import Dashboard from 'material-ui/svg-icons/action/dashboard';
+import Drawer from 'material-ui/Drawer';
+import MenuItem from 'material-ui/MenuItem';
 
 export const teal900 = '#004D40';
 
@@ -25,6 +27,7 @@ const styles = {
   largeIcon: {
     width: 60,
     height: 60,
+    color: "white"
   }
 };
 
@@ -32,16 +35,12 @@ class Navigation extends Component {
   constructor(props) {
     super(props);
  
-    this.state = {
-      slideIndex: 0,
-    };
+    this.state = {open: false};
   }
 
-  handleChange = (value) => {
-    this.setState({
-      slideIndex: value,
-    });
-  };
+handleToggle = () => this.setState({open: !this.state.open});
+
+  handleClose = () => this.setState({open: false});
 
  render() {
  	console.log("NAVIGATION2", this.props)
@@ -52,23 +51,25 @@ class Navigation extends Component {
     <AppBar
      style={styles.bar}
       title="Rhino Music"
-      iconElementLeft={<IconButton> <Dashboard /> </IconButton>}
+      titleStyle={styles.largeIcon}
+      iconElementLeft={<div> <Dashboard style={styles.largeIcon} onTouchTap={this.handleToggle}/> <Drawer
+          docked={false}
+          width={200}
+          open={this.state.open}
+          onRequestChange={(open) => this.setState({open})}> 
+          <MenuItem onTouchTap={this.handleClose}>Home</MenuItem>
+          <MenuItem onTouchTap={this.handleClose} containerElement={<Link to="/MyMusic"/>}>My Music</MenuItem>
+          <MenuItem onTouchTap={this.handleClose} containerElement={<Link to="/profile"/>} >Profile</MenuItem>
+          <MenuItem onTouchTap={this.handleClose} containerElement={<Link to="/Events"/>} >Events</MenuItem>
+          <MenuItem onTouchTap={this.handleClose} containerElement={<Link to="/Youtube"/>} >Videos</MenuItem>
+          <MenuItem onTouchTap={this.handleClose} containerElement={<Link to="/News"/>} >News</MenuItem>
+          <MenuItem onTouchTap={this.handleClose}>Login</MenuItem>
+          <MenuItem onTouchTap={this.handleClose}>Logout</MenuItem>
+        </Drawer> </div>}
       onTitleTouchTap = {()=> {hashHistory.push("/")}}
       iconElementRight = {
        <div>
-       <Tabs style={styles.bar}>
-          <Tab style={styles.bar} label="Playlists" value={0} containerElement={<Link to="/MyMusic"/>} />
-          <Tab style={styles.bar} label="Events" value={1} containerElement={<Link to="/Events"/>}/>
-          <Tab style={styles.bar} label="Videos" containerElement={<Link to="/Youtube"/>}/>
-          <Tab style={styles.bar} label="News" containerElement={<Link to="/News"/>}/>
-          <Tab style={styles.bar} label="Profile" containerElement={<Link to="/profile"/>}/>
-        </Tabs>
-         <SwipeableViews
-          style={styles.bar}
-          index={this.state.slideIndex}
-          onChangeIndex={this.handleChange}
-        >
-       </SwipeableViews>
+       
        </div>
      }
     />
