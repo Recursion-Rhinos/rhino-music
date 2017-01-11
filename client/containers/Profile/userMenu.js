@@ -14,7 +14,7 @@ import Download from 'material-ui/svg-icons/file/file-download';
 import Delete from 'material-ui/svg-icons/action/delete';
 import FontIcon from 'material-ui/FontIcon';
 import Setting from './userSettings';
-
+import changeSelected  from '../../actions/changeSelected';
 
 const style = {
   paper: {
@@ -27,17 +27,7 @@ const style = {
 class Profile extends Component {
   constructor(props) {
     super(props);
-    // console.log("=============>", Setting)
-    // console.log("PROPS+++++++++++++++", this.props)
-     // this.state = {open: false};
-     // this.toggleSetting = this.toggleSetting.bind(this);
   }	
-
-  // getInitialState() {
-  //   return { childVisible: false };
-  // }
-
-
 
 //Facebook image:
 //picture: profile.photos ? profile.photos[0].value : '/img/faces/unknown-user-pic.jpg'
@@ -54,13 +44,14 @@ render () {
         <MenuItem primaryText="Playlists" onClick={() => this.props.changeSelected('playlists')} leftIcon={<ContentLink />} />
         <Divider />
         <MenuItem primaryText="Events" leftIcon={<ContentCopy />} />
-        <MenuItem primaryText="Social " leftIcon={<Download />} />
+        <MenuItem primaryText="Exit " leftIcon={<Download />} />
       </Menu>
       </Paper>
       </div>
     );
   }
 }
+export default connect(null, { changeSelected })(Profile);
 
 // function mapDispatchToProps(dispatch) {
 // return bindActionCreators({toogleUser}, dispatch);  
@@ -71,9 +62,8 @@ render () {
 // }
 
 // export default connect(mapStateToProps, { toggleUser })(Profile);
-const changeSelected = (selected) => ({
-  type: 'CHANGE_SELECTED',
-  payload: selected
-});
+// const changeSelected = (selected) => ({
+//   type: 'CHANGE_SELECTED',
+//   payload: selected
+// });
 
-export default connect(null, { changeSelected })(Profile);
