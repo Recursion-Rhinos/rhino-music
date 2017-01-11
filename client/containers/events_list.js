@@ -3,6 +3,21 @@ import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import { fetchEvents } from '../actions/events';
 import axios from 'axios';
+import {Table, TableBody, TableHeader, TableHeaderColumn, TableRow, TableRowColumn} from 'material-ui/Table';
+import Paper from 'material-ui/Paper';
+import RaisedButton from 'material-ui/RaisedButton';
+
+const style = {
+  height: "auto",
+  width: "auto",
+  margin: 20,
+  textAlign: 'center',
+  display: 'inline-block',
+  button: {
+    color: "#00BCD4",
+    textColor: "white"
+  }
+};
 
 class EventsList extends Component {
 	constructor(props) {
@@ -25,12 +40,14 @@ return (
 	
 	eventsList.map((event) => {
 		return (
-	<tr key={Math.random() * 100}> 
-        <td>{event.displayName}</td>
-        <td>{event.location.city}</td>
-      <td><a href={event.uri}><button onClick={() => 'location.href=`${event.uri}`'}> Reserve Now </button></a></td>
-      <td><button onClick={() => {saveEvent( {name:event.displayName, link: event.uri, location: [event.location.city, {lat: event.location.lat, lon: event.location.lng}] } ) }}> Reserve Later </button></td>
-      </tr>		
+       <TableRow key={Math.random() * 100}>
+	
+         <TableRowColumn style={{backgroundColor:'#B0BEC5', color: 'black'}}>{event.displayName}</TableRowColumn>
+         <TableRowColumn style={{backgroundColor:'#B0BEC5', color: 'black'}}>{event.location.city}</TableRowColumn>
+       <TableRowColumn style={{backgroundColor:'#B0BEC5', color: 'black'}}><a href={event.uri}><RaisedButton style ={style.button} onClick={() => 'location.href=`${event.uri}`'}> Buy Now </RaisedButton></a></TableRowColumn>
+       <TableRowColumn style={{backgroundColor:'#B0BEC5', color: 'black'}}><RaisedButton style ={style.button} onClick={() => {saveEvent( {name:event.displayName, link: event.uri, location: [event.location.city, {lat: event.location.lat, lon: event.location.lng}] } ) }}> Save </RaisedButton></TableRowColumn>
+      	
+      </TableRow>
 		)
 	})
   )
@@ -39,18 +56,20 @@ return (
 render () {
 console.log("PROPS IN EVENTS LIST", this.props.events)	
 return (
-  <table className="table table-hover">
-  <thead>
-    <tr >
-      <th> Event</th>
-      <th> Location </th>
-      <th> Purchase </th>
-    </tr>
-  </thead>
-  <tbody>
+<Paper key={Math.random() * 100} style={style} zDepth={3}>
+<Table>
+  <TableBody displayRowCheckbox={false}>
+
+    <TableRow key={Math.random() * 100}>
+      <TableHeaderColumn style={{backgroundColor:'#009688', color: 'white'}}> Event</TableHeaderColumn>
+      <TableHeaderColumn style={{backgroundColor:'#009688', color: 'white'}}> Location </TableHeaderColumn>
+      <TableHeaderColumn style={{backgroundColor:'#009688', color: 'white'}}> Purchase </TableHeaderColumn>
+     <TableHeaderColumn style={{backgroundColor:'#009688', color: 'white'}}> Stay Woke </TableHeaderColumn>
+  </TableRow>
       {this.renderEvents()}
-  </tbody>
-</table>
+  </TableBody>
+</Table>
+</Paper>  
     );
   }
 }

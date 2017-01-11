@@ -12,8 +12,7 @@ import {Tabs, Tab} from 'material-ui/Tabs';
 import { Link } from 'react-router';
 import { hashHistory } from 'react-router';
 import IconButton from 'material-ui/IconButton';
-import ActionHome from 'material-ui/svg-icons/action/home';
-import Dashboard from 'material-ui/svg-icons/action/dashboard';
+import Dashboard from 'material-ui/svg-icons/av/queue-music';
 import Drawer from 'material-ui/Drawer';
 import MenuItem from 'material-ui/MenuItem';
 
@@ -21,8 +20,7 @@ export const teal900 = '#004D40';
 
 const styles = {
   bar: {
-    "background-color": teal900,
-    backgroundColor: teal900
+    "background-color": "#00695C"
   },
   largeIcon: {
     width: 60,
@@ -30,6 +28,8 @@ const styles = {
     color: "white"
   }
 };
+
+
 
 class Navigation extends Component {
   constructor(props) {
@@ -57,13 +57,11 @@ handleToggle = () => this.setState({open: !this.state.open});
           width={200}
           open={this.state.open}
           onRequestChange={(open) => this.setState({open})}> 
-          <MenuItem onTouchTap={this.handleClose}>Home</MenuItem>
           <MenuItem onTouchTap={this.handleClose} containerElement={<Link to="/MyMusic"/>}>My Music</MenuItem>
           <MenuItem onTouchTap={this.handleClose} containerElement={<Link to="/profile"/>} >Profile</MenuItem>
           <MenuItem onTouchTap={this.handleClose} containerElement={<Link to="/Events"/>} >Events</MenuItem>
           <MenuItem onTouchTap={this.handleClose} containerElement={<Link to="/Youtube"/>} >Videos</MenuItem>
           <MenuItem onTouchTap={this.handleClose} containerElement={<Link to="/News"/>} >News</MenuItem>
-          <MenuItem onTouchTap={this.handleClose}>Login</MenuItem>
           <MenuItem onTouchTap={this.handleClose}>Logout</MenuItem>
         </Drawer> </div>}
       onTitleTouchTap = {()=> {hashHistory.push("/")}}
