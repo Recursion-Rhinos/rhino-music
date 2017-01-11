@@ -11,7 +11,7 @@ class PlaylistSongs extends Component {
 
   renderList(songs) {
     return songs.map((song) => {
-      console.log('playlistSongs Container Song: ', song);
+      // console.log('playlistSongs Container Song: ', song);
       return (
         <li key={song.id}>
         {song.Name}

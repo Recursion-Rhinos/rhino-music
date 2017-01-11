@@ -20,7 +20,7 @@ componentWillMount() {
   }
   
 componentDidReceiveProps(nextProps) {
-  console.log('NEXT PROPS: ', nextProps)
+  // console.log('NEXT PROPS: ', nextProps)
   this.forceUpdate();
 }
 
@@ -36,7 +36,7 @@ if(this.props.playVideo) {
   autoplay = this.props.playVideo+"?autoplay=1";
 }
 
-console.log("PLAYAAAAAA", this.props.videos[0]);
+// console.log("PLAYAAAAAA", this.props.videos[0]);
 
 if(this.props.videos.length > 0 && !this.flag) {
   vidList = this.props.videos[0];
@@ -46,7 +46,7 @@ if(this.props.videos.length > 0 && !this.flag) {
   });
 
   playlist = vidIds;
-  console.log("THIS IS THE VIDEO LIST OF IDs", playlist);
+  // console.log("THIS IS THE VIDEO LIST OF IDs", playlist);
 }
 
 
@@ -54,10 +54,10 @@ else if(this.props.videofyVideos && this.flag) {
   playlist = this.props.videofyVideos;
 
   
-  console.log("THIS IS THE FIRST VID", playlist[0])
+  // console.log("THIS IS THE FIRST VID", playlist[0])
   };
 
-  console.log("THIS IS THE VIDEOfy LIST OF IDs", playlist);
+  // console.log("THIS IS THE VIDEOfy LIST OF IDs", playlist);
         
   return (
       <div className="video-detail col-md-5">

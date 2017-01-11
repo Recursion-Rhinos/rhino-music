@@ -34,7 +34,7 @@ class UserPlaylists extends Component {
   deletePlaylist(playlistName) {
     console.log('DELETING PLAYLIST')
     axios.post('/api/deletePlaylist', {playlist: playlistName}).then((data) => {
-      console.log('GETTING PLAYLISTS AFTER DELETE')
+      // console.log('GETTING PLAYLISTS AFTER DELETE')
       this.props.getPlaylists();
     });
   }
@@ -45,21 +45,21 @@ class UserPlaylists extends Component {
   //
   if(playlistName !== '') {
     axios.post('/api/newPlaylist', {body: playlistName}).then((data) => {
-      console.log('GETTING NEW PLAYLISTS')
+      // console.log('GETTING NEW PLAYLISTS')
       this.props.getPlaylists();
     });
   }
  }
 
   renderSongs(songs) {
-    console.log('SONGS!!!!!!!!!', songs)
+    // console.log('SONGS!!!!!!!!!', songs)
     if(Array.isArray(songs)) {
       return songs.map((songData) => {
-        console.log('SONG-DATA: ', songData)
+        // console.log('SONG-DATA: ', songData)
         if(typeof songData.song === 'string'){
           songData.song = JSON.parse(songData.song);
         }
-        console.log('SONG TO RENDER: ', songData)
+        // console.log('SONG TO RENDER: ', songData)
         return (
           <tr key={songData.id}>
             <td>{songData.song.artist}</td>
@@ -73,7 +73,7 @@ class UserPlaylists extends Component {
   }
 
   renderList(playlists) {
-    console.log('PLATLISTS!!!!!!!!!!!!!: ', playlists)
+    // console.log('PLATLISTS!!!!!!!!!!!!!: ', playlists)
     if(Array.isArray(playlists)){
       return playlists.map((playlist) => {
         return (
@@ -89,7 +89,7 @@ class UserPlaylists extends Component {
   }
 
   render() {
-    console.log('USER PLAYLIST PROPS: ', this.props)
+    // console.log('USER PLAYLIST PROPS: ', this.props)
     return (
     <div style={{display: 'inline-block'}}>
       <span>

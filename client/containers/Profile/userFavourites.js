@@ -73,7 +73,7 @@ handleChange (event) {
         <TableRow key={el.Name}>
           <TableRowColumn>{idx}</TableRowColumn>
           <TableRowColumn>{el.Name}</TableRowColumn>
-          <TableRowColumn>{Math.floor(Math.random() * 100)}</TableRowColumn>
+          <TableRowColumn>{el.songCount}</TableRowColumn>
         </TableRow>
         );
       }); 

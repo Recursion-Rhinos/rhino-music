@@ -20,7 +20,7 @@ class SearchBar extends Component {
 
 
   onInputChange(event) {
-    console.log('Search_Bar Container onInputChange:', event.target.value);
+    // console.log('Search_Bar Container onInputChange:', event.target.value);
     this.setState({term: event.target.value});
   }
 
@@ -31,7 +31,7 @@ class SearchBar extends Component {
     this.props.fetchNews(this.state.term);
     this.props.fetchEvents(this.state.term);
     //we need to go fetch data
-    console.log('Search_Bar Container onFormSubmit:', this.state.term);
+    // console.log('Search_Bar Container onFormSubmit:', this.state.term);
     this.props.fetchSongs(this.state.term);
     this.setState({ term: '' });
   }

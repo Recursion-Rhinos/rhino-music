@@ -29,7 +29,7 @@ class SearchList extends Component {
 
   renderAlbums(albumId) {
   	let albumsArray = [];
-    console.log("PROPS TRACKS", this.props.tracks)
+    // console.log("PROPS TRACKS", this.props.tracks)
     if(this.props.tracks.length > 0) {
         albumsArray = this.props.tracks[0];
     }
@@ -89,7 +89,7 @@ class SearchList extends Component {
 }
 
   render () {
-  console.log("PROPS IN SEARCH_RESULTS_LIST", this.props) 
+  // console.log("PROPS IN SEARCH_RESULTS_LIST", this.props) 
     return (
        <Paper style={style} zDepth={3}>
        <Table>
@@ -133,7 +133,7 @@ function mapStateToProps(state) {
 }
 
 function mapDispatchToProps(dispatch) {
-  console.log("dispatch in search-results",dispatch)
+  // console.log("dispatch in search-results",dispatch)
   return bindActionCreators({playSong, getPlaylistDropdown}, dispatch);
 }
 export default connect(mapStateToProps, mapDispatchToProps)(SearchList); //add mapDispatchToProps to mapStateToProps
