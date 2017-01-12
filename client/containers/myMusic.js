@@ -12,14 +12,16 @@ import Flexbox from 'flexbox-react';
 import PlayCircleFilled from 'material-ui/svg-icons/av/play-circle-filled';
 import Delete from 'material-ui/svg-icons/action/delete-forever';
 import Remove from 'material-ui/svg-icons/content/remove-circle';
+import Paper from 'material-ui/Paper';
 
 
-const styles = {
-  selectBox: { width: '50%' },
-  playlist: { width: '100%'},
-  display: {display: 'block'}
+const style = {
+  height: "auto",
+  margin: 20,
+  textAlign: 'center',
+  display: 'inline-block',
+};
 
-}
 console.log("GET PLAYLIST SONGS", getPlaylistSongs)
 class UserPlaylists extends Component {
   constructor(props) {
@@ -117,25 +119,27 @@ class UserPlaylists extends Component {
 
   render() {
     return (
-    <Flexbox>
+    <Paper zDepth={1}>
+      <Flexbox>
         <Table onCellClick={this.cellClicked} height={'500px'}>
         <TableBody displayRowCheckbox={false}>
-          <TableHeaderColumn style={{width: '20%'}} adjustForCheckbox={false}><input id='newPlaylist' type='text' placeholder='Create New Playlist' maxLength='15'/>
+          <TableHeaderColumn style={{backgroundColor:'#673AB7', color: 'white',width: '20%'}} adjustForCheckbox={false}><input id='newPlaylist' type='text' placeholder='Create New Playlist' maxLength='15'/>
             <button onClick={() => {this.newPlaylist(document.getElementById('newPlaylist').value); document.getElementById('newPlaylist').value = '';}}>+</button></TableHeaderColumn>
-          <TableHeaderColumn style={{width: '30%'}}>Playlists</TableHeaderColumn>
+          <TableHeaderColumn style={{backgroundColor:'#673AB7', color: 'white',width: '30%'}}>Playlists</TableHeaderColumn>
           {this.renderList(this.props.playlists)}
         </TableBody>
         </Table>
         <Table height={'500px'}>
           <TableBody displayRowCheckbox={false}>
-            <TableHeaderColumn style={{width: '20%'}} adjustForCheckbox={false}>Artist</TableHeaderColumn>
-            <TableHeaderColumn style={{width: '50%'}} adjustForCheckbox={false}>Album</TableHeaderColumn>
-            <TableHeaderColumn style={{width: '15%'}} adjustForCheckbox={false}>Play</TableHeaderColumn>
-            <TableHeaderColumn style={{width: '15%'}} adjustForCheckbox={false}>Remove</TableHeaderColumn>   
+            <TableHeaderColumn style={{backgroundColor:'#673AB7', color: 'white',width: '20%'}} adjustForCheckbox={false}>Artist</TableHeaderColumn>
+            <TableHeaderColumn style={{backgroundColor:'#673AB7', color: 'white',width: '50%'}} adjustForCheckbox={false}>Album</TableHeaderColumn>
+            <TableHeaderColumn style={{backgroundColor:'#673AB7', color: 'white',width: '15%'}} adjustForCheckbox={false}>Play</TableHeaderColumn>
+            <TableHeaderColumn style={{backgroundColor:'#673AB7', color: 'white',width: '15%'}} adjustForCheckbox={false}>Remove</TableHeaderColumn>   
             {this.renderSongs(this.props.playlistSongs)}
           </TableBody>
         </Table>
-    </Flexbox>
+      </Flexbox>
+    </Paper>
     )
   }
 }

@@ -189,8 +189,7 @@ module.exports = function(app, passport) {
     Playlists.getPlaylistIdByName(req.body.body, passport.user.id)
     .then((result) => {
       if(result[0]) {
-        
-      let playlistId = result[0].id;
+        let playlistId = result[0].id;
         Playlists.getPlaylistSongsByPlaylistId(playlistId, passport.user.id)
         .then((songs) => {
           let songsArr = [];
