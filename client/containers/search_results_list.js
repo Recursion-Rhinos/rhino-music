@@ -74,12 +74,12 @@ class SearchList extends Component {
       
           <TableRow key={Math.random() * 100}>
             <TableRowColumn style={{backgroundColor:'#B0BEC5', color: 'black',}}>{track.artists[0].name}</TableRowColumn>
-            <TableRowColumn style={{backgroundColor:'#B0BEC5', color: 'black',}}>{track.name}</TableRowColumn>
+            <TableRowColumn style={{backgroundColor:'#B0BEC5', color: 'black',}}><img src={track.images[2].url} /> {track.name}</TableRowColumn>
             <TableRowColumn style={{backgroundColor:'#B0BEC5', color: 'white',}}><PlayCircleFilled onClick={() => this.props.playSong(track.uri)}>Play</PlayCircleFilled></TableRowColumn>
             <TableRowColumn style={{backgroundColor:'#B0BEC5', color: 'white',}}><select id={'playlistDropdown'+track.uri}><option value='default'>Pick a Playlist</option>{this.props.playlistDropdown.map(function(playlist){
               return(<option value={playlist.Name}>{playlist.Name}</option>)
             })}></select></TableRowColumn>
-            <TableRowColumn style={{backgroundColor:'#B0BEC5', color: 'white',}}><PlaylistAdd onClick={() => {let p = 'playlistDropdown'+track.uri; saveToPlaylist(document.getElementById(p).value, {artist:track.artists[0].name, album:track.name, uri:track.uri})}}>Add to playlist</PlaylistAdd></TableRowColumn>
+            <TableRowColumn style={{backgroundColor:'#B0BEC5', color: 'white',}}><PlaylistAdd onClick={() => {let p = 'playlistDropdown'+track.uri; saveToPlaylist(document.getElementById(p).value, {artist:track.artists[0].name, album:track.name, uri:track.uri, image: track.images[2].url})}}>Add to playlist</PlaylistAdd></TableRowColumn>
           </TableRow>
        )
     })

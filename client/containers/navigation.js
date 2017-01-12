@@ -48,7 +48,7 @@ handleToggle = () => this.setState({open: !this.state.open});
   // console.log("Container")
   // let profile = <a href="/profile"></a>
    return (
-
+  
     <AppBar
      style={styles.bar}
       title="Rhino Music"

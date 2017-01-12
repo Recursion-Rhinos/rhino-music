@@ -87,7 +87,7 @@ class UserPlaylists extends Component {
         return (
           <TableRow key={songData.id}>
             <TableRowColumn>{songData.song.artist}</TableRowColumn>
-            <TableRowColumn>{songData.song.album}</TableRowColumn>
+            <TableRowColumn><img src={songData.song.image} />{songData.song.album}</TableRowColumn>
             <TableRowColumn>
               <PlayCircleFilled onClick={() => this.props.playSong(songData.song.uri)}>Play</PlayCircleFilled>
             </TableRowColumn>
