@@ -147,7 +147,7 @@ handleChange (event) {
       deselectOnClickaway={this.state.deselectOnClickaway}
       stripedRows={this.state.stripedRows}
     >
-      {this.renderEvents(this.props.allEvents)}
+     {this.renderEvents(this.props.allEvents)}
     </TableBody> 
     </Table>  
     </div> 

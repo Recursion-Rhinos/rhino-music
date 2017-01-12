@@ -27,6 +27,7 @@ const style = {
     display: 'inline-block',
     float: 'left',
     margin: '16px 32px 16px 0',
+    paddingLeft: 5
   }
 };
 

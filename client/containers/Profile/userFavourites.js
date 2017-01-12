@@ -43,16 +43,10 @@ class Favourites extends Component {
       height: '300px',
     };
     this.componentWillMount = this.componentWillMount.bind(this);
-    // this.test = this.props.getEvents()
-    // this.getUserEvents = this.getUserEvents.bind(this);
-    // this.componentDidMount = this.componentDidMount.bind(this);
  }
 
 componentWillMount() {
-    this.props.getAllPlaylists();
-    // this.getUserEvents();
-    this.props.getEvents();
-    console.log("getEvents return a promise: => ", this.props.allEvents)
+  this.props.getAllPlaylists();
 }
 
 componentDidReceiveProps(nextProps) {
@@ -85,37 +79,8 @@ handleChange (event) {
     }
   }
 
-  renderEvents(events) {
-    // console.log("EVEEENTSSSS", JSON.parse(events));
-    const data = [];
-    events.forEach((arr) => {
-      arr.forEach((obj) => {
-        data.push(obj);
-      });
-    });
-    data.forEach((ele) => {
-      console.log("JSON PARSEEEEEEEEE", ele);
-      if (typeof ele.event === "string") {
-      ele.event = JSON.parse(ele.event);
-      }
-    })
-     console.log("DATAAAAAAAAAAA", data)
-    return data.map((el, idx) =>{
-      console.log("+++++++++++++++++++++++++++", el)
-      return (
-      <TableRow  key={el + (idx + Math.random())} >
-        <TableRowColumn >{ idx }</TableRowColumn>
-        <TableRowColumn>{el.event.name}</TableRowColumn>
-        <TableRowColumn>{el.event.location[0]}</TableRowColumn>
-        <TableRowColumn><a href={el.event.link}><button onClick={() => 'location.href=`${el.event.link}`'}>Reserve</button></a></TableRowColumn>
-        <TableRowColumn><button onClick={() => {this.props.removeEvent(el.id); this.props.getEvents()}}>Remove</button></TableRowColumn> 
-      </TableRow>
-      )  
-    });
-  }
-   //NEED STYLING!!!
   render () {
-    console.log("SVETDaVeT Playlist", this.props)
+   console.log("SVETDaVeT Playlist", this.props)
    return (
     <div>
       <div className="playlists">
@@ -152,42 +117,6 @@ handleChange (event) {
     </TableBody> 
     </Table>       
     </div>
-    <div className="events">
-    <Table
-      height={this.state.height}
-      fixedHeader={this.state.fixedHeader}
-      fixedFooter={this.state.fixedFooter}
-      selectable={this.state.selectable}
-      multiSelectable={this.state.multiSelectable}
-    >
-    <TableHeader
-      displaySelectAll={this.state.showCheckboxes}
-      adjustForCheckbox={this.state.showCheckboxes}
-      enableSelectAll={this.state.enableSelectAll}
-    >
-    <TableRow>
-    <TableHeaderColumn colSpan="5" tooltip="EVENTS" style={{textAlign: 'center'}}>
-      EVENTS
-    </TableHeaderColumn>
-    </TableRow>
-    <TableRow>
-      <TableHeaderColumn tooltip="The ID">ID</TableHeaderColumn>
-      <TableHeaderColumn tooltip="The Name">Name</TableHeaderColumn>
-      <TableHeaderColumn tooltip="The Location">Location</TableHeaderColumn>
-      <TableHeaderColumn tooltip="The Reservation">Reserve</TableHeaderColumn>
-      <TableHeaderColumn tooltip="Delete">Delete</TableHeaderColumn>
-    </TableRow>
-    </TableHeader>
-    <TableBody
-      showRowHover={this.state.showRowHover}
-      displayRowCheckbox={this.state.showCheckboxes}
-      deselectOnClickaway={this.state.deselectOnClickaway}
-      stripedRows={this.state.stripedRows}
-    >
-      {this.renderEvents(this.props.allEvents)}
-    </TableBody> 
-    </Table>  
-    </div> 
     </div>  
     );
   }
@@ -196,7 +125,7 @@ handleChange (event) {
 function mapStateToProps(state) {
   console.log("STATE IN FAVOURITES", state);
   return {
-    allEvents: state.allEvents,
+    // allEvents: state.allEvents,
     playlists: state.getAllPlaylists
   }
 }
@@ -206,6 +135,6 @@ function mapStateToProps(state) {
 // }
 
 // export default connect(mapStateToProps, mapDispatchToProps)(Favourites);
-export default connect(mapStateToProps, { getAllPlaylists, getEvents, removeEvent })(Favourites);
+export default connect(mapStateToProps, { getAllPlaylists })(Favourites);
 
 
