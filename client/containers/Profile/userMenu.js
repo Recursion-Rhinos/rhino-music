@@ -16,8 +16,11 @@ import ContentCopy from 'material-ui/svg-icons/content/content-copy';
 import Download from 'material-ui/svg-icons/file/file-download';
 import Delete from 'material-ui/svg-icons/action/delete';
 import FontIcon from 'material-ui/FontIcon';
-import Verified from 'material-ui/svg-icons/action/verified-user';
-
+import Settings from 'material-ui/svg-icons/action/settings';
+import Account from 'material-ui/svg-icons/action/account-circle';
+import Exit from 'material-ui/svg-icons/action/exit-to-app';
+import Events from 'material-ui/svg-icons/action/record-voice-over';
+import Playlist from 'material-ui/svg-icons/av/playlist-play';
 
 const style = {
   paper: {
@@ -46,12 +49,11 @@ render () {
       <div>
       <Paper style={style.paper}>
       <Menu>
-        <MenuItem primaryText={this.props.userInfo.username} leftIcon={<Verified />} />
-        <MenuItem primaryText="Basic Details" onClick={() => this.props.changeSelected('settings')} leftIcon={<PersonAdd />} />
-        <MenuItem primaryText="Playlists" onClick={() => this.props.changeSelected('playlists')} leftIcon={<ContentLink />} />
-        <Divider />
-        <MenuItem primaryText="Events" leftIcon={<ContentCopy />} />
-        <MenuItem primaryText="Exit " leftIcon={<Download />} />
+        <MenuItem primaryText={this.props.userInfo.username} leftIcon={<Account />} />
+        <MenuItem primaryText="Basic Details" onClick={() => this.props.changeSelected('settings')} leftIcon={<Settings />} />
+        <MenuItem primaryText="Playlists" onClick={() => this.props.changeSelected('playlists')} leftIcon={<Playlist />} />
+        <MenuItem primaryText="Events" leftIcon={<Events />} />
+        <MenuItem leftIcon={<Exit />}> <a href='/logout'> Exit </a></MenuItem>
       </Menu>
       </Paper>
       </div>
