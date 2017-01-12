@@ -124,9 +124,10 @@ render() {
   console.log("PROPS in USERSETTING", this.props)
   return (
     <Flexbox style={styles.flex}>
+    <h3> Change User Settings </h3>
   	<form style={{display: this.state.active}}  onSubmit={this.handleSubmit}>
        <TextField   
-        hintText="Hint Text" 
+        hintText="New Username" 
         floatingLabelText="Username" 
         underlineFocusStyle={styles.underlineStyle}
         floatingLabelFocusStyle={styles.floatingLabelFocusStyle}
@@ -135,22 +136,22 @@ render() {
        /> <br />
        <br />
       <TextField 
-       hintText="Hint Text" 
+       hintText="New Password" 
        underlineFocusStyle={styles.underlineStyle}
        floatingLabelFocusStyle={styles.floatingLabelFocusStyle}
        floatingLabelText="Password" 
        value={this.state.password}
        onChange={this.onPasswordInputChange}
        /> <br />
-       <br /> 
+       
       <TextField 
-       hintText="Hint Text" 
+       hintText="Change E-mail Address" 
        underlineFocusStyle={styles.underlineStyle}
        floatingLabelFocusStyle={styles.floatingLabelFocusStyle}
        floatingLabelText="Email" 
        value={this.state.email}
        onChange={this.onEmailInputChange}
-       />
+       /><br /> <br /> 
       <FlatButton 
        label="Submit"
        backgroundColor='#00B0FF'
