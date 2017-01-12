@@ -52,7 +52,7 @@ handleToggle = () => this.setState({open: !this.state.open});
     <AppBar
      style={styles.bar}
       title="Rhino Music"
-      titleStyle={styles.largeIcon}
+      titleStyle={{ color: 'white', fontFamily: 'Bungee Shade, cursive', fontSize: '60px' }}
       iconElementLeft={<div> <Dashboard style={styles.largeIcon} onTouchTap={this.handleToggle}/> <Drawer
           docked={false}
           width={200}
@@ -67,11 +67,7 @@ handleToggle = () => this.setState({open: !this.state.open});
           <MenuItem><a style={{color:'black'}} href='/logout'>Logout</a></MenuItem>
         </Drawer></div>}
       onTitleTouchTap = {()=> {hashHistory.push("/")}}
-      iconElementRight = {
-       <div>
-       
-       </div>
-     }
+     
     />
 
   )
