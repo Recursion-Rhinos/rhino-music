@@ -16,6 +16,7 @@ import Dashboard from 'material-ui/svg-icons/av/queue-music';
 import Drawer from 'material-ui/Drawer';
 import MenuItem from 'material-ui/MenuItem';
 import Logout from '../actions/logout.js';
+import GetUser from '../actions/currentUser.js';
 
 export const teal900 = '#004D40';
 
@@ -35,7 +36,7 @@ const styles = {
 class Navigation extends Component {
   constructor(props) {
     super(props);
- 
+    this.props.GetUser();
     this.state = {open: false};
   }
 
@@ -52,7 +53,7 @@ handleToggle = () => this.setState({open: !this.state.open});
     <AppBar
      style={styles.bar}
       title="Rhino Music"
-      titleStyle={styles.largeIcon}
+      titleStyle={{ color: 'white', fontFamily: 'Bungee Shade, cursive', fontSize: '60px' }}
       iconElementLeft={<div> <Dashboard style={styles.largeIcon} onTouchTap={this.handleToggle}/> <Drawer
           docked={false}
           width={200}
@@ -64,14 +65,10 @@ handleToggle = () => this.setState({open: !this.state.open});
           <MenuItem onTouchTap={this.handleClose} containerElement={<Link to="/Events"/>} >Events</MenuItem>
           <MenuItem onTouchTap={this.handleClose} containerElement={<Link to="/Youtube"/>} >Videos</MenuItem>
           <MenuItem onTouchTap={this.handleClose} containerElement={<Link to="/News"/>} >News</MenuItem>
-          <MenuItem><a href='/logout'>Logout</a></MenuItem>
+          <MenuItem><a style={{color:'black'}} href='/logout'>Logout</a></MenuItem>
         </Drawer></div>}
       onTitleTouchTap = {()=> {hashHistory.push("/")}}
-      iconElementRight = {
-       <div>
-       
-       </div>
-     }
+      iconElementRight={<div style={{color:'white', 'padding-right': '10px', 'padding-top': '15px'}}>Welcome, {this.props.user.username}!</div>}
     />
 
   )
@@ -84,9 +81,10 @@ function mapStateToProps(state) {
   	tracks: state.tracks,
   	playSong: state.playSong,
     events: state.events,
-    getPlaylists: state.playlists
+    getPlaylists: state.playlists, 
+    user: state.userInfo
   }; 
 
 }
 
-export default connect(mapStateToProps, { getPlaylists, Logout })(Navigation);
+export default connect(mapStateToProps, { getPlaylists, Logout, GetUser })(Navigation);

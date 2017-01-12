@@ -6,12 +6,14 @@ import axios from 'axios';
 import { videoPlaylist } from '../actions/videoPlaylist';
 import  getDropDown  from '../actions/playlistDropdown';
 import Flexbox from 'flexbox-react';
-
-const styles = {
-
-
-
-}
+import RaisedButton from 'material-ui/RaisedButton';
+export const red400 = '#ef5350';
+const style = {
+  margin: 12,
+  flex: {flexDirection:"column-reverse", alignItems: "center"},
+  button: { backgroundColor:"#ef5350"},
+  innerFlex: {alignItems: "space-between"}
+};
 
 class VideoPlayer extends Component {
   constructor(props) {
@@ -37,10 +39,9 @@ let videoIds;
 let vidIds;
 let autoplay;
 let playlist =[];
+let firstVid;
 
-if(this.props.playVideo) {
-  autoplay = this.props.playVideo+"?autoplay=1";
-}
+
 
 // console.log("PLAYAAAAAA", this.props.videos[0]);
 
@@ -52,6 +53,9 @@ if(this.props.videos.length > 0 && !this.flag) {
   });
 
   playlist = vidIds;
+
+  firstVid = playlist.shift()
+
   // console.log("THIS IS THE VIDEO LIST OF IDs", playlist);
 }
 
@@ -59,25 +63,32 @@ if(this.props.videos.length > 0 && !this.flag) {
 else if(this.props.videofyVideos && this.flag) {
   playlist = this.props.videofyVideos;
 
+  firstVid = playlist.shift()
   
-  // console.log("THIS IS THE FIRST VID", playlist[0])
-  };
+} else if(this.props.playVideo) {
+
+  autoplay = this.props.playVideo+"?autoplay=1";
+
+  firstVid = this.props.playVideo;
+
+}
 
   // console.log("THIS IS THE VIDEOfy LIST OF IDs", playlist);
         
   return (
-    <Flexbox>
-      <div className="video-detail col-md-5">
+    <Flexbox style={style.flex}>
         <div className="embed-responsive embed-responsive-16by9">
-          <iframe className="embed-responsive-item" src={this.props.playVideo ? autoplay : `https://www.youtube.com/v/${playlist.shift()}?&playlist=${playlist}&autoplay=1`}></iframe>
+          <iframe className="embed-responsive-item" src={`https://www.youtube.com/v/${firstVid}?&playlist=${playlist}&autoplay=1`}></iframe>
         </div>
         <div className="details">
-          <div></div>
+          <div> </div>
+     <Flexbox>
         <div><select id={'playlistDropdown'}><option value='default'>Pick a Playlist</option>{this.props.dropdown.map(function(playlistDD){
               return(<option value={playlistDD.Name}>{playlistDD.Name}</option>)
-            })}></select></div>
-        <div><button onClick={() => { this.flag = true; let p = 'playlistDropdown'; this.props.videoPlaylist(document.getElementById(p).value)}}>Videofy</button></div>  
+            })}></select>
         </div>
+        <RaisedButton label="V I D E O F Y" toolTip="TURN YOUR PLAYLIST OF SONGS INTO A PLAYLIST OF VIDEOS" width="500" color="white" backgroundColor='#ef5350' onClick={() => { this.flag = true; let p = 'playlistDropdown'; this.props.videoPlaylist(document.getElementById(p).value)}}/> 
+    </Flexbox>
       </div>
     </Flexbox>
     )

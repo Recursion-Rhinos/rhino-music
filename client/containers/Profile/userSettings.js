@@ -7,6 +7,27 @@ import { changeEmail } from '../../actions/userSettings';
 import { toggleUser} from '../../actions/toggleUser';
 import TextField from 'material-ui/TextField';
 import FlatButton from 'material-ui/FlatButton';
+import {orange500} from 'material-ui/styles/colors';
+import Flexbox from 'flexbox-react';
+
+
+const styles = {
+  errorStyle: {
+    color: orange500,
+  },
+  underlineStyle: {
+    borderColor: '#9b59b6',
+  },
+  floatingLabelStyle: {
+    color: '#9b59b6',
+  },
+  floatingLabelFocusStyle: {
+    color: '#9b59b6',
+  },
+  flex: {
+  'justify-content': 'center',
+  }  
+};
 
 
 class UserSettings extends Component {
@@ -19,10 +40,7 @@ class UserSettings extends Component {
       email: '',
       active: false
     };
-  // this.clickFunc() => {
-  //   this.setState({active: true});
-  // }
-  // this.props.toggleUser()
+
   this.onUserInputChange = this.onUserInputChange.bind(this);
   this.onPasswordInputChange = this.onPasswordInputChange.bind(this);
   this.onEmailInputChange = this.onEmailInputChange.bind(this);
@@ -100,19 +118,24 @@ render() {
   if(typeof hideForm === 'function') {
     hideForm();
   }
-  console.log("BITCHEEEESSSSSSSSSSSSS", this.hideForm)
+  
   console.log("PROPS in USERSETTING", this.props)
   return (
-  	<form style={{display: this.state.active}} onSubmit={this.handleSubmit}>
+    <Flexbox style={styles.flex}>
+  	<form style={{display: this.state.active}}  onSubmit={this.handleSubmit}>
        <TextField   
         hintText="Hint Text" 
         floatingLabelText="Username" 
+        underlineFocusStyle={styles.underlineStyle}
+        floatingLabelFocusStyle={styles.floatingLabelFocusStyle}
         value={this.state.username}
         onChange={this.onUserInputChange} 
        /> <br />
        <br />
       <TextField 
        hintText="Hint Text" 
+       underlineFocusStyle={styles.underlineStyle}
+       floatingLabelFocusStyle={styles.floatingLabelFocusStyle}
        floatingLabelText="Password" 
        value={this.state.password}
        onChange={this.onPasswordInputChange}
@@ -120,12 +143,18 @@ render() {
        <br /> 
       <TextField 
        hintText="Hint Text" 
+       underlineFocusStyle={styles.underlineStyle}
+       floatingLabelFocusStyle={styles.floatingLabelFocusStyle}
        floatingLabelText="Email" 
        value={this.state.email}
        onChange={this.onEmailInputChange}
        />
-      <FlatButton label="Submit" primary={true} />
+      <FlatButton 
+       label="Submit"
+       backgroundColor='#9b59b6'
+       />
     </form>
+    </Flexbox>
    )
  }
 }

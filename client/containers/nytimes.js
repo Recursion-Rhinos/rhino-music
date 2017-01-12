@@ -26,12 +26,12 @@ class SearchNews extends Component {
     return (
       <div 
         key={el.source.concat(idx + Math.random())}
-        className="col-md-3"
+        className="col-md-4"
         > 
         <a href={el.web_url}>
         <img src={`http://nytimes.com/${el.multimedia[0].url}`} width="190" height="130"/> 
         </a>
-        {el.headline.main} 
+        <div style={{'line-height': '20px', width: "190", 'padding-bottom': '10px'}}>{el.headline.main}</div>
       </div>
      )
    })
