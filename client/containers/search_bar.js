@@ -15,6 +15,12 @@ const style = {
   margin: 20,
   textAlign: 'center',
   display: 'inline-block',
+  form: {
+    paddingLeft: 5,
+    paddingRight: 5,
+    paddingTop: 5,
+    paddingBottom: 5
+  }
 };
 
 class SearchBar extends Component {
@@ -49,8 +55,8 @@ class SearchBar extends Component {
 
   render() {
     return (
-    <Paper style={style} >
-      <form onSubmit={this.onFormSubmit} className="input-group">
+   
+      <form style={style.form} onSubmit={this.onFormSubmit} className="input-group">
           <input 
             placeholder="search for artist or album"
             className="form-control"
@@ -60,7 +66,7 @@ class SearchBar extends Component {
             <button type="submit" className="btn btn-secondary">Search</button>
           </span>
       </form>
-    </Paper>
+   
     )
   }
 }
