@@ -7,13 +7,10 @@ import NYTimesData from './nytimes';
 class SearchNews extends Component {
   constructor(props) {
     super(props);
-    // console.log("NYTimes props =>", this.props);
     this.renderNews = this.renderNews.bind(this);
   }
 
   renderNews(news) {
-  // console.log("RENDERNEWS", this.props)
-  // console.log("NEWS", news);
   let renderedNews = this.props.news  
     .filter((news) => news.multimedia.length > 0) //sorting the news with multimedia
     // .map((img) => img.multimedia[0].url);
@@ -23,13 +20,14 @@ class SearchNews extends Component {
   //news.map((text) => text.headline.main); //Have to fix this one
   return (
     renderedNews.map((el, idx) => { 
+      console.log("NYTIMES IMAGES", el)
     return (
       <div 
         key={el.source.concat(idx + Math.random())}
         className="col-md-3"
         > 
         <a href={el.web_url}>
-        <img src={`http://nytimes.com/${el.multimedia[0].url}`} width="190" height="130"/> 
+        <img src={`http://nytimes.com/${el.multimedia[0].url}`} width="220" height="160"/> 
         </a>
         {el.headline.main} 
       </div>
