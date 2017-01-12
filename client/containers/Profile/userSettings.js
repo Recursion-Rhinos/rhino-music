@@ -17,7 +17,7 @@ class UserSettings extends Component {
       username: '',
       password: '',
       email: '',
-      active: 'none'
+      active: false
     };
   // this.clickFunc() => {
   //   this.setState({active: true});
@@ -104,7 +104,7 @@ render() {
   console.log("PROPS in USERSETTING", this.props)
   return (
   	<form style={{display: this.state.active}} onSubmit={this.handleSubmit}>
-       <TextField 
+       <TextField   
         hintText="Hint Text" 
         floatingLabelText="Username" 
         value={this.state.username}
