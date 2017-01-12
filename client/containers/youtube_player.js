@@ -9,7 +9,7 @@ import Flexbox from 'flexbox-react';
 
 const styles = {
 
-
+flex: {justifyContent:"center"}
 
 }
 
@@ -66,7 +66,7 @@ else if(this.props.videofyVideos && this.flag) {
   // console.log("THIS IS THE VIDEOfy LIST OF IDs", playlist);
         
   return (
-    <Flexbox>
+    <Flexbox style={styles.flex} >
       <div className="video-detail col-md-5">
         <div className="embed-responsive embed-responsive-16by9">
           <iframe className="embed-responsive-item" src={this.props.playVideo ? autoplay : `https://www.youtube.com/v/${playlist.shift()}?&playlist=${playlist}&autoplay=1`}></iframe>
@@ -76,7 +76,7 @@ else if(this.props.videofyVideos && this.flag) {
         <div><select id={'playlistDropdown'}><option value='default'>Pick a Playlist</option>{this.props.dropdown.map(function(playlistDD){
               return(<option value={playlistDD.Name}>{playlistDD.Name}</option>)
             })}></select></div>
-        <div><button onClick={() => { this.flag = true; this.props.playVideo = false; let p = 'playlistDropdown'; this.props.videoPlaylist(document.getElementById(p).value)}}>Videofy</button></div>  
+        <div><button onClick={() => { this.flag = true; let p = 'playlistDropdown'; this.props.videoPlaylist(document.getElementById(p).value)}}>Videofy</button></div>  
         </div>
       </div>
     </Flexbox>
