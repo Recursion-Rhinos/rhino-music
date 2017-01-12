@@ -16,7 +16,7 @@ const style = {
   height: "auto",
   margin: 20,
   textAlign: 'center',
-  display: 'inline-block',
+  display: 'inline-block'
 };
 class SearchList extends Component {
   constructor(props) {  //no need of it if there is a stateless component
@@ -73,13 +73,13 @@ class SearchList extends Component {
         return (
       
           <TableRow key={Math.random() * 100}>
-            <TableRowColumn style={{backgroundColor:'#B0BEC5', color: 'black',}}>{track.artists[0].name}</TableRowColumn>
-            <TableRowColumn style={{backgroundColor:'#B0BEC5', color: 'black',}}>{track.name}</TableRowColumn>
+            <TableRowColumn style={{backgroundColor:'#B0BEC5', color: 'black',}}><p style={{ color: 'white', fontFamily: 'Teko, cursive', fontSize: '28px' }}>{track.artists[0].name}</p></TableRowColumn>
+            <TableRowColumn style={{backgroundColor:'#B0BEC5', color: 'black',}}><img src={track.images[2].url} /><p style={{ color: 'white', fontFamily: 'Teko, cursive', fontSize: '26px' }}>{track.name}</p></TableRowColumn>
             <TableRowColumn style={{backgroundColor:'#B0BEC5', color: 'white',}}><PlayCircleFilled onClick={() => this.props.playSong(track.uri)}>Play</PlayCircleFilled></TableRowColumn>
             <TableRowColumn style={{backgroundColor:'#B0BEC5', color: 'white',}}><select id={'playlistDropdown'+track.uri}><option value='default'>Pick a Playlist</option>{this.props.playlistDropdown.map(function(playlist){
               return(<option value={playlist.Name}>{playlist.Name}</option>)
             })}></select></TableRowColumn>
-            <TableRowColumn style={{backgroundColor:'#B0BEC5', color: 'white',}}><PlaylistAdd onClick={() => {let p = 'playlistDropdown'+track.uri; saveToPlaylist(document.getElementById(p).value, {artist:track.artists[0].name, album:track.name, uri:track.uri})}}>Add to playlist</PlaylistAdd></TableRowColumn>
+            <TableRowColumn style={{backgroundColor:'#B0BEC5', color: 'white',}}><PlaylistAdd onClick={() => {let p = 'playlistDropdown'+track.uri; saveToPlaylist(document.getElementById(p).value, {artist:track.artists[0].name, album:track.name, uri:track.uri, image: track.images[2].url})}}>Add to playlist</PlaylistAdd></TableRowColumn>
           </TableRow>
        )
     })
@@ -97,11 +97,11 @@ class SearchList extends Component {
       <TableBody displayRowCheckbox={false}>
        { console.log("search_results_list => this.props", this.props)}
     <TableRow>
-          <TableHeaderColumn style={{backgroundColor:'#673AB7', color: 'white',}}> Artist </TableHeaderColumn>
-          <TableHeaderColumn style={{backgroundColor:'#673AB7', color: 'white',}}> Album </TableHeaderColumn>
-          <TableHeaderColumn style={{backgroundColor:'#673AB7', color: 'white',}}> Play </TableHeaderColumn>
-          <TableHeaderColumn style={{backgroundColor:'#673AB7', color: 'white',}}>Playlist Dropdown</TableHeaderColumn>
-          <TableHeaderColumn style={{backgroundColor:'#673AB7', color: 'white',}}>Add to Playlist</TableHeaderColumn>
+          <TableHeaderColumn style={{backgroundColor:'#673AB7', color: 'white',}}> <p style={{ color: 'white', fontFamily: 'VT323, cursive', fontSize: '30px' }}> Artist </p></TableHeaderColumn>
+          <TableHeaderColumn style={{backgroundColor:'#673AB7', color: 'white',}}> <p style={{ color: 'white', fontFamily: 'VT323, cursive', fontSize: '30px' }}>  Album </p></TableHeaderColumn>
+          <TableHeaderColumn style={{backgroundColor:'#673AB7', color: 'white',}}> <p style={{ color: 'white', fontFamily: 'VT323, cursive', fontSize: '30px' }}> Play </p></TableHeaderColumn>
+          <TableHeaderColumn style={{backgroundColor:'#673AB7', color: 'white',}}> <p style={{ color: 'white', fontFamily: 'VT323, cursive', fontSize: '30px' }}> Playlist Dropdown</p></TableHeaderColumn>
+          <TableHeaderColumn style={{backgroundColor:'#673AB7', color: 'white',}}> <p style={{ color: 'white', fontFamily: 'VT323, cursive', fontSize: '30px' }}> Add to Playlist</p></TableHeaderColumn>
       </TableRow>
           {this.renderAlbums()}
       </TableBody>

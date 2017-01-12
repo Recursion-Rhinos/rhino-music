@@ -44,11 +44,10 @@ return (
 		return (
        <TableRow key={Math.random() * 100}>
 	       
-         <TableRowColumn style={{backgroundColor:'#B0BEC5', color: 'black'}}>{event.displayName}</TableRowColumn>
-         <TableRowColumn style={{backgroundColor:'#B0BEC5', color: 'black'}}>{event.location.city}</TableRowColumn>
-         <TableRowColumn style={{backgroundColor:'#B0BEC5', color: 'black'}}><GoogleMap lat={event.location.lat} lon={event.location.lng} /></TableRowColumn>
-       <TableRowColumn style={{backgroundColor:'#B0BEC5', color: 'white'}}><a href={event.uri}><RaisedButton style ={style.button} onClick={() => 'location.href=`${event.uri}`'}> Buy Now </RaisedButton></a></TableRowColumn>
-       <TableRowColumn style={{backgroundColor:'#B0BEC5', color: 'white'}}><RaisedButton style ={style.button} onClick={() => {saveEvent( {name:event.displayName, link: event.uri, location: [event.location.city, {lat: event.location.lat, lon: event.location.lng}] } ) }}> Save </RaisedButton></TableRowColumn>
+         <TableRowColumn style={{backgroundColor:'#B0BEC5', color: 'black'}}><p style={{ color: 'white', fontFamily: 'Teko, cursive', fontSize: '26px' }}>{event.displayName}</p></TableRowColumn>
+         <TableRowColumn style={{backgroundColor:'#B0BEC5', color: 'black'}}><p style={{ color: 'white', fontFamily: 'Teko, cursive', fontSize: '26px' }}>{event.location.city}</p></TableRowColumn>
+       <TableRowColumn style={{backgroundColor:'#B0BEC5', color: 'white'}}><a href={event.uri}><RaisedButton backgroundColor="#B2FF59" style ={style.button} onClick={() => 'location.href=`${event.uri}`'}> Buy Now </RaisedButton></a></TableRowColumn>
+       <TableRowColumn style={{backgroundColor:'#B0BEC5', color: 'white'}}><RaisedButton backgroundColor="#03A9F4" style ={style.button} onClick={() => {saveEvent( {name:event.displayName, link: event.uri, location: [event.location.city, {lat: event.location.lat, lon: event.location.lng}] } ) }}> Save </RaisedButton></TableRowColumn>
       	
       </TableRow>
 		)
@@ -64,11 +63,10 @@ return (
   <TableBody displayRowCheckbox={false}>
 
     <TableRow key={Math.random() * 100}>
-      <TableHeaderColumn style={{backgroundColor:'#673AB7', color: 'white'}}> Event</TableHeaderColumn>
-      <TableHeaderColumn style={{backgroundColor:'#673AB7', color: 'white'}}> Location </TableHeaderColumn>
-      <TableHeaderColumn style={{backgroundColor:'#673AB7', color: 'white'}}> Maps </TableHeaderColumn>
-      <TableHeaderColumn style={{backgroundColor:'#673AB7', color: 'white'}}> Purchase </TableHeaderColumn>
-     <TableHeaderColumn style={{backgroundColor:'#673AB7', color: 'white'}}> Stay Woke </TableHeaderColumn>
+      <TableHeaderColumn style={{backgroundColor:'#673AB7', color: 'white'}}><p style={{ color: 'white', fontFamily: 'Teko, cursive', fontSize: '28px' }}> Event</p></TableHeaderColumn>
+      <TableHeaderColumn style={{backgroundColor:'#673AB7', color: 'white'}}><p style={{ color: 'white', fontFamily: 'Teko, cursive', fontSize: '28px' }}> Location </p></TableHeaderColumn>
+      <TableHeaderColumn style={{backgroundColor:'#673AB7', color: 'white'}}><p style={{ color: 'white', fontFamily: 'Teko, cursive', fontSize: '28px' }}> Purchase </p></TableHeaderColumn>
+     <TableHeaderColumn style={{backgroundColor:'#673AB7', color: 'white'}}><p style={{ color: 'white', fontFamily: 'Teko, cursive', fontSize: '28px' }}> Stay Woke </p></TableHeaderColumn>
   </TableRow>
       {this.renderEvents()}
   </TableBody>

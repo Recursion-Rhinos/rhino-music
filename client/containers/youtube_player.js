@@ -87,7 +87,7 @@ else if(this.props.videofyVideos && this.flag) {
               return(<option value={playlistDD.Name}>{playlistDD.Name}</option>)
             })}></select>
         </div>
-        <RaisedButton label="V I D E O F Y" toolTip="TURN YOUR PLAYLIST OF SONGS INTO A PLAYLIST OF VIDEOS" width="500" color="white" backgroundColor='#ef5350' onClick={() => { this.flag = true; let p = 'playlistDropdown'; this.props.videoPlaylist(document.getElementById(p).value)}}/> 
+        <RaisedButton label="V I D E O F Y" toolTip="TURN YOUR PLAYLIST OF SONGS INTO A PLAYLIST OF VIDEOS" color="white" backgroundColor='#d32f2f' onClick={() => { this.flag = true; let p = 'playlistDropdown'; this.props.videoPlaylist(document.getElementById(p).value)}}/> 
     </Flexbox>
       </div>
     </Flexbox>
