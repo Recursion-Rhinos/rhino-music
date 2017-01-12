@@ -10,8 +10,8 @@ export default class Youtube extends Component {
     return (
       <div>
         <Navigation />
-        <SearchBar />
         <MusicPlayer />
+        <SearchBar />
         <VideoPlayer />
         <VideoPlayList />
       </div>

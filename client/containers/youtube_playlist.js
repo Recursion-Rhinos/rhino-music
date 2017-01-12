@@ -6,6 +6,7 @@ import {GridList, GridTile} from 'material-ui/GridList';
 import IconButton from 'material-ui/IconButton';
 import Subheader from 'material-ui/Subheader';
 import PlayVid from 'material-ui/svg-icons/av/play-circle-outline';
+import Flexbox from 'flexbox-react';
 
 const styles = {
   root: {
@@ -59,6 +60,7 @@ class YoutubePlaylist extends Component {
 
 render () {
   return (
+<Flexbox>
   <GridList
       cellHeight={180}
       style={styles.gridList}
@@ -67,7 +69,7 @@ render () {
 	    	{this.renderList()}
 	    </div>
     </GridList>
-
+</Flexbox>
 	  );
   }
 }

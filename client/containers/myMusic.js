@@ -10,8 +10,8 @@ import { playSong } from '../actions/songs';
 import {Link} from 'react-router';
 import Flexbox from 'flexbox-react';
 import PlayCircleFilled from 'material-ui/svg-icons/av/play-circle-filled';
-import Delete from 'material-ui/svg-icons/action/delete-forever'
-import Remove from 'material-ui/svg-icons/content/remove-circle'
+import Delete from 'material-ui/svg-icons/action/delete-forever';
+import Remove from 'material-ui/svg-icons/content/remove-circle';
 
 
 const styles = {
