@@ -38,7 +38,6 @@ class Navigation extends Component {
     super(props);
     this.props.GetUser();
     this.state = {open: false};
-    console.log('NAVBAR USER ++++++++++++++++++++++', this.user)
   }
 
 handleToggle = () => this.setState({open: !this.state.open});
@@ -69,7 +68,7 @@ handleToggle = () => this.setState({open: !this.state.open});
           <MenuItem><a style={{color:'black'}} href='/logout'>Logout</a></MenuItem>
         </Drawer></div>}
       onTitleTouchTap = {()=> {hashHistory.push("/")}}
-      iconElementRight={<div style={{color:'white', 'padding-left': '10px'}}>Welcome, {this.props.user.username}!</div>}
+      iconElementRight={<div style={{color:'white', 'padding-right': '10px', 'padding-top': '15px'}}>Welcome, {this.props.user.username}!</div>}
     />
 
   )
