@@ -29,6 +29,11 @@ class UserPlaylists extends Component {
     this.state = null;
     this.playlistId = null;
     this.playlistName = null;
+    setInterval(() => {
+      if(this.playlistName !== null) {
+        this.props.getPlaylistSongs(this.playlistName);
+      }
+    }, 5000);
     this.newPlaylist = this.newPlaylist.bind(this);
     this.deletePlaylists = this.deletePlaylist.bind(this);
     this.renderSongs = this.renderSongs.bind(this);
