@@ -27,16 +27,23 @@ class UserPlaylists extends Component {
     this.state = null;
     this.playlistId = null;
     this.playlistName = null;
+    setInterval(()=>this.renderSongs(this.props.getPlaylistSongs(this.playlistName)), 5000);
     this.newPlaylist = this.newPlaylist.bind(this);
     this.deletePlaylists = this.deletePlaylist.bind(this);
     this.renderSongs = this.renderSongs.bind(this);
     this.renderList = this.renderList.bind(this);
     this.componentWillMount = this.componentWillMount.bind(this);
     this.deleteSong = this.deleteSong.bind(this);
+    this.cellClicked = this.cellClicked.bind(this);
   }
 
   componentWillMount() {
     this.props.getPlaylists();
+  }
+  componentDidMount(){
+    if(this.playlistName) {
+      this.renderSongs(this.props.getPlaylistSongs(this.playlistName));
+    }
   }
 
   deletePlaylist(playlistName) {
@@ -59,6 +66,15 @@ class UserPlaylists extends Component {
       console.log('Song Removed')
       this.renderSongs(this.props.getPlaylistSongs(this.playlistName))
     })
+  }
+
+  cellClicked(rowNum, colNum){
+    let index = rowNum-2;
+    let playlist = this.props.playlists[index];
+    console.log('playlist: ', playlist.Name)
+    this.playlistId = playlist.id;
+    this.playlistName = playlist.Name;
+    this.renderSongs(this.props.getPlaylistSongs(playlist.Name));
   }
 
   renderSongs(songs) {
@@ -87,12 +103,12 @@ class UserPlaylists extends Component {
     if(Array.isArray(playlists)){
       return playlists.map((playlist) => {
         return (
-          <TableRow key={playlist.id}>
+          <TableRow key={playlist.id} onClick={() => { console.log('HELLO????'); this.playlistId = playlist.id; this.playlistName= playlist.Name; this.renderSongs(this.props.getPlaylistSongs(playlist.Name))}}>
             <TableRowColumn>
               <Delete onClick={()=> { this.deletePlaylist(playlist.Name)}}></Delete>
             </TableRowColumn>
             <TableRowColumn>
-              <button onClick={() => { this.playlistId = playlist.id; this.playlistName= playlist.Name; this.renderSongs(this.props.getPlaylistSongs(playlist.Name))}}>{playlist.Name}</button>  
+              {playlist.Name} 
             </TableRowColumn>
           </TableRow>
         )
@@ -103,7 +119,7 @@ class UserPlaylists extends Component {
   render() {
     return (
     <Flexbox>
-        <Table>
+        <Table onCellClick={this.cellClicked} >
         <TableBody displayRowCheckbox={false}>
           <TableHeaderColumn style={{width: '20%'}} adjustForCheckbox={false}><input id='newPlaylist' type='text' placeholder='Create New Playlist' maxLength='15'/>
             <button onClick={() => {this.newPlaylist(document.getElementById('newPlaylist').value); document.getElementById('newPlaylist').value = '';}}>+</button></TableHeaderColumn>
