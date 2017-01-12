@@ -15,16 +15,18 @@ const styles = {
     justifyContent: 'space-around',
   },
   gridList: {
-    width: 500,
-    height: 450,
-    overflowY: 'auto',
+    display: 'flex',
+    flexWrap: 'nowrap',
+    overflowX: 'auto',
+  },
+  titleStyle: {
+    color: 'rgb(0, 188, 212)',
   },
   image: {
-    width: 480,
-    height: 360
+    width: 150,
+    height: 100
   }
 };
-
 class YoutubePlaylist extends Component {
 	constructor(props) {
 		super(props);
@@ -45,31 +47,36 @@ class YoutubePlaylist extends Component {
    	// console.log('THIS DA VIDEOZZZZZZZ: ', videosArray);
 
     return videosArray.map(video => (
-    <GridTile
+
+       <GridTile
           key={video.id.videoId}
           title={video.snippet.title}
-          actionIcon={<IconButton><PlayVid onClick={() => this.props.playVideo(video.id.videoId)} color="white" /> </IconButton>}
-        >
-  
-          <img style={styles.image} src={video.snippet.thumbnails.high.url} />
-
+          actionIcon={<IconButton><PlayVid onClick={() => this.props.playVideo(video.id.videoId)} color="white"/></IconButton>}
+          titleStyle={styles.titleStyle}
+          titleBackground="linear-gradient(to top, rgba(0,0,0,0.7) 0%,rgba(0,0,0,0.3) 70%,rgba(0,0,0,0) 100%)">
+          <img src={styles.image} src={video.snippet.thumbnails.default.url} />
+        
     </GridTile>
-    ));
+
+    )
+
+    );
   
   }
 
 render () {
   return (
-<Flexbox>
+<div style={styles.root}>
   <GridList
-      cellHeight={180}
+      cellHeight={100}
       style={styles.gridList}
+      cols={2.2}
     >
-	    <div className="row">
+	    
 	    	{this.renderList()}
-	    </div>
+	 
     </GridList>
-</Flexbox>
+</div>
 	  );
   }
 }
