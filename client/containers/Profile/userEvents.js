@@ -4,13 +4,12 @@ import { bindActionCreators } from 'redux';
 import { Table, TableBody, TableFooter, TableHeader, TableHeaderColumn, TableRow, TableRowColumn }from 'material-ui/Table';
 import TextField from 'material-ui/TextField';
 import Toggle from 'material-ui/Toggle';
-import getAllPlaylists  from '../../actions/getPlaylists';
 import getEvents  from '../../actions/profileEvents';
 import removeEvent from '../../actions/removeEvent';
 import RaisedButton from 'material-ui/RaisedButton';
-import {fullWhite} from 'material-ui/styles/colors';
 import ActionAndroid from 'material-ui/svg-icons/action/android';
 import FontIcon from 'material-ui/FontIcon';
+import {fullWhite} from 'material-ui/styles/colors'; // STYLING WITH MATERIAL UI
 
 
 const styles = {
@@ -22,11 +21,11 @@ const styles = {
   propToggleHeader: {
     margin: '20px auto 10px',
   },
-  margin: 12
+  margin: 12,
 };
 
 
-class Favourites extends Component {
+class Events extends Component {
   constructor(props) {
     super(props)
 
@@ -46,7 +45,10 @@ class Favourites extends Component {
  }
 
 componentWillMount() {
-  this.props.getAllPlaylists();
+    // this.props.getAllPlaylists();
+    // this.getUserEvents();
+    this.props.getEvents();
+    console.log("getEvents return a promise: => ", this.props.allEvents)
 }
 
 componentDidReceiveProps(nextProps) {
@@ -63,28 +65,42 @@ handleChange (event) {
   this.setState({height: event.target.value});
 };
 
-  renderPlaylists(playlists) {
-    console.log("PLAYLISTS INSINDE RENDERPLAYLISTS", playlists);
-    if(Array.isArray(playlists)) {
-      return playlists.map((el, idx) => {
-      console.log("PLAYLISTS", el);
-        return (
-        <TableRow key={el.Name}>
-          <TableRowColumn>{idx}</TableRowColumn>
-          <TableRowColumn>{el.Name}</TableRowColumn>
-          <TableRowColumn>{el.songCount}</TableRowColumn>
-        </TableRow>
-        );
-      }); 
-    }
+  renderEvents(events) {
+    // console.log("EVEEENTSSSS", JSON.parse(events));
+    const data = [];
+    events.forEach((arr) => {
+      arr.forEach((obj) => {
+        data.push(obj);
+      });
+    });
+    data.forEach((ele) => {
+      console.log("JSON PARSEEEEEEEEE", ele);
+      if (typeof ele.event === "string") {
+      ele.event = JSON.parse(ele.event);
+      }
+    })
+     console.log("DATAAAAAAAAAAA", data)
+    return data.map((el, idx) =>{
+      console.log("+++++++++++++++++++++++++++", el)
+      //<RaisedButton label="Primary" primary={true} style={style} />
+      return (
+      <TableRow  key={el + (idx + Math.random())} >
+        <TableRowColumn >{ idx }</TableRowColumn>
+        <TableRowColumn>{el.event.name}</TableRowColumn>
+        <TableRowColumn>{el.event.location[0]}</TableRowColumn>
+        <TableRowColumn><a href={el.event.link}><RaisedButton className="reserve" label="Reserve" backgroundColor="#a4c639" onClick={() => 'location.href=`${el.event.link}`'}></RaisedButton></a></TableRowColumn>
+        <TableRowColumn><RaisedButton label="Remove" style={styles} backgroundColor="#ef5350" onClick={() => {this.props.removeEvent(el.id); this.props.getEvents()}}/></TableRowColumn> 
+      </TableRow>
+      )  
+    });
   }
-
+   //NEED STYLING!!!
   render () {
-   console.log("SVETDaVeT Playlist", this.props)
+    console.log("SVETDaVeT Playlist", this.props)
    return (
     <div>
-      <div className="playlists">
-       <Table
+    <div className="events">
+    <Table
       height={this.state.height}
       fixedHeader={this.state.fixedHeader}
       fixedFooter={this.state.fixedFooter}
@@ -97,14 +113,16 @@ handleChange (event) {
       enableSelectAll={this.state.enableSelectAll}
     >
     <TableRow>
-    <TableHeaderColumn colSpan="3" tooltip="PLAYLISTS" style={{textAlign: 'center'}}>
-      PLAYLISTS
+    <TableHeaderColumn colSpan="5" tooltip="EVENTS" style={{textAlign: 'center'}}>
+      EVENTS
     </TableHeaderColumn>
     </TableRow>
     <TableRow>
       <TableHeaderColumn tooltip="The ID">ID</TableHeaderColumn>
       <TableHeaderColumn tooltip="The Name">Name</TableHeaderColumn>
-      <TableHeaderColumn tooltip="The Location">Songs</TableHeaderColumn>
+      <TableHeaderColumn tooltip="The Location">Location</TableHeaderColumn>
+      <TableHeaderColumn tooltip="The Reservation">Reserve</TableHeaderColumn>
+      <TableHeaderColumn tooltip="Delete">Delete</TableHeaderColumn>
     </TableRow>
     </TableHeader>
     <TableBody
@@ -113,10 +131,10 @@ handleChange (event) {
       deselectOnClickaway={this.state.deselectOnClickaway}
       stripedRows={this.state.stripedRows}
     >
-      {this.renderPlaylists(this.props.playlists)}
+     {this.renderEvents(this.props.allEvents)}
     </TableBody> 
-    </Table>       
-    </div>
+    </Table>  
+    </div> 
     </div>  
     );
   }
@@ -125,8 +143,8 @@ handleChange (event) {
 function mapStateToProps(state) {
   console.log("STATE IN FAVOURITES", state);
   return {
-    // allEvents: state.allEvents,
-    playlists: state.getAllPlaylists
+    allEvents: state.allEvents,
+    // playlists: state.getAllPlaylists
   }
 }
 
@@ -135,6 +153,6 @@ function mapStateToProps(state) {
 // }
 
 // export default connect(mapStateToProps, mapDispatchToProps)(Favourites);
-export default connect(mapStateToProps, { getAllPlaylists })(Favourites);
+export default connect(mapStateToProps, {getEvents, removeEvent })(Events);
 
 
