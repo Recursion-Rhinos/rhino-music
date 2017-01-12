@@ -4,6 +4,7 @@ import { bindActionCreators } from 'redux';
 import toggleUser from '../../actions/toggleUser';
 import Setting from './userSettings';
 import changeSelected  from '../../actions/changeSelected';
+import getUser from '../../actions/currentUser';
 import Paper from 'material-ui/Paper';
 import Menu from 'material-ui/Menu';
 import MenuItem from 'material-ui/MenuItem';
@@ -28,20 +29,24 @@ const style = {
 
 class Profile extends Component {
   constructor(props) {
-    super(props);
-  }	
+  super(props);
+  // this.User;
+  this.props.getUser();
+}	
 
 //Facebook image:
 //picture: profile.photos ? profile.photos[0].value : '/img/faces/unknown-user-pic.jpg'
 
 render () { 
   // let test = toggleSetting();
-  console.log("PROPS IN USER MENU", this.props)
+
+  // console.log("+++++++++++++++++++++", userName)
+  console.log("PROPS IN USER MENU", this.props.userInfo)
     return (
       <div>
       <Paper style={style.paper}>
       <Menu>
-        <MenuItem primaryText="Svetlin" leftIcon={<Verified />} />
+        <MenuItem primaryText={this.props.userInfo.username} leftIcon={<Verified />} />
         <MenuItem primaryText="Basic Details" onClick={() => this.props.changeSelected('settings')} leftIcon={<PersonAdd />} />
         <MenuItem primaryText="Playlists" onClick={() => this.props.changeSelected('playlists')} leftIcon={<ContentLink />} />
         <Divider />
@@ -53,15 +58,16 @@ render () {
     );
   }
 }
-export default connect(null, { changeSelected })(Profile);
 
-// function mapDispatchToProps(dispatch) {
-// return bindActionCreators({toogleUser}, dispatch);  
-// }
+function mapStateToProps(state) {
+  return {userInfo: state.userInfo}
+}
 
-// function mapStateToProps(state) {
-//   return {selected: state.selected}
-// }
+function mapDispatchToProps(dispatch) {
+return bindActionCreators({toogleUser, getUser}, dispatch);  
+}
+
+export default connect(mapStateToProps, { changeSelected, getUser })(Profile);
 
 // export default connect(mapStateToProps, { toggleUser })(Profile);
 // const changeSelected = (selected) => ({
