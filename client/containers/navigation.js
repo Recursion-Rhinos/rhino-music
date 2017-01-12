@@ -16,6 +16,7 @@ import Dashboard from 'material-ui/svg-icons/av/queue-music';
 import Drawer from 'material-ui/Drawer';
 import MenuItem from 'material-ui/MenuItem';
 import Logout from '../actions/logout.js';
+import GetUser from '../actions/currentUser.js';
 
 export const teal900 = '#004D40';
 
@@ -35,8 +36,9 @@ const styles = {
 class Navigation extends Component {
   constructor(props) {
     super(props);
- 
+    this.props.GetUser();
     this.state = {open: false};
+    console.log('NAVBAR USER ++++++++++++++++++++++', this.user)
   }
 
 handleToggle = () => this.setState({open: !this.state.open});
@@ -67,7 +69,7 @@ handleToggle = () => this.setState({open: !this.state.open});
           <MenuItem><a style={{color:'black'}} href='/logout'>Logout</a></MenuItem>
         </Drawer></div>}
       onTitleTouchTap = {()=> {hashHistory.push("/")}}
-     
+      iconElementRight={<div style={{color:'white', 'padding-left': '10px'}}>Welcome, {this.props.user.username}!</div>}
     />
 
   )
@@ -80,9 +82,10 @@ function mapStateToProps(state) {
   	tracks: state.tracks,
   	playSong: state.playSong,
     events: state.events,
-    getPlaylists: state.playlists
+    getPlaylists: state.playlists, 
+    user: state.userInfo
   }; 
 
 }
 
-export default connect(mapStateToProps, { getPlaylists, Logout })(Navigation);
+export default connect(mapStateToProps, { getPlaylists, Logout, GetUser })(Navigation);

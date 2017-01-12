@@ -1,5 +1,4 @@
 import axios from 'axios';
-import async from 'async';
 import { VIDEO_PLAYLIST } from '../constants/ActionTypes';
 export function videoPlaylist(playlistName) {
 
