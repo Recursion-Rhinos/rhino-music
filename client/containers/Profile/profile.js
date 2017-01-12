@@ -6,13 +6,14 @@ import { getEvents } from '../../actions/profileEvents';
 import {Link} from 'react-router';
 import Navigation from '../navigation';
 import UserFavourites from './userFavourites';
+import UserEvents from './userEvents'
 import UserMenu from './userMenu';
 import UserSettings from './userSettings';
 
 const components = {
   settings: <UserSettings />,
   playlists: <UserFavourites />,
-  events: <UserFavourites />
+  events: <UserEvents />
 };
 
 class Profile extends Component {	
@@ -21,7 +22,7 @@ class Profile extends Component {
       <div>
         <Navigation />
         <UserMenu />
-        {components[this.props.selected] || 'NONE'}           
+        {components[this.props.selected] || 'NONE'}          
       </div>
     );
   }

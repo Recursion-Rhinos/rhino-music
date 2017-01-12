@@ -52,7 +52,7 @@ render () {
         <MenuItem primaryText={this.props.userInfo.username} leftIcon={<Account />} />
         <MenuItem primaryText="Basic Details" onClick={() => this.props.changeSelected('settings')} leftIcon={<Settings />} />
         <MenuItem primaryText="Playlists" onClick={() => this.props.changeSelected('playlists')} leftIcon={<Playlist />} />
-        <MenuItem primaryText="Events" leftIcon={<Events />} />
+        <MenuItem primaryText="Events" onClick={() => this.props.changeSelected('events')} leftIcon={<Events />} />
         <MenuItem leftIcon={<Exit />}> <a href='/logout'> Exit </a></MenuItem>
       </Menu>
       </Paper>
