@@ -11,6 +11,7 @@ import RaisedButton from 'material-ui/RaisedButton';
 import {fullWhite} from 'material-ui/styles/colors';
 import ActionAndroid from 'material-ui/svg-icons/action/android';
 import FontIcon from 'material-ui/FontIcon';
+import Paper from 'material-ui/Paper';
 
 
 const styles = {
@@ -22,7 +23,14 @@ const styles = {
   propToggleHeader: {
     margin: '20px auto 10px',
   },
-  margin: 12
+  margin: 12,
+  paper: {
+    height: 100,
+    width: 100,
+    margin: 20,
+    textAlign: 'center',
+    display: 'inline-block',
+  }
 };
 
 
@@ -115,9 +123,10 @@ handleChange (event) {
     >
       {this.renderPlaylists(this.props.playlists)}
     </TableBody> 
-    </Table>       
+    </Table>   
     </div>
     </div>  
+  
     );
   }
 }
