@@ -4,13 +4,12 @@ import { bindActionCreators } from 'redux';
 import { Table, TableBody, TableFooter, TableHeader, TableHeaderColumn, TableRow, TableRowColumn }from 'material-ui/Table';
 import TextField from 'material-ui/TextField';
 import Toggle from 'material-ui/Toggle';
-// import getAllPlaylists  from '../../actions/getPlaylists';
 import getEvents  from '../../actions/profileEvents';
 import removeEvent from '../../actions/removeEvent';
 import RaisedButton from 'material-ui/RaisedButton';
-import {fullWhite} from 'material-ui/styles/colors';
 import ActionAndroid from 'material-ui/svg-icons/action/android';
 import FontIcon from 'material-ui/FontIcon';
+import {fullWhite} from 'material-ui/styles/colors'; // STYLING WITH MATERIAL UI
 
 
 const styles = {
@@ -22,7 +21,7 @@ const styles = {
   propToggleHeader: {
     margin: '20px auto 10px',
   },
-  margin: 12
+  margin: 12,
 };
 
 
@@ -66,22 +65,6 @@ handleChange (event) {
   this.setState({height: event.target.value});
 };
 
-  // renderPlaylists(playlists) {
-  //   console.log("PLAYLISTS INSINDE RENDERPLAYLISTS", playlists);
-  //   if(Array.isArray(playlists)) {
-  //     return playlists.map((el, idx) => {
-  //     console.log("PLAYLISTS", el);
-  //       return (
-  //       <TableRow key={el.Name}>
-  //         <TableRowColumn>{idx}</TableRowColumn>
-  //         <TableRowColumn>{el.Name}</TableRowColumn>
-  //         <TableRowColumn>{el.songCount}</TableRowColumn>
-  //       </TableRow>
-  //       );
-  //     }); 
-  //   }
-  // }
-
   renderEvents(events) {
     // console.log("EVEEENTSSSS", JSON.parse(events));
     const data = [];
@@ -99,13 +82,14 @@ handleChange (event) {
      console.log("DATAAAAAAAAAAA", data)
     return data.map((el, idx) =>{
       console.log("+++++++++++++++++++++++++++", el)
+      //<RaisedButton label="Primary" primary={true} style={style} />
       return (
       <TableRow  key={el + (idx + Math.random())} >
         <TableRowColumn >{ idx }</TableRowColumn>
         <TableRowColumn>{el.event.name}</TableRowColumn>
         <TableRowColumn>{el.event.location[0]}</TableRowColumn>
-        <TableRowColumn><a href={el.event.link}><button onClick={() => 'location.href=`${el.event.link}`'}>Reserve</button></a></TableRowColumn>
-        <TableRowColumn><button onClick={() => {this.props.removeEvent(el.id); this.props.getEvents()}}>Remove</button></TableRowColumn> 
+        <TableRowColumn><a href={el.event.link}><RaisedButton className="reserve" label="Reserve" backgroundColor="#a4c639" onClick={() => 'location.href=`${el.event.link}`'}></RaisedButton></a></TableRowColumn>
+        <TableRowColumn><RaisedButton label="Remove" style={styles} backgroundColor="#ef5350" onClick={() => {this.props.removeEvent(el.id); this.props.getEvents()}}/></TableRowColumn> 
       </TableRow>
       )  
     });
