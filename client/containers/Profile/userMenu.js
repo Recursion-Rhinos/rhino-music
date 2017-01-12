@@ -54,7 +54,7 @@ render () {
         <MenuItem primaryText="Basic Details" onClick={() => this.props.changeSelected('settings')} leftIcon={<Settings />} />
         <MenuItem primaryText="Playlists" onClick={() => this.props.changeSelected('playlists')} leftIcon={<Playlist />} />
         <MenuItem primaryText="Events" onClick={() => this.props.changeSelected('events')} leftIcon={<Events />} />
-        <MenuItem leftIcon={<Exit />}> <a href='/logout'> Exit </a></MenuItem>
+        <MenuItem leftIcon={<Exit />}> <a style={{color:'black'}} href='/logout'> Exit </a></MenuItem>
       </Menu>
       </Paper>
       </div>
