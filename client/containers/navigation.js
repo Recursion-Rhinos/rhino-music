@@ -58,7 +58,7 @@ handleToggle = () => this.setState({open: !this.state.open});
           width={200}
           open={this.state.open}
           onRequestChange={(open) => this.setState({open})}> 
-          <MenuItem onTouchTap={this.handleClose}>Home</MenuItem>
+          <MenuItem onTouchTap={this.handleClose} containerElement={<Link to="/"/>}>Search</MenuItem>
           <MenuItem onTouchTap={this.handleClose} containerElement={<Link to="/MyMusic"/>} >My Music</MenuItem>
           <MenuItem onTouchTap={this.handleClose} containerElement={<Link to="/profile"/>} >Profile</MenuItem>
           <MenuItem onTouchTap={this.handleClose} containerElement={<Link to="/Events"/>} >Events</MenuItem>

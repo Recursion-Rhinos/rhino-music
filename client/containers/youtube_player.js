@@ -5,7 +5,13 @@ import { bindActionCreators } from 'redux';
 import axios from 'axios';
 import { videoPlaylist } from '../actions/videoPlaylist';
 import  getDropDown  from '../actions/playlistDropdown';
+import Flexbox from 'flexbox-react';
 
+const styles = {
+
+
+
+}
 
 class VideoPlayer extends Component {
   constructor(props) {
@@ -60,6 +66,7 @@ else if(this.props.videofyVideos && this.flag) {
   // console.log("THIS IS THE VIDEOfy LIST OF IDs", playlist);
         
   return (
+    <Flexbox>
       <div className="video-detail col-md-5">
         <div className="embed-responsive embed-responsive-16by9">
           <iframe className="embed-responsive-item" src={this.props.playVideo ? autoplay : `https://www.youtube.com/v/${playlist.shift()}?&playlist=${playlist}&autoplay=1`}></iframe>
@@ -72,6 +79,7 @@ else if(this.props.videofyVideos && this.flag) {
         <div><button onClick={() => { this.flag = true; let p = 'playlistDropdown'; this.props.videoPlaylist(document.getElementById(p).value)}}>Videofy</button></div>  
         </div>
       </div>
+    </Flexbox>
     )
   }
 }
