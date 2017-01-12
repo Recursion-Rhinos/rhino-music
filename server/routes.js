@@ -15,7 +15,7 @@ module.exports = function(app, passport) {
     res.sendFile(path.join(__dirname, '/../client/search.html'))
   });
 
-  app.post('/api/search', (req,res) => {
+  app.post('/api/search', isLoggedIn, (req,res) => {
     let input = JSON.stringify(req.body.body); 
     request.get({
       url: `https://api.spotify.com/v1/search?q=${input}&type=album`
@@ -29,7 +29,7 @@ module.exports = function(app, passport) {
     });
   });
 
-  app.post('/api/getId', (req, res) => {
+  app.post('/api/getId', isLoggedIn, (req, res) => {
     console.log("EVENTS INPUT", req.body);
     let artistName = req.body.body;
     request.get({
@@ -47,7 +47,7 @@ module.exports = function(app, passport) {
     });
   });
 
-  app.post('/api/events', (req, res) => {
+  app.post('/api/events', isLoggedIn, (req, res) => {
     var artist_id = req.body.body
     request.get({
       url: `http://api.songkick.com/api/3.0/artists/${artist_id}/calendar.json?apikey=ujMX1UFiCgZT5oaH`
@@ -63,7 +63,7 @@ module.exports = function(app, passport) {
     });
   });
 
-  app.post('/api/videos', (req, res) => {
+  app.post('/api/videos', isLoggedIn, (req, res) => {
     let input = req.body.body
     request({
       url: "https://www.googleapis.com/youtube/v3/search",
@@ -86,7 +86,7 @@ module.exports = function(app, passport) {
     });
   });
 
-  app.post('/api/videofy', (req, res) => {
+  app.post('/api/videofy', isLoggedIn, (req, res) => {
 
     let query = req.body.name.artist + " " + req.body.name.album;
     console.log("QUERY QUERY QUERY FROM VIDEO PLAYLIST", query);
@@ -188,20 +188,23 @@ module.exports = function(app, passport) {
   app.post('/api/getPlaylistSongs', isLoggedIn, (req, res) => {
     Playlists.getPlaylistIdByName(req.body.body, passport.user.id)
     .then((result) => {
+      if(result[0]) {
+        
       let playlistId = result[0].id;
-      Playlists.getPlaylistSongsByPlaylistId(playlistId, passport.user.id)
-      .then((songs) => {
-        let songsArr = [];
-        for(let i = 0; i < songs.length; i++) {
-          songsArr.push(Songs.getSongById(songs[i].SongId));
-        }
-        Promise.all(songsArr).then((arrSongs) => {
-            sendSongs(arrSongs);
+        Playlists.getPlaylistSongsByPlaylistId(playlistId, passport.user.id)
+        .then((songs) => {
+          let songsArr = [];
+          for(let i = 0; i < songs.length; i++) {
+            songsArr.push(Songs.getSongById(songs[i].SongId));
+          }
+          Promise.all(songsArr).then((arrSongs) => {
+              sendSongs(arrSongs);
+          })
+          function sendSongs(arr) {
+              res.send(arr);
+          }      
         })
-        function sendSongs(arr) {
-            res.send(arr);
-        }      
-      })
+      }
     })
   })
 

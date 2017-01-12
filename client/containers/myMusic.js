@@ -27,7 +27,6 @@ class UserPlaylists extends Component {
     this.state = null;
     this.playlistId = null;
     this.playlistName = null;
-    setInterval(()=>this.renderSongs(this.props.getPlaylistSongs(this.playlistName)), 5000);
     this.newPlaylist = this.newPlaylist.bind(this);
     this.deletePlaylists = this.deletePlaylist.bind(this);
     this.renderSongs = this.renderSongs.bind(this);
@@ -103,7 +102,7 @@ class UserPlaylists extends Component {
     if(Array.isArray(playlists)){
       return playlists.map((playlist) => {
         return (
-          <TableRow key={playlist.id} onClick={() => { console.log('HELLO????'); this.playlistId = playlist.id; this.playlistName= playlist.Name; this.renderSongs(this.props.getPlaylistSongs(playlist.Name))}}>
+          <TableRow displayBorder={true} key={playlist.id} onClick={() => { console.log('HELLO????'); this.playlistId = playlist.id; this.playlistName= playlist.Name; this.renderSongs(this.props.getPlaylistSongs(playlist.Name))}}>
             <TableRowColumn>
               <Delete onClick={()=> { this.deletePlaylist(playlist.Name)}}></Delete>
             </TableRowColumn>
@@ -119,7 +118,7 @@ class UserPlaylists extends Component {
   render() {
     return (
     <Flexbox>
-        <Table onCellClick={this.cellClicked} >
+        <Table onCellClick={this.cellClicked} height={'500px'}>
         <TableBody displayRowCheckbox={false}>
           <TableHeaderColumn style={{width: '20%'}} adjustForCheckbox={false}><input id='newPlaylist' type='text' placeholder='Create New Playlist' maxLength='15'/>
             <button onClick={() => {this.newPlaylist(document.getElementById('newPlaylist').value); document.getElementById('newPlaylist').value = '';}}>+</button></TableHeaderColumn>
@@ -127,7 +126,7 @@ class UserPlaylists extends Component {
           {this.renderList(this.props.playlists)}
         </TableBody>
         </Table>
-        <Table>
+        <Table height={'500px'}>
           <TableBody displayRowCheckbox={false}>
             <TableHeaderColumn style={{width: '20%'}} adjustForCheckbox={false}>Artist</TableHeaderColumn>
             <TableHeaderColumn style={{width: '50%'}} adjustForCheckbox={false}>Album</TableHeaderColumn>
