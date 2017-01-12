@@ -6,12 +6,13 @@ import axios from 'axios';
 import { videoPlaylist } from '../actions/videoPlaylist';
 import  getDropDown  from '../actions/playlistDropdown';
 import Flexbox from 'flexbox-react';
+import RaisedButton from 'material-ui/RaisedButton';
 
-const styles = {
-
-flex: {justifyContent:"center"}
-
-}
+const style = {
+  margin: 12,
+  flex: {flexDirection:"column-reverse", alignItems: "center"},
+  button: { backgroundColor:"#ef5350"}
+};
 
 class VideoPlayer extends Component {
   constructor(props) {
@@ -66,8 +67,7 @@ else if(this.props.videofyVideos && this.flag) {
   // console.log("THIS IS THE VIDEOfy LIST OF IDs", playlist);
         
   return (
-    <Flexbox style={styles.flex} >
-      <div className="video-detail col-md-5">
+    <Flexbox style={style.flex}>
         <div className="embed-responsive embed-responsive-16by9">
           <iframe className="embed-responsive-item" src={this.props.playVideo ? autoplay : `https://www.youtube.com/v/${playlist.shift()}?&playlist=${playlist}&autoplay=1`}></iframe>
         </div>
@@ -76,8 +76,7 @@ else if(this.props.videofyVideos && this.flag) {
         <div><select id={'playlistDropdown'}><option value='default'>Pick a Playlist</option>{this.props.dropdown.map(function(playlistDD){
               return(<option value={playlistDD.Name}>{playlistDD.Name}</option>)
             })}></select></div>
-        <div><button onClick={() => { this.flag = true; let p = 'playlistDropdown'; this.props.videoPlaylist(document.getElementById(p).value)}}>Videofy</button></div>  
-        </div>
+        <div><RaisedButton fullWidth={true} onClick={() => { this.flag = true; let p = 'playlistDropdown'; this.props.videoPlaylist(document.getElementById(p).value)}}>Videofy</RaisedButton></div>  
       </div>
     </Flexbox>
     )
