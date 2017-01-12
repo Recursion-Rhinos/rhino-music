@@ -76,7 +76,7 @@ else if(this.props.videofyVideos && this.flag) {
         <div><select id={'playlistDropdown'}><option value='default'>Pick a Playlist</option>{this.props.dropdown.map(function(playlistDD){
               return(<option value={playlistDD.Name}>{playlistDD.Name}</option>)
             })}></select></div>
-        <div><button onClick={() => { this.flag = true; let p = 'playlistDropdown'; this.props.videoPlaylist(document.getElementById(p).value)}}>Videofy</button></div>  
+        <div><button onClick={() => { this.flag = true; this.props.playVideo = false; let p = 'playlistDropdown'; this.props.videoPlaylist(document.getElementById(p).value)}}>Videofy</button></div>  
         </div>
       </div>
     </Flexbox>
