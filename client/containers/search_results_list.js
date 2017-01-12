@@ -97,11 +97,11 @@ class SearchList extends Component {
       <TableBody displayRowCheckbox={false}>
        { console.log("search_results_list => this.props", this.props)}
     <TableRow>
-          <TableHeaderColumn style={{backgroundColor:'#009688', color: 'white',}}> Artist </TableHeaderColumn>
-          <TableHeaderColumn style={{backgroundColor:'#009688', color: 'white',}}> Album </TableHeaderColumn>
-          <TableHeaderColumn style={{backgroundColor:'#009688', color: 'white',}}> Play </TableHeaderColumn>
-          <TableHeaderColumn style={{backgroundColor:'#009688', color: 'white',}}>Playlist Dropdown</TableHeaderColumn>
-          <TableHeaderColumn style={{backgroundColor:'#009688', color: 'white',}}>Add to Playlist</TableHeaderColumn>
+          <TableHeaderColumn style={{backgroundColor:'#673AB7', color: 'white',}}> Artist </TableHeaderColumn>
+          <TableHeaderColumn style={{backgroundColor:'#673AB7', color: 'white',}}> Album </TableHeaderColumn>
+          <TableHeaderColumn style={{backgroundColor:'#673AB7', color: 'white',}}> Play </TableHeaderColumn>
+          <TableHeaderColumn style={{backgroundColor:'#673AB7', color: 'white',}}>Playlist Dropdown</TableHeaderColumn>
+          <TableHeaderColumn style={{backgroundColor:'#673AB7', color: 'white',}}>Add to Playlist</TableHeaderColumn>
       </TableRow>
           {this.renderAlbums()}
       </TableBody>

@@ -21,7 +21,7 @@ export const teal900 = '#004D40';
 
 const styles = {
   bar: {
-    "background-color": "#00695C"
+    "background-color": "#512DA8"
   },
   largeIcon: {
     width: 60,

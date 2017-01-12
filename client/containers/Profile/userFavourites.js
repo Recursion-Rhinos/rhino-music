@@ -7,6 +7,10 @@ import Toggle from 'material-ui/Toggle';
 import getAllPlaylists  from '../../actions/getPlaylists';
 import getEvents  from '../../actions/profileEvents';
 import removeEvent from '../../actions/removeEvent';
+import RaisedButton from 'material-ui/RaisedButton';
+import {fullWhite} from 'material-ui/styles/colors';
+import ActionAndroid from 'material-ui/svg-icons/action/android';
+import FontIcon from 'material-ui/FontIcon';
 
 
 const styles = {
@@ -17,7 +21,8 @@ const styles = {
   },
   propToggleHeader: {
     margin: '20px auto 10px',
-  }
+  },
+  margin: 12
 };
 
 

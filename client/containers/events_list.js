@@ -62,10 +62,10 @@ return (
   <TableBody displayRowCheckbox={false}>
 
     <TableRow key={Math.random() * 100}>
-      <TableHeaderColumn style={{backgroundColor:'#009688', color: 'white'}}> Event</TableHeaderColumn>
-      <TableHeaderColumn style={{backgroundColor:'#009688', color: 'white'}}> Location </TableHeaderColumn>
-      <TableHeaderColumn style={{backgroundColor:'#009688', color: 'white'}}> Purchase </TableHeaderColumn>
-     <TableHeaderColumn style={{backgroundColor:'#009688', color: 'white'}}> Stay Woke </TableHeaderColumn>
+      <TableHeaderColumn style={{backgroundColor:'#673AB7', color: 'white'}}> Event</TableHeaderColumn>
+      <TableHeaderColumn style={{backgroundColor:'#673AB7', color: 'white'}}> Location </TableHeaderColumn>
+      <TableHeaderColumn style={{backgroundColor:'#673AB7', color: 'white'}}> Purchase </TableHeaderColumn>
+     <TableHeaderColumn style={{backgroundColor:'#673AB7', color: 'white'}}> Stay Woke </TableHeaderColumn>
   </TableRow>
       {this.renderEvents()}
   </TableBody>
