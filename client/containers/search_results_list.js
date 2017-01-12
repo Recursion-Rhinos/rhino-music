@@ -91,7 +91,7 @@ class SearchList extends Component {
   render () {
   // console.log("PROPS IN SEARCH_RESULTS_LIST", this.props) 
     return (
-       <Paper style={style} zDepth={3}>
+       <Paper style={style} zDepth={5}>
        <Table>
      
       <TableBody displayRowCheckbox={false}>

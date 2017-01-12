@@ -47,8 +47,8 @@ render () {
   // console.log("+++++++++++++++++++++", userName)
   console.log("PROPS IN USER MENU", this.props.userInfo)
     return (
+      <Paper style={style.paper} zDepth={5} >
       <div>
-      <Paper style={style.paper}>
       <Menu>
         <MenuItem primaryText={this.props.userInfo.username} leftIcon={<Account />} />
         <MenuItem primaryText="Basic Details" onClick={() => this.props.changeSelected('settings')} leftIcon={<Settings />} />
@@ -56,8 +56,8 @@ render () {
         <MenuItem primaryText="Events" onClick={() => this.props.changeSelected('events')} leftIcon={<Events />} />
         <MenuItem leftIcon={<Exit />}> <a style={{color:'black'}} href='/logout'> Exit </a></MenuItem>
       </Menu>
-      </Paper>
       </div>
+      </Paper>
     );
   }
 }

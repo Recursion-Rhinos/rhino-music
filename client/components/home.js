@@ -18,7 +18,7 @@ export default class Home extends Component {
         <Navigation />
         <MusicPlayer />
         <SearchBar />
-        <SearchResults/> 	 	 	 	
+        <SearchResults className="animated fadeInDown" /> 	 	 	 	
       </div>
     );
   }
