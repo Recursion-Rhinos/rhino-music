@@ -26,7 +26,9 @@ const styles = {
   },
   flex: {
   'justify-content': 'center',
-  }  
+  flexDirection: 'row'
+  },
+  float: 'right'
 };
 
 
@@ -151,7 +153,8 @@ render() {
        />
       <FlatButton 
        label="Submit"
-       backgroundColor='#9b59b6'
+       backgroundColor='#00B0FF'
+       color="white"
        />
     </form>
     </Flexbox>
