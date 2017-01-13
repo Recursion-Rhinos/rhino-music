@@ -80,7 +80,7 @@ class SearchList extends Component {
       
           <TableRow key={Math.random() * 100}>
             <TableRowColumn style={{backgroundColor:'#B0BEC5', color: 'black',}}><p style={{ color: 'white', fontFamily: 'Teko, cursive', fontSize: '28px' }}>{track.artists[0].name}</p></TableRowColumn>
-            <TableRowColumn style={{backgroundColor:'#B0BEC5', color: 'black',}}><img src={track.images[2].url} /><p style={{ color: 'white', fontFamily: 'Teko, cursive', fontSize: '26px' }}>{track.name}</p></TableRowColumn>
+            <TableRowColumn style={{backgroundColor:'#B0BEC5', color: 'black',}}><img src={track.images[2].url} /><p style={{ color: 'white', fontFamily: 'Teko, cursive', fontSize: '20px' }}>{track.name}</p></TableRowColumn>
             <TableRowColumn style={{backgroundColor:'#B0BEC5', color: 'white',}}><IconButton style={style.largeIcon}><PlayCircleFilled onClick={() => this.props.playSong(track.uri)}>Play</PlayCircleFilled></IconButton></TableRowColumn>
             <TableRowColumn style={{backgroundColor:'#B0BEC5', color: 'white',}}><select id={'playlistDropdown'+track.uri}><option value='default'>Pick a Playlist</option>{this.props.playlistDropdown.map(function(playlist){
               return(<option value={playlist.Name}>{playlist.Name}</option>)

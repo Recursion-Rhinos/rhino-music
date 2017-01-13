@@ -41,7 +41,15 @@ let autoplay;
 let playlist =[];
 let firstVid;
 
+if(this.props.playVideo) {
 
+  autoplay = this.props.playVideo+"?autoplay=1";
+
+  firstVid = this.props.playVideo;
+
+  console.log("AUTO PLAY THE CLICKER", autoplay)
+
+}
 
 // console.log("PLAYAAAAAA", this.props.videos[0]);
 
@@ -65,20 +73,14 @@ else if(this.props.videofyVideos && this.flag) {
 
   firstVid = playlist.shift()
   
-} else if(this.props.playVideo) {
-
-  autoplay = this.props.playVideo+"?autoplay=1";
-
-  firstVid = this.props.playVideo;
-
-}
+} 
 
   // console.log("THIS IS THE VIDEOfy LIST OF IDs", playlist);
         
   return (
     <Flexbox style={style.flex}>
         <div className="embed-responsive embed-responsive-16by9">
-          <iframe className="embed-responsive-item" src={`https://www.youtube.com/v/${firstVid}?&playlist=${playlist}&autoplay=1`}></iframe>
+          <iframe className="embed-responsive-item" src={this.props.playVideo ? autoplay : `https://www.youtube.com/v/${firstVid}?&playlist=${playlist}&autoplay=1`}></iframe>
         </div>
         <div className="details">
           <div> </div>

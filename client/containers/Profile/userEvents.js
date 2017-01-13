@@ -10,18 +10,25 @@ import RaisedButton from 'material-ui/RaisedButton';
 import ActionAndroid from 'material-ui/svg-icons/action/android';
 import FontIcon from 'material-ui/FontIcon';
 import {fullWhite} from 'material-ui/styles/colors'; // STYLING WITH MATERIAL UI
-
+import Paper from 'material-ui/Paper';
 
 const styles = {
   propContainer: {
-    width: 200,
+    width: "75%",
     overflow: 'hidden',
     margin: '20px auto 0',
+    paddingBottom: '20px'
   },
   propToggleHeader: {
     margin: '20px auto 10px',
   },
   margin: 12,
+  div: {
+    margin: '19px 32px 16px 10px',
+    paddingLeft: 20,
+    lineHeight: 2.5,
+    float: 'left'
+  }
 };
 
 
@@ -85,9 +92,9 @@ handleChange (event) {
       //<RaisedButton label="Primary" primary={true} style={style} />
       return (
       <TableRow  key={el + (idx + Math.random())} >
-        <TableRowColumn >{ idx }</TableRowColumn>
-        <TableRowColumn>{el.event.name}</TableRowColumn>
-        <TableRowColumn>{el.event.location[0]}</TableRowColumn>
+        <TableRowColumn><p style={{ color: '#311B92', fontFamily: 'Teko, cursive', fontSize: '20px' }}>{ idx }</p></TableRowColumn>
+        <TableRowColumn><p style={{ color: '#311B92', fontFamily: 'Teko, cursive', fontSize: '20px' }}>{el.event.name}</p></TableRowColumn>
+        <TableRowColumn><p style={{ color: '#311B92', fontFamily: 'Teko, cursive', fontSize: '20px' }}>{el.event.location[0]}</p></TableRowColumn>
         <TableRowColumn><a href={el.event.link}><RaisedButton className="reserve" label="Reserve" backgroundColor="#a4c639" onClick={() => 'location.href=`${el.event.link}`'}></RaisedButton></a></TableRowColumn>
         <TableRowColumn><RaisedButton label="Remove" style={styles} backgroundColor="#ef5350" onClick={() => {this.props.removeEvent(el.id); this.props.getEvents()}}/></TableRowColumn> 
       </TableRow>
@@ -98,8 +105,9 @@ handleChange (event) {
   render () {
     console.log("SVETDaVeT Playlist", this.props)
    return (
-    <div>
+    <div style={styles.propContainer} >
     <div className="events">
+    <Paper style={styles.div} zDepth={5}>
     <Table
       height={this.state.height}
       fixedHeader={this.state.fixedHeader}
@@ -114,15 +122,15 @@ handleChange (event) {
     >
     <TableRow>
     <TableHeaderColumn colSpan="5" tooltip="EVENTS" style={{textAlign: 'center'}}>
-      EVENTS
+      <p style={{ color: '#311B92', fontFamily: 'VT323, cursive', fontSize: '38px' }}>EVENTS</p>
     </TableHeaderColumn>
     </TableRow>
     <TableRow>
-      <TableHeaderColumn tooltip="The ID">ID</TableHeaderColumn>
-      <TableHeaderColumn tooltip="The Name">Name</TableHeaderColumn>
-      <TableHeaderColumn tooltip="The Location">Location</TableHeaderColumn>
-      <TableHeaderColumn tooltip="The Reservation">Reserve</TableHeaderColumn>
-      <TableHeaderColumn tooltip="Delete">Delete</TableHeaderColumn>
+      <TableHeaderColumn tooltip="Event ID"><p style={{ color: '#311B92', fontFamily: 'Teko, cursive', fontSize: '28px' }}>ID</p></TableHeaderColumn>
+      <TableHeaderColumn tooltip="Venue Details"><p style={{ color: '#311B92', fontFamily: 'Teko, cursive', fontSize: '28px' }}>Name</p></TableHeaderColumn>
+      <TableHeaderColumn tooltip="Location"><p style={{ color: '#311B92', fontFamily: 'Teko, cursive', fontSize: '28px' }}>Location</p></TableHeaderColumn>
+      <TableHeaderColumn tooltip="Reserve Tickets"><p style={{ color: '#311B92', fontFamily: 'Teko, cursive', fontSize: '28px' }}>Reserve</p></TableHeaderColumn>
+      <TableHeaderColumn tooltip="Delete Event"><p style={{ color: '#311B92', fontFamily: 'Teko, cursive', fontSize: '28px' }}>Delete</p></TableHeaderColumn>
     </TableRow>
     </TableHeader>
     <TableBody
@@ -134,6 +142,7 @@ handleChange (event) {
      {this.renderEvents(this.props.allEvents)}
     </TableBody> 
     </Table>  
+    </Paper>
     </div> 
     </div>  
     );
