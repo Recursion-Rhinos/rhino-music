@@ -15,14 +15,15 @@ import Remove from 'material-ui/svg-icons/content/remove-circle';
 import Paper from 'material-ui/Paper';
 
 
+
 const style = {
   height: "auto",
   margin: 20,
   textAlign: 'center',
   display: 'inline-block',
   largeIcon: {
-    width: 60,
-    height: 60,
+    width: 30,
+    height: 30,
     color: "#311B92"
   }
 };
@@ -46,6 +47,19 @@ class UserPlaylists extends Component {
     this.componentWillMount = this.componentWillMount.bind(this);
     this.deleteSong = this.deleteSong.bind(this);
     this.cellClicked = this.cellClicked.bind(this);
+    this.tableStyle = 
+    this.tableStyle = {
+      fixedHeader: true,
+      fixedFooter: true,
+      stripedRows: false,
+      showRowHover: true,
+      selectable: false,
+      multiSelectable: false,
+      enableSelectAll: false,
+      deselectOnClickaway: true,
+      showCheckboxes: false,
+      height: '300px',
+    };
   }
 
   componentWillMount() {
@@ -80,9 +94,9 @@ class UserPlaylists extends Component {
   }
 
   cellClicked(rowNum, colNum){
+    console.log('rowNumber: ', rowNum)
     let index = rowNum-2;
     let playlist = this.props.playlists[index];
-    console.log('playlist: ', playlist.Name)
     this.playlistId = playlist.id;
     this.playlistName = playlist.Name;
     this.renderSongs(this.props.getPlaylistSongs(playlist.Name));
@@ -99,7 +113,7 @@ class UserPlaylists extends Component {
             <TableRowColumn><p style={{ color: '#512DA8', fontFamily: 'Teko, cursive', fontSize: '22px' }}>{songData.song.artist}</p></TableRowColumn>
             <TableRowColumn><img src={songData.song.image} /><p style={{ color: '#512DA8', fontFamily: 'Teko, cursive', fontSize: '26px' }}>{songData.song.album}</p></TableRowColumn>
             <TableRowColumn>
-              <PlayCircleFilled style={style.largeIcon}onClick={() => this.props.playSong(songData.song.uri)}>Play</PlayCircleFilled>
+              <PlayCircleFilled style={style.largeIcon} onClick={() => this.props.playSong(songData.song.uri)}>Play</PlayCircleFilled>
             </TableRowColumn>
             <TableRowColumn>
               <Remove style={style.largeIcon}onClick={()=>{this.deleteSong(this.playlistId, songData.id)}}></Remove>
@@ -130,21 +144,31 @@ class UserPlaylists extends Component {
   render() {
     return (
     <Paper zDepth={1}>
+    <Table>
+    <TableBody displayRowCheckbox={false}>
+    <TableHeaderColumn style={{backgroundColor:'#673AB7', color: 'white',width: '22%'}} adjustForCheckbox={false}><input id='newPlaylist' type='text' placeholder='Create New Playlist' maxLength='15'/>
+    <button onClick={() => {this.newPlaylist(document.getElementById('newPlaylist').value); document.getElementById('newPlaylist').value = '';}}>+</button></TableHeaderColumn>
+    <TableHeaderColumn style={{backgroundColor:'#673AB7', color: 'white',width: '25%'}}><p style={{ color: 'white', fontFamily: 'Teko, cursive', fontSize: '28px' }}>Playlists</p></TableHeaderColumn>
+    <TableHeaderColumn style={{backgroundColor:'#673AB7', color: 'white',width: '15%'}} adjustForCheckbox={false}><p style={{ color: 'white', fontFamily: 'Teko, cursive', fontSize: '28px' }}>Artist</p></TableHeaderColumn>
+    <TableHeaderColumn style={{backgroundColor:'#673AB7', color: 'white',width: '15%'}} adjustForCheckbox={false}><p style={{ color: 'white', fontFamily: 'Teko, cursive', fontSize: '28px' }}>Album</p></TableHeaderColumn>
+    <TableHeaderColumn style={{backgroundColor:'#673AB7', color: 'white',width: '8%'}} adjustForCheckbox={false}><p style={{ color: 'white', fontFamily: 'Teko, cursive', fontSize: '28px' }}>Play</p></TableHeaderColumn>
+    <TableHeaderColumn style={{backgroundColor:'#673AB7', color: 'white',width: '8%'}} adjustForCheckbox={false}><p style={{ color: 'white', fontFamily: 'Teko, cursive', fontSize: '28px' }}>Remove</p></TableHeaderColumn>
+    </TableBody>
+    </Table>
       <Flexbox>
-        <Table onCellClick={this.cellClicked} height={'500px'}>
+        <Table onCellClick={this.cellClicked} height={'500px'} width={'400px'}>
         <TableBody displayRowCheckbox={false}>
-          <TableHeaderColumn style={{backgroundColor:'#673AB7', color: 'white',width: '20%'}} adjustForCheckbox={false}><input id='newPlaylist' type='text' placeholder='Create New Playlist' maxLength='15'/>
-            <button onClick={() => {this.newPlaylist(document.getElementById('newPlaylist').value); document.getElementById('newPlaylist').value = '';}}>+</button></TableHeaderColumn>
-          <TableHeaderColumn style={{backgroundColor:'#673AB7', color: 'white',width: '30%'}}><p style={{ color: 'white', fontFamily: 'Teko, cursive', fontSize: '28px' }}>Playlists</p></TableHeaderColumn>
+        <TableHeaderColumn></TableHeaderColumn>
+        <TableHeaderColumn></TableHeaderColumn>
           {this.renderList(this.props.playlists)}
         </TableBody>
         </Table>
         <Table height={'500px'}>
           <TableBody displayRowCheckbox={false}>
-            <TableHeaderColumn style={{backgroundColor:'#673AB7', color: 'white',width: '20%'}} adjustForCheckbox={false}><p style={{ color: 'white', fontFamily: 'Teko, cursive', fontSize: '28px' }}>Artist</p></TableHeaderColumn>
-            <TableHeaderColumn style={{backgroundColor:'#673AB7', color: 'white',width: '50%'}} adjustForCheckbox={false}><p style={{ color: 'white', fontFamily: 'Teko, cursive', fontSize: '28px' }}>Album</p></TableHeaderColumn>
-            <TableHeaderColumn style={{backgroundColor:'#673AB7', color: 'white',width: '15%'}} adjustForCheckbox={false}><p style={{ color: 'white', fontFamily: 'Teko, cursive', fontSize: '28px' }}>Play</p></TableHeaderColumn>
-            <TableHeaderColumn style={{backgroundColor:'#673AB7', color: 'white',width: '15%'}} adjustForCheckbox={false}><p style={{ color: 'white', fontFamily: 'Teko, cursive', fontSize: '28px' }}>Remove</p></TableHeaderColumn>   
+          <TableHeaderColumn style={{width: '15%'}}></TableHeaderColumn>
+          <TableHeaderColumn style={{width: '25%'}}></TableHeaderColumn>
+          <TableHeaderColumn style={{width: '10%'}}></TableHeaderColumn>
+          <TableHeaderColumn style={{width: '10%'}}></TableHeaderColumn>
             {this.renderSongs(this.props.playlistSongs)}
           </TableBody>
         </Table>

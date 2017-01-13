@@ -11,6 +11,7 @@ import DropDownMenu from 'material-ui/DropDownMenu';
 import MenuItem from 'material-ui/MenuItem';
 import Paper from 'material-ui/Paper';
 import IconButton from 'material-ui/IconButton';
+import BrokenImage from 'material-ui/svg-icons/image/broken-image';
 
 const style = {
   height: "auto",
@@ -48,7 +49,7 @@ class SearchList extends Component {
         return (    
           <TableRow key={Math.random() * 100}>
             <TableRowColumn style={{backgroundColor:'#B0BEC5', color: 'black',}}><p style={{ color: 'white', fontFamily: 'Teko, cursive', fontSize: '28px' }}>{track.artists[0].name}</p></TableRowColumn>
-            <TableRowColumn style={{backgroundColor:'#B0BEC5', color: 'black',}}><img src={track.images[2].url} /><p style={{ color: 'white', fontFamily: 'Teko, cursive', fontSize: '20px' }}>{track.name}</p></TableRowColumn>
+            <TableRowColumn style={{backgroundColor:'#B0BEC5', color: 'black',}}><img src={track.images[2] ? track.images[2].url : (<BrokenImage>noImage</BrokenImage>)} /><p style={{ color: 'white', fontFamily: 'Teko, cursive', fontSize: '20px' }}>{track.name}</p></TableRowColumn>
             <TableRowColumn style={{backgroundColor:'#B0BEC5', color: 'white',}}><IconButton style={style.largeIcon}><PlayCircleFilled onClick={() => this.props.playSong(track.uri)}>Play</PlayCircleFilled></IconButton></TableRowColumn>
             <TableRowColumn style={{backgroundColor:'#B0BEC5', color: 'white',}}>
               <DropDownMenu id={"playlistDropdown" + track.uri} value={this.state.value} onChange={this.handleChange}>
