@@ -430,7 +430,9 @@ module.exports = function(app, passport) {
         'q': reqBody
       }
     }, (err, response, body) => {
+      if(typeof body === "string") {
       body = JSON.parse(body);
+      }
       res.send(body);
     });
   });
