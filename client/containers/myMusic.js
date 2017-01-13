@@ -13,7 +13,7 @@ import PlayCircleFilled from 'material-ui/svg-icons/av/play-circle-filled';
 import Delete from 'material-ui/svg-icons/action/delete-forever';
 import Remove from 'material-ui/svg-icons/content/remove-circle';
 import Paper from 'material-ui/Paper';
-
+import Circle from 'material-ui/svg-icons/content/add-circle';
 
 const style = {
   height: "auto",
@@ -24,7 +24,8 @@ const style = {
     width: 60,
     height: 60,
     color: "#311B92"
-  }
+  },
+  button: "5px",
 };
 
 console.log("GET PLAYLIST SONGS", getPlaylistSongs)
@@ -134,7 +135,7 @@ class UserPlaylists extends Component {
         <Table onCellClick={this.cellClicked} height={'500px'}>
         <TableBody displayRowCheckbox={false}>
           <TableHeaderColumn style={{backgroundColor:'#673AB7', color: 'white',width: '20%'}} adjustForCheckbox={false}><input id='newPlaylist' type='text' placeholder='Create New Playlist' maxLength='15'/>
-            <button onClick={() => {this.newPlaylist(document.getElementById('newPlaylist').value); document.getElementById('newPlaylist').value = '';}}>+</button></TableHeaderColumn>
+            <button className="button" style={{height: "auto"}} onClick={() => {this.newPlaylist(document.getElementById('newPlaylist').value); document.getElementById('newPlaylist').value = '';}}>+</button></TableHeaderColumn>
           <TableHeaderColumn style={{backgroundColor:'#673AB7', color: 'white',width: '30%'}}><p style={{ color: 'white', fontFamily: 'Teko, cursive', fontSize: '28px' }}>Playlists</p></TableHeaderColumn>
           {this.renderList(this.props.playlists)}
         </TableBody>
