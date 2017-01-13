@@ -16,21 +16,14 @@ import Paper from 'material-ui/Paper';
 
 const styles = {
   propContainer: {
-    width: 200,
+    width: "75%",
     overflow: 'hidden',
     margin: '20px auto 0',
   },
   propToggleHeader: {
     margin: '20px auto 10px',
   },
-  margin: 12,
-  paper: {
-    height: 100,
-    width: 100,
-    margin: 20,
-    textAlign: 'center',
-    display: 'inline-block',
-  }
+  margin: 12
 };
 
 
@@ -78,9 +71,9 @@ handleChange (event) {
       console.log("PLAYLISTS", el);
         return (
         <TableRow key={el.Name}>
-          <TableRowColumn>{idx}</TableRowColumn>
-          <TableRowColumn>{el.Name}</TableRowColumn>
-          <TableRowColumn>{el.songCount}</TableRowColumn>
+          <TableRowColumn><p style={{ color: '#311B92', fontFamily: 'Teko, cursive', fontSize: '20px' }}>{idx}</p></TableRowColumn>
+          <TableRowColumn><p style={{ color: '#311B92', fontFamily: 'Teko, cursive', fontSize: '20px' }}>{el.Name}</p></TableRowColumn>
+          <TableRowColumn><p style={{ color: '#311B92', fontFamily: 'Teko, cursive', fontSize: '20px' }}>{el.songCount}</p></TableRowColumn>
         </TableRow>
         );
       }); 
@@ -90,7 +83,8 @@ handleChange (event) {
   render () {
    console.log("SVETDaVeT Playlist", this.props)
    return (
-    <div>
+
+    <div style={styles.propContainer} >
       <div className="playlists">
        <Table
       height={this.state.height}
@@ -106,13 +100,13 @@ handleChange (event) {
     >
     <TableRow>
     <TableHeaderColumn colSpan="3" tooltip="PLAYLISTS" style={{textAlign: 'center'}}>
-      PLAYLISTS
+      <p style={{ color: '#311B92', fontFamily: 'VT323, cursive', fontSize: '38px' }}>PLAYLISTS</p>
     </TableHeaderColumn>
     </TableRow>
     <TableRow>
-      <TableHeaderColumn tooltip="The ID">ID</TableHeaderColumn>
-      <TableHeaderColumn tooltip="The Name">Name</TableHeaderColumn>
-      <TableHeaderColumn tooltip="The Location">Songs</TableHeaderColumn>
+      <TableHeaderColumn tooltip="Playlist ID"><p style={{ color: '#311B92', fontFamily: 'Teko, cursive', fontSize: '28px' }}>ID</p></TableHeaderColumn>
+      <TableHeaderColumn tooltip="Playlist Name"><p style={{ color: '#311B92', fontFamily: 'Teko, cursive', fontSize: '28px' }}>Name</p></TableHeaderColumn>
+      <TableHeaderColumn tooltip="Track Count"><p style={{ color: '#311B92', fontFamily: 'Teko, cursive', fontSize: '28px' }}>Songs</p></TableHeaderColumn>
     </TableRow>
     </TableHeader>
     <TableBody

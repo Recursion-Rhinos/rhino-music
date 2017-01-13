@@ -26,7 +26,14 @@ const styles = {
   },
   flex: {
   'justify-content': 'center',
-  }  
+  flexDirection: 'row'
+  },
+  float: 'right',
+  div: {
+  "margin-top": '19px 32px 16px 10px',
+    paddingLeft: 20,
+    lineHeight: 2.5,
+  }
 };
 
 
@@ -122,9 +129,10 @@ render() {
   console.log("PROPS in USERSETTING", this.props)
   return (
     <Flexbox style={styles.flex}>
+    <h3> Change User Settings </h3>
   	<form style={{display: this.state.active}}  onSubmit={this.handleSubmit}>
        <TextField   
-        hintText="Hint Text" 
+        hintText="New Username" 
         floatingLabelText="Username" 
         underlineFocusStyle={styles.underlineStyle}
         floatingLabelFocusStyle={styles.floatingLabelFocusStyle}
@@ -133,25 +141,26 @@ render() {
        /> <br />
        <br />
       <TextField 
-       hintText="Hint Text" 
+       hintText="New Password" 
        underlineFocusStyle={styles.underlineStyle}
        floatingLabelFocusStyle={styles.floatingLabelFocusStyle}
        floatingLabelText="Password" 
        value={this.state.password}
        onChange={this.onPasswordInputChange}
        /> <br />
-       <br /> 
+       
       <TextField 
-       hintText="Hint Text" 
+       hintText="Change E-mail Address" 
        underlineFocusStyle={styles.underlineStyle}
        floatingLabelFocusStyle={styles.floatingLabelFocusStyle}
        floatingLabelText="Email" 
        value={this.state.email}
        onChange={this.onEmailInputChange}
-       />
+       /><br /> <br /> 
       <FlatButton 
        label="Submit"
-       backgroundColor='#9b59b6'
+       backgroundColor='#00B0FF'
+       color="white"
        />
     </form>
     </Flexbox>

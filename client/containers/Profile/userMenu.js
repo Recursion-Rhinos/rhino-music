@@ -23,11 +23,11 @@ import Events from 'material-ui/svg-icons/action/record-voice-over';
 import Playlist from 'material-ui/svg-icons/av/playlist-play';
 
 const style = {
-  paper: {
-    display: 'inline-block',
-    float: 'left',
-    margin: '16px 32px 16px 0',
-    paddingLeft: 5
+  div: {
+    margin: '19px 32px 16px 10px',
+    paddingLeft: 20,
+    lineHeight: 2.5,
+    float: 'left'
   }
 };
 
@@ -47,7 +47,7 @@ render () {
   // console.log("+++++++++++++++++++++", userName)
   console.log("PROPS IN USER MENU", this.props.userInfo)
     return (
-      <Paper style={style.paper} zDepth={5} >
+      <Paper style={style.div} zDepth={5}>
       <div>
       <Menu>
         <MenuItem primaryText={this.props.userInfo.username} leftIcon={<Account />} />
