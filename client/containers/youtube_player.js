@@ -7,12 +7,16 @@ import { videoPlaylist } from '../actions/videoPlaylist';
 import  getDropDown  from '../actions/playlistDropdown';
 import Flexbox from 'flexbox-react';
 import RaisedButton from 'material-ui/RaisedButton';
+import DropDownMenu from 'material-ui/DropDownMenu';
+import MenuItem from 'material-ui/MenuItem';
+
 export const red400 = '#ef5350';
 const style = {
   margin: 12,
   flex: {flexDirection:"column-reverse", alignItems: "center"},
   button: { backgroundColor:"#ef5350"},
-  innerFlex: {alignItems: "space-between"}
+  innerFlex: {alignItems: "space-between"},
+  height: {height: '50px', lineHeight: '50px'}
 };
 
 class VideoPlayer extends Component {
@@ -20,62 +24,66 @@ class VideoPlayer extends Component {
     super(props);
     this.playlist= [];
     this.flag=false;
+    this.state = {value:'default'};
     this.componentWillMount = this.componentWillMount.bind(this);
+    this.handleChange = this.handleChange.bind(this);
   }
 
-componentWillMount() {
-    this.props.getDropDown();
+  componentWillMount() {
+      this.props.getDropDown();
+    }
+    
+  componentDidReceiveProps(nextProps) {
+    // console.log('NEXT PROPS: ', nextProps)
+    this.forceUpdate();
   }
-  
-componentDidReceiveProps(nextProps) {
-  // console.log('NEXT PROPS: ', nextProps)
-  this.forceUpdate();
-}
 
-render () { 
+  handleChange(event, index, value) {
+     return this.setState({value});
+    }
 
-let vidList = [];
-let videoIds;
-let vidIds;
-let autoplay;
-let playlist =[];
-let firstVid;
+  render () { 
 
-if(this.props.playVideo) {
+  let vidList = [];
+  let videoIds;
+  let vidIds;
+  let autoplay;
+  let playlist =[];
+  let firstVid;
 
-  autoplay = this.props.playVideo+"?autoplay=1";
+  if(this.props.playVideo) {
 
-  firstVid = this.props.playVideo;
+    autoplay = this.props.playVideo+"?autoplay=1";
 
-  console.log("AUTO PLAY THE CLICKER", autoplay)
+    firstVid = this.props.playVideo;
 
-}
+    console.log("AUTO PLAY THE CLICKER", autoplay)
 
-// console.log("PLAYAAAAAA", this.props.videos[0]);
+  }
 
-if(this.props.videos.length > 0 && !this.flag) {
-  vidList = this.props.videos[0];
+  // console.log("PLAYAAAAAA", this.props.videos[0]);
 
-  vidIds = vidList.map((video) => {
-    return video.id.videoId;
-  });
+  if(this.props.videos.length > 0 && !this.flag) {
+    vidList = this.props.videos[0];
 
-  playlist = vidIds;
+    vidIds = vidList.map((video) => {
+      return video.id.videoId;
+    });
 
-  firstVid = playlist.shift()
+    playlist = vidIds;
 
-  // console.log("THIS IS THE VIDEO LIST OF IDs", playlist);
-}
+    firstVid = playlist.shift()
+
+    // console.log("THIS IS THE VIDEO LIST OF IDs", playlist);
+  }
 
 
-else if(this.props.videofyVideos && this.flag) {
-  playlist = this.props.videofyVideos;
+  else if(this.props.videofyVideos && this.flag) {
+    playlist = this.props.videofyVideos;
 
-  firstVid = playlist.shift()
-  
-} 
-
-  // console.log("THIS IS THE VIDEOfy LIST OF IDs", playlist);
+    firstVid = playlist.shift()
+    
+  } 
         
   return (
     <Flexbox style={style.flex}>
@@ -85,12 +93,14 @@ else if(this.props.videofyVideos && this.flag) {
         <div className="details">
           <div> </div>
      <Flexbox>
-        <div><select id={'playlistDropdown'}><option value='default'>Pick a Playlist</option>{this.props.dropdown.map(function(playlistDD){
-              return(<option value={playlistDD.Name}>{playlistDD.Name}</option>)
-            })}></select>
+        <div>
+          <DropDownMenu value={this.state.value} onChange={this.handleChange}>
+            <MenuItem value='default' primaryText="Choose Playlist"/>
+            {this.props.dropdown.map((playlistDD) =>(<MenuItem value={playlistDD.Name} primaryText={playlistDD.Name} />))}
+          </DropDownMenu>
         </div>
-        <RaisedButton label="V I D E O F Y" toolTip="TURN YOUR PLAYLIST OF SONGS INTO A PLAYLIST OF VIDEOS" color="white" backgroundColor='#d32f2f' onClick={() => { this.flag = true; let p = 'playlistDropdown'; this.props.videoPlaylist(document.getElementById(p).value)}}/> 
-    </Flexbox>
+        <RaisedButton style={style.height} label="V I D E O F Y" toolTip="TURN YOUR PLAYLIST OF SONGS INTO A PLAYLIST OF VIDEOS" color="white" backgroundColor='#d32f2f' onClick={() => { this.flag = true; if(this.state.value !== 'default'){this.props.videoPlaylist(this.state.value)} }}/> 
+      </Flexbox>
       </div>
     </Flexbox>
     )
