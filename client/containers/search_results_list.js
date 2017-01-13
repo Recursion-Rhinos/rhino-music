@@ -21,7 +21,7 @@ const style = {
   largeIcon: {
     width: 60,
     height: 60,
-    color: "black"
+    color: "#37474F"
   }
 };
 class SearchList extends Component {
@@ -79,13 +79,13 @@ class SearchList extends Component {
         return (
       
           <TableRow key={Math.random() * 100}>
-            <TableRowColumn style={{backgroundColor:'#B0BEC5', color: 'black',}}><p style={{ color: 'white', fontFamily: 'Teko, cursive', fontSize: '28px' }}>{track.artists[0].name}</p></TableRowColumn>
-            <TableRowColumn style={{backgroundColor:'#B0BEC5', color: 'black',}}><img src={track.images[2].url} /><p style={{ color: 'white', fontFamily: 'Teko, cursive', fontSize: '20px' }}>{track.name}</p></TableRowColumn>
-            <TableRowColumn style={{backgroundColor:'#B0BEC5', color: 'white',}}><IconButton style={style.largeIcon}><PlayCircleFilled onClick={() => this.props.playSong(track.uri)}>Play</PlayCircleFilled></IconButton></TableRowColumn>
-            <TableRowColumn style={{backgroundColor:'#B0BEC5', color: 'white',}}><select id={'playlistDropdown'+track.uri}><option value='default'>Pick a Playlist</option>{this.props.playlistDropdown.map(function(playlist){
+            <TableRowColumn style={{backgroundColor:'#EEEEEE', color: '#37474F',}}><p style={{ color: '#37474F', fontFamily: 'Teko, cursive', fontSize: '28px' }}>{track.artists[0].name}</p></TableRowColumn>
+            <TableRowColumn style={{backgroundColor:'#EEEEEE', color: '#37474F',}}><img src={track.images[2].url} /><p style={{ color: '#37474F', fontFamily: 'Teko, cursive', fontSize: '20px' }}>{track.name}</p></TableRowColumn>
+            <TableRowColumn style={{backgroundColor:'#EEEEEE', color: 'white',}}><IconButton style={style.largeIcon}><PlayCircleFilled onClick={() => this.props.playSong(track.uri)}>Play</PlayCircleFilled></IconButton></TableRowColumn>
+            <TableRowColumn style={{backgroundColor:'#EEEEEE', color: 'white',}}><select id={'playlistDropdown'+track.uri}><option value='default'>Pick a Playlist</option>{this.props.playlistDropdown.map(function(playlist){
               return(<option value={playlist.Name}>{playlist.Name}</option>)
             })}></select></TableRowColumn>
-            <TableRowColumn style={{backgroundColor:'#B0BEC5', color: 'white',}}><IconButton style={style.largeIcon}> <PlaylistAdd style={style.largeIcon} onClick={() => {let p = 'playlistDropdown'+track.uri; saveToPlaylist(document.getElementById(p).value, {artist:track.artists[0].name, album:track.name, uri:track.uri, image: track.images[2].url})}}>Add to playlist</PlaylistAdd></IconButton></TableRowColumn>
+            <TableRowColumn style={{backgroundColor:'#EEEEEE', color: 'white',}}><IconButton style={style.largeIcon}> <PlaylistAdd style={style.largeIcon} onClick={() => {let p = 'playlistDropdown'+track.uri; saveToPlaylist(document.getElementById(p).value, {artist:track.artists[0].name, album:track.name, uri:track.uri, image: track.images[2].url})}}>Add to playlist</PlaylistAdd></IconButton></TableRowColumn>
           </TableRow>
        )
     })

@@ -5,14 +5,16 @@ import { fetchNews } from '../actions/news_nytimes';
 import NYTimesData from './nytimes';
 import CircularProgress from 'material-ui/CircularProgress';
 import Flexbox from 'flexbox-react';
+import Launch from 'material-ui/svg-icons/action/launch';
+import {Card, CardActions, CardHeader, CardMedia, CardTitle, CardText} from 'material-ui/Card';
 
 const style = {
 
   flex: {
     flexFlow: "row wrap"
   }
+};
 
-}
 
 class SearchNews extends Component {
   constructor(props) {
@@ -32,17 +34,25 @@ class SearchNews extends Component {
   //  <ul key={ news._id }>
 
   //news.map((text) => text.headline.main); //Have to fix this one
-  return (
-  <Flexbox flexWrap="wrap" justifyContent="space-around">
+  return ( 
+  <Flexbox flexWrap="wrap" justifyContent="space-between" justifyContent="space-around" padding-bottom="20px">
    { renderedNews.map((el, idx) => { 
     return (
       <div 
         key={el.source.concat(idx + Math.random())}
         > 
-        <a href={el.web_url}>
-        <img src={`http://nytimes.com/${el.multimedia[1].url}`} width="300" height="250"/> 
-        </a>
-        <div style={{'line-height': '20px', width: "190", 'padding-bottom': '10px'}}>{el.headline.main}</div>
+       
+  
+        <CardMedia
+        backgroundColor={"#673AB7"}
+      overlay={<CardTitle title={ <a href={el.web_url}>
+
+          <Launch style={{float: "right", width: 60, height: 60, color:"white"}}/>
+        </a>} subtitle={el.headline.main} />}
+      >
+
+        <img src={`http://nytimes.com/${el.multimedia[1].url}`} width="300" height="350" /> 
+    </CardMedia>
       </div>
      )
    }) }
@@ -60,10 +70,15 @@ render () {
   }
   
   return (
-    <div>
+    <Card backgroundColor={"#673AB7"} zDepth={6} >
+<CardMedia
+      title="NEWS"
+      subtitle="Search, collect, and review artist related news."
+    >
+    </CardMedia>
       {console.log('THIS.PROPS.NEWS', this.props, newsData)}
       {newsData.length ? this.renderNews(newsData) : <CircularProgress size={60} thickness={5} />}
-    </div>
+    </Card>
   );
  }
 }
