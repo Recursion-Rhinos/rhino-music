@@ -25,8 +25,8 @@ const styles = {
     color: '#9b59b6',
   },
   flex: {
-  'justify-content': 'center',
-  flexDirection: 'row'
+  'alignItems': 'center',
+  flexDirection: 'column'
   },
   float: 'right',
   div: {
