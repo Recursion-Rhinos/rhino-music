@@ -22,6 +22,10 @@ const styles = {
     margin: '20px auto 10px',
   },
   margin: 12,
+  events: {
+    margin: '20px 20px 20px 0',
+    "margin-bottom": '20px'
+  },
 };
 
 
@@ -98,8 +102,8 @@ handleChange (event) {
   render () {
     console.log("SVETDaVeT Playlist", this.props)
    return (
-    <div>
-    <div className="events">
+    <div >
+    <div style={styles.events} >
     <Table
       height={this.state.height}
       fixedHeader={this.state.fixedHeader}
@@ -108,6 +112,7 @@ handleChange (event) {
       multiSelectable={this.state.multiSelectable}
     >
     <TableHeader
+      events={styles.events}
       displaySelectAll={this.state.showCheckboxes}
       adjustForCheckbox={this.state.showCheckboxes}
       enableSelectAll={this.state.enableSelectAll}
@@ -133,6 +138,14 @@ handleChange (event) {
     >
      {this.renderEvents(this.props.allEvents)}
     </TableBody> 
+    <TableFooter
+      // adjustForCheckbox={this.state.showCheckboxes}
+      events={styles.events}
+      displaySelectAll={this.state.showCheckboxes}
+      adjustForCheckbox={this.state.showCheckboxes}
+      enableSelectAll={this.state.enableSelectAll}
+    >
+    </TableFooter>
     </Table>  
     </div> 
     </div>  
