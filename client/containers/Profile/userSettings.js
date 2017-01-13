@@ -28,7 +28,12 @@ const styles = {
   'justify-content': 'center',
   flexDirection: 'row'
   },
-  float: 'right'
+  float: 'right',
+  div: {
+  "margin-top": '19px 32px 16px 10px',
+    paddingLeft: 20,
+    lineHeight: 2.5,
+  }
 };
 
 

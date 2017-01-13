@@ -68,7 +68,7 @@ handleToggle = () => this.setState({open: !this.state.open});
           <MenuItem><a style={{color:'black'}} href='/logout'>Logout</a></MenuItem>
         </Drawer></div>}
       onTitleTouchTap = {()=> {hashHistory.push("/")}}
-      iconElementRight={<div style={{color:'white', 'padding-right': '10px', 'padding-top': '15px'}}>Welcome, {this.props.user.username}!</div>}
+      iconElementRight={<div style={{color:'white', 'padding-right': '10px', 'padding-top': '15px'}}><p style={{ color: '#512DA8', fontFamily: 'VT323, cursive', fontSize: '20px' }}>Take Charge, {this.props.user.username}!</p></div>}
     />
 
   )
