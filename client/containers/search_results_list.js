@@ -3,8 +3,7 @@ import { connect } from 'react-redux';
 import { playSong } from '../actions/songs';
 import { bindActionCreators } from 'redux'; //=> Take a look
 import axios from 'axios';
-import {Table, TableBody, TableFooter, TableHeader, TableHeaderColumn, TableRow, TableRowColumn}
-  from 'material-ui/Table';
+import {Table, TableBody, TableFooter, TableHeader, TableHeaderColumn, TableRow, TableRowColumn} from 'material-ui/Table';
 import getPlaylistDropdown from '../actions/getPlaylistDropdown';
 import PlaylistAdd from 'material-ui/svg-icons/av/playlist-add';
 import PlayCircleFilled from 'material-ui/svg-icons/av/play-circle-filled';
@@ -24,95 +23,62 @@ const style = {
     color: "#37474F"
   }
 };
+
 class SearchList extends Component {
   constructor(props) {  //no need of it if there is a stateless component
     super(props)
     this.index = 0;
+    this.state = {value:'default'};
     this.props.getPlaylistDropdown();
     this.renderAlbums = this.renderAlbums.bind(this); //binding in  a constructor
+    this.handleChange = this.handleChange.bind(this);
   }
 
+  handleChange(event, index, value) {
+   return this.setState({value});
+  }
 
   renderAlbums(albumId) {
   	let albumsArray = [];
-    // console.log("PROPS TRACKS", this.props.tracks)
     if(this.props.tracks.length > 0) {
-        albumsArray = this.props.tracks[0];
+      albumsArray = this.props.tracks[0];
     }
-    // console.log("PLAY SONG", playSong)
-    //   let that = this;
-    //   console.log("RENDER ALBUMS", this.props)
-    // const name = albumId
-    //  .map((title) => title.name)
-    //  .map((names, idx) => (<p key={names.concat(idx + 1)}>{names}</p>));
-
-    // const artist = albumId
-    //   .map(title => title.artists[0].name)
-    //   .map((artistName, idx) => (<p key={artistName.concat(idx + 1)}>{artistName}</p>)); 
-      
-    // const album = albumId
-    //   .map(title => title.album.album_type)
-    //   .map((album, idx) => (<p key={album.concat(idx + 1)}>{album}</p>));
-
-   //For testing purposes only
-  //==========================>
-   // const name = albumId[0].name;
-   // const artist = albumId[0].artists[0].name;
-   // const album = albumId[0].album.album_type;
-   //==========================>    
-//  }
-    let index = 0;
     return (
       albumsArray.map((track) => { 
-        // return (
-        //   <tr key={Math.random() * 100}> 
-        //     <td></td>
-        //     <td>{track.artists[0].name}</td>
-        //     <td>{track.name}</td>
-        //     <td><button onClick={() => this.props.playSong(track.uri)} >Play</button></td>
-        //     <td><select id={'playlistDropdown'+track.uri}><option value='default'>Pick a Playlist</option>{this.state.map(function(playlist){
-        //       return(<option value={playlist.Name}>{playlist.Name}</option>)
-        //     })}></select></td>
-        //     <td><button onClick={() => {let p = 'playlistDropdown'+track.uri; saveToPlaylist(document.getElementById(p).value, {artist:track.artists[0].name, album:track.name, uri:track.uri})}}>Add to playlist</button></td>
-        //   </tr>
-        // )
-        return (
-      
+        return (    
           <TableRow key={Math.random() * 100}>
-            <TableRowColumn style={{backgroundColor:'#EEEEEE', color: '#37474F',}}><p style={{ color: '#37474F', fontFamily: 'Teko, cursive', fontSize: '28px' }}>{track.artists[0].name}</p></TableRowColumn>
-            <TableRowColumn style={{backgroundColor:'#EEEEEE', color: '#37474F',}}><img src={track.images[2].url} /><p style={{ color: '#37474F', fontFamily: 'Teko, cursive', fontSize: '20px' }}>{track.name}</p></TableRowColumn>
-            <TableRowColumn style={{backgroundColor:'#EEEEEE', color: 'white',}}><IconButton style={style.largeIcon}><PlayCircleFilled onClick={() => this.props.playSong(track.uri)}>Play</PlayCircleFilled></IconButton></TableRowColumn>
-            <TableRowColumn style={{backgroundColor:'#EEEEEE', color: 'white',}}><select id={'playlistDropdown'+track.uri}><option value='default'>Pick a Playlist</option>{this.props.playlistDropdown.map(function(playlist){
-              return(<option value={playlist.Name}>{playlist.Name}</option>)
-            })}></select></TableRowColumn>
-            <TableRowColumn style={{backgroundColor:'#EEEEEE', color: 'white',}}><IconButton style={style.largeIcon}> <PlaylistAdd style={style.largeIcon} onClick={() => {let p = 'playlistDropdown'+track.uri; saveToPlaylist(document.getElementById(p).value, {artist:track.artists[0].name, album:track.name, uri:track.uri, image: track.images[2].url})}}>Add to playlist</PlaylistAdd></IconButton></TableRowColumn>
+            <TableRowColumn style={{backgroundColor:'#B0BEC5', color: 'black',}}><p style={{ color: 'white', fontFamily: 'Teko, cursive', fontSize: '28px' }}>{track.artists[0].name}</p></TableRowColumn>
+            <TableRowColumn style={{backgroundColor:'#B0BEC5', color: 'black',}}><img src={track.images[2].url} /><p style={{ color: 'white', fontFamily: 'Teko, cursive', fontSize: '20px' }}>{track.name}</p></TableRowColumn>
+            <TableRowColumn style={{backgroundColor:'#B0BEC5', color: 'white',}}><IconButton style={style.largeIcon}><PlayCircleFilled onClick={() => this.props.playSong(track.uri)}>Play</PlayCircleFilled></IconButton></TableRowColumn>
+            <TableRowColumn style={{backgroundColor:'#B0BEC5', color: 'white',}}>
+              <DropDownMenu id={"playlistDropdown" + track.uri} value={this.state.value} onChange={this.handleChange}>
+                <MenuItem value={'default'} primaryText="Choose Playlist" />
+                {this.props.playlistDropdown.map((playlist) => (<MenuItem value={playlist.Name} primaryText={playlist.Name} />))}
+              </DropDownMenu></TableRowColumn>
+            <TableRowColumn style={{backgroundColor:'#B0BEC5', color: 'white',}}><IconButton style={style.largeIcon}><PlaylistAdd style={style.largeIcon} onClick={() => {let p = 'playlistDropdown'+track.uri; saveToPlaylist(this.state.value, {artist:track.artists[0].name, album:track.name, uri:track.uri, image: track.images[2].url})}}>Add to playlist</PlaylistAdd></IconButton></TableRowColumn>
           </TableRow>
-       )
-    })
-   )
+        )
+      })
+    )
+  }
 
-    
-}
-
-  render () {
-  // console.log("PROPS IN SEARCH_RESULTS_LIST", this.props) 
+  render () { 
     return (
-       <Paper style={style} zDepth={5}>
-       <Table>
-     
-      <TableBody displayRowCheckbox={false}>
-       { console.log("search_results_list => this.props", this.props)}
-    <TableRow>
-          <TableHeaderColumn style={{backgroundColor:'#673AB7', color: 'white',}}> <p style={{ color: 'white', fontFamily: 'VT323, cursive', fontSize: '30px' }}> Artist </p></TableHeaderColumn>
-          <TableHeaderColumn style={{backgroundColor:'#673AB7', color: 'white',}}> <p style={{ color: 'white', fontFamily: 'VT323, cursive', fontSize: '30px' }}>  Album </p></TableHeaderColumn>
-          <TableHeaderColumn style={{backgroundColor:'#673AB7', color: 'white',}}> <p style={{ color: 'white', fontFamily: 'VT323, cursive', fontSize: '30px' }}> Play </p></TableHeaderColumn>
-          <TableHeaderColumn style={{backgroundColor:'#673AB7', color: 'white',}}> <p style={{ color: 'white', fontFamily: 'VT323, cursive', fontSize: '30px' }}> Playlist Dropdown</p></TableHeaderColumn>
-          <TableHeaderColumn style={{backgroundColor:'#673AB7', color: 'white',}}> <p style={{ color: 'white', fontFamily: 'VT323, cursive', fontSize: '30px' }}> Add to Playlist</p></TableHeaderColumn>
-      </TableRow>
-          {this.renderAlbums()}
-      </TableBody>
-      </Table>
-       </Paper>
+      <Paper style={style} zDepth={5}>
+        <Table>
+          <TableBody displayRowCheckbox={false}>
+           { console.log("search_results_list => this.props", this.props)}
+          <TableRow>
+            <TableHeaderColumn style={{backgroundColor:'#673AB7', color: 'white',}}> <p style={{ color: 'white', fontFamily: 'VT323, cursive', fontSize: '30px' }}> Artist </p></TableHeaderColumn>
+            <TableHeaderColumn style={{backgroundColor:'#673AB7', color: 'white',}}> <p style={{ color: 'white', fontFamily: 'VT323, cursive', fontSize: '30px' }}>  Album </p></TableHeaderColumn>
+            <TableHeaderColumn style={{backgroundColor:'#673AB7', color: 'white',}}> <p style={{ color: 'white', fontFamily: 'VT323, cursive', fontSize: '30px' }}> Play </p></TableHeaderColumn>
+            <TableHeaderColumn style={{backgroundColor:'#673AB7', color: 'white',}}> <p style={{ color: 'white', fontFamily: 'VT323, cursive', fontSize: '30px' }}> Playlist Dropdown</p></TableHeaderColumn>
+            <TableHeaderColumn style={{backgroundColor:'#673AB7', color: 'white',}}> <p style={{ color: 'white', fontFamily: 'VT323, cursive', fontSize: '30px' }}> Add to Playlist</p></TableHeaderColumn>
+          </TableRow>
+            {this.renderAlbums()}
+          </TableBody>
+        </Table>
+      </Paper>
     );
   }
 }
@@ -130,16 +96,11 @@ function saveToPlaylist(playlistName, songData) {
   }
 }
 
-function updateIndex() {
-  this.index++;
-}
-
 function mapStateToProps(state) {
   return {tracks: state.tracks, playlistDropdown: state.PlaylistDropdown};  //same as tracks: state.tracks
 }
 
 function mapDispatchToProps(dispatch) {
-  // console.log("dispatch in search-results",dispatch)
   return bindActionCreators({playSong, getPlaylistDropdown}, dispatch);
 }
 export default connect(mapStateToProps, mapDispatchToProps)(SearchList); //add mapDispatchToProps to mapStateToProps
