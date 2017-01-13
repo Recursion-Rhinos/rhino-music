@@ -8,12 +8,12 @@ module.exports = {
   googleAuth: {
     clientID: '948319285413-if84g6741rt1u3nm7dpd9ip449jq4dh2.apps.googleusercontent.com',
     clientSecret: 'CYGv1MNksTqrGABE0AZbvWk6',
-    callbackURL: 'http://localhost:3005/auth/google/callback'
+    callbackURL: "https://rhino-music.herokuapp.com/"
   },
   facebookAuth: {
     clientID: '1296092313746575',
     clientSecret: 'a812d1bcd8d1c6de0afb0eb848573fcb', 
-    callbackURL: 'http://localhost:3005/auth/facebook/callback'
+    callbackURL: "https://rhino-music.herokuapp.com/"
   }
 };
 
