@@ -19,11 +19,18 @@ const styles = {
     width: "75%",
     overflow: 'hidden',
     margin: '20px auto 0',
+    paddingBottom: '20px'
   },
   propToggleHeader: {
     margin: '20px auto 10px',
   },
-  margin: 12
+  margin: 12,
+  div: {
+    margin: '19px 32px 16px 10px',
+    paddingLeft: 20,
+    lineHeight: 2.5,
+    float: 'left'
+  }
 };
 
 
@@ -83,9 +90,9 @@ handleChange (event) {
   render () {
    console.log("SVETDaVeT Playlist", this.props)
    return (
-
     <div style={styles.propContainer} >
       <div className="playlists">
+<Paper style={styles.div} zDepth={5}>
        <Table
       height={this.state.height}
       fixedHeader={this.state.fixedHeader}
@@ -117,7 +124,8 @@ handleChange (event) {
     >
       {this.renderPlaylists(this.props.playlists)}
     </TableBody> 
-    </Table>   
+    </Table> 
+    </Paper>  
     </div>
     </div>  
   
