@@ -78,23 +78,21 @@ class SearchBar extends Component {
   //<button type="submit" className="btn btn-secondary">Search</button>
   render() {
     return (
-   
-      <form style={style.form} onSubmit={this.onFormSubmit} className="input-group">
-          <input 
-            placeholder="search for artist or album"
-            className="form-control"
-            value={this.state.term}
-            onChange={this.onInputChange} />
-          <span className="input-group-btn">
-            <button style={style.button} >
-              <FlatButton
-              label="Search"
-              icon={<Search />}
-            />
-            </button>
-          </span>
-      </form>
-   
+    <form style={style.form} onSubmit={this.onFormSubmit} className="input-group">
+      <input 
+        placeholder="search for artist or album"
+        className="form-control"
+        value={this.state.term}
+        onChange={this.onInputChange} />
+      <span className="input-group-btn">
+        <button style={style.button} >
+        <FlatButton
+          label="Search"
+          icon={<Search />}
+        />
+        </button>
+      </span>
+    </form>
     )
   }
 }

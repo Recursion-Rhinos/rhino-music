@@ -16,13 +16,13 @@ const styles = {
     color: orange500,
   },
   underlineStyle: {
-    borderColor: '#9b59b6',
+    borderColor: '#B7B13A',
   },
   floatingLabelStyle: {
-    color: '#9b59b6',
+    color: '#B7B13A',
   },
   floatingLabelFocusStyle: {
-    color: '#9b59b6',
+    color: '#B7B13A',
   },
   flex: {
   'alignItems': 'center',
@@ -159,8 +159,9 @@ render() {
        /><br /> <br /> 
       <FlatButton 
        label="Submit"
-       backgroundColor='#00B0FF'
+       backgroundColor='#B7B13A'
        color="white"
+       style={{marginBottom: "25px"}}
        />
     </form>
     </Flexbox>
