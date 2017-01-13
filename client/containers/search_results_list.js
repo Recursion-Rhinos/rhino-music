@@ -11,12 +11,18 @@ import PlayCircleFilled from 'material-ui/svg-icons/av/play-circle-filled';
 import DropDownMenu from 'material-ui/DropDownMenu';
 import MenuItem from 'material-ui/MenuItem';
 import Paper from 'material-ui/Paper';
+import IconButton from 'material-ui/IconButton';
 
 const style = {
   height: "auto",
   margin: 20,
   textAlign: 'center',
-  display: 'inline-block'
+  display: 'inline-block',
+  largeIcon: {
+    width: 60,
+    height: 60,
+    color: "black"
+  }
 };
 class SearchList extends Component {
   constructor(props) {  //no need of it if there is a stateless component
@@ -75,11 +81,11 @@ class SearchList extends Component {
           <TableRow key={Math.random() * 100}>
             <TableRowColumn style={{backgroundColor:'#B0BEC5', color: 'black',}}><p style={{ color: 'white', fontFamily: 'Teko, cursive', fontSize: '28px' }}>{track.artists[0].name}</p></TableRowColumn>
             <TableRowColumn style={{backgroundColor:'#B0BEC5', color: 'black',}}><img src={track.images[2].url} /><p style={{ color: 'white', fontFamily: 'Teko, cursive', fontSize: '26px' }}>{track.name}</p></TableRowColumn>
-            <TableRowColumn style={{backgroundColor:'#B0BEC5', color: 'white',}}><PlayCircleFilled onClick={() => this.props.playSong(track.uri)}>Play</PlayCircleFilled></TableRowColumn>
+            <TableRowColumn style={{backgroundColor:'#B0BEC5', color: 'white',}}><IconButton style={style.largeIcon}><PlayCircleFilled onClick={() => this.props.playSong(track.uri)}>Play</PlayCircleFilled></IconButton></TableRowColumn>
             <TableRowColumn style={{backgroundColor:'#B0BEC5', color: 'white',}}><select id={'playlistDropdown'+track.uri}><option value='default'>Pick a Playlist</option>{this.props.playlistDropdown.map(function(playlist){
               return(<option value={playlist.Name}>{playlist.Name}</option>)
             })}></select></TableRowColumn>
-            <TableRowColumn style={{backgroundColor:'#B0BEC5', color: 'white',}}><PlaylistAdd onClick={() => {let p = 'playlistDropdown'+track.uri; saveToPlaylist(document.getElementById(p).value, {artist:track.artists[0].name, album:track.name, uri:track.uri, image: track.images[2].url})}}>Add to playlist</PlaylistAdd></TableRowColumn>
+            <TableRowColumn style={{backgroundColor:'#B0BEC5', color: 'white',}}><IconButton style={style.largeIcon}> <PlaylistAdd style={style.largeIcon} onClick={() => {let p = 'playlistDropdown'+track.uri; saveToPlaylist(document.getElementById(p).value, {artist:track.artists[0].name, album:track.name, uri:track.uri, image: track.images[2].url})}}>Add to playlist</PlaylistAdd></IconButton></TableRowColumn>
           </TableRow>
        )
     })
