@@ -8,6 +8,11 @@ import { fetchEvents } from '../actions/events';
 // import Redux from 'react-redux';
 // console.log("REDUX", {connect});
 import Paper from 'material-ui/Paper';
+import FlatButton from 'material-ui/FlatButton';
+import FontIcon from 'material-ui/FontIcon';
+import ActionAndroid from 'material-ui/svg-icons/action/android';
+import {fullWhite} from 'material-ui/styles/colors';
+import Search from 'material-ui/svg-icons/action/search';
 
 const style = {
   height: "auto",
@@ -20,7 +25,12 @@ const style = {
     paddingRight: 5,
     paddingTop: 5,
     paddingBottom: 5
-  }
+  },
+  button: {
+    // margin: 12,
+    // backgroundColor: "#D8C2FF"
+    backgroundColor: "#B7B13A"
+  },
 };
 
 class SearchBar extends Component {
@@ -51,22 +61,38 @@ class SearchBar extends Component {
     this.setState({ term: '' });
   }
 
-  
+  /*
+  <FlatButton
+      icon={<ActionAndroid />}
+      style={style}
+    />
 
+
+     <FlatButton
+              // styling="material-icons md-48"
+              icon={<Search />}
+              style={style.button}
+            />
+  */
+
+  //<button type="submit" className="btn btn-secondary">Search</button>
   render() {
     return (
-   
-      <form style={style.form} onSubmit={this.onFormSubmit} className="input-group">
-          <input 
-            placeholder="search for artist or album"
-            className="form-control"
-            value={this.state.term}
-            onChange={this.onInputChange} />
-          <span className="input-group-btn">
-            <button type="submit" className="btn btn-secondary">Search</button>
-          </span>
-      </form>
-   
+    <form style={style.form} onSubmit={this.onFormSubmit} className="input-group">
+      <input 
+        placeholder="search for artist or album"
+        className="form-control"
+        value={this.state.term}
+        onChange={this.onInputChange} />
+      <span className="input-group-btn">
+        <button style={style.button} >
+        <FlatButton
+          label="Search"
+          icon={<Search />}
+        />
+        </button>
+      </span>
+    </form>
     )
   }
 }
