@@ -8,7 +8,7 @@ import MyPlaylists from './components/myPlaylists';
 import Youtube from './components/youtube';
 import News from './components/news';
 import Events from './components/events';
-
+import About from './components/about';
 
 export default (
   <Route path= "/" component={App} >
@@ -18,5 +18,6 @@ export default (
   <Route path="/Youtube" component={Youtube} />
   <Route path="/News" component={News} />
   <Route path="/Events" component={Events} />
+  <Route path="/About" component={About} />
   </Route>
 );

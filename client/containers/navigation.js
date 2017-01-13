@@ -65,10 +65,11 @@ handleToggle = () => this.setState({open: !this.state.open});
           <MenuItem onTouchTap={this.handleClose} containerElement={<Link to="/Events"/>} >Events</MenuItem>
           <MenuItem onTouchTap={this.handleClose} containerElement={<Link to="/Youtube"/>} >Videos</MenuItem>
           <MenuItem onTouchTap={this.handleClose} containerElement={<Link to="/News"/>} >News</MenuItem>
+          <MenuItem onTouchTap={this.handleClose} containerElement={<Link to="/About"/>} >About</MenuItem>
           <MenuItem><a style={{color:'black'}} href='/logout'>Logout</a></MenuItem>
         </Drawer></div>}
       onTitleTouchTap = {()=> {hashHistory.push("/")}}
-      iconElementRight={<div style={{color:'white', 'padding-right': '10px', 'padding-top': '15px'}}>Welcome, {this.props.user.username}!</div>}
+      iconElementRight={<div style={{color:'white', 'padding-right': '10px', 'padding-top': '15px'}}> <p style={{ color: 'white', fontFamily: 'VT323, cursive', fontSize: '30px'}}>Take Charge, {this.props.user.username}!</p></div>}
     />
 
   )
