@@ -6,8 +6,8 @@ module.exports = {
     callbackURL: 'http://localhost:3005/auth/spotify/callback'
   },
   googleAuth: {
-    clientID: '948319285413-if84g6741rt1u3nm7dpd9ip449jq4dh2.apps.googleusercontent.com',
-    clientSecret: 'CYGv1MNksTqrGABE0AZbvWk6',
+    clientID: '948319285413-gufr44vs8vsqkb8hlnj3os8t5p18p3ci.apps.googleusercontent.com',
+    clientSecret: '392UkfT2FyGAxl_vXA09CECQ',
     callbackURL: "https://rhino-music.herokuapp.com/auth/google/callback"
   },
   facebookAuth: {
