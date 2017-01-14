@@ -8,7 +8,7 @@ module.exports = {
   googleAuth: {
     clientID: '948319285413-if84g6741rt1u3nm7dpd9ip449jq4dh2.apps.googleusercontent.com',
     clientSecret: 'CYGv1MNksTqrGABE0AZbvWk6',
-    callbackURL: "https://rhino-music.herokuapp.com"
+    callbackURL: "https://rhino-music.herokuapp.com/auth/google/callback"
   },
   facebookAuth: {
     clientID: '1296092313746575',
