@@ -7,9 +7,7 @@ import Toggle from 'material-ui/Toggle';
 import getEvents  from '../../actions/profileEvents';
 import removeEvent from '../../actions/removeEvent';
 import RaisedButton from 'material-ui/RaisedButton';
-import ActionAndroid from 'material-ui/svg-icons/action/android';
 import FontIcon from 'material-ui/FontIcon';
-import {fullWhite} from 'material-ui/styles/colors'; // STYLING WITH MATERIAL UI
 import Paper from 'material-ui/Paper';
 
 const styles = {
