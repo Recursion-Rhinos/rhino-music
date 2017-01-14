@@ -7,14 +7,9 @@ import { changeEmail } from '../../actions/userSettings';
 import { toggleUser} from '../../actions/toggleUser';
 import TextField from 'material-ui/TextField';
 import FlatButton from 'material-ui/FlatButton';
-import {orange500} from 'material-ui/styles/colors';
 import Flexbox from 'flexbox-react';
 
-
 const styles = {
-  errorStyle: {
-    color: orange500,
-  },
   underlineStyle: {
     borderColor: '#B7B13A',
   },
@@ -51,39 +46,31 @@ class UserSettings extends Component {
   this.onUserInputChange = this.onUserInputChange.bind(this);
   this.onPasswordInputChange = this.onPasswordInputChange.bind(this);
   this.onEmailInputChange = this.onEmailInputChange.bind(this);
-  // this.onUserFormSubmit = this.onUserFormSubmit.bind(this); 
-  // this.onPasswordSubmit = this.onPasswordSubmit.bind(this);    
-  // this.onEmailFormSubmit = this.onEmailFormSubmit.bind(this);
   this.handleSubmit = this.handleSubmit.bind(this);
-  console.log("TOG", this.props)
   this.hideForm = this.props.toggleSettings;
   }
 
 
 
 onUserInputChange(event) {
-console.log('UserSettings Container onInputChange:', event.target.value);
   this.setState({
     username: event.target.value
    });  
 }
 
 onPasswordInputChange(event) {
-console.log('UserSettings Container onPasswordChange:', event.target.value);
   this.setState({
     password: event.target.value
    });  
 }
 
 onEmailInputChange(event) {
-console.log('UserSettings Container onEmailChange:', event.target.value);
   this.setState({
   email: event.target.value
    }); 
 }
 
 componentDidReceiveProps(nextProp) {
-  console.log('NEXT PROPS !@#!@#!@#: ', nextProp);
 }
 
 // onUserFormSubmit(event) {
@@ -125,8 +112,7 @@ render() {
   if(typeof hideForm === 'function') {
     hideForm();
   }
-  
-  console.log("PROPS in USERSETTING", this.props)
+
   return (
     <Flexbox style={styles.flex}>
     <h3> Change User Settings </h3>
@@ -166,14 +152,14 @@ render() {
     </form>
     </Flexbox>
    )
- }
+  }
 }
 
-function mapStateToProps(state) {
+const mapStateToProps = (state) => {
   return (toggleSettings: state.toggleSettings)
 }
 
-function mapDispatchToProps(dispatch) {
+const mapDispatchToProps = (dispatch) => {
   return bindActionCreators({ changeUser, changePassword, changeEmail}, dispatch);
 }
 

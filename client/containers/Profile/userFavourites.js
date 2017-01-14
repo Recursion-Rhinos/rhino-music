@@ -1,18 +1,17 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
-import { Table, TableBody, TableFooter, TableHeader, TableHeaderColumn, TableRow, TableRowColumn }from 'material-ui/Table';
-import TextField from 'material-ui/TextField';
-import Toggle from 'material-ui/Toggle';
 import getAllPlaylists  from '../../actions/getPlaylists';
 import getEvents  from '../../actions/profileEvents';
 import removeEvent from '../../actions/removeEvent';
+import { Table, TableBody, TableFooter, TableHeader, TableHeaderColumn, TableRow, TableRowColumn }from 'material-ui/Table';
+import TextField from 'material-ui/TextField';
+import Toggle from 'material-ui/Toggle';
 import RaisedButton from 'material-ui/RaisedButton';
 import {fullWhite} from 'material-ui/styles/colors';
 import ActionAndroid from 'material-ui/svg-icons/action/android';
 import FontIcon from 'material-ui/FontIcon';
 import Paper from 'material-ui/Paper';
-
 
 const styles = {
   propContainer: {
@@ -88,64 +87,57 @@ handleChange (event) {
   }
 
   render () {
-   console.log("SVETDaVeT Playlist", this.props)
    return (
     <div style={styles.propContainer} >
       <div className="playlists">
-<Paper style={styles.div} zDepth={5}>
-       <Table
-      height={this.state.height}
-      fixedHeader={this.state.fixedHeader}
-      fixedFooter={this.state.fixedFooter}
-      selectable={this.state.selectable}
-      multiSelectable={this.state.multiSelectable}
-    >
-    <TableHeader
-      displaySelectAll={this.state.showCheckboxes}
-      adjustForCheckbox={this.state.showCheckboxes}
-      enableSelectAll={this.state.enableSelectAll}
-    >
-    <TableRow>
-    <TableHeaderColumn colSpan="3" tooltip="PLAYLISTS" style={{textAlign: 'center'}}>
-      <p style={{ color: '#311B92', fontFamily: 'VT323, cursive', fontSize: '38px' }}>PLAYLISTS</p>
-    </TableHeaderColumn>
-    </TableRow>
-    <TableRow>
-      <TableHeaderColumn tooltip="Playlist ID"><p style={{ color: '#311B92', fontFamily: 'Teko, cursive', fontSize: '28px' }}>ID</p></TableHeaderColumn>
-      <TableHeaderColumn tooltip="Playlist Name"><p style={{ color: '#311B92', fontFamily: 'Teko, cursive', fontSize: '28px' }}>Name</p></TableHeaderColumn>
-      <TableHeaderColumn tooltip="Track Count"><p style={{ color: '#311B92', fontFamily: 'Teko, cursive', fontSize: '28px' }}>Songs</p></TableHeaderColumn>
-    </TableRow>
-    </TableHeader>
-    <TableBody
-      showRowHover={this.state.showRowHover}
-      displayRowCheckbox={this.state.showCheckboxes}
-      deselectOnClickaway={this.state.deselectOnClickaway}
-      stripedRows={this.state.stripedRows}
-    >
-      {this.renderPlaylists(this.props.playlists)}
-    </TableBody> 
-    </Table> 
-    </Paper>  
-    </div>
-    </div>  
-  
+      <Paper 
+        style={styles.div} 
+        zDepth={5}>
+      <Table
+        height={this.state.height}
+        fixedHeader={this.state.fixedHeader}
+        fixedFooter={this.state.fixedFooter}
+        selectable={this.state.selectable}
+        multiSelectable={this.state.multiSelectable}
+      >
+     <TableHeader
+       displaySelectAll={this.state.showCheckboxes}
+       adjustForCheckbox={this.state.showCheckboxes}
+       enableSelectAll={this.state.enableSelectAll}
+     >
+     <TableRow>
+     <TableHeaderColumn colSpan="3" tooltip="PLAYLISTS" style={{textAlign: 'center'}}>
+       <p style={{ color: '#311B92', fontFamily: 'VT323, cursive', fontSize: '38px' }}>PLAYLISTS</p>
+     </TableHeaderColumn>
+     </TableRow>
+     <TableRow>
+       <TableHeaderColumn tooltip="Playlist ID"><p style={{ color: '#311B92', fontFamily: 'Teko, cursive', fontSize: '28px' }}>ID</p></TableHeaderColumn>
+       <TableHeaderColumn tooltip="Playlist Name"><p style={{ color: '#311B92', fontFamily: 'Teko, cursive', fontSize: '28px' }}>Name</p></TableHeaderColumn>
+       <TableHeaderColumn tooltip="Track Count"><p style={{ color: '#311B92', fontFamily: 'Teko, cursive', fontSize: '28px' }}>Songs</p></TableHeaderColumn>
+     </TableRow>
+     </TableHeader>
+     <TableBody
+       showRowHover={this.state.showRowHover}
+       displayRowCheckbox={this.state.showCheckboxes}
+       deselectOnClickaway={this.state.deselectOnClickaway}
+       stripedRows={this.state.stripedRows}
+     >
+     {this.renderPlaylists(this.props.playlists)}
+     </TableBody> 
+     </Table> 
+     </Paper>  
+     </div>
+    </div>   
     );
   }
 }
 
-function mapStateToProps(state) {
-  console.log("STATE IN FAVOURITES", state);
+const mapStateToProps = (state) => {
   return {
-    // allEvents: state.allEvents,
     playlists: state.getAllPlaylists
   }
 }
 
-// function mapDispatchToProps(dispatch) {
-//   return bindActionCreators({ getAllPlaylists, getEvents }, dispatch);
-// }
-
-// export default connect(mapStateToProps, mapDispatchToProps)(Favourites);
 export default connect(mapStateToProps, { getAllPlaylists })(Favourites);
 
 
