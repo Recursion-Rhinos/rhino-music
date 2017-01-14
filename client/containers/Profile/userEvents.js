@@ -52,11 +52,8 @@ class Events extends Component {
  }
 
 componentWillMount() {
-    // this.props.getAllPlaylists();
-    // this.getUserEvents();
-    this.props.getEvents();
-    console.log("getEvents return a promise: => ", this.props.allEvents)
-}
+  this.props.getEvents();  
+};
 
 componentDidReceiveProps(nextProps) {
   this.forceUpdate();
@@ -73,7 +70,6 @@ handleChange (event) {
 };
 
   renderEvents(events) {
-    // console.log("EVEEENTSSSS", JSON.parse(events));
     const data = [];
     events.forEach((arr) => {
       arr.forEach((obj) => {
@@ -81,15 +77,11 @@ handleChange (event) {
       });
     });
     data.forEach((ele) => {
-      console.log("JSON PARSEEEEEEEEE", ele);
       if (typeof ele.event === "string") {
       ele.event = JSON.parse(ele.event);
       }
     })
-     console.log("DATAAAAAAAAAAA", data)
     return data.map((el, idx) =>{
-      console.log("+++++++++++++++++++++++++++", el)
-      //<RaisedButton label="Primary" primary={true} style={style} />
       return (
       <TableRow  key={el + (idx + Math.random())} >
         <TableRowColumn><p style={{ color: '#311B92', fontFamily: 'Teko, cursive', fontSize: '20px' }}>{ idx }</p></TableRowColumn>
@@ -101,9 +93,8 @@ handleChange (event) {
       )  
     });
   }
-   //NEED STYLING!!!
+
   render () {
-    console.log("SVETDaVeT Playlist", this.props)
    return (
     <div style={styles.propContainer} >
     <div className="events">
@@ -143,7 +134,6 @@ handleChange (event) {
      {this.renderEvents(this.props.allEvents)}
     </TableBody> 
     <TableFooter
-      // adjustForCheckbox={this.state.showCheckboxes}
       events={styles.events}
       displaySelectAll={this.state.showCheckboxes}
       adjustForCheckbox={this.state.showCheckboxes}
@@ -158,19 +148,12 @@ handleChange (event) {
   }
 }
 
-function mapStateToProps(state) {
-  console.log("STATE IN FAVOURITES", state);
+const mapStateToProps = (state) => {
   return {
-    allEvents: state.allEvents,
-    // playlists: state.getAllPlaylists
+    allEvents: state.allEvents
   }
 }
 
-// function mapDispatchToProps(dispatch) {
-//   return bindActionCreators({ getAllPlaylists, getEvents }, dispatch);
-// }
-
-// export default connect(mapStateToProps, mapDispatchToProps)(Favourites);
 export default connect(mapStateToProps, {getEvents, removeEvent })(Events);
 
 

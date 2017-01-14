@@ -1,9 +1,9 @@
 import React, {Component} from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
-import { getPlaylists } from '../../actions/playlists';
-import { getEvents } from '../../actions/profileEvents';
-import {Link} from 'react-router';
+// import { getPlaylists } from '../../actions/playlists';
+// import { getEvents } from '../../actions/profileEvents';
+// import {Link} from 'react-router';
 import Navigation from '../navigation';
 import UserFavourites from './userFavourites';
 import UserEvents from './userEvents'
