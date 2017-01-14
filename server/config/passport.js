@@ -79,7 +79,7 @@ module.exports = function(passport) {
   var googleStrategy = new GoogleStrategy({
     clientID: configAuth.googleAuth.clientID,
     clientSecret: configAuth.googleAuth.clientSecret,
-    callbackURL: configAuth.googleAuth.callbackURL
+    redirect_uri: configAuth.googleAuth.callbackURL
   },
    function(token, refreshToken, profile, done) {
      User.getUserByName(profile.displayName)
