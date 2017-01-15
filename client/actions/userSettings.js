@@ -4,7 +4,8 @@ import { USER_PASSWORD } from '../constants/ActionTypes';
 import { USERNAME_CHANGE } from '../constants/ActionTypes';
 import { USER_EMAIL } from '../constants/ActionTypes';
 
-export function changeUser(username) {   
+//VALIDATION
+export changeUser = (username) => {  
   let newUsername = axios.post('/api/changeUsername', {username:username})
   return {
     type: "USERNAME_CHANGE",
@@ -12,19 +13,18 @@ export function changeUser(username) {
   };
 }
 
-export function changePassword(password) {
+export changePassword = (password) => {
   let newPassword = axios.post('/api/changePassword', {newPassword:password});
-    return {
-      type: "USER_PASSWORD",
-      payload: newPassword	
-    };
-  }
+  return {
+    type: "USER_PASSWORD",
+    payload: newPassword	
+  };
+}
 
-export function changeEmail(email) {
+export changeEmail = (email) => {
   let newEmail = axios.post('/api/changeEmail', {email:email});
   return {
     type: "USER_EMAIL",
     payload: newEmail	
   };
- }
-
+}

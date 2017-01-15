@@ -33,7 +33,6 @@ const styles = {
 class Events extends Component {
   constructor(props) {
     super(props)
-
      this.state = {
       fixedHeader: true,
       fixedFooter: true,
@@ -95,52 +94,49 @@ handleChange (event) {
   render () {
    return (
     <div style={styles.propContainer} >
-    <div className="events">
-    <Paper style={styles.div} zDepth={5}>
-    <Table
-      height={this.state.height}
-      fixedHeader={this.state.fixedHeader}
-      fixedFooter={this.state.fixedFooter}
-      selectable={this.state.selectable}
-      multiSelectable={this.state.multiSelectable}
-    >
-    <TableHeader
-      events={styles.events}
-      displaySelectAll={this.state.showCheckboxes}
-      adjustForCheckbox={this.state.showCheckboxes}
-      enableSelectAll={this.state.enableSelectAll}
-    >
-    <TableRow>
-    <TableHeaderColumn colSpan="5" tooltip="EVENTS" style={{textAlign: 'center'}}>
-      <p style={{ color: '#311B92', fontFamily: 'VT323, cursive', fontSize: '38px' }}>EVENTS</p>
-    </TableHeaderColumn>
-    </TableRow>
-    <TableRow>
-      <TableHeaderColumn tooltip="Event ID"><p style={{ color: '#311B92', fontFamily: 'Teko, cursive', fontSize: '28px' }}>ID</p></TableHeaderColumn>
-      <TableHeaderColumn tooltip="Venue Details"><p style={{ color: '#311B92', fontFamily: 'Teko, cursive', fontSize: '28px' }}>Name</p></TableHeaderColumn>
-      <TableHeaderColumn tooltip="Location"><p style={{ color: '#311B92', fontFamily: 'Teko, cursive', fontSize: '28px' }}>Location</p></TableHeaderColumn>
-      <TableHeaderColumn tooltip="Reserve Tickets"><p style={{ color: '#311B92', fontFamily: 'Teko, cursive', fontSize: '28px' }}>Reserve</p></TableHeaderColumn>
-      <TableHeaderColumn tooltip="Delete Event"><p style={{ color: '#311B92', fontFamily: 'Teko, cursive', fontSize: '28px' }}>Delete</p></TableHeaderColumn>
-    </TableRow>
-    </TableHeader>
-    <TableBody
-      showRowHover={this.state.showRowHover}
-      displayRowCheckbox={this.state.showCheckboxes}
-      deselectOnClickaway={this.state.deselectOnClickaway}
-      stripedRows={this.state.stripedRows}
-    >
-     {this.renderEvents(this.props.allEvents)}
-    </TableBody> 
-    <TableFooter
-      events={styles.events}
-      displaySelectAll={this.state.showCheckboxes}
-      adjustForCheckbox={this.state.showCheckboxes}
-      enableSelectAll={this.state.enableSelectAll}
-    >
-    </TableFooter>
-    </Table>  
-    </Paper>
-    </div> 
+      <div className="events">
+        <Paper style={styles.div} zDepth={5}>
+          <Table
+            height={this.state.height}
+            fixedHeader={this.state.fixedHeader}
+            fixedFooter={this.state.fixedFooter}
+            selectable={this.state.selectable}
+            multiSelectable={this.state.multiSelectable}
+          >
+          <TableHeader
+            events={styles.events}
+            displaySelectAll={this.state.showCheckboxes}
+            adjustForCheckbox={this.state.showCheckboxes}
+            enableSelectAll={this.state.enableSelectAll}>
+            <TableRow>
+              <TableHeaderColumn colSpan="5" tooltip="EVENTS" style={{textAlign: 'center'}}>
+                <p style={{ color: '#311B92', fontFamily: 'VT323, cursive', fontSize: '38px' }}>EVENTS</p>
+              </TableHeaderColumn>
+            </TableRow>
+            <TableRow>
+              <TableHeaderColumn tooltip="Event ID"><p style={{ color: '#311B92', fontFamily: 'Teko, cursive', fontSize: '28px' }}>ID</p></TableHeaderColumn>
+              <TableHeaderColumn tooltip="Venue Details"><p style={{ color: '#311B92', fontFamily: 'Teko, cursive', fontSize: '28px' }}>Name</p></TableHeaderColumn>
+              <TableHeaderColumn tooltip="Location"><p style={{ color: '#311B92', fontFamily: 'Teko, cursive', fontSize: '28px' }}>Location</p></TableHeaderColumn>
+              <TableHeaderColumn tooltip="Reserve Tickets"><p style={{ color: '#311B92', fontFamily: 'Teko, cursive', fontSize: '28px' }}>Reserve</p></TableHeaderColumn>
+              <TableHeaderColumn tooltip="Delete Event"><p style={{ color: '#311B92', fontFamily: 'Teko, cursive', fontSize: '28px' }}>Delete</p></TableHeaderColumn>
+            </TableRow>
+          </TableHeader>
+          <TableBody
+            showRowHover={this.state.showRowHover}
+            displayRowCheckbox={this.state.showCheckboxes}
+            deselectOnClickaway={this.state.deselectOnClickaway}
+            stripedRows={this.state.stripedRows}>
+              {this.renderEvents(this.props.allEvents)}
+          </TableBody> 
+          <TableFooter
+            events={styles.events}
+            displaySelectAll={this.state.showCheckboxes}
+            adjustForCheckbox={this.state.showCheckboxes}
+            enableSelectAll={this.state.enableSelectAll}>
+          </TableFooter>
+          </Table>  
+        </Paper>
+      </div> 
     </div>  
     );
   }

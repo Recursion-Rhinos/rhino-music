@@ -26,22 +26,22 @@ const style = {
 
 class Profile extends Component {
   constructor(props) {
-  super(props);
-  this.props.getUser();
-}	
+    super(props);
+    this.props.getUser();
+  }	
 
-render () { 
+  render () { 
     return (
       <Paper style={style.div} zDepth={5}>
-      <div>
-      <Menu>
-        <MenuItem primaryText={this.props.userInfo.username} leftIcon={<Account />} />
-        <MenuItem primaryText="Basic Details" onClick={() => this.props.changeSelected('settings')} leftIcon={<Settings />} />
-        <MenuItem primaryText="Playlists" onClick={() => this.props.changeSelected('playlists')} leftIcon={<Playlist />} />
-        <MenuItem primaryText="Events" onClick={() => this.props.changeSelected('events')} leftIcon={<Events />} />
-        <MenuItem leftIcon={<Exit />}> <a style={{color:'black'}} href='/logout'> Exit </a></MenuItem>
-      </Menu>
-      </div>
+        <div>
+          <Menu>
+            <MenuItem primaryText={this.props.userInfo.username} leftIcon={<Account />} />
+            <MenuItem primaryText="Basic Details" onClick={() => this.props.changeSelected('settings')} leftIcon={<Settings />} />
+            <MenuItem primaryText="Playlists" onClick={() => this.props.changeSelected('playlists')} leftIcon={<Playlist />} />
+            <MenuItem primaryText="Events" onClick={() => this.props.changeSelected('events')} leftIcon={<Events />} />
+            <MenuItem leftIcon={<Exit />}> <a style={{color:'black'}} href='/logout'> Exit </a></MenuItem>
+          </Menu>
+        </div>
       </Paper>
     );
   }
