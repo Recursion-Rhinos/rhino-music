@@ -4,7 +4,6 @@ import { USER_PASSWORD } from '../constants/ActionTypes';
 import { USERNAME_CHANGE } from '../constants/ActionTypes';
 import { USER_EMAIL } from '../constants/ActionTypes';
 
-//VALIDATION
 export function changeUser(username) {   
   let newUsername = axios.post('/api/changeUsername', {username:username})
   return {
