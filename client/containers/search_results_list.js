@@ -68,7 +68,6 @@ class SearchList extends Component {
       <Paper style={style} zDepth={5}>
         <Table>
           <TableBody displayRowCheckbox={false}>
-           { console.log("search_results_list => this.props", this.props)}
           <TableRow>
             <TableHeaderColumn style={{backgroundColor:'#673AB7', color: 'white',}}> <p style={{ color: 'white', fontFamily: 'VT323, cursive', fontSize: '30px' }}> Artist </p></TableHeaderColumn>
             <TableHeaderColumn style={{backgroundColor:'#673AB7', color: 'white',}}> <p style={{ color: 'white', fontFamily: 'VT323, cursive', fontSize: '30px' }}>  Album </p></TableHeaderColumn>
@@ -84,24 +83,21 @@ class SearchList extends Component {
   }
 }
 
-function saveToPlaylist(playlistName, songData) {
+const saveToPlaylist = (playlistName, songData) => {
   if(playlistName !== 'default'){
     let obj = {
       playlistName: playlistName,
       songData: songData
     }
     axios.post('/api/saveSong', {body: obj})
-    .then((result) => {
-      console.log('SAVING SONG')
-    });
   }
 }
 
-function mapStateToProps(state) {
+const mapStateToProps = (state) => {
   return {tracks: state.tracks, playlistDropdown: state.PlaylistDropdown};  //same as tracks: state.tracks
 }
 
-function mapDispatchToProps(dispatch) {
+const mapDispatchToProps = (dispatch) => {
   return bindActionCreators({playSong, getPlaylistDropdown}, dispatch);
 }
 export default connect(mapStateToProps, mapDispatchToProps)(SearchList); //add mapDispatchToProps to mapStateToProps

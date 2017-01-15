@@ -13,7 +13,6 @@ let removeSong = (song) => {
 };
 
 let getSongById = (songId) => {
-  console.log('SONG MODEL ID: ', songId);
   return knex('Songs').where({
     id: songId
   });
