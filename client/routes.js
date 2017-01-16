@@ -11,13 +11,13 @@ import Events from './components/events';
 import About from './components/about';
 
 export default (
-  <Route path= "/" component={App} >
-  <IndexRoute component={Home} />
-  <Route path="/profile" component={Profile} />
-  <Route path="/MyMusic" component={MyPlaylists} />
-  <Route path="/Youtube" component={Youtube} />
-  <Route path="/News" component={News} />
-  <Route path="/Events" component={Events} />
-  <Route path="/About" component={About} />
+  <Route path="/" component={App} >
+    <IndexRoute component={Home} />
+    <Route path="/profile" component={Profile} />
+    <Route path="/MyMusic" component={MyPlaylists} />
+    <Route path="/Youtube" component={Youtube} />
+    <Route path="/News" component={News} />
+    <Route path="/Events" component={Events} />
+    <Route path="/About" component={About} />
   </Route>
 );
