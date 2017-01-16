@@ -4,6 +4,5 @@ export default changeSelected = (selected) => {
   return {  
     type: 'CHANGE_SELECTED',
     payload: selected
-  };
+  }
 }
-
