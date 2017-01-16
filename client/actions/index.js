@@ -1,7 +1,7 @@
 import axios from 'axios';
 import { FETCH_SONGS } from '../constants/ActionTypes';
 
-export fetchSongs = (term) => {
+export function fetchSongs(term) {
 	let request = axios.post('/api/search', { body: term })
 	return {
 		type: FETCH_SONGS,
