@@ -1,7 +1,7 @@
 import axios from 'axios';
 import { FETCH_EVENTS } from '../constants/ActionTypes';
 
-export fetchEvents = (term) => {
+const fetchEvents = (term) => {
 	let firstResult;
 	let events = axios.post('/api/getId', {body: term})
 	.then(function(result) {
@@ -13,4 +13,6 @@ export fetchEvents = (term) => {
 		type: "FETCH_EVENTS",
 		payload: events
 	};
-}
+};
+
+export default fetchEvents;

@@ -1,7 +1,7 @@
 import axios from 'axios';
 import { VIDEO_PLAYLIST } from '../constants/ActionTypes';
 
-export videoPlaylist = (playlistName) => {
+const videoPlaylist = (playlistName) => {
   let videoPlaylist = [];
   const videos = axios.post('/api/getPlaylistSongs',{body:playlistName})
   .then((songArrs) => { 
@@ -22,3 +22,5 @@ export videoPlaylist = (playlistName) => {
   	payload: videos
   };
 }
+
+export default videoPlaylist;
