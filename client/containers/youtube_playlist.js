@@ -30,47 +30,62 @@ const styles = {
 class YoutubePlaylist extends Component {
 	constructor(props) {
 		super(props);
+		
 		this.renderList = this.renderList.bind(this);
 	}
 
 
-    renderList() {
-     	let videosArray = [];
-     	if(this.props.videos.length > 0) {
-     		videosArray = this.props.videos[0];
-     	}
-      return videosArray.map(video => (
-        <GridTile
-        key={video.id.videoId}
-        title={video.snippet.title}
-        actionIcon={<IconButton><PlayVid onClick={() => this.props.playVideo(video.id.videoId)} color="white"/></IconButton>}
-        titleStyle={styles.titleStyle}
-        titleBackground="linear-gradient(to top, rgba(0,0,0,0.7) 0%,rgba(0,0,0,0.3) 70%,rgba(0,0,0,0) 100%)">
-          <img src={styles.image} src={video.snippet.thumbnails.default.url} />    
-        </GridTile>
-      )
+   renderList() {
+   	
+   	// console.log('THIS DA VID PROP. DUDE: ', this.props.videos);
+   	let videosArray = [];
+   	if(this.props.videos.length > 0) {
+   		videosArray = this.props.videos[0];
+   	}
+
+
+   	// console.log('THIS DA VIDEOZZZZZZZ: ', videosArray);
+
+    return videosArray.map(video => (
+
+       <GridTile
+          key={video.id.videoId}
+          title={video.snippet.title}
+          actionIcon={<IconButton><PlayVid onClick={() => this.props.playVideo(video.id.videoId)} color="white"/></IconButton>}
+          titleStyle={styles.titleStyle}
+          titleBackground="linear-gradient(to top, rgba(0,0,0,0.7) 0%,rgba(0,0,0,0.3) 70%,rgba(0,0,0,0) 100%)">
+          <img src={styles.image} src={video.snippet.thumbnails.default.url} />
+        
+    </GridTile>
+
     )
+
+    );
+  
   }
 
-  render () {
-    return (
-      <div style={styles.root}>
-        <GridList
-        cellHeight={100}
-        style={styles.gridList}
-        cols={2.2}>
-  	    	{this.renderList()}
-        </GridList>
-      </div>
-  	);
+render () {
+  return (
+<div style={styles.root}>
+  <GridList
+      cellHeight={100}
+      style={styles.gridList}
+      cols={2.2}
+    >
+	    
+	    	{this.renderList()}
+	 
+    </GridList>
+</div>
+	  );
   }
 }
 
-const mapStateToProps = (state) => {
+function mapStateToProps(state) {
   return {videos: state.videos, videofyVideos: state.videoPlaylist};  //same as tracks: state.tracks
 }
 
-const mapDispatchToProps = (dispatch) => {
+function mapDispatchToProps(dispatch) {
   return bindActionCreators({ playVideo : playVideo }, dispatch);
 }
 

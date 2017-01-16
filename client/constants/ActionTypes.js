@@ -22,8 +22,3 @@ export const USER_PASSWORD = 'USER_PASSWORD';
 export const USER_EMAIL = 'USER_EMAIL';
 export const TOGGLE_USER = 'TOGGLE_USER';
 export const CHANGE_SELECTED = 'CHANGE_SELECTED';
-export const LOGOUT = 'LOGOUT';
-
-//Playlist
-export const GET_PLAYLIST_DROPDOWN = 'GET_PLAYLIST_DROPDOWN';
-export const SHOW_PLAYLIST = 'SHOW_PLAYLIST';

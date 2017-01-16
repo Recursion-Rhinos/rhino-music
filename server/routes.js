@@ -20,7 +20,7 @@ module.exports = function(app, passport) {
     request.get({
       url: `https://api.spotify.com/v1/search?q=${input}&type=album`
     },
-    (error, response, body) => {
+    function(error, response, body) {
       if (!error && response.statusCode === 200) {            
         res.send(body);
       } else {
@@ -30,12 +30,14 @@ module.exports = function(app, passport) {
   });
 
   app.post('/api/getId', isLoggedIn, (req, res) => {
+    console.log("EVENTS INPUT", req.body);
     let artistName = req.body.body;
     request.get({
       url: `http://api.songkick.com/api/3.0/search/artists.json?apikey=ujMX1UFiCgZT5oaH&query=${artistName}`,
       method: "GET"
     },
-    (error, response, body) => {
+    function(error, response, body) {
+      // console.log("SOngKinck API", body);
       if(!error && response.statusCode === 200) {
         var bodyParsed = JSON.parse(body);
         res.send(bodyParsed)
@@ -50,9 +52,10 @@ module.exports = function(app, passport) {
     request.get({
       url: `http://api.songkick.com/api/3.0/artists/${artist_id}/calendar.json?apikey=ujMX1UFiCgZT5oaH`
     }, 
-    (error, response, body) => {
+    function(error, response, body) {
       if (!error && response.statusCode === 200) {
         var bodyParse = JSON.parse(body);
+        console.log("DO I HAVE EVENTS OR NAH!?", bodyParse)
         res.send(bodyParse);
       } else {
         res.json(error);
@@ -74,7 +77,7 @@ module.exports = function(app, passport) {
         key: "AIzaSyDuq91IyM4yVkDOCagx_Y_VvRnLyKHXfuE"
       }
     },
-    (error, response, body) => {       
+    function(error, response, body) {       
       if (!error && response.statusCode === 200) {
         res.send(body);
       } else {
@@ -84,7 +87,9 @@ module.exports = function(app, passport) {
   });
 
   app.post('/api/videofy', isLoggedIn, (req, res) => {
+
     let query = req.body.name.artist + " " + req.body.name.album;
+    console.log("QUERY QUERY QUERY FROM VIDEO PLAYLIST", query);
     request({
       url: "https://www.googleapis.com/youtube/v3/search",
       qs: {
@@ -97,8 +102,9 @@ module.exports = function(app, passport) {
         key: "AIzaSyDuq91IyM4yVkDOCagx_Y_VvRnLyKHXfuE"
       }
     },
-    (error, response, body) => {
+    function(error, response, body) {
       if(!error && response.statusCode === 200) {
+        console.log("BODY", body)
         res.json(body);
       } else {
         res.json(error);
@@ -119,6 +125,7 @@ module.exports = function(app, passport) {
     let playlists;
     Playlists.getAllPlaylistsByUserId(passport.user.id)
     .then((userPlaylists) => {
+      console.log('USERPLAYLISTS: ', userPlaylists);
       playlists = userPlaylists;
       let playlistIds = [];
       userPlaylists.forEach((playlist) => {
@@ -129,11 +136,13 @@ module.exports = function(app, passport) {
         idArr.forEach((id) => {
           idArray.push(id[0].id)
         });
+        console.log('IDARRAY: ', idArray)
         let songIds = [];
         idArray.forEach((id) => {
           songIds.push(Playlists.getPlaylistSongsByPlaylistId(id))
         });
         Promise.all(songIds).then((data) => {
+          console.log('DATA!@@#!@#!@#: ', data)
           for(let i=0; i<playlists.length; i++) {
             playlists[i].songCount = data[i].length;
           }
@@ -158,6 +167,7 @@ module.exports = function(app, passport) {
   });
 
   app.post('/api/deletePlaylist', isLoggedIn, (req,res) => {
+    console.log("passport.user.id", passport.user.id);
     Playlists.getPlaylistIdByName(req.body.playlist, passport.user.id)
     .then((result) => {
       let playlistId = result[0].id;
@@ -230,6 +240,9 @@ module.exports = function(app, passport) {
           .then((songs) => {
             let songId = songs[0];
             Playlists.addSongToPlaylist(playlistId, songId)
+            .then((result) => {
+              console.log('RESULT: ', result)
+            })
           })
         }
       })
@@ -237,30 +250,42 @@ module.exports = function(app, passport) {
   })
 
   app.post('/api/saveEvent', isLoggedIn, (req,res) => {
+    console.log("EVENTS HERE INFO", req.body)
     const savedEvent = req.body.body
+
     Events.getAllEvents().then((events) => {
       let match = false;
       events.forEach((event) => {
         let eventObj = JSON.parse(event.event)
+        console.log("COMPARISON", eventObj.name === savedEvent.name)
         if(eventObj.name === savedEvent.name){
           match = event;
         }
       })
+      console.log("MATCH RESULT", match)
       if(match.id === Number) {
         let userEventMatch = false
         Events.getEventsByUserId(passport.user.id)
         .then((events) => {
           if(events.id === match.id) {
+            console.log("MATCH FOUND FOR USER")
             userEventMatch = true;
           } else if(!userEventMatch) {
             Events.addEventToEventsUsers(newEventId, passport.user.id)
+            .then((id) => {
+              console.log("DONE", id)
+            })
           }
         })
       } else {
         Events.saveEvent(JSON.stringify(savedEvent))
         .then((id) => {
           let newEventId = id[0]
+          console.log(newEventId)
           Events.addEventToEventsUsers(newEventId, passport.user.id)
+          .then((newId) => {
+            console.log("DONE", newId)
+          })
         })
       }
     })
@@ -270,11 +295,13 @@ module.exports = function(app, passport) {
     let eventId = req.body.eventId;
     let userId = passport.user.id;
     Events.removeUserEvent(eventId, userId).then((removed) => {
+      console.log('REMOVED EVENTS: ', removed);
       res.send('removed');
     })
   });
 
   app.get('/', isLoggedIn, (req, res) => {
+    console.log('ROUTES.JS GET')
     res.sendFile(path.join(__dirname, '/../client/public/bundle.js'))
   });
 
@@ -286,8 +313,7 @@ module.exports = function(app, passport) {
     successRedirect: '/search',
     failureRedirect: '/login',
     failureFlash: true
-  }), 
-  (req, res) => {
+  }), (req, res) => {
     if(req.body.remember) {
       req.session.cookie.maxAge= 1000 * 60 * 3;
     } else {
@@ -296,6 +322,7 @@ module.exports = function(app, passport) {
   });
   
   app.get('/signup', (req, res) => {
+    console.log('rendering signup')
     res.render('signup.ejs', { message: req.flash('signupMessage') })
   });
 
@@ -306,12 +333,14 @@ module.exports = function(app, passport) {
   }));
   
   app.get('/profile', isLoggedIn, (req, res) => {
+    console.log('PROFILE!!!')
     res.render('profile.ejs', {
       user: req.user
     });
   });
 
   app.get('/logout', (req, res) => {
+    console.log("LOGGING OUT ROUTES")
     req.logout();
     res.redirect('/');
   });
@@ -348,6 +377,7 @@ module.exports = function(app, passport) {
   //Change Username
   //==================>
   app.post('/api/changeUsername', isLoggedIn, (req,res) => {
+    console.log('2134324324', req);
     if (req.body.username === '') {
       res.send("Nothing is updated");
     } else { 
@@ -377,9 +407,11 @@ module.exports = function(app, passport) {
     else {
     let newPassword = req.body.newPassword;
     Users.getUserById(passport.user.id).then((userInfo) => {
+      console.log('USER INFO : ', userInfo)
       if(userInfo.password) {
         newPassword = bcrypt.hashSync(newPassword, null, null);
         Users.updatePassword(newPassword, passport.user.id).then((updated) => {
+          console.log('UPDATED PASSWORD', updated)
           res.send("updated");
         });
       }
@@ -389,6 +421,7 @@ module.exports = function(app, passport) {
   //==================>
 
   app.post('/api/news', isLoggedIn, (req, res) => { 
+    console.log('GETTING NEWS: ',req.body.body)
     let reqBody = req.body.body;
     request.get({
       url: "https://api.nytimes.com/svc/search/v2/articlesearch.json",
@@ -410,6 +443,7 @@ module.exports = function(app, passport) {
     Events.getEventsByUserId(passport.user.id)
     .then((data) => {
      let events = data;
+      console.log('All EVENTS BY USER: ',data);
      let eventsArray=[];
       events.forEach((event) => {
       eventsArray.push(Events.getEventsById(event.EventsId));
@@ -419,6 +453,7 @@ module.exports = function(app, passport) {
       });
 
       sendEvents = (arr) => {
+        console.log("EVENTSARRAY", arr);
         res.send(arr);
       }
     });
