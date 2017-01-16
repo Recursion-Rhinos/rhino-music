@@ -1,8 +1,8 @@
 import axios from 'axios';
-import { LOGOUT } from '../constants/ActionTypes';
 
 const logout = () => {
   let request = axios.get('/logout');
+  console.log('LOGGING OUT!!!!')
   return { 
     type: 'LOGOUT',
     payload: request

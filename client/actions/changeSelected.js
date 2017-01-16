@@ -1,8 +1,8 @@
 import { CHANGE_SELECTED } from '../constants/ActionTypes';
 
-export default changeSelected = (selected) => {
+export default function changeSelected (selected) {
   return {  
-    type: 'CHANGE_SELECTED',
-    payload: selected
+  type: 'CHANGE_SELECTED',
+  payload: selected
   }
 }
