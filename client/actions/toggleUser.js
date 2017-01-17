@@ -1,6 +1,6 @@
 import { TOGGLE_USER } from '../constants/ActionTypes';
 
-export default toggleUser = () => {
+const toggleUser = () => {
    let toggleSetting = () => {
     this.setState({active: 'block'});
   }
@@ -9,3 +9,5 @@ export default toggleUser = () => {
     payload: toggleSetting	
   };
 }
+
+export default toggleUser;

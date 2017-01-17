@@ -1,7 +1,7 @@
 import axios from 'axios';
 import { NYT_NEWS, GET_NEWS } from '../constants/ActionTypes';
 
-export default fetchNews = (term) => {
+const fetchNews = (term) => {
   const request = axios.post('/api/news', {body:term});
   return {
     type: NYT_NEWS,
@@ -9,3 +9,4 @@ export default fetchNews = (term) => {
   }
 }
 
+export default fetchNews;
