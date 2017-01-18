@@ -1,10 +1,10 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
-import { fetchSongs } from '../actions/index';
+import fetchSongs  from '../actions/index';
 import fetchNews from '../actions/news_nytimes';
-import { fetchVideos } from '../actions/youtube.js';
-import { fetchEvents } from '../actions/events';
+import fetchVideos  from '../actions/youtube.js';
+import  fetchEvents  from '../actions/events';
 // import Redux from 'react-redux';
 // console.log("REDUX", {connect});
 import Paper from 'material-ui/Paper';
