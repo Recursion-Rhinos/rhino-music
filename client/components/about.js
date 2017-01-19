@@ -25,6 +25,7 @@ const style = {
     boxShadow: "10px 10px 5px #888888"
   }
 };
+// http://almende.github.io/chap-links-library/img/forkme_right_darkblue_121621.png
 
 export default class About extends Component {
   render() {
@@ -41,6 +42,8 @@ export default class About extends Component {
        <p style={{ color: 'white', fontFamily: 'Abel, cursive', fontSize: '28px' }}>This was made by music lovers for music lovers!</p>
   
       <br />
+
+<a class="github-button" href="https://github.com/Recursion-Rhinos/rhino-music" data-icon="octicon-star" data-style="mega" data-count-href="/Recursion-Rhinos/rhino-music/stargazers" data-count-api="/repos/Recursion-Rhinos/rhino-music#stargazers_count" data-count-aria-label="# stargazers on GitHub" aria-label="Star Recursion-Rhinos/rhino-music on GitHub">Star</a>
   </div>
   </center>
    
@@ -52,22 +55,27 @@ export default class About extends Component {
     
     <ListItem>
      <center>
-        <img src='https://s24.postimg.org/6x6flabpx/circle_me.gif' border='0' alt='circle me'/><br/><br/>
+        <img src='https://s24.postimg.org/6x6flabpx/circle_me.gif' border='0' alt='narmin'/><br/><br/>
         <Flexbox justifyContent='space-around'>
 
-         <img src='https://github.com/favicon.ico' border='0' alt='github'/>
-      
-         <img src='http://wwwf.imperial.ac.uk/utils/assets/apps/news/img/icon-linkedin.png' border='0' alt='github'/>
+     <a href="https://github.com/narmeen12?tab=repositories">
+         <img src='https://github.com/favicon.ico' border='0' alt='github'/></a>
+          Narmin Shahin
+          <a href="https://www.linkedin.com/in/narminshahin">
+         <img src='http://wwwf.imperial.ac.uk/utils/assets/apps/news/img/icon-linkedin.png' border='0' alt='github'/></a>
         </Flexbox>
       </center>
     </ListItem>
  
     <ListItem>
       <center>
-        <img src='https://s24.postimg.org/to1rpxzxx/jerry_circle.gif' border='0' alt='github'/><br/><br/>
+        <img src='https://s24.postimg.org/to1rpxzxx/jerry_circle.gif' border='0' alt='jerry'/><br/><br/>
         <Flexbox justifyContent='space-around'>
-         <img src='https://github.com/favicon.ico' border='0' alt='jerry circle'/>
-         <img src='http://wwwf.imperial.ac.uk/utils/assets/apps/news/img/icon-linkedin.png' border='0' alt='github'/>
+        <a href="https://github.com/Jerrys914">
+         <img src='https://github.com/favicon.ico' border='0' alt='jerry circle'/> </a>
+          Gerard "Jerry" Shanahan
+          <a href="https://www.linkedin.com/in/gerard-shanahan">
+         <img src='http://wwwf.imperial.ac.uk/utils/assets/apps/news/img/icon-linkedin.png' border='0' alt='li'/></a>
         </Flexbox>
       </center>
       
@@ -75,10 +83,13 @@ export default class About extends Component {
     </ListItem>
     <ListItem>
     <center>
-        <img src='https://s30.postimg.org/5xmwbz7sh/circle_svetlin.gif' border='0' alt='circle svetlin'/><br/><br/>
+        <img src='https://s30.postimg.org/5xmwbz7sh/circle_svetlin.gif' border='0' alt='svetlin'/><br/><br/>
         <Flexbox justifyContent='space-around'>
-         <img src='https://github.com/favicon.ico' border='0' alt='github'/>
-         <img src='http://wwwf.imperial.ac.uk/utils/assets/apps/news/img/icon-linkedin.png' border='0' alt='github'/>
+        <a href="https://github.com/sveem">
+         <img src='https://github.com/favicon.ico' border='0' alt='github'/></a>
+         Svetlin Mladenov
+         <a href="linkedin.com/in/mladenovs">
+         <img src='http://wwwf.imperial.ac.uk/utils/assets/apps/news/img/icon-linkedin.png' border='0' alt='li'/></a>
          </Flexbox>      
     </center>
     </ListItem>
