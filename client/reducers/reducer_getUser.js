@@ -1,5 +1,4 @@
-export default function(state=[], action) {
-  console.log("GET USER REDUCER", action);	
+export default function(state=[], action) {	
   if (action.type === 'GET_USER') {
     return action.payload.data;
   }

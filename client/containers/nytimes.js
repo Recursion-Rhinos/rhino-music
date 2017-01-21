@@ -56,7 +56,6 @@ class SearchNews extends Component {
         title="NEWS"
         subtitle="Search, collect, and review artist related news.">
         </CardMedia>
-        {console.log('THIS.PROPS.NEWS', this.props, newsData)}
         {newsData.length ? this.renderNews(newsData) : <CircularProgress size={60} thickness={5} />}
       </Card>
     )

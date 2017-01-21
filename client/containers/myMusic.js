@@ -88,15 +88,12 @@ class UserPlaylists extends Component {
   }
 
   deleteSong(playlistId,songId){
-    console.log('REmoving Song')
     axios.post('/api/removePlaylistSong', {playlistId: playlistId, songId: songId}).then((data) => {
-      console.log('Song Removed')
       this.renderSongs(this.props.getPlaylistSongs(this.playlistName))
     })
   }
 
   cellClicked(rowNum, colNum){
-    console.log('rowNumber: ', rowNum)
     let index = rowNum-2;
     let playlist = this.props.playlists[index];
     this.playlistId = playlist.id;
