@@ -9,11 +9,9 @@ import {BottomNavigation, BottomNavigationItem} from 'material-ui/BottomNavigati
 class MusicPlayer extends Component {
   constructor(props) {
     super(props);
-     // this.playSong = this.playSong.bind(this)
   }
 
   render () {
-      //" + (this.props.playSong ?  this.props.playSong.currentSong : "no song"
     return (
     <div className="bottom-align">
     <iframe
@@ -28,9 +26,7 @@ class MusicPlayer extends Component {
   }
 }
 
-function mapStateToProps(state) {
-	// console.log("state in  spotify_player",state);
-	// console.log("spotify_player state.playSong", state.playSong);
+const mapStateToProps = (state) => {
   return {playSong: state.playSong}; 
 }
 

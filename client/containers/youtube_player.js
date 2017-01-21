@@ -105,7 +105,7 @@ const mapStateToProps = (state) => {
   return {playVideo: state.playVideo, videos: state.videos, dropdown: state.dropdown, videofyVideos: state.videoPlaylist}; 
 }
 
-function mapDispatchToProps(dispatch) {
+const mapDispatchToProps = (dispatch) => {
   return bindActionCreators({ getDropDown, videoPlaylist }, dispatch);
 }
 

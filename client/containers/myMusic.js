@@ -31,7 +31,6 @@ const style = {
   button: "5px",
 };
 
-console.log("GET PLAYLIST SONGS", getPlaylistSongs)
 class UserPlaylists extends Component {
   constructor(props) {
     super(props);
@@ -178,7 +177,7 @@ class UserPlaylists extends Component {
   }
 }
 
-function mapStateToProps(state) {
+const mapStateToProps = (state) => {
   return {
     playlists: state.playlists, 
     getPlaylistSongs: state.playlistSongs, 
@@ -186,7 +185,7 @@ function mapStateToProps(state) {
   };
 }
 
-function mapDispatchToProps(dispatch) {
+const mapDispatchToProps = (dispatch) => {
   return bindActionCreators({ getPlaylistSongs, getPlaylists, playSong }, dispatch);
 }
 

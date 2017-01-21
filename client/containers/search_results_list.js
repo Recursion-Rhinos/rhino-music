@@ -84,7 +84,7 @@ class SearchList extends Component {
   }
 }
 
-function saveToPlaylist(playlistName, songData) {
+const saveToPlaylist = (playlistName, songData) => {
   if(playlistName !== 'default'){
     let obj = {
       playlistName: playlistName,
@@ -97,11 +97,11 @@ function saveToPlaylist(playlistName, songData) {
   }
 }
 
-function mapStateToProps(state) {
+const mapStateToProps = (state) => {
   return {tracks: state.tracks, playlistDropdown: state.PlaylistDropdown};  //same as tracks: state.tracks
 }
 
-function mapDispatchToProps(dispatch) {
+const mapDispatchToProps = (dispatch) => {
   return bindActionCreators({playSong, getPlaylistDropdown}, dispatch);
 }
 export default connect(mapStateToProps, mapDispatchToProps)(SearchList); //add mapDispatchToProps to mapStateToProps
