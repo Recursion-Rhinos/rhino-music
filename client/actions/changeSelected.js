@@ -1,8 +1,10 @@
 import { CHANGE_SELECTED } from '../constants/ActionTypes';
 
-export default function changeSelected (selected) {
+const changeSelected = (selected) => {
   return {  
   type: 'CHANGE_SELECTED',
   payload: selected
   }
 }
+
+export default changeSelected;

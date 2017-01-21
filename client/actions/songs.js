@@ -1,9 +1,10 @@
 import { PLAY_SONGS } from '../constants/ActionTypes';
 
-export function playSong(songId) {
-  // console.log("PLAY_SONGS Action Creator => songId", songId)
+const playSong = (songId) => {
   return {
     type: "PLAY_SONGS",
     payload: songId	
   };
 }
+
+export default playSong;

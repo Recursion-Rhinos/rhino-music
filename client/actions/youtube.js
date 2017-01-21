@@ -1,7 +1,7 @@
 import axios from 'axios';
 import { FETCH_VIDEOS } from '../constants/ActionTypes';
 
-export function fetchVideos(term) {
+const fetchVideos = (term) => {
 	var videos = axios.post('/api/videos', {body: term});
 
 	return {
@@ -9,3 +9,5 @@ export function fetchVideos(term) {
 		payload: videos
 	};
 }
+
+export default fetchVideos;

@@ -1,7 +1,7 @@
 import  React, { Component} from 'react';
 import {connect } from 'react-redux';
 import { bindActionCreators} from 'redux';
-import { fetchNews } from '../actions/news_nytimes';
+import fetchNews from '../actions/news_nytimes';
 import NYTimesData from './nytimes';
 import CircularProgress from 'material-ui/CircularProgress';
 import Flexbox from 'flexbox-react';
@@ -44,29 +44,12 @@ class SearchNews extends Component {
        
   
         <CardMedia
-        backgroundColor={"#673AB7"}
-      overlay={<CardTitle title={ <a href={el.web_url}>
-
-          <Launch style={{float: "right", width: 60, height: 60, color:"white"}}/>
-        </a>} subtitle={el.headline.main} />}
-      >
-
-        <img src={`http://nytimes.com/${el.multimedia[1].url}`} width="300" height="350" /> 
-    </CardMedia>
-      </div>
-     )
-   }) }
-  </Flexbox>
-  )
-}
-
-render () {
-  let newsData = [];
-  if(this.props.news.length === 0) {
-    // console.log("NO NEWS")
-  } else {
-    newsData = this.props.news; 
-    // console.log("newsData", newsData)
+        title="NEWS"
+        subtitle="Search, collect, and review artist related news.">
+        </CardMedia>
+        {newsData.length ? this.renderNews(newsData) : <CircularProgress size={60} thickness={5} />}
+      </Card>
+    )
   }
   
   return (

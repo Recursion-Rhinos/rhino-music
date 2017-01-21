@@ -1,7 +1,6 @@
 import { TOGGLE_USER } from '../constants/ActionTypes';
 
-export default function toggleUser() {
-  console.log("TOGGLE_USER Action Creator => event")
+const toggleUser = () => {
    let toggleSetting = () => {
    	console.log('SHOW THE FUCKING FORM')
     this.setState({active: 'block'});
@@ -11,3 +10,5 @@ export default function toggleUser() {
     payload: toggleSetting	
   };
 }
+
+export default toggleUser;

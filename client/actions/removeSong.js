@@ -1,6 +1,6 @@
 import axios from 'axios';
 
-const removeSong(sondId) {
+const removeSong = (sondId) => {
   let request = axios.post('/api/removePlaylistSong', {songId: songId});
 
   return {
@@ -8,3 +8,5 @@ const removeSong(sondId) {
     payload: request
   }
 }
+
+export default removeSong;

@@ -1,7 +1,6 @@
 import { PLAY_VIDEO } from '../constants/ActionTypes';
 
-export function playVideo(videoId) {
-  
+const playVideo = (videoId) => {
   const videoUrl = `https://www.youtube.com/embed/${videoId}`
 
   return {
@@ -9,3 +8,5 @@ export function playVideo(videoId) {
     payload: videoUrl	
   };
 }
+
+export default playVideo;

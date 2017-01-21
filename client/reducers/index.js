@@ -37,11 +37,4 @@ const rootReducer = combineReducers({
   userInfo: GetUser
 });
 
-console.log("tracks", SearchReducer);
-console.log("playSongs", PlaySongs);
-console.log('news', NewsSearch);
-console.log('playlists', PlaylistSearch);
-console.log('playlistSongs', PlaylistSongs);
-console.log("allEvents", AllEvents);
-
 export default rootReducer;

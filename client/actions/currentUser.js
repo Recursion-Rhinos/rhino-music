@@ -1,10 +1,12 @@
 import axios from 'axios';
 import {GET_USER} from '../constants/ActionTypes';
 
-export default function getUser() {
+const getUser = () => {
   let currentUser = axios.get('/api/getUserInfo');
-	return {
+    return {
 	  type: "GET_USER",
 	  payload: currentUser
-	};
-}
+  };
+};
+
+export default getUser;

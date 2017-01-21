@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
-import { getPlaylistSongs } from '../actions/playlists.js';
+import getPlaylistSongs from '../actions/playlists.js';
 
 class PlaylistSongs extends Component {
   constructor(props) {

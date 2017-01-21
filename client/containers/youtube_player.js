@@ -1,9 +1,9 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux';
-import { playVideo } from '../actions/videos';
+import playVideo from '../actions/videos';
 import { bindActionCreators } from 'redux';
 import axios from 'axios';
-import { videoPlaylist } from '../actions/videoPlaylist';
+import videoPlaylist from '../actions/videoPlaylist';
 import  getDropDown  from '../actions/playlistDropdown';
 import Flexbox from 'flexbox-react';
 import RaisedButton from 'material-ui/RaisedButton';
@@ -34,7 +34,6 @@ class VideoPlayer extends Component {
     }
     
   componentDidReceiveProps(nextProps) {
-    // console.log('NEXT PROPS: ', nextProps)
     this.forceUpdate();
   }
 
@@ -57,11 +56,7 @@ class VideoPlayer extends Component {
 
     firstVid = this.props.playVideo;
 
-    console.log("AUTO PLAY THE CLICKER", autoplay)
-
   }
-
-  // console.log("PLAYAAAAAA", this.props.videos[0]);
 
   if(this.props.videos.length > 0 && !this.flag) {
     vidList = this.props.videos[0];
@@ -74,7 +69,6 @@ class VideoPlayer extends Component {
 
     firstVid = playlist.shift()
 
-    // console.log("THIS IS THE VIDEO LIST OF IDs", playlist);
   }
 
 
@@ -107,7 +101,7 @@ class VideoPlayer extends Component {
   }
 }
 
-function mapStateToProps(state) {
+const mapStateToProps = (state) => {
   return {playVideo: state.playVideo, videos: state.videos, dropdown: state.dropdown, videofyVideos: state.videoPlaylist}; 
 }
 
