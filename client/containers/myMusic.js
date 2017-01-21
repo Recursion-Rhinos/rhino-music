@@ -1,12 +1,12 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
-import { getPlaylistSongs } from '../actions/playlistSongs.js';
-import { renderPlaylistSongs } from '../actions/renderPlaylist.js';
+import getPlaylistSongs from '../actions/playlistSongs.js';
+import renderPlaylistSongs from '../actions/renderPlaylist.js';
 import {Table, TableBody, TableFooter, TableHeader, TableHeaderColumn, TableRow, TableRowColumn} from 'material-ui/Table';
 import axios from 'axios';
 import getPlaylists from '../actions/playlists';
-import { playSong } from '../actions/songs';
+import playSong from '../actions/songs';
 import {Link} from 'react-router';
 import Flexbox from 'flexbox-react';
 import PlayCircleFilled from 'material-ui/svg-icons/av/play-circle-filled';

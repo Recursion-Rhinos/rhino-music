@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { playSong } from '../actions/songs';
+import playSong from '../actions/songs';
 import { bindActionCreators } from 'redux'; //=> Take a look
 import axios from 'axios';
 import {Table, TableBody, TableFooter, TableHeader, TableHeaderColumn, TableRow, TableRowColumn} from 'material-ui/Table';

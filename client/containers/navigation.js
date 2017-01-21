@@ -1,9 +1,9 @@
 import React ,{ Component} from 'react';
 import { connect } from 'react-redux';
-import { fetchSongs } from '../actions/index';
-import { playSong } from '../actions/songs';
-import { fetchNews } from '../actions/news_nytimes';
-import { fetchEvents } from '../actions/events';
+import fetchSongs from '../actions/index';
+import playSong from '../actions/songs';
+import fetchNews from '../actions/news_nytimes';
+import fetchEvents from '../actions/events';
 import { bindActionCreators } from 'redux';
 import getPlaylists from '../actions/playlists';
 import AppBar from 'material-ui/AppBar';

@@ -1,7 +1,7 @@
 import  React, { Component} from 'react';
 import {connect } from 'react-redux';
 import { bindActionCreators} from 'redux';
-import { fetchNews } from '../actions/news_nytimes';
+import fetchNews from '../actions/news_nytimes';
 import NYTimesData from './nytimes';
 import CircularProgress from 'material-ui/CircularProgress';
 import Flexbox from 'flexbox-react';
