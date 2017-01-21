@@ -1,9 +1,9 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux';
-import { playVideo } from '../actions/videos';
+import playVideo from '../actions/videos';
 import { bindActionCreators } from 'redux';
 import axios from 'axios';
-import { videoPlaylist } from '../actions/videoPlaylist';
+import videoPlaylist from '../actions/videoPlaylist';
 import  getDropDown  from '../actions/playlistDropdown';
 import Flexbox from 'flexbox-react';
 import RaisedButton from 'material-ui/RaisedButton';

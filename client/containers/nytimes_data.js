@@ -1,7 +1,7 @@
 import  React, { Component} from 'react';
 import {connect } from 'react-redux';
 import { bindActionCreators} from 'redux';
-import { fetchNews } from '../actions/news_nytimes';
+import fetchNews from '../actions/news_nytimes';
 
 
 class nyTimesData extends Component {
