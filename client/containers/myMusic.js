@@ -31,6 +31,7 @@ const style = {
   button: "5px",
 };
 
+console.log("GET PLAYLIST SONGS", getPlaylistSongs)
 class UserPlaylists extends Component {
   constructor(props) {
     super(props);
@@ -143,31 +144,31 @@ class UserPlaylists extends Component {
   render() {
     return (
     <Paper zDepth={1}>
-      <Table>
-        <TableBody displayRowCheckbox={false}>
-          <TableHeaderColumn style={{backgroundColor:'#673AB7', color: 'white',width: '22%'}} adjustForCheckbox={false}><input id='newPlaylist' type='text' placeholder='Create New Playlist' maxLength='15'/>
-          <button onClick={() => {this.newPlaylist(document.getElementById('newPlaylist').value); document.getElementById('newPlaylist').value = '';}}>+</button></TableHeaderColumn>
-          <TableHeaderColumn style={{backgroundColor:'#673AB7', color: 'white',width: '25%'}}><p style={{ color: 'white', fontFamily: 'Teko, cursive', fontSize: '28px' }}>Playlists</p></TableHeaderColumn>
-          <TableHeaderColumn style={{backgroundColor:'#673AB7', color: 'white',width: '15%'}} adjustForCheckbox={false}><p style={{ color: 'white', fontFamily: 'Teko, cursive', fontSize: '28px' }}>Artist</p></TableHeaderColumn>
-          <TableHeaderColumn style={{backgroundColor:'#673AB7', color: 'white',width: '15%'}} adjustForCheckbox={false}><p style={{ color: 'white', fontFamily: 'Teko, cursive', fontSize: '28px' }}>Album</p></TableHeaderColumn>
-          <TableHeaderColumn style={{backgroundColor:'#673AB7', color: 'white',width: '8%'}} adjustForCheckbox={false}><p style={{ color: 'white', fontFamily: 'Teko, cursive', fontSize: '28px' }}>Play</p></TableHeaderColumn>
-          <TableHeaderColumn style={{backgroundColor:'#673AB7', color: 'white',width: '8%'}} adjustForCheckbox={false}><p style={{ color: 'white', fontFamily: 'Teko, cursive', fontSize: '28px' }}>Remove</p></TableHeaderColumn>
-        </TableBody>
-      </Table>
+    <Table>
+    <TableBody displayRowCheckbox={false}>
+    <TableHeaderColumn style={{backgroundColor:'#673AB7', color: 'white',width: '22%'}} adjustForCheckbox={false}><input id='newPlaylist' type='text' placeholder='Create New Playlist' maxLength='15'/>
+    <button onClick={() => {this.newPlaylist(document.getElementById('newPlaylist').value); document.getElementById('newPlaylist').value = '';}}>+</button></TableHeaderColumn>
+    <TableHeaderColumn style={{backgroundColor:'#673AB7', color: 'white',width: '25%'}}><p style={{ color: 'white', fontFamily: 'Teko, cursive', fontSize: '28px' }}>Playlists</p></TableHeaderColumn>
+    <TableHeaderColumn style={{backgroundColor:'#673AB7', color: 'white',width: '15%'}} adjustForCheckbox={false}><p style={{ color: 'white', fontFamily: 'Teko, cursive', fontSize: '28px' }}>Artist</p></TableHeaderColumn>
+    <TableHeaderColumn style={{backgroundColor:'#673AB7', color: 'white',width: '15%'}} adjustForCheckbox={false}><p style={{ color: 'white', fontFamily: 'Teko, cursive', fontSize: '28px' }}>Album</p></TableHeaderColumn>
+    <TableHeaderColumn style={{backgroundColor:'#673AB7', color: 'white',width: '8%'}} adjustForCheckbox={false}><p style={{ color: 'white', fontFamily: 'Teko, cursive', fontSize: '28px' }}>Play</p></TableHeaderColumn>
+    <TableHeaderColumn style={{backgroundColor:'#673AB7', color: 'white',width: '8%'}} adjustForCheckbox={false}><p style={{ color: 'white', fontFamily: 'Teko, cursive', fontSize: '28px' }}>Remove</p></TableHeaderColumn>
+    </TableBody>
+    </Table>
       <Flexbox>
         <Table onCellClick={this.cellClicked} height={'500px'} width={'400px'}>
-          <TableBody displayRowCheckbox={false}>
-            <TableHeaderColumn></TableHeaderColumn>
-            <TableHeaderColumn></TableHeaderColumn>
-            {this.renderList(this.props.playlists)}
-          </TableBody>
+        <TableBody displayRowCheckbox={false}>
+        <TableHeaderColumn></TableHeaderColumn>
+        <TableHeaderColumn></TableHeaderColumn>
+          {this.renderList(this.props.playlists)}
+        </TableBody>
         </Table>
         <Table height={'500px'}>
           <TableBody displayRowCheckbox={false}>
-            <TableHeaderColumn style={{width: '15%'}}></TableHeaderColumn>
-            <TableHeaderColumn style={{width: '25%'}}></TableHeaderColumn>
-            <TableHeaderColumn style={{width: '10%'}}></TableHeaderColumn>
-            <TableHeaderColumn style={{width: '10%'}}></TableHeaderColumn>
+          <TableHeaderColumn style={{width: '15%'}}></TableHeaderColumn>
+          <TableHeaderColumn style={{width: '25%'}}></TableHeaderColumn>
+          <TableHeaderColumn style={{width: '10%'}}></TableHeaderColumn>
+          <TableHeaderColumn style={{width: '10%'}}></TableHeaderColumn>
             {this.renderSongs(this.props.playlistSongs)}
           </TableBody>
         </Table>
@@ -177,7 +178,7 @@ class UserPlaylists extends Component {
   }
 }
 
-const mapStateToProps = (state) => {
+function mapStateToProps(state) {
   return {
     playlists: state.playlists, 
     getPlaylistSongs: state.playlistSongs, 
@@ -185,7 +186,7 @@ const mapStateToProps = (state) => {
   };
 }
 
-const mapDispatchToProps = (dispatch) =>{
+function mapDispatchToProps(dispatch) {
   return bindActionCreators({ getPlaylistSongs, getPlaylists, playSong }, dispatch);
 }
 

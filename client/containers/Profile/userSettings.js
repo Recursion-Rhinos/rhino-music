@@ -35,81 +35,123 @@ const styles = {
 class UserSettings extends Component {
   constructor(props) {
     super(props);
+
     this.state = {
       username: '',
       password: '',
       email: '',
       active: false
     };
-    this.onUserInputChange = this.onUserInputChange.bind(this);
-    this.onPasswordInputChange = this.onPasswordInputChange.bind(this);
-    this.onEmailInputChange = this.onEmailInputChange.bind(this);
-    this.handleSubmit = this.handleSubmit.bind(this);
-    this.hideForm = this.props.toggleSettings;
+
+  this.onUserInputChange = this.onUserInputChange.bind(this);
+  this.onPasswordInputChange = this.onPasswordInputChange.bind(this);
+  this.onEmailInputChange = this.onEmailInputChange.bind(this);
+  this.handleSubmit = this.handleSubmit.bind(this);
+  this.hideForm = this.props.toggleSettings;
   }
 
-  onUserInputChange(event) {
-    this.setState({username: event.target.value});  
+
+
+onUserInputChange(event) {
+  this.setState({
+    username: event.target.value
+   });  
+}
+
+onPasswordInputChange(event) {
+  this.setState({
+    password: event.target.value
+   });  
+}
+
+onEmailInputChange(event) {
+  this.setState({
+  email: event.target.value
+   }); 
+}
+
+componentDidReceiveProps(nextProp) {
+}
+
+// onUserFormSubmit(event) {
+//   console.log("+++++++++++++", event.target.value)
+//   event.preventDefault();
+//   this.props.changeUser(this.state.username);
+//   console.log("HURAAAAAA USEEERRRRR LETS HAVE SOME FUN")
+//   this.setState({ username: '' });
+// }
+
+// onPasswordSubmit(event) {
+//   event.preventDefault();
+//   console.log("+++++++++++++", event.target.value)
+//   this.props.changePassword(this.state.password);
+//     console.log("HURAAAAAA NEW PASSSWOOOORDDDDDDD")
+//   this.setState({ password: ''}); 
+// }
+
+// onEmailFormSubmit(event) {
+//   console.log("+++++++++++++", event.target.value)
+//   event.preventDefault();
+//   this.props.changeEmail(this.state.email);
+//   console.log("HURAAAAAA NEW EMAIL DUDE")
+//   this.setState({ email: '' });
+// }
+
+handleSubmit(event) {
+event.preventDefault();
+  let username =this.props.changeUser(this.state.username);
+  let password = this.props.changePassword(this.state.password);
+  let email = this.props.changeEmail(this.state.email)
+  if (!username || !password || !email ) {
+    return;
+  }
+  this.setState({username: '', password: '', email:''});
   }
 
-  onPasswordInputChange(event) {
-    this.setState({password: event.target.value});  
+render() {
+  if(typeof hideForm === 'function') {
+    hideForm();
   }
 
-  onEmailInputChange(event) {
-    this.setState({email: event.target.value}); 
-  }
-  handleSubmit(event) {
-  event.preventDefault();
-    let username =this.props.changeUser(this.state.username);
-    let password = this.props.changePassword(this.state.password);
-    let email = this.props.changeEmail(this.state.email)
-    if (!username || !password || !email ) {
-      return;
-    }
-    this.setState({username: '', password: '', email:''});
-    }
-
-  render() {
-    if(typeof hideForm === 'function') {
-      hideForm();
-    }
-    return (
-      <Flexbox style={styles.flex}>
-        <h3>Change User Settings</h3>
-      	<form style={{display: this.state.active}}  onSubmit={this.handleSubmit}>
-           <TextField   
-            hintText="New Username" 
-            floatingLabelText="Username" 
-            underlineFocusStyle={styles.underlineStyle}
-            floatingLabelFocusStyle={styles.floatingLabelFocusStyle}
-            value={this.state.username}
-            onChange={this.onUserInputChange}/> 
-          <br /><br />
-          <TextField 
-          hintText="New Password" 
-          underlineFocusStyle={styles.underlineStyle}
-          floatingLabelFocusStyle={styles.floatingLabelFocusStyle}
-          floatingLabelText="Password" 
-          value={this.state.password}
-          onChange={this.onPasswordInputChange}/> 
-          <br />    
-          <TextField 
-           hintText="Change E-mail Address" 
-           underlineFocusStyle={styles.underlineStyle}
-           floatingLabelFocusStyle={styles.floatingLabelFocusStyle}
-           floatingLabelText="Email" 
-           value={this.state.email}
-           onChange={this.onEmailInputChange}/>
-          <br /> <br /> 
-          <FlatButton 
-          label="Submit"
-          backgroundColor='#B7B13A'
-          color="white"
-          style={{marginBottom: "25px"}}/>
-        </form>
-      </Flexbox>
-    )
+  return (
+    <Flexbox style={styles.flex}>
+    <h3> Change User Settings </h3>
+  	<form style={{display: this.state.active}}  onSubmit={this.handleSubmit}>
+       <TextField   
+        hintText="New Username" 
+        floatingLabelText="Username" 
+        underlineFocusStyle={styles.underlineStyle}
+        floatingLabelFocusStyle={styles.floatingLabelFocusStyle}
+        value={this.state.username}
+        onChange={this.onUserInputChange} 
+       /> <br />
+       <br />
+      <TextField 
+       hintText="New Password" 
+       underlineFocusStyle={styles.underlineStyle}
+       floatingLabelFocusStyle={styles.floatingLabelFocusStyle}
+       floatingLabelText="Password" 
+       value={this.state.password}
+       onChange={this.onPasswordInputChange}
+       /> <br />
+       
+      <TextField 
+       hintText="Change E-mail Address" 
+       underlineFocusStyle={styles.underlineStyle}
+       floatingLabelFocusStyle={styles.floatingLabelFocusStyle}
+       floatingLabelText="Email" 
+       value={this.state.email}
+       onChange={this.onEmailInputChange}
+       /><br /> <br /> 
+      <FlatButton 
+       label="Submit"
+       backgroundColor='#B7B13A'
+       color="white"
+       style={{marginBottom: "25px"}}
+       />
+    </form>
+    </Flexbox>
+   )
   }
 }
 

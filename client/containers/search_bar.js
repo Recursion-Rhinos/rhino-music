@@ -27,53 +27,77 @@ const style = {
     paddingBottom: 5
   },
   button: {
+    // margin: 12,
+    // backgroundColor: "#D8C2FF"
     backgroundColor: "#B7B13A"
   },
 };
 
 class SearchBar extends Component {
   constructor(props) {
-    super(props); 
+    super(props);
+    
     this.state = {term: ''};
+
     this.onInputChange = this.onInputChange.bind(this);
     this.onFormSubmit = this.onFormSubmit.bind(this);
   }
 
 
   onInputChange(event) {
+    // console.log('Search_Bar Container onInputChange:', event.target.value);
     this.setState({term: event.target.value});
   }
 
   onFormSubmit(event) {
     event.preventDefault();
     this.props.fetchVideos(this.state.term);
+    // this.props.fetchEvents(this.state.term);
     this.props.fetchNews(this.state.term);
     this.props.fetchEvents(this.state.term);
+    //we need to go fetch data
+    // console.log('Search_Bar Container onFormSubmit:', this.state.term);
     this.props.fetchSongs(this.state.term);
     this.setState({ term: '' });
   }
 
+  /*
+  <FlatButton
+      icon={<ActionAndroid />}
+      style={style}
+    />
+
+
+     <FlatButton
+              // styling="material-icons md-48"
+              icon={<Search />}
+              style={style.button}
+            />
+  */
+
+  //<button type="submit" className="btn btn-secondary">Search</button>
   render() {
     return (
-      <form style={style.form} onSubmit={this.onFormSubmit} className="input-group">
-        <input 
+    <form style={style.form} onSubmit={this.onFormSubmit} className="input-group">
+      <input 
         placeholder="search for artist or album"
         className="form-control"
         value={this.state.term}
         onChange={this.onInputChange} />
-        <span className="input-group-btn">
-          <button style={style.button} >
-            <FlatButton
-            label="Search"
-            icon={<Search />}/>
-          </button>
-        </span>
-      </form>
+      <span className="input-group-btn">
+        <button style={style.button} >
+        <FlatButton
+          label="Search"
+          icon={<Search />}
+        />
+        </button>
+      </span>
+    </form>
     )
   }
 }
 
-const mapDispatchToProps = (dispatch) => {
+function mapDispatchToProps(dispatch) {
   return bindActionCreators({ fetchSongs, fetchNews, fetchEvents, fetchVideos}, dispatch);
 }
 

@@ -42,48 +42,61 @@ class VideoPlayer extends Component {
     }
 
   render () { 
-    let vidList = [];
-    let videoIds;
-    let vidIds;
-    let autoplay;
-    let playlist =[];
-    let firstVid;
 
-    if(this.props.playVideo) {
-      autoplay = this.props.playVideo+"?autoplay=1";
-      firstVid = this.props.playVideo;
-    }
+  let vidList = [];
+  let videoIds;
+  let vidIds;
+  let autoplay;
+  let playlist =[];
+  let firstVid;
 
-    if(this.props.videos.length > 0 && !this.flag) {
-      vidList = this.props.videos[0];
-      vidIds = vidList.map((video) => {
-        return video.id.videoId;
-      })
-      playlist = vidIds;
-      firstVid = playlist.shift()
-    } else if(this.props.videofyVideos && this.flag) {
-      playlist = this.props.videofyVideos;
-      firstVid = playlist.shift()
-    } 
+  if(this.props.playVideo) {
+
+    autoplay = this.props.playVideo+"?autoplay=1";
+
+    firstVid = this.props.playVideo;
+
+  }
+
+  if(this.props.videos.length > 0 && !this.flag) {
+    vidList = this.props.videos[0];
+
+    vidIds = vidList.map((video) => {
+      return video.id.videoId;
+    });
+
+    playlist = vidIds;
+
+    firstVid = playlist.shift()
+
+  }
+
+
+  else if(this.props.videofyVideos && this.flag) {
+    playlist = this.props.videofyVideos;
+
+    firstVid = playlist.shift()
+    
+  } 
         
-    return (
-      <Flexbox style={style.flex}>
+  return (
+    <Flexbox style={style.flex}>
         <div className="embed-responsive embed-responsive-16by9">
           <iframe className="embed-responsive-item" src={this.props.playVideo ? autoplay : `https://www.youtube.com/v/${firstVid}?&playlist=${playlist}&autoplay=1`}></iframe>
         </div>
         <div className="details">
-          <div></div>
-          <Flexbox>
-            <div>
-              <DropDownMenu value={this.state.value} onChange={this.handleChange}>
-                <MenuItem value='default' primaryText="Choose Playlist"/>
-                {this.props.dropdown.map((playlistDD) =>(<MenuItem value={playlistDD.Name} primaryText={playlistDD.Name} />))}
-              </DropDownMenu>
-            </div>
-            <RaisedButton style={style.height} label="V I D E O F Y" toolTip="TURN YOUR PLAYLIST OF SONGS INTO A PLAYLIST OF VIDEOS" color="white" backgroundColor='#d32f2f' onClick={() => { this.flag = true; if(this.state.value !== 'default'){this.props.videoPlaylist(this.state.value)} }}/> 
-          </Flexbox>
+          <div> </div>
+     <Flexbox>
+        <div>
+          <DropDownMenu value={this.state.value} onChange={this.handleChange}>
+            <MenuItem value='default' primaryText="Choose Playlist"/>
+            {this.props.dropdown.map((playlistDD) =>(<MenuItem value={playlistDD.Name} primaryText={playlistDD.Name} />))}
+          </DropDownMenu>
         </div>
+        <RaisedButton style={style.height} label="V I D E O F Y" toolTip="TURN YOUR PLAYLIST OF SONGS INTO A PLAYLIST OF VIDEOS" color="white" backgroundColor='#d32f2f' onClick={() => { this.flag = true; if(this.state.value !== 'default'){this.props.videoPlaylist(this.state.value)} }}/> 
       </Flexbox>
+      </div>
+    </Flexbox>
     )
   }
 }
@@ -92,7 +105,7 @@ const mapStateToProps = (state) => {
   return {playVideo: state.playVideo, videos: state.videos, dropdown: state.dropdown, videofyVideos: state.videoPlaylist}; 
 }
 
-const mapDispatchToProps = (dispatch) => {
+function mapDispatchToProps(dispatch) {
   return bindActionCreators({ getDropDown, videoPlaylist }, dispatch);
 }
 

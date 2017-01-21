@@ -1,10 +1,14 @@
 import { NYT_NEWS }  from '../constants/ActionTypes';
 
 export default function (state=[], action) {
+  
   switch (action.type) {
     case "NYT_NEWS":
-    // state = []
-    return action.payload.data.response.docs.concat(state); 
+    console.log('### News', action);
+    // state = []; //try to fixed this in the container
+    return action.payload.data.response.docs.concat(state); //return an array with all news!
+    // case "GET_NEWS":
+    // return state.concat([action.payload.data]);
   }
   return state;
 }

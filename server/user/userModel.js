@@ -1,3 +1,4 @@
+
 const knex = require('../database/schema.knex.js');
 
 let storeUser = (username, password, email, genres = 'Hip-Hop') => {
@@ -14,7 +15,11 @@ let retrieveUser = (name, password) => {
     username: name,
     password: password  
   })
-  .first();//resolves with promise in the controller
+.first();//resolves with promise in the controller
+// .then(data => {
+//   console.log('DATA', data);
+//   return data;
+// });
 }; 
 
 let getUserById = (Id) => {
@@ -53,6 +58,12 @@ let updateEmail = (email, userId) => {
   });
 }
 
+// let retrieveUserId = () => {
+//   return knex('Users').where({
+
+//   }).select('id')
+// }
+
 let retrieveGraphId = (userId) => {
  //not finished yet
 };
@@ -61,6 +72,10 @@ let deleteUser = (name) => {
   return knex('Users').where({
     username: name
   }).select('id').del(); //resolves with promise in the controller
+    // .then(deletedUser => {
+    //   console.log(deletedUser);
+    //   return deletedUser;
+    // }); 
 };
 
 module.exports = {

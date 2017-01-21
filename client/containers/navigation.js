@@ -31,6 +31,8 @@ const styles = {
   }
 };
 
+
+
 class Navigation extends Component {
   constructor(props) {
     super(props);
@@ -38,21 +40,25 @@ class Navigation extends Component {
     this.state = {open: false};
   }
 
-  handleToggle = () => this.setState({open: !this.state.open});
+handleToggle = () => this.setState({open: !this.state.open});
+
   handleClose = () => this.setState({open: false});
 
  render() {
-    return (  
-      <AppBar
-      style={styles.bar}
-        title="Rhino Music"
-        titleStyle={{ color: 'white', fontFamily: 'Bungee Shade, cursive', fontSize: '60px' }}
-        iconElementLeft={<div> <Dashboard style={styles.largeIcon} onTouchTap={this.handleToggle}/> 
-        <Drawer
-        docked={false}
-        width={200}
-        open={this.state.open}
-        onRequestChange={(open) => this.setState({open})}> 
+ 	// console.log("NAVIGATION2", this.props)
+  // console.log("Container")
+  // let profile = <a href="/profile"></a>
+   return (
+  
+    <AppBar
+     style={styles.bar}
+      title="Rhino Music"
+      titleStyle={{ color: 'white', fontFamily: 'Bungee Shade, cursive', fontSize: '60px' }}
+      iconElementLeft={<div> <Dashboard style={styles.largeIcon} onTouchTap={this.handleToggle}/> <Drawer
+          docked={false}
+          width={200}
+          open={this.state.open}
+          onRequestChange={(open) => this.setState({open})}> 
           <MenuItem onTouchTap={this.handleClose} containerElement={<Link to="/"/>}>Search</MenuItem>
           <MenuItem onTouchTap={this.handleClose} containerElement={<Link to="/MyMusic"/>} >My Music</MenuItem>
           <MenuItem onTouchTap={this.handleClose} containerElement={<Link to="/profile"/>} >Profile</MenuItem>
@@ -63,12 +69,14 @@ class Navigation extends Component {
           <MenuItem><a style={{color:'black'}} href='/logout'>Logout</a></MenuItem>
         </Drawer></div>}
       onTitleTouchTap = {()=> {hashHistory.push("/")}}
-      iconElementRight={<div style={{color:'white', 'padding-right': '10px', 'padding-top': '15px'}}> <p style={{ color: 'white', fontFamily: 'VT323, cursive', fontSize: '30px'}}>Take Charge, {this.props.user.username}!</p></div>}/>
-    )
-  }
+      iconElementRight={<div style={{color:'white', 'padding-right': '10px', 'padding-top': '15px'}}> <p style={{ color: 'white', fontFamily: 'VT323, cursive', fontSize: '30px'}}>Take Charge, {this.props.user.username}!</p></div>}
+    />
+
+  )
+ }
 }
 
-const mapStateToProps = (state) => {	
+function mapStateToProps(state) {	
   return {
   	news: state.news,
   	tracks: state.tracks,

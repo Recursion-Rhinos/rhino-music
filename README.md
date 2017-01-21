@@ -1,4 +1,3 @@
-
 # Rhino-Music
 <!-- <img src="add a logo later"/> -->
 
@@ -33,9 +32,5 @@ Sing up for Rhino Music and take charge of your music experience
   - __Development Team Members__: [Svetlin Mladenov](http://github.com/sveem), [Jerry Shanahan](http://github.com/Jerrys914), [Narmin Shahin](http://github.com/narmeen12)
 
 ## Usage
-
-
-
-
 
 

@@ -11,6 +11,7 @@ let getAllPlaylistsByUserId = (UserId) => {
   return knex('Playlist').where({
     UserId: UserId
   }).then((data) => {
+    console.log('getAllPlaylistsByUserId: ', data)
     return data;
   });
 };
@@ -33,10 +34,12 @@ let createNewPlaylist = (Name, UserId) => {
 };
 
 let deletePlaylist = (PlaylistId) => {
+  console.log('PLAYLIST ID: ', PlaylistId)
   return knex('PlaylistSongs').where({
     PlaylistId: PlaylistId
   })
   .del().then((result) => {
+    console.log('DELETED Songs for PLAYLIST : ', result)
     return knex('Playlist').where({
       id: PlaylistId
     })

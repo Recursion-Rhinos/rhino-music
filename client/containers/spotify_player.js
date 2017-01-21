@@ -4,29 +4,38 @@ import { playSong } from '../actions/songs';
 import { bindActionCreators } from 'redux';
 import {BottomNavigation, BottomNavigationItem} from 'material-ui/BottomNavigation';
 
+// size may also be a plain string using the presets 'large' or 'compact' 
 
 class MusicPlayer extends Component {
   constructor(props) {
     super(props);
+     // this.playSong = this.playSong.bind(this)
   }
 
   render () {
+      //" + (this.props.playSong ?  this.props.playSong.currentSong : "no song"
     return (
-      <div className="bottom-align">
-        <iframe
+    <div className="bottom-align">
+    <iframe
   		  src={`https://embed.spotify.com/?uri=${this.props.playSong}`}
   		  width="100%" 
   		  height="100" 
   		  frameBorder="0" 
   		  allowTransparency="true">
-  	    </iframe>
-      </div>
-    )
+  	  </iframe>
+    </div>
+    );
   }
 }
 
-const mapStateToProps = (state) => {
+function mapStateToProps(state) {
+	// console.log("state in  spotify_player",state);
+	// console.log("spotify_player state.playSong", state.playSong);
   return {playSong: state.playSong}; 
 }
 
 export default connect(mapStateToProps,null)(MusicPlayer)
+
+
+// "spotify:track:7vFv0yFGMJW3qVXbAd9BK9"
+//src={`https://embed.spotify.com/?uri=${props.songUri}`}
