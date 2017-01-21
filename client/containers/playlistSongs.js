@@ -11,7 +11,6 @@ class PlaylistSongs extends Component {
 
   renderList(songs) {
     return songs.map((song) => {
-      // console.log('playlistSongs Container Song: ', song);
       return (
         <li key={song.id}>
         {song.Name}
@@ -29,12 +28,12 @@ class PlaylistSongs extends Component {
   }
 }
 
-function mapStateToProps(state) {
+const mapStateToProps = (state) => {
   return {playlistSongs: state.playlistSongs}
 }
 
-function mapDispatchToProps(dispatch) {
+const mapDispatchToProps = (dispatch) => {
   return bindActionCreators({ getPlaylistSongs }, dispatch);
 }
 
-export default connect(mapStateToProps, null)(PlaylistSongs);
+export default connect(mapStateToProps, mapDispatchToProps)(PlaylistSongs);

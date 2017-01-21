@@ -40,18 +40,13 @@ class Navigation extends Component {
     this.state = {open: false};
   }
 
-handleToggle = () => this.setState({open: !this.state.open});
-
+  handleToggle = () => this.setState({open: !this.state.open});
   handleClose = () => this.setState({open: false});
 
  render() {
- 	// console.log("NAVIGATION2", this.props)
-  // console.log("Container")
-  // let profile = <a href="/profile"></a>
    return (
-  
-    <AppBar
-     style={styles.bar}
+     <AppBar
+      style={styles.bar}
       title="Rhino Music"
       titleStyle={{ color: 'white', fontFamily: 'Bungee Shade, cursive', fontSize: '60px' }}
       iconElementLeft={<div> <Dashboard style={styles.largeIcon} onTouchTap={this.handleToggle}/> <Drawer
@@ -71,12 +66,11 @@ handleToggle = () => this.setState({open: !this.state.open});
       onTitleTouchTap = {()=> {hashHistory.push("/")}}
       iconElementRight={<div style={{color:'white', 'padding-right': '10px', 'padding-top': '15px'}}> <p style={{ color: 'white', fontFamily: 'VT323, cursive', fontSize: '30px'}}>Take Charge, {this.props.user.username}!</p></div>}
     />
-
   )
  }
 }
 
-function mapStateToProps(state) {	
+const mapStateToProps = (state) => {	
   return {
   	news: state.news,
   	tracks: state.tracks,
@@ -85,7 +79,6 @@ function mapStateToProps(state) {
     getPlaylists: state.playlists, 
     user: state.userInfo
   }; 
-
 }
 
 export default connect(mapStateToProps, { getPlaylists, Logout, GetUser })(Navigation);

@@ -9,7 +9,6 @@ import Launch from 'material-ui/svg-icons/action/launch';
 import {Card, CardActions, CardHeader, CardMedia, CardTitle, CardText} from 'material-ui/Card';
 
 const style = {
-
   flex: {
     flexFlow: "row wrap"
   }
