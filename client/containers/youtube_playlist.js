@@ -66,11 +66,11 @@ class YoutubePlaylist extends Component {
   }
 }
 
-function mapStateToProps(state) {
+const mapStateToProps = (state) => {
   return {videos: state.videos, videofyVideos: state.videoPlaylist};  //same as tracks: state.tracks
 }
 
-function mapDispatchToProps(dispatch) {
+const mapDispatchToProps = (dispatch) => {
   return bindActionCreators({ playVideo : playVideo }, dispatch);
 }
 

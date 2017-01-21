@@ -45,7 +45,6 @@ class SearchBar extends Component {
 
 
   onInputChange(event) {
-    // console.log('Search_Bar Container onInputChange:', event.target.value);
     this.setState({term: event.target.value});
   }
 
@@ -56,26 +55,10 @@ class SearchBar extends Component {
     this.props.fetchNews(this.state.term);
     this.props.fetchEvents(this.state.term);
     //we need to go fetch data
-    // console.log('Search_Bar Container onFormSubmit:', this.state.term);
     this.props.fetchSongs(this.state.term);
     this.setState({ term: '' });
   }
 
-  /*
-  <FlatButton
-      icon={<ActionAndroid />}
-      style={style}
-    />
-
-
-     <FlatButton
-              // styling="material-icons md-48"
-              icon={<Search />}
-              style={style.button}
-            />
-  */
-
-  //<button type="submit" className="btn btn-secondary">Search</button>
   render() {
     return (
     <form style={style.form} onSubmit={this.onFormSubmit} className="input-group">
@@ -97,7 +80,7 @@ class SearchBar extends Component {
   }
 }
 
-function mapDispatchToProps(dispatch) {
+const mapDispatchToProps = (dispatch) => {
   return bindActionCreators({ fetchSongs, fetchNews, fetchEvents, fetchVideos}, dispatch);
 }
 
