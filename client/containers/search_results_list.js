@@ -68,7 +68,6 @@ class SearchList extends Component {
       <Paper style={style} zDepth={5}>
         <Table>
           <TableBody displayRowCheckbox={false}>
-           { console.log("search_results_list => this.props", this.props)}
           <TableRow>
             <TableHeaderColumn style={{backgroundColor:'#673AB7', color: 'white',}}> <p style={{ color: 'white', fontFamily: 'VT323, cursive', fontSize: '30px' }}> Artist </p></TableHeaderColumn>
             <TableHeaderColumn style={{backgroundColor:'#673AB7', color: 'white',}}> <p style={{ color: 'white', fontFamily: 'VT323, cursive', fontSize: '30px' }}>  Album </p></TableHeaderColumn>
@@ -91,9 +90,6 @@ const saveToPlaylist = (playlistName, songData) => {
       songData: songData
     }
     axios.post('/api/saveSong', {body: obj})
-    .then((result) => {
-      console.log('SAVING SONG')
-    });
   }
 }
 
