@@ -1,6 +1,5 @@
 import axios from 'axios';
 import { VIDEO_PLAYLIST } from '../constants/ActionTypes';
-export function videoPlaylist(playlistName) {
 
 const videoPlaylist = (playlistName) => {
   let videoPlaylist = [];

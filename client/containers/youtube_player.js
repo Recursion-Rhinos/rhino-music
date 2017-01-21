@@ -4,7 +4,7 @@ import playVideo from '../actions/videos';
 import { bindActionCreators } from 'redux';
 import axios from 'axios';
 import videoPlaylist from '../actions/videoPlaylist';
-import  getDropDown  from '../actions/playlistDropdown';
+import getDropDown  from '../actions/playlistDropdown';
 import Flexbox from 'flexbox-react';
 import RaisedButton from 'material-ui/RaisedButton';
 import DropDownMenu from 'material-ui/DropDownMenu';
