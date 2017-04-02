@@ -11,7 +11,7 @@
 ## Description
 Take charge of your music experience. 
 
-### Installing Dependencies
+## Installing Dependencies
 From within the root directory:
 ```sh
 npm install
