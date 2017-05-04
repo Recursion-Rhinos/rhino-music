@@ -81,8 +81,10 @@ class VideoPlayer extends Component {
         
   return (
     <Flexbox style={style.flex}>
+      
         <div className="embed-responsive embed-responsive-16by9">
-          <iframe className="embed-responsive-item" src={this.props.playVideo ? autoplay : `https://www.youtube.com/v/${firstVid}?&playlist=${playlist}&autoplay=1`}></iframe>
+
+          {/*<iframe classNa{}me="embed-responsive-item" src={this.props.playVideo ? autoplay : `https://www.youtube.com/v/${firstVid}?&playlist=${playlist}&autoplay=1`}></iframe>*/}
         </div>
         <div className="details">
           <div> </div>
@@ -90,7 +92,7 @@ class VideoPlayer extends Component {
         <div>
           <DropDownMenu value={this.state.value} onChange={this.handleChange}>
             <MenuItem value='default' primaryText="Choose Playlist"/>
-            {this.props.dropdown.map((playlistDD) =>(<MenuItem value={playlistDD.Name} primaryText={playlistDD.Name} />))}
+            {this.props.dropdown.map((playlistDD) =>(<MenuItem key={playlistDD.Name} value={playlistDD.Name} primaryText={playlistDD.Name} />))}
           </DropDownMenu>
         </div>
         <RaisedButton style={style.height} label="V I D E O F Y" toolTip="TURN YOUR PLAYLIST OF SONGS INTO A PLAYLIST OF VIDEOS" color="white" backgroundColor='#d32f2f' onClick={() => { this.flag = true; if(this.state.value !== 'default'){this.props.videoPlaylist(this.state.value)} }}/> 
