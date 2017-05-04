@@ -12,8 +12,9 @@ export default class Youtube extends Component {
         <Navigation />
         <MusicPlayer />
         <SearchBar />
-        <VideoPlayer />
-        <VideoPlayList />
+        <h2 style={{textAlign:'center'}}>Unfortunately this feature is down. We are working to get it fixed!</h2>
+        {/*<VideoPlayer />
+        <VideoPlayList />*/}
       </div>
     )
   }
